@@ -125,6 +125,7 @@ const SuperAdminLogin = () => {
                     <Input
                       type={showPassword ? 'text' : 'password'} // Toggle between 'password' and 'text'
                       name="password"
+                      placeholder="password"
                       onChange={handleInputChange}
                     />
                     <InputRightElement width="4.5rem">

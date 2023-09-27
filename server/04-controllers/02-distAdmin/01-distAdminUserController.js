@@ -132,9 +132,13 @@ const GetDistAdminUsersList = async (req, res) => {
 
         if (profiles) {
             const data = profiles.map(profile => ({
+                _id: profile._id,
                 fullName: profile.fullName,
                 email: profile.email,
-                profileImageName: profile.profileImageName
+                profileImageName: profile.profileImageName,
+                district: profile.district,
+                createdAt: profile.createdAt,
+                updatedAt: profile.updatedAt,
             }))
             res.status(200).json({data })
         } else {
@@ -146,10 +150,6 @@ const GetDistAdminUsersList = async (req, res) => {
         return res.status(500).json({ msg: "Internal server error." });
     }
 }
-
-
-
-
 
 exports.DistAdminSignUp = DistAdminSignUp
 exports.DistAdminLogin = DistAdminLogin
