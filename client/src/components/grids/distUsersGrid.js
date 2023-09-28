@@ -12,25 +12,20 @@ import {
     HStack,
     Button
 } from '@chakra-ui/react'
-import { ViewIcon, DeleteIcon } from '@chakra-ui/icons';
-import CreateUserForm from '../../components/form/createUserForm';
+import { ViewIcon, DeleteIcon, SmallCloseIcon, EditIcon } from '@chakra-ui/icons';
+import CreateUserForm from '../form/createUserForm';
 
 const baseUrl = process.env.REACT_APP_BASE_URL
 
-const SuperAdminDashboard = () => {
+const DistUsersGrid = ({  }) => {
     const [distAdminList, setDistAdminList] = useState([])
-    //SWITCH BETN MANAGE USERS AND CREATE USERS
+    //SWITCH BETWEEEN MANAGE USERS AND CREATE USERS
     const [isCreateNewUserActive, setIsCreateNewUserActive] = useState(false)
     const fetchData = async () => {
         const res = await axios.get(`${baseUrl}/get-dist-admins-list`)
         if (res) {
             const data = res.data.data
             setDistAdminList(data.reverse())
-            // setImage1(`data:image/jpeg;base64,${data.valuableClientsImage1}`) 
-            // setHeading1(data.heading1)
-            // setText1(data.text1)
-            // setDescription1(data.description1)
-
         }
     }
     console.log(distAdminList)
@@ -38,12 +33,9 @@ const SuperAdminDashboard = () => {
     useEffect(() => {
         fetchData()
     }, [])
-    return (<>
-        <Box
-            textAlign="center"
-        >
-            <Heading m={5} > District Admin Users Management</Heading>
-            <Center p={5}>
+    return(
+        <>
+        <Center p={5}>
                 <HStack>
                     <Button
                     colorScheme={isCreateNewUserActive == false ? "blue" : "gray" }
@@ -59,8 +51,7 @@ const SuperAdminDashboard = () => {
                     >Create</Button>
                 </HStack>
             </Center>
-            {isCreateNewUserActive == false ? 
-            (<Box
+       {isCreateNewUserActive == false ?  (<Box
                 mx={10}
                 isCentered >
                 {/* LIST HEADER */}
@@ -125,7 +116,7 @@ const SuperAdminDashboard = () => {
                                 <Text w="120px">{distAdmin.createdAt.slice(0, 10)}</Text>
                                 <Text w="120px" >{distAdmin.updatedAt.slice(0, 10)}</Text>
                                 <Box w="60px">
-                                    <ViewIcon
+                                    <EditIcon
                                         style={{ cursor: 'pointer' }}
                                         _hover={{ color: 'blue.400' }}
                                         onClick={() => {
@@ -153,12 +144,12 @@ const SuperAdminDashboard = () => {
                 })}
             </Box>)
             :
-            (
-            <CreateUserForm setIsCreateNewUserActive={setIsCreateNewUserActive} />
-            )}
-        </Box>
-    </>
+        (<CreateUserForm setIsCreateNewUserActive={setIsCreateNewUserActive} />)
+    }
+        </>
     )
+
 }
 
-export default SuperAdminDashboard
+
+export default DistUsersGrid
