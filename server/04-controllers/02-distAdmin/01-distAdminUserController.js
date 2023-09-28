@@ -151,9 +151,28 @@ const GetDistAdminUsersList = async (req, res) => {
     }
 }
 
+const DeleteDistAdmin = async(req, res) => {
+    try {
+        const id = req.params.id;
+
+        const deletedDistAdmin = await DistAdminUser.findByIdAndDelete(id);
+
+        if (!deletedDistAdmin) {
+            return res.status(404).json({ message: 'Distrist admin data not found' });
+        }
+
+        res.status(200).json({ message: 'Distrist admin deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting distrist admin:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+}
+
+
 exports.DistAdminSignUp = DistAdminSignUp
 exports.DistAdminLogin = DistAdminLogin
 exports.ChangeDistAdminUserProfile = ChangeDistAdminUserProfile
 exports.ChangeDistAdminUserPassword = ChangeDistAdminUserPassword
 exports.GetDistAdminUserProfile = GetDistAdminUserProfile
 exports.GetDistAdminUsersList = GetDistAdminUsersList
+exports.DeleteDistAdmin = DeleteDistAdmin
