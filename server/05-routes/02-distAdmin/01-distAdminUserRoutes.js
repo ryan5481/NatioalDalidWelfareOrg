@@ -6,7 +6,8 @@ const {
     ChangeDistAdminUserProfile,
     ChangeDistAdminUserPassword,
     GetDistAdminUserProfile,
-    GetDistAdminUsersList
+    GetDistAdminUsersList,
+    DeleteDistAdmin
 } = require("../../04-controllers/02-distAdmin/01-distAdminUserController.js")
 
 router.post("/dist-admin-signup", DistAdminSignUp)
@@ -15,5 +16,6 @@ router.put("/change-dist-admin-profile", ChangeDistAdminUserProfile)
 router.put("/change-dist-admin-password", ChangeDistAdminUserPassword)
 router.get("/get-dist-admin-profile", GetDistAdminUserProfile)
 router.get("/get-dist-admins-list", GetDistAdminUsersList)
+router.delete("/delete-dist-admin/:id", DeleteDistAdmin)
 
 module.exports = router
