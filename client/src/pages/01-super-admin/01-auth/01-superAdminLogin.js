@@ -63,7 +63,7 @@ const SuperAdminLogin = () => {
             fullName: response.data.fullName,
           })
         );
-        navigate("/super-admin-dashboard");
+        navigate("/");
         toast({
           title: 'Success.',
           description: 'Logged into admin dashboard.',
@@ -89,7 +89,7 @@ const SuperAdminLogin = () => {
       console.error('Error:', error.response);
       toast({
         title: 'Error.',
-        description: 'Server error',
+        description: 'Wrong email or password.',
         status: 'error',
         duration: 5000,
         isClosable: true,

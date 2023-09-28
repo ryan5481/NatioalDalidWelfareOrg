@@ -2,18 +2,26 @@ import { Routes, Route } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useColorModeValue } from '@chakra-ui/react'
 import '../App.css';
+
+//SUPER ADMIN ROUTES
+import SuperAdminSidebar from '../components/navigation/sideBar/01-superAdminSidebar'
+import EditSuperAdminProfile from '../pages/01-super-admin/01-auth/02-editSuperAdminProfile'
+import SuperAdminDashboard from '../pages/01-super-admin/01-SuperAdminDashboard';
+import ManageDistUsers from '../pages/01-super-admin/02-manageDistUsers';
+
+//NON USER ROUTES
 import Home from "../pages/03-users/01-home.js"
 // import Header from '../components/header/header';
-import NavBar  from '../components/navigation/navbar'
+import NavBar from '../components/navigation/navbar'
 import SuperAdminLogin from '../pages/01-super-admin/01-auth/01-superAdminLogin';
-import SuperAdminDashboard from '../pages/01-super-admin/02-superAdminDashboard';
+
 
 
 const ConditionalRoute = () => {
   const { userRole } = useSelector(state => state.user)
   if (userRole === 'superAdmin') {
     return <SuperAdminRoutes />
-  }else if (userRole === 'distAdmin') {
+  } else if (userRole === 'distAdmin') {
     return <DistAdminRoutes />
   } else if (userRole === 'user') {
     return <UserRoutes />
@@ -23,16 +31,15 @@ const ConditionalRoute = () => {
 }
 
 
-
 const SuperAdminRoutes = () => {
   return (
     <>
-      {/* <AdminNavBar /> */}
-      <Routes bg={useColorModeValue('purple.100', 'purple.800')}>
-      <Route path="/super-admin-dashboard" element={<SuperAdminDashboard />} />
-      
-        
-        
+      <SuperAdminSidebar />
+      <Routes >
+        <Route path="/" element={<SuperAdminDashboard  />} />
+        <Route path="/profile" element={<EditSuperAdminProfile />} />
+        <Route path="/user-management" element={<ManageDistUsers />} />
+
       </Routes>
     </>
   )
@@ -41,10 +48,8 @@ const SuperAdminRoutes = () => {
 const DistAdminRoutes = () => {
   return (
     <>
-      {/* <AdminNavBar /> */}
       <Routes bg={useColorModeValue('purple.100', 'purple.800')}>
-        {/* <Route path="/" element={<Home />} /> */}
-        
+
       </Routes>
     </>
   )
@@ -56,9 +61,7 @@ const UserRoutes = () => {
       {/* <Header /> */}
       <NavBar zIndex={10} />
       <Routes>
-      <Route path="/" element={<Home />} />
-        {/* <Route path="/adminlogin" element={<AdminLogin />} />
-        <Route path="/brochure" element={<Brochure />} /> */}
+        <Route path="/" element={<Home />} />
       </Routes>
       {/* <Footer /> */}
     </>
@@ -68,13 +71,10 @@ const UserRoutes = () => {
 const NonUserRoutes = () => {
   return (
     <>
-      {/* <Header /> */}
       <NavBar zIndex={10} />
       <Routes>
-      <Route path="/super-admin-login" element={<SuperAdminLogin />} />
-      {/* <Route path="/" element={<Home />} /> */}
+        <Route path="/super-admin-login" element={<SuperAdminLogin />} />
       </Routes>
-      {/* <Footer /> */}
     </>
   )
 }
