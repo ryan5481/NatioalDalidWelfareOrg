@@ -47,7 +47,7 @@ const DistAdminLogin = async (req, res) => {
                 msg: "Logged into super admin account successfully.",
                 fullName: distAdminUser.fullName,
                 email: distAdminUser.email,
-                profileImageName: distAdminUser.profileImageName,
+                profileImageName: profile.profileImageName,
                 id: distAdminUser._id
             })
         }
