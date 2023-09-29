@@ -1,8 +1,16 @@
 
 const SuperAdminUser = require("../../02-models/01-superAdmin/superAdminUserSchema.js");
 const bcrypt = require ("bcrypt")
-const saltRounds = 10
+const dotenv = require("dotenv");
+dotenv.config();
 
+// Retrieve the salt rounds from the environment
+const saltRounds = parseInt(process.env.SALT_ROUNDS);
+
+if (isNaN(saltRounds) || saltRounds <= 0) {
+  console.error('Invalid SALT_ROUNDS value in .env');
+  process.exit(1); // Exit the script with an error code
+}
 
 const SuperAdminSignUp = async(req, res) => {
     try{
@@ -90,7 +98,7 @@ const ChangeSuperAdminUserPassword = async (req, res) => {
             return res.status(401).json({ msg: "Old password is incorrect." })
         }
 
-        const hashedNewPassword = await bcrypt.hash(newPassword, 10)
+        const hashedNewPassword = await bcrypt.hash(newPassword, saltRounds)
         user.password = hashedNewPassword
         await user.save()
 

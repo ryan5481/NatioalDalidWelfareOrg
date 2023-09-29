@@ -1,8 +1,16 @@
 
 const DistAdminUser = require("../../02-models/02-distAdmin/distAdminUserSchema.js");
 const bcrypt = require ("bcrypt")
-const saltRounds = 10
+const dotenv = require("dotenv");
+dotenv.config();
 
+// Retrieve the salt rounds from the environment
+const saltRounds = parseInt(process.env.SALT_ROUNDS);
+
+if (isNaN(saltRounds) || saltRounds <= 0) {
+  console.error('Invalid SALT_ROUNDS value in .env');
+  process.exit(1); // Exit the script with an error code
+}
 
 const DistAdminSignUp = async(req, res) => {
     try{
@@ -128,7 +136,22 @@ const GetDistAdminUserProfile = async (req, res) => {
 const GetDistAdminUsersList = async (req, res) => {
     try {
 
-        const profiles = await DistAdminUser.find({}, {password: 0})
+        //filter
+        const queryObj = { ...req.query }
+        const excludeFields = ["page", "sort", "skip", "limit", "fields"]
+        excludeFields.forEach(el => delete queryObj[el])
+
+        //sort
+        const sortBy = req.query.sort
+        // console.log(queryObj, req.query.sort)
+
+        //pagination
+        const page = req.query.page
+        const limit = req.query.limit
+        const skip = (page - 1) * limit
+        console.log(page, limit, skip)
+
+        const profiles = await DistAdminUser.find(queryObj).sort(sortBy).skip(skip).limit(limit)
 
         if (profiles) {
             const data = profiles.map(profile => ({

@@ -8,12 +8,16 @@ import {
     Text,
     Grid,
     Center,
-    Container,
+    Select,
     HStack,
     Button,
-    useDisclosure
+    useDisclosure,
+    InputGroup,
+    InputRightElement,
+    IconButton,
+    Input
 } from '@chakra-ui/react'
-import { ViewIcon, DeleteIcon, SmallCloseIcon, EditIcon } from '@chakra-ui/icons';
+import { ViewIcon, DeleteIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
 import CreateUserForm from '../form/createUserForm';
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
 
@@ -26,9 +30,153 @@ const DistUsersGrid = () => {
     const disclosure = useDisclosure()
     const [distAdminTodelete, setDistAdminTodelete] = useState({})
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const { isOpen, onOpen, onClose } = useDisclosure();
+    const { isOpen, onOpen, onClose } = useDisclosure();
     //SWITCH BETWEEEN MANAGE USERS AND CREATE USERS
     const [isCreateNewUserActive, setIsCreateNewUserActive] = useState(false)
+      // Calculate the start and end indices for the current page
+      const [currentPage, setCurrentPage] = useState(1);
+      const itemsPerPage = 20;
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      const [sortOrder, setSortOrder] = useState('asc');
+      const [sortColumn, setSortColumn] = useState(null);
+      const [searchInput, setSearchInput] = useState('');
+    // Create an object to track the mouse state for each Text element
+    const [textMouseStates, setTextMouseStates] = useState({});
+    const handleMouseDown = (id) => {
+        setTextMouseStates({ ...textMouseStates, [id]: true });
+    };
+    const handleMouseUp = (id) => {
+        setTextMouseStates({ ...textMouseStates, [id]: false });
+    };
+    // Define the original and clicked background colors
+    const originalBackgroundColor = 'cyan.900';
+    const clickedBackgroundColor = 'cyan.500';
+    const nepalDistricts = [
+        "Achham",
+        "Arghakhanchi",
+        "Baglung",
+        "Baitadi",
+        "Bajhang",
+        "Bajura",
+        "Banke",
+        "Bara",
+        "Bardiya",
+        "Bhaktapur",
+        "Bhojpur",
+        "Chitwan",
+        "Dadeldhura",
+        "Dailekh",
+        "Dang",
+        "Darchula",
+        "Dhading",
+        "Dhankuta",
+        "Dhanusa",
+        "Dholkha",
+        "Dolpa",
+        "Doti",
+        "Gorkha",
+        "Gulmi",
+        "Humla",
+        "Ilam",
+        "Jajarkot",
+        "Jhapa",
+        "Jumla",
+        "Kailali",
+        "Kalikot",
+        "Kanchanpur",
+        "Kapilvastu",
+        "Kaski",
+        "Kathmandu",
+        "Kavrepalanchok",
+        "Khotang",
+        "Lalitpur",
+        "Lamjung",
+        "Mahottari",
+        "Makwanpur",
+        "Manang",
+        "Morang",
+        "Mugu",
+        "Mustang",
+        "Myagdi",
+        "Nawalparasi",
+        "Nuwakot",
+        "Okhaldhunga",
+        "Palpa",
+        "Panchthar",
+        "Parbat",
+        "Parsa",
+        "Pyuthan",
+        "Ramechhap",
+        "Rasuwa",
+        "Rautahat",
+        "Rolpa",
+        "Rukum",
+        "Rupandehi",
+        "Salyan",
+        "Sankhuwasabha",
+        "Saptari",
+        "Sarlahi",
+        "Sindhuli",
+        "Sindhupalchok",
+        "Siraha",
+        "Solukhumbu",
+        "Sunsari",
+        "Surkhet",
+        "Syangja",
+        "Tanahun",
+        "Taplejung",
+        "Terhathum",
+        "Udayapur",
+    ];
+
+
+
+    // Sorting functions
+    const handleSort = (column) => {
+        if (column === sortColumn) {
+            // Reverse the order if the same column is clicked again
+            setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+        } else {
+            // Set the new column and default to ascending order
+            setSortColumn(column);
+            setSortOrder('asc');
+        }
+    };
+
+    //FILTER BY DISTRICT
+    const [selectedDistrict, setSelectedDistrict] = useState('');
+    const filteredDistAdminList = distAdminList
+    .filter((item) =>
+      item.district.toLowerCase().includes(selectedDistrict.toLowerCase())
+    )
+    .filter(
+      (item) =>
+        item.fullName.toLowerCase().includes(searchInput.toLowerCase()) ||
+        item.email.toLowerCase().includes(searchInput.toLowerCase()) ||
+        item.district.toLowerCase().includes(searchInput.toLowerCase())
+    );
+
+    //SEARCH
+
+
+    // Calculate the total number of pages
+    const totalPages = Math.ceil(distAdminList.length / itemsPerPage);
+
+    // Sorting logic and pagination for distAdminList
+    const sortedAndPaginatedDistAdminList = filteredDistAdminList
+        .slice()
+        .sort((a, b) => {
+            const aValue = a[sortColumn] || '';
+            const bValue = b[sortColumn] || '';
+
+            if (sortOrder === 'asc') {
+                return aValue.localeCompare(bValue);
+            } else {
+                return bValue.localeCompare(aValue);
+            }
+        })
+        .slice(startIndex, endIndex);
 
     //FETCH
     const fetchData = async () => {
@@ -76,53 +224,174 @@ const DistUsersGrid = () => {
                 pl={"200px"}
                 fontSize="14px"
             >
-                <Center p={5}>
+                <Center p={2}>
                     <HStack>
                         <Button
+                            h={8}
                             colorScheme={isCreateNewUserActive == false ? "blue" : "gray"}
                             _hover={{ border: '2px solid #1C6FEB' }}
                             transition="0.15s ease-in-out"
                             onClick={() => { setIsCreateNewUserActive(false) }}
                         >Manage</Button>
                         <Button
+                            h={8}
                             colorScheme={isCreateNewUserActive == true ? "blue" : "gray"}
                             _hover={{ border: '2px solid #1C6FEB' }}
                             transition="0.15s ease-in-out"
                             onClick={() => { setIsCreateNewUserActive(true) }}
                         >Create</Button>
                     </HStack>
+
                 </Center>
                 {isCreateNewUserActive == false ?
                     (<Box
                         pos={"absolute"}
-                        mx={10}
-                        isCentered >
+                        px={10}
+                        h={8}
+                    >
+                        <HStack>
+                            <Box></Box>
+                            <Text fontSize={"14px"} px={2} >District:</Text>
+                            <Select
+                                mx={1}
+                                h={8}
+                                w={"200px"}
+                                id="district"
+                                onChange={(e) => setSelectedDistrict(e.target.value)}
+                                value={selectedDistrict}
+                            >
+                                <option value="">All Districts</option>
+                                {nepalDistricts.map((district, index) => (
+                                    <option key={index} value={district} >{district}</option>
+                                ))}
+                            </Select>
+                            <Text fontSize={"14px"} px={2} >Search:</Text>
+                            <InputGroup>
+            <Input
+              rounded="full"
+              w="300px"
+              h={8}
+              placeholder="Name, email, district"
+              onChange={(e) => setSearchInput(e.target.value)}
+              value={searchInput}
+            />
+            {searchInput && (
+              <InputRightElement>
+                <CloseIcon  variant="ghost"
+                  onClick={() => setSearchInput('')}/>
+                 
+               
+              </InputRightElement>
+            )}
+          </InputGroup>
+
+                        </HStack>
                         {/* LIST HEADER */}
-                        <Grid color='white'
-                            templateColumns={{ sm: '1fr', md: '1fr 1fr 1fr', lg: '1fr 1fr 2fr 2fr 2fr 1fr 1fr 1fr 1fr' }}
-                            p={1}
+                        <Grid
+                            color="white"
+                            templateColumns={{
+                                sm: '1fr',
+                                md: '1fr 1fr 1fr',
+                                lg: '1fr 1fr 2fr 2fr 2fr 1fr 1fr 1fr 1fr',
+                            }}
                             m={1}
                             h={8}
                             gap={1}
-                            // w={"80%"}
-                            bg={'blue.700'}
-                            textAlign={"left"}
-                            fontWeight={"bold"}
+                            bg={originalBackgroundColor}
+                            _hover={{
+                                cursor: "default"
+                            }}
+                            textAlign="left"
+                            fontWeight="bold"
                             align="center"
                             justify="center"
                         >
-                            <Text w="30px"  >SN</Text>
-                            <Text w="150px">District</Text>
-                            <Text w="200px">Name</Text>
-                            <Text w="200px">Email</Text>
-                            <Text w="100px">Password</Text>
-                            <Text w="120px" >Regd. date</Text>
-                            <Text w="120px"  >Updated date</Text>
-                            <Text w="60px">Edit</Text>
-                            <Text w="60px">Delete</Text>
+                            <Text
+                                w="100%"
+                                p={1}
+                                bg={textMouseStates.sn ? clickedBackgroundColor : originalBackgroundColor}
+                                onMouseDown={() => handleMouseDown('sn')}
+                                onMouseUp={() => handleMouseUp('sn')}
+                                onMouseLeave={() => handleMouseUp('sn')}
+                                _hover={{ cursor: 'pointer' }}
+                            >
+                                SN
+                            </Text>
+                            <Text
+                                w="150px"
+                                p={1}
+                                bg={textMouseStates.district ? clickedBackgroundColor : originalBackgroundColor}
+                                onMouseDown={() => handleMouseDown('district')}
+                                onMouseUp={() => handleMouseUp('district')}
+                                onMouseLeave={() => handleMouseUp('district')}
+                                onClick={() => handleSort('district')}
+
+                            >
+                                District
+                            </Text>
+                            <Text
+                                w="200px"
+                                p={1}
+                                bg={textMouseStates.name ? clickedBackgroundColor : originalBackgroundColor}
+                                onMouseDown={() => handleMouseDown('name')}
+                                onMouseUp={() => handleMouseUp('name')}
+                                onMouseLeave={() => handleMouseUp('name')}
+                                onClick={() => handleSort('fullName')}
+
+                            >
+                                Name
+                            </Text>
+                            <Text
+                                w="200px"
+                                p={1}
+                                bg={textMouseStates.email ? clickedBackgroundColor : originalBackgroundColor}
+                                onMouseDown={() => handleMouseDown('email')}
+                                onMouseUp={() => handleMouseUp('email')}
+                                onMouseLeave={() => handleMouseUp('email')}
+                                onClick={() => handleSort('email')}
+
+                            >
+                                Email
+                            </Text>
+                            <Text
+                                w="120px"
+                                p={1}
+                                bg={textMouseStates.regdDate ? clickedBackgroundColor : originalBackgroundColor}
+                                onMouseDown={() => handleMouseDown('regdDate')}
+                                onMouseUp={() => handleMouseUp('regdDate')}
+                                onMouseLeave={() => handleMouseUp('regdDate')}
+                                onClick={() => handleSort('createdAt')}
+
+                            >
+                                Regd date
+                            </Text>
+                            <Text
+                                w="120px"
+                                p={1}
+                                bg={textMouseStates.updatedDate ? clickedBackgroundColor : originalBackgroundColor}
+                                onMouseDown={() => handleMouseDown('updatedDate')}
+                                onMouseUp={() => handleMouseUp('updatedDate')}
+                                onMouseLeave={() => handleMouseUp('updatedDate')}
+                                onClick={() => handleSort('updatedAt')}
+
+                            >
+                                Updated date
+                            </Text>
+                            <Text
+                                w="60px"
+                                p={1}
+                            >
+                                Edit
+                            </Text>
+                            <Text
+                                w="60px"
+                                p={1}
+                            >
+                                Delete
+                            </Text>
                         </Grid>
                         {/* LIST BODY */}
-                        {distAdminList && distAdminList.map((distAdmin, index) => {
+                        {sortedAndPaginatedDistAdminList && sortedAndPaginatedDistAdminList.map((distAdmin, index) => {
                             const isEven = index % 2 === 0;
                             const rowStyle = {
                                 backgroundColor: isEven ? 'lightgray' : 'white',
@@ -136,7 +405,11 @@ const DistUsersGrid = () => {
                                     isCentered
                                 >
                                     <Grid
-                                        templateColumns={{ sm: '1fr', md: '1fr 1fr 1fr', lg: '1fr 1fr 2fr 2fr 2fr 1fr 1fr 1fr 1fr' }}
+                                        templateColumns={{
+                                            sm: '1fr',
+                                            md: '1fr 1fr 1fr',
+                                            lg: '1fr 1fr 2fr 2fr 2fr 1fr 1fr 1fr 1fr',
+                                        }}
                                         p={1}
                                         m={1}
                                         h={8}
@@ -151,11 +424,10 @@ const DistUsersGrid = () => {
                                         key={distAdmin._id}
                                     >
 
-                                        <Text w="30px"  >{index + 1}</Text>
+                                        <Text w="30px"  >{index + startIndex + 1}</Text>
                                         <Text w="150px"  >{distAdmin.district}</Text>
                                         <Text w="200px">{distAdmin.fullName}</Text>
                                         <Text w="200px">{distAdmin.email}</Text>
-                                        <Text w="100px">**********</Text>
                                         <Text w="120px">{distAdmin.createdAt.slice(0, 10)}</Text>
                                         <Text w="120px" >{distAdmin.updatedAt.slice(0, 10)}</Text>
                                         <Box w="60px">
@@ -179,12 +451,45 @@ const DistUsersGrid = () => {
                                 </Box>
                             </>)
                         })}
+                         {/* PAGINATION CONTROLS */}
+            <Box mt={4} textAlign="center">
+                <Button
+                    h={10}
+                    m={2}
+                    onClick={() => setCurrentPage(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    isDisabled={currentPage === 1}
+                >
+                    Previous Page
+                </Button>
+                {/* Page number buttons */}
+                {[...Array(totalPages)].map((_, page) => (
+                    <Button
+                        key={page + 1}
+                        m={2}
+                        onClick={() => setCurrentPage(page + 1)}
+                        colorScheme={currentPage === page + 1 ? 'blue' : 'gray'}
+                    >
+                        {page + 1}
+                    </Button>
+                ))}
+                <Button
+                    m={2}
+                    onClick={() => setCurrentPage(currentPage + 1)}
+                    disabled={endIndex >= distAdminList.length}
+                    isDisabled={currentPage === totalPages}
+
+                >
+                    Next Page
+                </Button>
+            </Box>
                     </Box>)
                     :
-                    (<CreateUserForm setIsCreateNewUserActive={setIsCreateNewUserActive} />)
+                    (<CreateUserForm setIsCreateNewUserActive={setIsCreateNewUserActive} fetchData={fetchData} />)
                 }
-                <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={distAdminTodelete} handleDistAdminDelete={handleDistAdminDelete} />
+                <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={distAdminTodelete} accountType="district admin account" handleDistAdminDelete={handleDistAdminDelete} />
             </Box>
+           
         </>
     )
 
