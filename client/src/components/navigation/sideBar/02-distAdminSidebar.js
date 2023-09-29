@@ -62,7 +62,7 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, href: "/" },
-  { name: 'User management', icon: PiUsersFourBold, href: "/user-management"},
+  { name: 'Students', icon: PiUsersFourBold, href: "/student-management"},
   { name: 'Explore', icon: FiCompass },
   { name: 'Favourites', icon: FiStar },
   { name: 'Settings', icon: FiSettings },
@@ -204,7 +204,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   ml="2">
                   <Text fontSize="sm" fontWeight="bold">{fullName}</Text>
                   <Text fontSize="xs" color="gray.600">
-                    Super Admin
+                    District Admin
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -228,7 +228,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   )
 }
 
-const SuperAdminSidebar = () => {
+const DistAdminSidebar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
 
@@ -254,4 +254,4 @@ const SuperAdminSidebar = () => {
   )
 }
 
-export default SuperAdminSidebar
+export default DistAdminSidebar

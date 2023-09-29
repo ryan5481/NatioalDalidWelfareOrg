@@ -9,11 +9,15 @@ import EditSuperAdminProfile from '../pages/01-super-admin/01-auth/02-editSuperA
 import SuperAdminDashboard from '../pages/01-super-admin/01-SuperAdminDashboard';
 import ManageDistUsers from '../pages/01-super-admin/02-manageDistUsers';
 
+//DIST ADMIN Routes
+import DistAdminSidebar from '../components/navigation/sideBar/02-distAdminSidebar';
+
 //NON USER ROUTES
 import Home from "../pages/03-users/01-home.js"
 // import Header from '../components/header/header';
 import NavBar from '../components/navigation/navbar'
 import SuperAdminLogin from '../pages/01-super-admin/01-auth/01-superAdminLogin';
+import DistAdminLogin from '../pages/02-district-admin/01-auth/01-distAdminLogin';
 
 
 
@@ -48,6 +52,8 @@ const SuperAdminRoutes = () => {
 const DistAdminRoutes = () => {
   return (
     <>
+      <DistAdminSidebar />
+
       <Routes bg={useColorModeValue('purple.100', 'purple.800')}>
 
       </Routes>
@@ -59,7 +65,7 @@ const UserRoutes = () => {
   return (
     <>
       {/* <Header /> */}
-      <NavBar zIndex={10} />
+      {/* <NavBar zIndex={10} /> */}
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
@@ -71,9 +77,10 @@ const UserRoutes = () => {
 const NonUserRoutes = () => {
   return (
     <>
-      <NavBar zIndex={10} />
+      {/* <NavBar zIndex={10} /> */}
       <Routes>
         <Route path="/super-admin-login" element={<SuperAdminLogin />} />
+        <Route path="/dist-admin-login" element={<DistAdminLogin />} />
       </Routes>
     </>
   )
