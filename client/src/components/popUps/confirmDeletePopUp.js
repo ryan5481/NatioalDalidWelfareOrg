@@ -2,7 +2,8 @@ import {
     Button, AlertDialog, AlertDialogOverlay, AlertDialogContent, AlertDialogHeader, AlertDialogBody, AlertDialogFooter, List, ListItem, Text
 } from '@chakra-ui/react'
 import { useRef } from 'react'
-const ConfirmDeletePopUp = ({ isOpen, onClose, data, handleDistAdminDelete }) => {
+
+const ConfirmDeletePopUp = ({ isOpen, onClose, data, accountType, handleDistAdminDelete }) => {
 const cancelRef = useRef()
 
 return (
@@ -15,7 +16,7 @@ return (
             <AlertDialogOverlay>
                 <AlertDialogContent>
                     <AlertDialogHeader fontSize="lg" fontWeight="bold" textAlign="center" >
-                        Delete item
+                        Delete {accountType}
                     </AlertDialogHeader>
                     <AlertDialogBody>
                         <List spacing={2}>

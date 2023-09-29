@@ -23,14 +23,92 @@ import {
   IconButton,
   Center,
   useDisclosure,
+  Select,
   FormErrorMessage, // Add this import for error message display
 } from '@chakra-ui/react';
 import { SmallCloseIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
-const CreateUserForm = ({setIsCreateNewUserActive}) => {
+const CreateUserForm = ({setIsCreateNewUserActive, fetchData}) => {
   const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
+  const nepalDistricts = [
+    "Achham",
+    "Arghakhanchi",
+    "Baglung",
+    "Baitadi",
+    "Bajhang",
+    "Bajura",
+    "Banke",
+    "Bara",
+    "Bardiya",
+    "Bhaktapur",
+    "Bhojpur",
+    "Chitwan",
+    "Dadeldhura",
+    "Dailekh",
+    "Dang",
+    "Darchula",
+    "Dhading",
+    "Dhankuta",
+    "Dhanusa",
+    "Dholkha",
+    "Dolpa",
+    "Doti",
+    "Gorkha",
+    "Gulmi",
+    "Humla",
+    "Ilam",
+    "Jajarkot",
+    "Jhapa",
+    "Jumla",
+    "Kailali",
+    "Kalikot",
+    "Kanchanpur",
+    "Kapilvastu",
+    "Kaski",
+    "Kathmandu",
+    "Kavrepalanchok",
+    "Khotang",
+    "Lalitpur",
+    "Lamjung",
+    "Mahottari",
+    "Makwanpur",
+    "Manang",
+    "Morang",
+    "Mugu",
+    "Mustang",
+    "Myagdi",
+    "Nawalparasi",
+    "Nuwakot",
+    "Okhaldhunga",
+    "Palpa",
+    "Panchthar",
+    "Parbat",
+    "Parsa",
+    "Pyuthan",
+    "Ramechhap",
+    "Rasuwa",
+    "Rautahat",
+    "Rolpa",
+    "Rukum",
+    "Rupandehi",
+    "Salyan",
+    "Sankhuwasabha",
+    "Saptari",
+    "Sarlahi",
+    "Sindhuli",
+    "Sindhupalchok",
+    "Siraha",
+    "Solukhumbu",
+    "Sunsari",
+    "Surkhet",
+    "Syangja",
+    "Tanahun",
+    "Taplejung",
+    "Terhathum",
+    "Udayapur",
+];
 
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('Full name is required'),
@@ -67,8 +145,8 @@ const CreateUserForm = ({setIsCreateNewUserActive}) => {
     try {
       const res = await axios.post(`${baseUrl}/dist-admin-signup`, formData);
       // Handle success and error messages
-      if (res) {
-        setIsCreateNewUserActive(false)
+      if (res.status == 200) {
+        
         toast({
             title: 'Success.',
             description: 'District admin user account created.',
@@ -77,6 +155,8 @@ const CreateUserForm = ({setIsCreateNewUserActive}) => {
             isClosable: true,
             position: 'top'
         });
+        fetchData()
+        setIsCreateNewUserActive(false)
     } else {
         toast({
             title: 'Error.',
@@ -203,20 +283,25 @@ const CreateUserForm = ({setIsCreateNewUserActive}) => {
               <FormErrorMessage>{formik.errors.confirmPassword}</FormErrorMessage>
             </FormControl>
             <FormControl id="district" isRequired>
-              <FormLabel>District</FormLabel>
-              <Input
-                placeholder="District"
-                _placeholder={{ color: 'gray.500' }}
-                type="text"
-                id="district"
-                {...formik.getFieldProps('district')}
-              />
-              {formik.errors.district && formik.touched.district && (
-                <Box color="red.500" mt={1}>
-                  {formik.errors.district}
-                </Box>
-              )}
-            </FormControl>
+  <FormLabel>District</FormLabel>
+  <Select
+    placeholder="Select District"
+    _placeholder={{ color: 'gray.500' }}
+    id="district"
+    {...formik.getFieldProps('district')}
+  >
+    {nepalDistricts.map((district) => (
+      <option key={district} value={district}>
+        {district}
+      </option>
+    ))}
+  </Select>
+  {formik.errors.district && formik.touched.district && (
+    <Box color="red.500" mt={1}>
+      {formik.errors.district}
+    </Box>
+  )}
+</FormControl>
             <Stack spacing={6} direction={['column', 'row']}>
               <Button
                 bg={'red.400'}
