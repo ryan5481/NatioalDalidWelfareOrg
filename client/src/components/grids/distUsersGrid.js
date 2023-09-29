@@ -15,9 +15,10 @@ import {
     InputGroup,
     InputRightElement,
     IconButton,
-    Input
+    Input,
+    FormControl
 } from '@chakra-ui/react'
-import { ViewIcon, DeleteIcon, CloseIcon, EditIcon } from '@chakra-ui/icons';
+import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import CreateUserForm from '../form/createUserForm';
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
 
@@ -33,14 +34,16 @@ const DistUsersGrid = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     //SWITCH BETWEEEN MANAGE USERS AND CREATE USERS
     const [isCreateNewUserActive, setIsCreateNewUserActive] = useState(false)
-      // Calculate the start and end indices for the current page
-      const [currentPage, setCurrentPage] = useState(1);
-      const itemsPerPage = 20;
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
-      const [sortOrder, setSortOrder] = useState('asc');
-      const [sortColumn, setSortColumn] = useState(null);
-      const [searchInput, setSearchInput] = useState('');
+    //PAGINATE FILTER SORT
+    // Calculate the start and end indices for the current page
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 20;
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const [sortOrder, setSortOrder] = useState('asc');
+    const [sortColumn, setSortColumn] = useState(null);
+    const [searchInput, setSearchInput] = useState('');
+    //CHANGE BG COLOR ON HEADING CLICK
     // Create an object to track the mouse state for each Text element
     const [textMouseStates, setTextMouseStates] = useState({});
     const handleMouseDown = (id) => {
@@ -129,10 +132,7 @@ const DistUsersGrid = () => {
         "Terhathum",
         "Udayapur",
     ];
-
-
-
-    // Sorting functions
+    //PAGINATE FILTER SORT
     const handleSort = (column) => {
         if (column === sortColumn) {
             // Reverse the order if the same column is clicked again
@@ -147,15 +147,15 @@ const DistUsersGrid = () => {
     //FILTER BY DISTRICT
     const [selectedDistrict, setSelectedDistrict] = useState('');
     const filteredDistAdminList = distAdminList
-    .filter((item) =>
-      item.district.toLowerCase().includes(selectedDistrict.toLowerCase())
-    )
-    .filter(
-      (item) =>
-        item.fullName.toLowerCase().includes(searchInput.toLowerCase()) ||
-        item.email.toLowerCase().includes(searchInput.toLowerCase()) ||
-        item.district.toLowerCase().includes(searchInput.toLowerCase())
-    );
+        .filter((item) =>
+            item.district.toLowerCase().includes(selectedDistrict.toLowerCase())
+        )
+        .filter(
+            (item) =>
+                item.fullName.toLowerCase().includes(searchInput.toLowerCase()) ||
+                item.email.toLowerCase().includes(searchInput.toLowerCase()) ||
+                item.district.toLowerCase().includes(searchInput.toLowerCase())
+        );
 
     //SEARCH
 
@@ -218,6 +218,7 @@ const DistUsersGrid = () => {
     useEffect(() => {
         fetchData()
     }, [])
+
     return (
         <>
             <Box
@@ -266,24 +267,41 @@ const DistUsersGrid = () => {
                                 ))}
                             </Select>
                             <Text fontSize={"14px"} px={2} >Search:</Text>
+                            <FormControl>
+
                             <InputGroup>
-            <Input
-              rounded="full"
-              w="300px"
-              h={8}
-              placeholder="Name, email, district"
-              onChange={(e) => setSearchInput(e.target.value)}
-              value={searchInput}
-            />
-            {searchInput && (
-              <InputRightElement>
-                <CloseIcon  variant="ghost"
-                  onClick={() => setSearchInput('')}/>
-                 
-               
-              </InputRightElement>
-            )}
-          </InputGroup>
+                                <Input
+                                    rounded="full"
+                                    w="300px"
+                                    h={8}
+                                    placeholder="Name, email, district"
+                                    onChange={(e) => setSearchInput(e.target.value)}
+                                    value={searchInput}
+                                />
+                                {searchInput && (
+                                    <InputRightElement>
+
+                                        <Box
+                                            as={IconButton}
+                                            size='xxs'
+                                            colorScheme='blue'
+                                            rounded="full"
+                                            right="550px"
+                                            zIndex='10'
+                                            boxShadow="2xl"
+                                            onClick={() => setSearchInput('')}
+                                        >
+                                            <SmallCloseIcon
+                                            w="15px"
+                                            h="15px"
+                                                color="gray.50"
+                                            />
+
+                                        </Box>
+                                    </InputRightElement>
+                                )}
+                            </InputGroup>
+                            </FormControl>
 
                         </HStack>
                         {/* LIST HEADER */}
@@ -451,45 +469,45 @@ const DistUsersGrid = () => {
                                 </Box>
                             </>)
                         })}
-                         {/* PAGINATION CONTROLS */}
-            <Box mt={4} textAlign="center">
-                <Button
-                    h={10}
-                    m={2}
-                    onClick={() => setCurrentPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    isDisabled={currentPage === 1}
-                >
-                    Previous Page
-                </Button>
-                {/* Page number buttons */}
-                {[...Array(totalPages)].map((_, page) => (
-                    <Button
-                        key={page + 1}
-                        m={2}
-                        onClick={() => setCurrentPage(page + 1)}
-                        colorScheme={currentPage === page + 1 ? 'blue' : 'gray'}
-                    >
-                        {page + 1}
-                    </Button>
-                ))}
-                <Button
-                    m={2}
-                    onClick={() => setCurrentPage(currentPage + 1)}
-                    disabled={endIndex >= distAdminList.length}
-                    isDisabled={currentPage === totalPages}
+                        {/* PAGINATION CONTROLS */}
+                        <Box mt={4} textAlign="center">
+                            <Button
+                                h={10}
+                                m={2}
+                                onClick={() => setCurrentPage(currentPage - 1)}
+                                disabled={currentPage === 1}
+                                isDisabled={currentPage === 1}
+                            >
+                                Previous Page
+                            </Button>
+                            {/* Page number buttons */}
+                            {[...Array(totalPages)].map((_, page) => (
+                                <Button
+                                    key={page + 1}
+                                    m={2}
+                                    onClick={() => setCurrentPage(page + 1)}
+                                    colorScheme={currentPage === page + 1 ? 'blue' : 'gray'}
+                                >
+                                    {page + 1}
+                                </Button>
+                            ))}
+                            <Button
+                                m={2}
+                                onClick={() => setCurrentPage(currentPage + 1)}
+                                disabled={endIndex >= distAdminList.length}
+                                isDisabled={currentPage === totalPages}
 
-                >
-                    Next Page
-                </Button>
-            </Box>
+                            >
+                                Next Page
+                            </Button>
+                        </Box>
                     </Box>)
                     :
                     (<CreateUserForm setIsCreateNewUserActive={setIsCreateNewUserActive} fetchData={fetchData} />)
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={distAdminTodelete} accountType="district admin account" handleDistAdminDelete={handleDistAdminDelete} />
             </Box>
-           
+
         </>
     )
 

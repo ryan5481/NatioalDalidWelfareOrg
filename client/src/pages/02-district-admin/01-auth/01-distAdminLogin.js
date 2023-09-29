@@ -25,7 +25,7 @@ import { assignUserRole, setLoginDetails } from '../../../redux/reducers/userSli
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 const baseUrl = process.env.REACT_APP_BASE_URL
 
-const SuperAdminLogin = () => {
+const DistAdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const toast = useToast()
   const navigate = useNavigate()
@@ -47,17 +47,16 @@ const SuperAdminLogin = () => {
 
     try {
       // console.log('Form Data:', formData);
-      const response = await axios.post(`${baseUrl}/super-admin-login`, {
+      const response = await axios.post(`${baseUrl}/dist-admin-login`, {
         email: formData.email,
         password: formData.password,
       })
 
       if (response.status === 200) {
         // Successful login
-        dispatch(assignUserRole("superAdmin"));
+        dispatch(assignUserRole("distAdmin"));
         dispatch(
           setLoginDetails({
-            // userRole: "superAdmin",
             email: response.data.email,
             id: response.data.id,
             fullName: response.data.fullName,
@@ -110,7 +109,7 @@ const SuperAdminLogin = () => {
           <Stack spacing={4} w={'full'} maxW={'md'}>
 
             <Center><Image w={300} src=''></Image></Center>
-            <Heading fontSize={'2xl'} textAlign="center" >Super Admin Login</Heading>
+            <Heading fontSize={'2xl'} textAlign="center" >District Admin Login</Heading>
             <FormControl>
               <form
                 onSubmit={handleSubmit}
@@ -180,4 +179,4 @@ const SuperAdminLogin = () => {
   )
 }
 
-export default SuperAdminLogin
+export default DistAdminLogin

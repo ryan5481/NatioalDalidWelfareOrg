@@ -29,7 +29,7 @@ import {
 import { SmallCloseIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
-const CreateUserForm = ({setIsCreateNewUserActive, fetchData}) => {
+const CreateUserForm = ({ setIsCreateNewUserActive, fetchData }) => {
   const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
   const nepalDistricts = [
@@ -108,20 +108,20 @@ const CreateUserForm = ({setIsCreateNewUserActive, fetchData}) => {
     "Taplejung",
     "Terhathum",
     "Udayapur",
-];
+  ];
 
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('Full name is required'),
     email: Yup.string().required('Email is required').email('Invalid email address'),
     password: Yup.string()
-    .required('Password is required')
-    .matches(
-      /^(?=.*[a-z].*[a-z])(?=.*[A-Z].*[A-Z])(?=.*\d.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-      'Password must contain at least 8 characters, two lowercase letters, two uppercase letters, two numbers, and one special character'
-    ),
+      .required('Password is required')
+      .matches(
+        /^(?=.*[a-z].*[a-z])(?=.*[A-Z].*[A-Z])(?=.*\d.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        'Password must contain at least 8 characters, two lowercase letters, two uppercase letters, two numbers, and one special character'
+      ),
     confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords do not match') // Check if it matches the 'password' field
-    .required('Password confirmation is required'),
+      .oneOf([Yup.ref('password'), null], 'Passwords do not match') // Check if it matches the 'password' field
+      .required('Password confirmation is required'),
     district: Yup.string().required('District is required'),
   });
 
@@ -146,39 +146,39 @@ const CreateUserForm = ({setIsCreateNewUserActive, fetchData}) => {
       const res = await axios.post(`${baseUrl}/dist-admin-signup`, formData);
       // Handle success and error messages
       if (res.status == 200) {
-        
+
         toast({
-            title: 'Success.',
-            description: 'District admin user account created.',
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-            position: 'top'
+          title: 'Success.',
+          description: 'District admin user account created.',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position: 'top'
         });
         fetchData()
         setIsCreateNewUserActive(false)
-    } else {
+      } else {
         toast({
-            title: 'Error.',
-            description: 'Failed to create user.',
-            status: 'error',
-            duration: 5000,
-            isClosable: true,
-            position: 'top'
+          title: 'Error.',
+          description: 'Failed to create user.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top'
         });
-    }
+      }
 
-} catch (error) {
-    console.error("Error updating image: ", error)
-    toast({
+    } catch (error) {
+      console.error("Error updating image: ", error)
+      toast({
         title: 'Error.',
         description: "Could not connect to server.",
         status: 'error',
         duration: 5000,
         isClosable: true,
         position: 'top'
-    });
-}
+      });
+    }
   };
 
   const handleTogglePassword = () => {
@@ -188,7 +188,7 @@ const CreateUserForm = ({setIsCreateNewUserActive, fetchData}) => {
   return (
     <Center >
       <Box
-      w={"md"}
+        w={"md"}
         justify={'center'}
         bg={useColorModeValue('gray.50', 'gray.800')}
       >
@@ -283,25 +283,25 @@ const CreateUserForm = ({setIsCreateNewUserActive, fetchData}) => {
               <FormErrorMessage>{formik.errors.confirmPassword}</FormErrorMessage>
             </FormControl>
             <FormControl id="district" isRequired>
-  <FormLabel>District</FormLabel>
-  <Select
-    placeholder="Select District"
-    _placeholder={{ color: 'gray.500' }}
-    id="district"
-    {...formik.getFieldProps('district')}
-  >
-    {nepalDistricts.map((district) => (
-      <option key={district} value={district}>
-        {district}
-      </option>
-    ))}
-  </Select>
-  {formik.errors.district && formik.touched.district && (
-    <Box color="red.500" mt={1}>
-      {formik.errors.district}
-    </Box>
-  )}
-</FormControl>
+              <FormLabel>District</FormLabel>
+              <Select
+                placeholder="Select District"
+                _placeholder={{ color: 'gray.500' }}
+                id="district"
+                {...formik.getFieldProps('district')}
+              >
+                {nepalDistricts.map((district) => (
+                  <option key={district} value={district}>
+                    {district}
+                  </option>
+                ))}
+              </Select>
+              {formik.errors.district && formik.touched.district && (
+                <Box color="red.500" mt={1}>
+                  {formik.errors.district}
+                </Box>
+              )}
+            </FormControl>
             <Stack spacing={6} direction={['column', 'row']}>
               <Button
                 bg={'red.400'}
@@ -310,7 +310,7 @@ const CreateUserForm = ({setIsCreateNewUserActive, fetchData}) => {
                 _hover={{
                   bg: 'red.500',
                 }}
-                onClick={()=>setIsCreateNewUserActive(false)}
+                onClick={() => setIsCreateNewUserActive(false)}
               >
                 Cancel
               </Button>
