@@ -18,7 +18,23 @@ const studentProfileSchema = ({
         type: String,
     },
 
+    gender: {
+        type: String,
+    },
+
     dateOfBirth: {
+        type: String,
+    },
+
+    contactNumber: {
+        type: String,
+    },
+
+    email: {
+        type: String,
+    },
+
+    birthCertificate: {
         type: String,
     },
 

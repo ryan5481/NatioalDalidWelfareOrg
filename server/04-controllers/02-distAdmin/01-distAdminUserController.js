@@ -44,10 +44,10 @@ const DistAdminLogin = async (req, res) => {
             return (res.status(401).json({ msg: "Invalid email or password." }))
         } else {
             res.status(200).json({
-                msg: "Logged into super admin account successfully.",
+                msg: "Logged into district admin account successfully.",
                 fullName: distAdminUser.fullName,
                 email: distAdminUser.email,
-                profileImageName: profile.profileImageName,
+                profileImageName: distAdminUser.profileImageName,
                 id: distAdminUser._id
             })
         }

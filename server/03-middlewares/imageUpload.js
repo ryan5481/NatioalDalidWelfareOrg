@@ -48,6 +48,27 @@ const ServicesImageUpload = multer({
     // fileFilter: fileFilter
 }).single("serviceImage")
 
+
+//////////////////////////////////
+//STUDENT PROFILE IMAGE
+const studentProfileImageStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "../client/src/uploads/studentImage/")
+    },
+    filename: function (req, file, cb) {
+        cb(null, "Student_profile_img_" + Date.now() + ".jpeg")
+    }
+})
+
+const StudentProfileImageUpload = multer({
+    storage: studentProfileImageStorage,
+    // limits: { fileSize: 1024 * 1024 * 4 }, //max file size 4 MB
+    // fileFilter: fileFilter
+}).single("profileImageName")
+
+
+exports.StudentProfileImageUpload = StudentProfileImageUpload;
+/////////////////
 exports.CarouselImageUpload = CarouselImageUpload;
 exports.LogoImageUpload = LogoImageUpload;
 exports.ServicesImageUpload = ServicesImageUpload;

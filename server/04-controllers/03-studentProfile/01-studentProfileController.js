@@ -4,9 +4,21 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 
-const CreateAtudentProfile = async(req, res) => {
+const CreateStudentProfile = async(req, res) => {
     try{
-        const data = await StudentProfile.create(req.body)
+
+        if (!req.file) {
+            return res.status(400).json({
+                msg: "File not received."
+            });
+        }
+
+        const reqInclFile = {
+            ...req.body,
+            profileImageName: req.file.filename,
+          };
+
+        const data = await StudentProfile.create(reqInclFile)
         if(data){
             res.status(200).json({
                 msg: "Student profile created successfully."
@@ -56,7 +68,7 @@ const EditStudentProfile = async (req, res) => {
 
 const DeleteStudentProfile = async(req, res) => {
     try {
-        const id = req.params._id;
+        const id = req.params.id;
 
         const data = await StudentProfile.findByIdAndDelete(id);
 
@@ -72,7 +84,7 @@ const DeleteStudentProfile = async(req, res) => {
 }
 
 
-exports.CreateAtudentProfile = CreateAtudentProfile
+exports.CreateStudentProfile = CreateStudentProfile
 exports.GetStudentProfiles = GetStudentProfiles
 exports.EditStudentProfile = EditStudentProfile
 exports.DeleteStudentProfile = DeleteStudentProfile

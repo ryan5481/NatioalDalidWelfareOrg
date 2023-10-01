@@ -19,7 +19,7 @@ import {
     FormControl
 } from '@chakra-ui/react'
 import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon } from '@chakra-ui/icons';
-import CreateUserForm from '../form/createUserForm';
+import StudentProfileForm from '../form/studentProfileForm';
 import EditStudentProfileModal from '../modals/editStudentProfileModal';
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
 
@@ -410,7 +410,7 @@ const StudentsGrid = () => {
                         </Box>
                     </Box>)
                     :
-                    (<CreateUserForm setIsCreateNewUserActive={setIsCreateNewUserActive} fetchData={fetchData} />)
+                    (<StudentProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive}  />)
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="student profile" handleDelete={handleStudentProfileDelete} />
                 <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} />
