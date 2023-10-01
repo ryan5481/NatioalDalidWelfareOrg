@@ -1,15 +1,16 @@
 const Express = require("express");
 const router = Express.Router()
 const {
-    CreateAtudentProfile,
+    CreateStudentProfile,
     GetStudentProfiles,
     EditStudentProfile,
     DeleteStudentProfile
 } = require("../../04-controllers/03-studentProfile/01-studentProfileController")
+const {StudentProfileImageUpload} = require("../../03-middlewares/imageUpload")
 
-router.post("/create-student-profile", CreateAtudentProfile)
+router.post("/create-student-profile", StudentProfileImageUpload, CreateStudentProfile)
 router.get("/get-student-profiles", GetStudentProfiles)
 router.put("/edit-student-profile", EditStudentProfile)
-router.delete("/delete-student-profile", DeleteStudentProfile)
+router.delete("/delete-student-profile/:id", DeleteStudentProfile)
 
 module.exports = router
