@@ -3,7 +3,7 @@ import {
 } from '@chakra-ui/react'
 import { useRef } from 'react'
 
-const ConfirmDeletePopUp = ({ isOpen, onClose, data, accountType, handleDistAdminDelete }) => {
+const ConfirmDeletePopUp = ({ isOpen, onClose, data, accountType, handleDelete }) => {
 const cancelRef = useRef()
 
 return (
@@ -51,7 +51,7 @@ return (
                             onClick={onClose}>
                             Cancel
                         </Button>
-                        <Button colorScheme="red" onClick={handleDistAdminDelete} ml={3}>
+                        <Button colorScheme="red" onClick={handleDelete} ml={3}>
                             Delete
                         </Button>
                     </AlertDialogFooter>
