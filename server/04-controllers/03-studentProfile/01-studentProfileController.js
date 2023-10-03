@@ -7,6 +7,8 @@ dotenv.config();
 const CreateStudentProfile = async(req, res) => {
     try{
 
+        // console.log(req.body)
+
         if (!req.file) {
             return res.status(400).json({
                 msg: "File not received."

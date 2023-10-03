@@ -80,7 +80,7 @@ const StudentsGrid = () => {
             (item) =>
                 item.firstName.toLowerCase().includes(searchInput.toLowerCase()) ||
                 item.lastName.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.school.schoolName.toLowerCase().includes(searchInput.toLowerCase())
+                item.schoolName.toLowerCase().includes(searchInput.toLowerCase())
         );
 
     //SEARCH
@@ -247,11 +247,6 @@ const StudentsGrid = () => {
                             <Text
                                 w="100%"
                                 p={1}
-                                // bg={textMouseStates.sn ? clickedBackgroundColor : originalBackgroundColor}
-                                // onMouseDown={() => handleMouseDown('sn')}
-                                // onMouseUp={() => handleMouseUp('sn')}
-                                // onMouseLeave={() => handleMouseUp('sn')}
-                                // _hover={{ cursor: 'pointer' }}
                             >
                                 SN
                             </Text>
@@ -262,7 +257,7 @@ const StudentsGrid = () => {
                                 onMouseDown={() => handleMouseDown('name')}
                                 onMouseUp={() => handleMouseUp('name')}
                                 onMouseLeave={() => handleMouseUp('name')}
-                                onClick={() => handleSort('name')}
+                                onClick={() => handleSort('firstName')}
 
                             >
                                 Studet Name
@@ -328,7 +323,6 @@ const StudentsGrid = () => {
                             return (<>
                                 <Box
                                     // mx={10}
-                                    isCentered
                                 >
                                     <Grid
                                         templateColumns={{
@@ -352,7 +346,7 @@ const StudentsGrid = () => {
 
                                         <Text w="30px"  >{index + startIndex + 1}</Text>
                                         <Text w="200px" isTruncated >{student.firstName} {student?.middleName} {student.lastName}</Text>
-                                        <Text w="200px" isTruncated >{student.school.schoolName}</Text>
+                                        <Text w="200px" isTruncated >{student.schoolName}</Text>
                                         <Text w="120px">{student.createdAt.slice(0, 10)}</Text>
                                         <Text w="120px" >{student.updatedAt.slice(0, 10)}</Text>
                                         <Box w="60px">
@@ -413,7 +407,7 @@ const StudentsGrid = () => {
                     (<StudentProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive}  />)
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="student profile" handleDelete={handleStudentProfileDelete} />
-                <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} />
+                <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData}  />
             </Box>
 
         </>
