@@ -58,18 +58,75 @@ const GetStudentProfiles = async (req, res) => {
 }
 
 
+// const EditStudentProfile = async (req, res) => {
+//     try {
+//         console.log(req.file, req.body)
+//         if(req.file){
+//             const reqInclFile = {
+//                 ...req.body,
+//                 profileImageName: req.file.filename,
+//               };
+//             const data = await StudentProfile.findByIdAndUpdate(req.body._id, reqInclFile);
+//             if (data) {
+//                 res.status(200).json({
+//                     msg: "Student profile updated successfully."
+//                 });
+//             } else {
+//                 res.json({ msg: "Error" });
+//             }
+    
+//         }else{
+//             const data = await StudentProfile.findByIdAndUpdate(req.body._id, req.body);
+            
+//             if (data) {
+//                 res.status(200).json({
+//                     msg: "Student profile updated successfully."
+//                 });
+//             } else {
+//                 res.json({ msg: "Error" });
+//             }
+//         }
+        
+//     } catch (error) {
+//         console.error("Error:", error);
+//         return res.status(500).json({ msg: "Internal server error." });
+//     }
+// }
+
 const EditStudentProfile = async (req, res) => {
     try {
-        const data = await StudentProfile.findByIdAndUpdate(req.body._id, req.body);
-        
+        console.log(req.params, req.body);
 
-        return res.status(200).json({ msg: "Student profile updated successfully." })
+        const studentId = req.params.id;
+        const updatedFields = req.body
 
-    } catch (error) {
-        console.error("Error:", error);
-        return res.status(500).json({ msg: "Internal server error." });
+        if (!updatedFields || Object.keys(updatedFields).length === 0) {
+            return res.status(400).json({ msg: "No valid update data provided." });
+        }
+
+        const updatedContact = await StudentProfile.findByIdAndUpdate(
+            studentId,
+            { $set: updatedFields },
+            { new: true } // Return the updated contact document
+        );
+
+        if (updatedContact) {
+            return res.status(200).json({
+                msg: "Updated successfully.",
+                updatedContact // Optionally, you can include the updated contact in the response
+            });
+        } else {
+            return res.status(404).json({
+                msg: "Contact not found." // Adjust this message according to your use case
+            });
+        }
+    } catch (err) {
+        console.error("Error: " + err);
+        return res.status(500).json({
+            msg: "Internal server error." // Adjust this message according to your use case
+        });
     }
-}
+};
 
 const DeleteStudentProfile = async(req, res) => {
     try {
