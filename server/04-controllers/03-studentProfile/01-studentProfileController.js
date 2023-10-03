@@ -1,6 +1,9 @@
 
 const StudentProfile = require("../../02-models/03-student/01-studentProfileSchema");
 const dotenv = require("dotenv");
+const fs = require("fs");
+const {promisify} = require('util')
+const unlinkAsync = promisify(fs.unlink)
 dotenv.config();
 
 
@@ -73,7 +76,13 @@ const DeleteStudentProfile = async(req, res) => {
         const id = req.params.id;
 
         const data = await StudentProfile.findByIdAndDelete(id);
-
+        const fileName = data.profileImageName;
+          
+        // Construct the path to the pdf file
+        const imagePath = `../client/src/uploads/studentImage/${fileName}`;
+    
+        // Delete the pdf file from the file system
+        await unlinkAsync(imagePath);
         if (!data) {
             return res.status(404).json({ message: 'Student profile data not found' });
         }
