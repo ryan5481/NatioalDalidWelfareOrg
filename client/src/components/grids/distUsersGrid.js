@@ -268,35 +268,38 @@ const DistUsersGrid = () => {
                             </Select>
                             <Text fontSize={"14px"} px={2} >Search:</Text>
                             <FormControl>
-
-                            <InputGroup>
+                            <InputGroup  >
                                 <Input
+                                    m={3}
                                     rounded="full"
                                     w="300px"
+                                    border={'solid 1px gray'}
                                     h={8}
-                                    placeholder="Name, email, district"
+                                    placeholder="Search name, school"
                                     onChange={(e) => setSearchInput(e.target.value)}
                                     value={searchInput}
                                 />
                                 {searchInput && (
                                     <InputRightElement>
-
                                         <Box
                                             as={IconButton}
                                             size='xxs'
-                                            colorScheme='blue'
+                                            bg='gray.500'
                                             rounded="full"
-                                            right="550px"
+                                            right="1320%"
+                                            top="20%"
                                             zIndex='10'
                                             boxShadow="2xl"
+                                            _hover={{
+                                                bg: "darkgray"
+                                            }}
                                             onClick={() => setSearchInput('')}
                                         >
                                             <SmallCloseIcon
-                                            w="15px"
-                                            h="15px"
+                                            w="19x"
+                                            h="19px"
                                                 color="gray.50"
                                             />
-
                                         </Box>
                                     </InputRightElement>
                                 )}

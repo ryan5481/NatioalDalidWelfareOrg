@@ -14,7 +14,6 @@ import DistAdminSidebar from '../components/navigation/sideBar/02-distAdminSideb
 import ManageStudents from '../pages/02-district-admin/02-manageStudents';
 
 //NON USER ROUTES
-import Home from "../pages/03-users/01-home.js"
 // import Header from '../components/header/header';
 import SuperAdminLogin from '../pages/01-super-admin/01-auth/01-superAdminLogin';
 import DistAdminLogin from '../pages/02-district-admin/01-auth/01-distAdminLogin';
@@ -38,7 +37,7 @@ const SuperAdminRoutes = () => {
     <>
       <SuperAdminSidebar />
       <Routes >
-        <Route path="/" element={<SuperAdminDashboard  />} />
+        <Route path="/" element={<SuperAdminDashboard />} />
         <Route path="/profile" element={<EditSuperAdminProfile />} />
         <Route path="/user-management" element={<ManageDistUsers />} />
 
@@ -51,9 +50,8 @@ const DistAdminRoutes = () => {
   return (
     <>
       <DistAdminSidebar />
-      <ManageStudents />
-      <Routes bg={useColorModeValue('purple.100', 'purple.800')}>
-
+      <Routes >
+        <Route path="/student-management" element={<ManageStudents />} />
       </Routes>
     </>
   )
@@ -65,7 +63,7 @@ const UserRoutes = () => {
       {/* <Header /> */}
       {/* <NavBar zIndex={10} /> */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home />} /> */}
       </Routes>
       {/* <Footer /> */}
     </>

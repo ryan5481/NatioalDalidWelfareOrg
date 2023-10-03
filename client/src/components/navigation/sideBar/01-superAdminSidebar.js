@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { resetLoginDetails } from '../../../redux/reducers/userSlice'
 import {
   IconButton,
-  Avatar,
+  Image,
   Box,
   CloseButton,
   Flex,
@@ -22,14 +22,14 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  Stack, 
-  Button, 
+  Stack,
+  Button,
   useColorMode
 } from '@chakra-ui/react'
 import {
-    MoonIcon,
-    SunIcon
-  } from '@chakra-ui/icons'
+  MoonIcon,
+  SunIcon
+} from '@chakra-ui/icons'
 import {
   FiHome,
   FiCompass,
@@ -39,7 +39,7 @@ import {
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi'
-import {PiUsersFourBold} from 'react-icons/pi'
+import { PiUsersFourBold } from 'react-icons/pi'
 import { IconType } from 'react-icons'
 
 interface LinkItemProps {
@@ -62,14 +62,14 @@ interface SidebarProps extends BoxProps {
 
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, href: "/" },
-  { name: 'User management', icon: PiUsersFourBold, href: "/user-management"},
+  { name: 'District admins', icon: PiUsersFourBold, href: "/user-management" },
   // { name: 'Explore', icon: FiCompass },
   // { name: 'Favourites', icon: FiStar },
   // { name: 'Settings', icon: FiSettings },
 ]
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
-  const navigate=  useNavigate()
+  const navigate = useNavigate()
   return (
     <Box
       transition="3s ease"
@@ -81,13 +81,11 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       h="full"
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon} onClick={()=> navigate(link.href)} >
+        <NavItem key={link.name} icon={link.icon} onClick={() => navigate(link.href)} >
           {link.name}
         </NavItem>
       ))}
@@ -131,14 +129,14 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 }
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-    const { colorMode, toggleColorMode } = useColorMode();
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
-  const{fullName} = useSelector((state) => state.user)
+  const { colorMode, toggleColorMode } = useColorMode();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { fullName } = useSelector((state) => state.user)
 
 
-    //PROFILE SECTION
-    const handleSignOut = () => {
+  //PROFILE SECTION
+  const handleSignOut = () => {
     dispatch(resetLoginDetails())
     navigate("/super-admin-login")
   }
@@ -156,7 +154,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       bg={useColorModeValue('white', 'gray.900')}
       borderBottomWidth="1px"
       borderBottomColor={useColorModeValue('gray.200', 'gray.700')}
-      justifyContent={{ base: 'space-between', md: 'flex-end' }}
+      justifyContent={{ base: 'space-between', md: 'space-between' }}
       {...rest}>
       <IconButton
         display={{ base: 'flex', md: 'none' }}
@@ -166,16 +164,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         icon={<FiMenu />}
       />
 
-      <Text
-        display={{ base: 'flex', md: 'none' }}
-        fontSize="2xl"
-        fontFamily="monospace"
-        fontWeight="bold">
-        Logo
-      </Text>
+      <Image
+        pos={"relative"}
+        left={"25%"}
+        src={require('../../../uploads/assets/nndswo-logo.jpeg')}
+      ></Image>
 
       <HStack spacing={{ base: '0', md: '6' }}>
-      <Stack
+        <Stack
           flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
           direction={'row'}
@@ -184,7 +180,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           {/* <Button onClick={toggleColorMode} m={2} >
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </Button> */}
-          
+
         </Stack>
         {/* <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} /> */}
         <Flex alignItems={'center'}>
@@ -215,7 +211,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem onClick={() => {handelEditProfileButtonClick()}} >Edit pofile</MenuItem>
+              <MenuItem onClick={() => { handelEditProfileButtonClick() }} >Edit pofile</MenuItem>
 
               <MenuDivider />
               <MenuItem onClick={() => handleSignOut()}>Sign out</MenuItem>
