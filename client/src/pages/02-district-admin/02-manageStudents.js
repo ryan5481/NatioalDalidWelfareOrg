@@ -3,16 +3,17 @@ import { Box } from '@chakra-ui/react'
 import StudentsGrid from '../../components/grids/studentsGrid'
 
 
-const ManageStudents = () => {
+const ManageDistUsers = () => {
     
     return (<>
         <Box
             textAlign="center"
         >
             <StudentsGrid />
+            
         </Box>
     </>
     )
 }
 
-export default ManageStudents
+export default ManageDistUsers

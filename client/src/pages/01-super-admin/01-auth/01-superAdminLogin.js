@@ -109,27 +109,32 @@ const SuperAdminLogin = () => {
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={4} w={'full'} maxW={'md'}>
 
-            <Center><Image w={300} src=''></Image></Center>
-            <Heading fontSize={'2xl'} textAlign="center" >Super Admin Login</Heading>
+            <Center><Image
+             w={600}
+              src={require('../../../uploads/assets/nndswo-logo.jpeg')}>
+                </Image>
+                </Center>
+            <Heading fontSize={'4xl'} textAlign="center" color="purple.800" >Super Admin Login</Heading>
             <FormControl>
               <form
                 onSubmit={handleSubmit}
               >
                 <FormControl id="email">
-                  <FormLabel>Email address</FormLabel>
-                  <Input type="email" name="email" onChange={handleInputChange} />
+                  <FormLabel color="purple.800">Email address</FormLabel>
+                  <Input color="purple.800" type="email" name="email" placeholder='Emaill ID' onChange={handleInputChange} />
                 </FormControl>
                 <FormControl id="password">
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel color="purple.800">Password</FormLabel>
                   <InputGroup>
                     <Input
+                    color="purple.800"
                       type={showPassword ? 'text' : 'password'} // Toggle between 'password' and 'text'
                       name="password"
                       placeholder="password"
                       onChange={handleInputChange}
                     />
-                    <InputRightElement width="4.5rem">
-                      {showPassword ? <ViewOffIcon onClick={handleTogglePassword} /> : <ViewIcon onClick={handleTogglePassword} />}
+                    <InputRightElement width="4.5rem" color='purple.800'>
+                      {showPassword ? <ViewOffIcon  onClick={handleTogglePassword} /> : <ViewIcon onClick={handleTogglePassword} />}
                       
                     </InputRightElement>
                   </InputGroup>
@@ -154,9 +159,13 @@ const SuperAdminLogin = () => {
                   </Stack>
 
                   <Button
-                    colorScheme={'blue'}
-                    variant={'solid'}
+                    bg="purple.800"
+                    color="white"
                     type='submit'
+                    _hover={{
+                      bg: 'purple.600',
+                      cursor: 'pointer'
+                    }}
                   >
                     Sign in
                   </Button>

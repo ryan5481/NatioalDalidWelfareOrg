@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {
@@ -26,6 +27,7 @@ import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
 const baseUrl = process.env.REACT_APP_BASE_URL
 
 const StudentsGrid = () => {
+  const { district } = useSelector(state => state.user)
     //FETCH
     const [studentsList, setStudentsList] = useState([])
     //EDIT
@@ -59,8 +61,8 @@ const StudentsGrid = () => {
         setTextMouseStates({ ...textMouseStates, [id]: false });
     };
     // Define the original and clicked background colors
-    const originalBackgroundColor = 'cyan.900';
-    const clickedBackgroundColor = 'cyan.500';
+    const originalBackgroundColor = 'blue.600';
+    const clickedBackgroundColor = 'blue.400';
 
     //PAGINATE FILTER SORT
     const handleSort = (column) => {
@@ -78,13 +80,11 @@ const StudentsGrid = () => {
     const filteredStudentsList = studentsList
         .filter(
             (item) =>
-                item.firstName.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.lastName.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.schoolName.toLowerCase().includes(searchInput.toLowerCase())
+            item.firstName.toLowerCase().includes(searchInput.toLowerCase()) ||
+            item.lastName.toLowerCase().includes(searchInput.toLowerCase()) ||
+            item.schoolName.toLowerCase().includes(searchInput.toLowerCase())
         );
-
     //SEARCH
-
 
     // Calculate the total number of pages
     const totalPages = Math.ceil(studentsList.length / itemsPerPage);
@@ -106,7 +106,7 @@ const StudentsGrid = () => {
 
     //FETCH
     const fetchData = async () => {
-        const res = await axios.get(`${baseUrl}/get-student-profiles`)
+        const res = await axios.get(`${baseUrl}/get-student-profiles?currentDistrict=${district}`)
         if (res) {
             const data = res.data.data
             setStudentsList(data.reverse())
@@ -144,6 +144,7 @@ const StudentsGrid = () => {
                 if (res) {
                     fetchData();
                     closeModal()
+                    window.location.reload()
                     console.log("Job deleted.")
                 }
             } catch (error) {
@@ -159,10 +160,11 @@ const StudentsGrid = () => {
     return (
         <>
             <Box
-                pl={"200px"}
+                // bg="gray.300"
+                pl={"230px"}
                 fontSize="14px"
             >
-                <Center p={2}>
+                <Center >
                     <HStack>
                         <Button
                             h={8}
@@ -189,14 +191,14 @@ const StudentsGrid = () => {
                     >
                         <HStack>
                             <FormControl>
-
-                            <InputGroup>
-                            <Text fontSize={"14px"} px={2} >Search:</Text>
+                            <InputGroup  >
                                 <Input
+                                    m={3}
                                     rounded="full"
                                     w="300px"
+                                    border={'solid 1px gray'}
                                     h={8}
-                                    placeholder="Name, school"
+                                    placeholder="Search student name, school"
                                     onChange={(e) => setSearchInput(e.target.value)}
                                     value={searchInput}
                                 />
@@ -205,16 +207,20 @@ const StudentsGrid = () => {
                                         <Box
                                             as={IconButton}
                                             size='xxs'
-                                            colorScheme='blue'
+                                            bg='gray.500'
                                             rounded="full"
-                                            right="550px"
+                                            right="2110%"
+                                            top="20%"
                                             zIndex='10'
                                             boxShadow="2xl"
+                                            _hover={{
+                                                bg: "darkgray"
+                                            }}
                                             onClick={() => setSearchInput('')}
                                         >
                                             <SmallCloseIcon
-                                            w="15px"
-                                            h="15px"
+                                            w="19x"
+                                            h="19px"
                                                 color="gray.50"
                                             />
                                         </Box>
@@ -407,7 +413,7 @@ const StudentsGrid = () => {
                     (<StudentProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive}  />)
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="student profile" handleDelete={handleStudentProfileDelete} />
-                <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData}  />
+                <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData}  closeEditModal={closeEditModal} />
             </Box>
 
         </>

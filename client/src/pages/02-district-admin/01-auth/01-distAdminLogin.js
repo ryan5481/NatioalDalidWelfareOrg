@@ -110,15 +110,16 @@ const DistAdminLogin = () => {
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={4} w={'full'} maxW={'md'}>
 
-            <Center><Image w={300} src=''></Image></Center>
-            <Heading fontSize={'2xl'} textAlign="center" >District Admin Login</Heading>
+            <Center><Image w={600}
+              src={require('../../../uploads/assets/nndswo-logo.jpeg')}></Image></Center>
+            <Heading  fontSize={'4xl'} textAlign="center" >District Admin Login</Heading>
             <FormControl>
               <form
                 onSubmit={handleSubmit}
               >
                 <FormControl id="email">
                   <FormLabel>Email address</FormLabel>
-                  <Input type="email" name="email" onChange={handleInputChange} />
+                  <Input type="email" name="email" placeholder='Email ID' onChange={handleInputChange} />
                 </FormControl>
                 <FormControl id="password">
                   <FormLabel>Password</FormLabel>

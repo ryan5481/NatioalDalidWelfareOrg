@@ -41,8 +41,11 @@ const CreateStudentProfile = async(req, res) => {
 
 const GetStudentProfiles = async (req, res) => {
     try {
-        
-        const data = await StudentProfile.find();
+        // Filter
+        const queryObj = { ...req.query };
+        const excludeFields = ["page", "sort", "skip", "limit", "fields"];
+        excludeFields.forEach((el) => delete queryObj[el]);
+        const data = await StudentProfile.find(queryObj);
 
         if (data) {
             res.status(200).json({

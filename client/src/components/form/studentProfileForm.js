@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
@@ -148,14 +148,14 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
     try {
       if (selectedImage === null) {
         toast({
-            title: 'Error',
-            description: 'Please select a student image.',
-            status: 'error',
-            duration: 3000,
-            isClosable: true,
-            position: 'top'
+          title: 'Error',
+          description: 'Please select a student image.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top'
         });
-    }
+      }
       const formData = new FormData();
       if (selectedImage) {
         formData.append('profileImageName', selectedImage, selectedImage.filename);
@@ -209,7 +209,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
       formData.append('schoolName', schoolName)
       formData.append('principalName', principalName)
       formData.append('schoolNumber', schoolNumber)
-      formData.append('contactPersonName',contactPersonName)
+      formData.append('contactPersonName', contactPersonName)
       formData.append('contactPersonPosition', contactPersonPosition)
       formData.append('contactPersonNumber', contactPersonNumber)
       formData.append('schoolMunicipality', schoolMunicipality)
@@ -237,7 +237,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
           'Content-Type': 'multipart/form-data',
         },
       });
-  
+
       // Handle success and error messages
       if (res.status === 200) {
         toast({
@@ -248,7 +248,8 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
           isClosable: true,
           position: 'top'
         });
-        fetchData()
+        window.location.reload()
+
       } else {
         toast({
           title: 'Error.',
@@ -271,14 +272,15 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
       });
     }
   };
-  
-  
+
+  const classOptions = ['Pre-K', 'K1', 'K2', 'K3', 'Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', 'PhD',];
 
   return (
     <Center >
       <Box
         justify={'center'}
-        mx={5}
+        m={5}
+        bg="white"
         rounded={10}
         border={'solid 1px lightgray'}
       >
@@ -304,7 +306,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                   accept='image/*'
                   ref={imageInputRef}
                   style={{ display: "none" }}
-                  onChange={(event) => {handleImageSelect(event)}}
+                  onChange={(event) => { handleImageSelect(event) }}
                 />
               </Center>
               <Box m={5} >
@@ -341,12 +343,22 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                 <HStack justify="flex-start" mb={5}>
                   <FormControl>
                     <FormLabel>Gender</FormLabel>
-                    <Input placeholder='Gender'
-                      isRequired
-                      name="gender"
-                      // value={formData.gender}
-                      onChange={(e) => setGender(e.target.value)}
-                    />
+                    <Select
+                      placeholder='Select'
+                      name="scholarship2.grade"
+                      // value={formData.scholarship1.grade}
+                      onChange={(event) => setGender(event.target.value)}
+                    >
+                      <option key="Male" value="Male">
+                        Male
+                      </option>
+                      <option key="Female" value="Female">
+                        Female
+                      </option>
+                      <option key="Other" value="Other">
+                        Other
+                      </option>
+                    </Select>
                   </FormControl>
                   <FormControl>
                     <FormLabel>Date of birth</FormLabel>
@@ -415,12 +427,18 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                   // value={formData.scholarship1.scholarshipCartage}
                   onChange={(e) => setScholarship1Cartage(e.target.value)}
                 />
-                <Input
-                  placeholder='Class'
+                <Select
+                  placeholder='Select'
                   name="scholarship1.grade"
                   // value={formData.scholarship1.grade}
-                  onChange={(e) => setScholarship1Grade(e.target.value)}
-                />
+                  onChange={(event) => setScholarship1Grade(event.target.value)}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                 <Input
                   placeholder='From'
                   type='date'
@@ -458,12 +476,18 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                   // value={formData.scholarship1.scholarshipCartage}
                   onChange={(e) => setScholarship2Cartage(e.target.value)}
                 />
-                <Input
-                  placeholder='Class'
-                  name="scholarship1.grade"
+                <Select
+                  placeholder='Select'
+                  name="scholarship2.grade"
                   // value={formData.scholarship1.grade}
-                  onChange={(e) => setScholarship2Grade(e.target.value)}
-                />
+                  onChange={(event) => setScholarship2Grade(event.target.value)}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                 <Input
                   placeholder='From'
                   type='date'
@@ -501,12 +525,18 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                   // value={formData.scholarship1.scholarshipCartage}
                   onChange={(e) => setScholarship3Cartage(e.target.value)}
                 />
-                <Input
-                  placeholder='Class'
-                  name="scholarship1.grade"
+                <Select
+                  placeholder='Select'
+                  name="scholarship3.grade"
                   // value={formData.scholarship1.grade}
-                  onChange={(e) => setScholarship3Grade(e.target.value)}
-                />
+                  onChange={(event) => setScholarship3Grade(event.target.value)}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                 <Input
                   placeholder='From'
                   type='date'
@@ -544,12 +574,18 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                   // value={formData.scholarship1.scholarshipCartage}
                   onChange={(e) => setScholarship4Cartage(e.target.value)}
                 />
-                <Input
-                  placeholder='Class'
-                  name="scholarship1.grade"
+                <Select
+                  placeholder='Select'
+                  name="scholarship4.grade"
                   // value={formData.scholarship1.grade}
-                  onChange={(e) => setScholarship4Grade(e.target.value)}
-                />
+                  onChange={(event) => setScholarship4Grade(event.target.value)}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                 <Input
                   placeholder='From'
                   type='date'
@@ -587,12 +623,18 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                   // value={formData.scholarship1.scholarshipCartage}
                   onChange={(e) => setScholarship5Cartage(e.target.value)}
                 />
-                <Input
-                  placeholder='Class'
-                  name="scholarship1.grade"
+                <Select
+                  placeholder='Select'
+                  name="scholarship5.grade"
                   // value={formData.scholarship1.grade}
-                  onChange={(e) => setScholarship5Grade(e.target.value)}
-                />
+                  onChange={(event) => setScholarship5Grade(event.target.value)}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                 <Input
                   placeholder='From'
                   type='date'
@@ -929,9 +971,12 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
 
           </Box>
           {/* BUTTONS */}
-          <Box justifyContent="center" m={5} mb={10} >
+          <Box justifySelf="center" m={5}  >
+            <Center>
+
             <Button colorScheme='red' mx={1} w={'200px'} >Cancel</Button>
             <Button onClick={() => submitForm()} colorScheme='green' mx={1} w={'200px'} >Save</Button>
+            </Center>
           </Box>
         </form>
       </Box>

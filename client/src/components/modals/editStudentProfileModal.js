@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from "axios"
 import {
-  useToast, Grid, Image, Box, FormLabel, Editable, EditablePreview, EditableInput, Input,
+  useToast, Grid, Image, Box, FormLabel, Select, EditablePreview, EditableInput, Input,
   Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Text, HStack, FormControl, VStack
 } from '@chakra-ui/react'
 import { Form } from 'react-router-dom'
@@ -99,8 +99,8 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
   };
   const [formData, setFormData] = useState(initialFormData);
 
-  // const [selectedImage, setSelectedImage] = useState(null)
-  // const [previewImage, setPreviewImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [previewImage, setPreviewImage] = useState(null);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -108,12 +108,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
   };
 
 
-  // const handleImageSelect = (event) => {
-  //   setSelectedImage(event.target.files[0])
-  //   if (event.target.files && event.target.files[0]) {
-  //     setPreviewImage(URL.createObjectURL(event.target.files[0]));
-  //   }
-  // }
+  const handleImageSelect = (event) => {
+    setSelectedImage(event.target.files[0])
+    if (event.target.files && event.target.files[0]) {
+      setPreviewImage(URL.createObjectURL(event.target.files[0]));
+    }
+  }
   useEffect(() => {
     setFormData({
       firstName: data.firstName,
@@ -210,6 +210,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
         //   }}
       )
       if (res.status === 200) {
+        window.location.reload()
         toast({
           title: 'Success.',
           description: 'Data updated.',
@@ -218,6 +219,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
           isClosable: true,
           position: 'top'
         });
+        
       } else {
         toast({
           title: 'Error.',
@@ -242,6 +244,8 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
     }
   };
 
+  const classOptions = ['Pre-K', 'K1', 'K2', 'K3', 'Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', 'PhD',];
+
   return (
     <>
       {data &&
@@ -259,7 +263,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
               <form
               >
                 <Grid gridTemplateColumns={"1fr 3fr"}>
-                  {/* {data?.profileImageName && <Image
+                  {data?.profileImageName && <Image
                     rounded={10}
                     src={require(`../../uploads/studentImage/${data?.profileImageName}`)} w="200px"
                     onClick={() => imageInputRef.current.click()}
@@ -271,7 +275,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                     ref={imageInputRef}
                     style={{ display: "none" }}
                     onChange={handleImageSelect}
-                  /> */}
+                  />
                   <Box m={5} >
                     <HStack justify="flex-start" mb={5} >
                       <FormControl>
@@ -306,12 +310,23 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                     <HStack justify="flex-start" mb={5}>
                       <FormControl>
                         <FormLabel>Gender</FormLabel>
-                        <Input placeholder={data.gender}
-                          isRequired
-                          name="gender"
-                          // value={formData.gender}
-                          onChange={handleInputChange}
-                        />
+                       
+                       <Select
+                      placeholder={data.gender}
+                      name="gender"
+                      // value={formData.scholarship1.grade}
+                      onChange={handleInputChange}
+                    >
+                      <option key="Male" value="Male">
+                        Male
+                      </option>
+                      <option key="Female" value="Female">
+                        Female
+                      </option>
+                      <option key="Other" value="Other">
+                        Other
+                      </option>
+                    </Select>
                       </FormControl>
                       <FormControl>
                         <FormLabel>Date of birth</FormLabel>
@@ -361,12 +376,13 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                 {/* SCHOLARSHIP */}
                 <FormControl>
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold" >Scholarship</FormLabel>
-                  <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr 1fr 1fr"} gap={5} >
+                  <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} >
                     <FormLabel >SN</FormLabel>
                     <FormLabel >Cartage</FormLabel>
                     <FormLabel>Class</FormLabel>
                     <FormLabel>From</FormLabel>
                     <FormLabel>To</FormLabel>
+                    <FormLabel>GPA</FormLabel>
                     <FormLabel>Remarks</FormLabel>
                   </Grid>
                   {/* SCHOLARSHIP ONE */}
@@ -379,12 +395,18 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                     // value={formData.scholarship1.scholarshipCartage}
                     onChange={handleInputChange}
                   />
-                  <Input
-                    placeholder={data.scholarship1Grade}
-                    name="scholarship1Grade"
-                    // value={formData.scholarship1.grade}
-                    onChange={handleInputChange}
-                  />
+                   <Select
+                  placeholder={data.scholarship1Grade}
+                  name="scholarship1Grade"
+                  // value={formData.scholarship1.grade}
+                  onChange={handleInputChange}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                   <Input
                     placeholder={data.scholarship1From}
                     type='date'
@@ -415,19 +437,25 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                 </Grid>
                 {/* SCHOLARSHIP TWO */}
                 <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
-                  <FormLabel>1. </FormLabel>
+                  <FormLabel>2. </FormLabel>
                   <Input
                     placeholder={data.scholarship2Cartage}
                     name="scholarship2Cartage"
                     // value={formData.scholarship1.scholarshipCartage}
                     onChange={handleInputChange}
                   />
-                  <Input
-                    placeholder={data.scholarship2Grade}
-                    name="scholarship2Grade"
-                    // value={formData.scholarship1.grade}
-                    onChange={handleInputChange}
-                  />
+                  <Select
+                  placeholder={data.scholarship2Grade}
+                  name="scholarship2Grade"
+                  // value={formData.scholarship1.grade}
+                  onChange={handleInputChange}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                   <Input
                     placeholder={data.scholarship2From}
                     type='date'
@@ -458,19 +486,25 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                 </Grid>
                 {/* SCHOLARSHIP THREE */}
                 <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
-                  <FormLabel>1. </FormLabel>
+                  <FormLabel>3. </FormLabel>
                   <Input
                     placeholder={data.scholarship3Cartage}
                     name="scholarship3Cartage"
                     // value={formData.scholarship1.scholarshipCartage}
                     onChange={handleInputChange}
                   />
-                  <Input
-                    placeholder={data.scholarship3Grade}
-                    name="scholarship3Grade"
-                    // value={formData.scholarship1.grade}
-                    onChange={handleInputChange}
-                  />
+                  <Select
+                  placeholder={data.scholarship3Grade}
+                  name="scholarship3Grade"
+                  // value={formData.scholarship1.grade}
+                  onChange={handleInputChange}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                   <Input
                     placeholder={data.scholarship3From}
                     type='date'
@@ -501,19 +535,25 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                 </Grid>
                 {/* SCHOLARSHIP FOUR */}
                 <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
-                  <FormLabel>1. </FormLabel>
+                  <FormLabel>4. </FormLabel>
                   <Input
                     placeholder={data.scholarship4Cartage}
                     name="scholarship4Cartage"
                     // value={formData.scholarship1.scholarshipCartage}
                     onChange={handleInputChange}
                   />
-                  <Input
-                    placeholder={data.scholarship4Grade}
-                    name="scholarship4Grade"
-                    // value={formData.scholarship1.grade}
-                    onChange={handleInputChange}
-                  />
+                  <Select
+                  placeholder={data.scholarship4Grade}
+                  name="scholarship4Grade"
+                  // value={formData.scholarship1.grade}
+                  onChange={handleInputChange}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                   <Input
                     placeholder={data.scholarship4From}
                     type='date'
@@ -543,19 +583,25 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                   />
                 </Grid>
                 <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
-                  <FormLabel>1. </FormLabel>
+                  <FormLabel>5. </FormLabel>
                   <Input
                     placeholder={data.scholarship5Cartage}
                     name="scholarship5Cartage"
                     // value={formData.scholarship1.scholarshipCartage}
                     onChange={handleInputChange}
                   />
-                  <Input
-                    placeholder={data.scholarship5Grade}
-                    name="scholarship5Grade"
-                    // value={formData.scholarship1.grade}
-                    onChange={handleInputChange}
-                  />
+                   <Select
+                  placeholder={data.scholarship5Grade}
+                  name="scholarship5Grade"
+                  // value={formData.scholarship1.grade}
+                  onChange={handleInputChange}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                   <Input
                     placeholder={data.scholarship5From}
                     type='date'
@@ -667,7 +713,6 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                   <FormLabel >Name</FormLabel>
                   <FormLabel>Principal</FormLabel>
                   <FormLabel>Contact No.</FormLabel>
-                  <FormLabel>Contact person name</FormLabel>
                 </Grid>
                 <HStack>
                   <Input
