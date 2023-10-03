@@ -13,7 +13,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
           onClose={onClose}
           isOpen={isOpen}
           scrollBehavior={scrollBehavior}
-          size="4xl"
+          size="6xl"
         >
           <ModalOverlay />
           <ModalContent>
@@ -39,15 +39,28 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                       <FormLabel>Last name:</FormLabel>
                       <Input placeholder={data.lastName} />
                     </FormControl>
+                    <FormControl>
+                      <FormLabel>Gender:</FormLabel>
+                      <Input placeholder={data.gender} />
+                    </FormControl>
                   </HStack>
                   <HStack>
+                  
                   <FormControl>
-                    <FormLabel>Gender:</FormLabel>
-                    <Input placeholder={data.gender} />
+                    <FormLabel>Date of birth</FormLabel>
+                    <Input  placeholder={data.dateOfBirth} />
                   </FormControl>
                   <FormControl>
-                    <FormLabel>Date of birth:</FormLabel>
-                    <Input  placeholder={data.dateOfBirth} />
+                    <FormLabel>Birth cert. no.</FormLabel>
+                    <Input placeholder={data.birthCertificateNo} />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>contactNumber</FormLabel>
+                    <Input  placeholder={data.contactNumber} />
+                  </FormControl>
+                  <FormControl>
+                    <FormLabel>Email</FormLabel>
+                    <Input placeholder={data.email} />
                   </FormControl>
                   </HStack>
                 </Box>
@@ -61,20 +74,53 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                 <FormLabel>To</FormLabel>
                 <FormLabel>Remarks</FormLabel>
               </Grid>
-              {data.scholarship && data.scholarship.map((item, index) => (
-                <FormControl>
+                <FormControl mb={2} >
                   <HStack>
-                    <Input placeholder={item.scholarshipCartages} />
-                    <Input placeholder={item.class} />
-                    <Input placeholder={item.from} />
-                    <Input placeholder={item.to} />
-                    <Input placeholder={item.remarks} />
+                    <Input placeholder={data.scholarship1Cartage} />
+                    <Input placeholder={data.scholarship1Grade} />
+                    <Input placeholder={data.scholarship1From} />
+                    <Input placeholder={data.scholarship1To} />
+                    <Input placeholder={data.scholarship1Remarks} />
                   </HStack>
                 </FormControl>
-              ))
-              }
+                <FormControl mb={2} >
+                  <HStack>
+                    <Input placeholder={data.scholarship2Cartage} />
+                    <Input placeholder={data.scholarship2Grade} />
+                    <Input placeholder={data.scholarship2From} />
+                    <Input placeholder={data.scholarship2To} />
+                    <Input placeholder={data.scholarship2Remarks} />
+                  </HStack>
+                </FormControl>
+                <FormControl mb={2} >
+                  <HStack>
+                    <Input placeholder={data.scholarship3Cartage} />
+                    <Input placeholder={data.scholarship3Grade} />
+                    <Input placeholder={data.scholarship3From} />
+                    <Input placeholder={data.scholarship3To} />
+                    <Input placeholder={data.scholarship3Remarks} />
+                  </HStack>
+                </FormControl>
+                <FormControl mb={2} >
+                  <HStack>
+                    <Input placeholder={data.scholarship4Cartage} />
+                    <Input placeholder={data.scholarship4Grade} />
+                    <Input placeholder={data.scholarship4From} />
+                    <Input placeholder={data.scholarship4To} />
+                    <Input placeholder={data.scholarship4Remarks} />
+                  </HStack>
+                </FormControl>
+                <FormControl mb={2} >
+                  <HStack>
+                    <Input placeholder={data.scholarship5Cartage} />
+                    <Input placeholder={data.scholarship5Grade} />
+                    <Input placeholder={data.scholarship5From} />
+                    <Input placeholder={data.scholarship5To} />
+                    <Input placeholder={data.scholarship5Remarks} />
+                  </HStack>
+                </FormControl>
               {/* PERMANANT ADDRESS */}
-              {data.permanentAddress &&
+              
                 <FormControl>
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold"  >Permanent address</FormLabel>
                   <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
@@ -84,14 +130,13 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                     <FormLabel>Province</FormLabel>
                   </Grid>
                   <HStack>
-                    <Input placeholder={data.permanentAddress.municipality} />
-                    <Input placeholder={data.permanentAddress.wardNumber} />
-                    <Input placeholder={data.permanentAddress.district} />
-                    <Input placeholder={data.permanentAddress.province} />
+                    <Input placeholder={data.permanentMunicipality} />
+                    <Input placeholder={data.permanentWardNumber} />
+                    <Input placeholder={data.permanentDistrict} />
+                    <Input placeholder={data.permanentProvince} />
                   </HStack>
-                </FormControl>}
+                </FormControl>
               {/* TEMPORARY ADDRESS */}
-              {data.currentAddress &&
                 <FormControl>
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold" >Current address</FormLabel>
                   <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
@@ -101,14 +146,13 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                     <FormLabel>Province</FormLabel>
                   </Grid>
                   <HStack>
-                    <Input placeholder={data.currentAddress.municipality} />
-                    <Input placeholder={data.currentAddress.wardNumber} />
-                    <Input placeholder={data.currentAddress.district} />
-                    <Input placeholder={data.currentAddress.province} />
+                    <Input placeholder={data.currentMunicipality} />
+                    <Input placeholder={data.currentWardNumber} />
+                    <Input placeholder={data.currentDistrict} />
+                    <Input placeholder={data.currentProvince} />
                   </HStack>
-                </FormControl>}
+                </FormControl>
               {/* SCHOOL */}
-              {data.school &&
                 <FormControl>
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold" >School</FormLabel>
                   <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr 1fr"} gap={5} >
@@ -119,15 +163,14 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                     <FormLabel>Contact person No.</FormLabel>
                   </Grid>
                   <HStack>
-                    <Input placeholder={data.school.schoolName} />
-                    <Input placeholder={data.school.principalName} />
-                    <Input placeholder={data.school.contactNumber} />
-                    <Input placeholder={data.school.contactPersonPosition} />
-                    <Input placeholder={data.school.contactPersonNumber} />
+                    <Input placeholder={data.schoolName} />
+                    <Input placeholder={data.principalName} />
+                    <Input placeholder={data.contactNumber} />
+                    <Input placeholder={data.contactPersonPosition} />
+                    <Input placeholder={data.contactPersonNumber} />
                   </HStack>
-                </FormControl>}
+                </FormControl>
               {/* SCHOOL ADDRESS */}
-              {data.schoolAddress &&
                 <FormControl>
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold" >School address</FormLabel>
                   <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
@@ -137,66 +180,66 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                     <FormLabel>Province</FormLabel>
                   </Grid>
                   <HStack>
-                    <Input placeholder={data.schoolAddress.municipality} />
-                    <Input placeholder={data.schoolAddress.wardNumber} />
-                    <Input placeholder={data.schoolAddress.district} />
-                    <Input placeholder={data.schoolAddress.province} />
+                    <Input placeholder={data.schoolMunicipality} />
+                    <Input placeholder={data.schoolWardNumber} />
+                    <Input placeholder={data.schoolDistrict} />
+                    <Input placeholder={data.schoolProvince} />
                   </HStack>
-                </FormControl>}
+                </FormControl>
               {/* FATHER */}
-              {data.father &&
                 <FormControl mt={5} fontSize="18px" fontWeight="bold" >
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold">Father</FormLabel>
-                  <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
+                  <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr 1fr"} gap={5} >
                     <FormLabel >Name</FormLabel>
                     <FormLabel>Address No.</FormLabel>
                     <FormLabel>Citizenship No</FormLabel>
+                    <FormLabel>Occupation</FormLabel>
                     <FormLabel>Contact No.</FormLabel>
                   </Grid>
                   <HStack>
-                    <Input placeholder={data.father.name} />
-                    <Input placeholder={data.father.address} />
-                    <Input placeholder={data.father.citizenshipNumber} />
-                    <Input placeholder={data.father.occupation} />
-                    <Input placeholder={data.father.contactNumber} />
+                    <Input placeholder={data.fatherName} />
+                    <Input placeholder={data.fatherAddress} />
+                    <Input placeholder={data.fatherCitizenshipNumber} />
+                    <Input placeholder={data.fatherOccupation} />
+                    <Input placeholder={data.fatherContactNumber} />
                   </HStack>
-                </FormControl>}
+                </FormControl>
               {/* MOTHER */}
-              {data.mother &&
                 <FormControl mt={5} fontSize="18px" fontWeight="bold" >
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold">Mother</FormLabel>
-                  <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
+                  <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr 1fr"} gap={5} >
                     <FormLabel >Name</FormLabel>
                     <FormLabel>Address No.</FormLabel>
                     <FormLabel>Citizenship No</FormLabel>
+                    <FormLabel>Occupation</FormLabel>
                     <FormLabel>Contact No.</FormLabel>
                   </Grid>
                   <HStack>
-                    <Input placeholder={data.mother.name} />
-                    <Input placeholder={data.mother.address} />
-                    <Input placeholder={data.mother.citizenshipNumber} />
-                    <Input placeholder={data.mother.occupation} />
-                    <Input placeholder={data.mother.contactNumber} />
+                    <Input placeholder={data.motherName} />
+                    <Input placeholder={data.motherAddress} />
+                    <Input placeholder={data.motherCitizenshipNumber} />
+                    <Input placeholder={data.motherOccupation} />
+                    <Input placeholder={data.motherContactNumber} />
                   </HStack>
-                </FormControl>}
+                </FormControl>
               {/* GUARDIAN */}
-              {data.guardian &&
                 <FormControl>
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold" >Guardian</FormLabel>
-                  <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
+                  <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr 1fr"} gap={5} >
                     <FormLabel >Name</FormLabel>
                     <FormLabel>Address No.</FormLabel>
                     <FormLabel>Citizenship No</FormLabel>
+                    <FormLabel>Occupation</FormLabel>
                     <FormLabel>Contact No.</FormLabel>
                   </Grid>
                   <HStack>
-                    <Input placeholder={data.guardian.name} />
-                    <Input placeholder={data.guardian.address} />
-                    <Input placeholder={data.guardian.citizenshipNumber} />
-                    <Input placeholder={data.guardian.occupation} />
-                    <Input placeholder={data.guardian.contactNumber} />
+                    <Input placeholder={data.guardianName} />
+                    <Input placeholder={data.guardianAddress} />
+                    <Input placeholder={data.guardianCitizenshipNumber} />
+                    <Input placeholder={data.guardianOccupation} />
+                    <Input placeholder={data.guardianContactNumber} />
                   </HStack>
-                </FormControl>}
+                </FormControl>
             </ModalBody>
             <ModalFooter justifyContent="center" >
               <Button colorScheme='red' mx={1} w={'200px'} onClick={onClose}>Cancel</Button>
