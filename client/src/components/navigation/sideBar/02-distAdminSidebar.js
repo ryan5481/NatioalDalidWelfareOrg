@@ -63,9 +63,7 @@ interface SidebarProps extends BoxProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome, href: "/" },
   { name: 'Students', icon: PiUsersFourBold, href: "/student-management"},
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+
 ]
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
@@ -134,6 +132,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
     const { colorMode, toggleColorMode } = useColorMode();
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const { district } = useSelector(state => state.user)
   const{fullName} = useSelector((state) => state.user)
 
 
@@ -181,9 +180,9 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           direction={'row'}
           spacing={6}
         >
-          <Button onClick={toggleColorMode} m={2} >
+          {/* <Button onClick={toggleColorMode} m={2} >
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
-          </Button>
+          </Button> */}
           
         </Stack>
         {/* <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} /> */}
@@ -204,7 +203,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   ml="2">
                   <Text fontSize="sm" fontWeight="bold">{fullName}</Text>
                   <Text fontSize="xs" color="gray.600">
-                    District Admin
+                    {district} District Admin
                   </Text>
                 </VStack>
                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -215,10 +214,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem onClick={() => {handelEditProfileButtonClick()}} >Edit pofile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
-              <MenuDivider />
+
               <MenuItem onClick={() => handleSignOut()}>Sign out</MenuItem>
             </MenuList>
           </Menu>

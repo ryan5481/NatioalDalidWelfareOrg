@@ -60,6 +60,8 @@ const DistAdminLogin = () => {
             email: response.data.email,
             id: response.data.id,
             fullName: response.data.fullName,
+            isLoggedIn: true,
+            district: response.data.district
           })
         );
         navigate("/");

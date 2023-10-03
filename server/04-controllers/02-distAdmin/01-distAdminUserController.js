@@ -48,6 +48,7 @@ const DistAdminLogin = async (req, res) => {
                 fullName: distAdminUser.fullName,
                 email: distAdminUser.email,
                 profileImageName: distAdminUser.profileImageName,
+                district: distAdminUser.district,
                 id: distAdminUser._id
             })
         }
