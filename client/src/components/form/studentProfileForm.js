@@ -273,7 +273,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
     }
   };
 
-  const classOptions = ['Pre-K', 'K1', 'K2', 'K3', 'Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', 'PhD',];
+  const classOptions = ['Pre-K', 'K1', 'K2', 'K3', 'Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', "Diploma"];
 
   return (
     <Center >

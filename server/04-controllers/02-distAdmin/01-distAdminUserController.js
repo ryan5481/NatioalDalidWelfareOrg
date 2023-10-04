@@ -4,17 +4,17 @@ const bcrypt = require ("bcrypt")
 const dotenv = require("dotenv");
 dotenv.config();
 
-// Retrieve the salt rounds from the environment
-const saltRounds = parseInt(process.env.SALT_ROUNDS);
+// // Retrieve the salt rounds from the environment
+// const saltRounds = parseInt(process.env.SALT_ROUNDS);
 
-if (isNaN(saltRounds) || saltRounds <= 0) {
-  console.error('Invalid SALT_ROUNDS value in .env');
-  process.exit(1); // Exit the script with an error code
-}
+// if (isNaN(saltRounds) || saltRounds <= 0) {
+//   console.error('Invalid SALT_ROUNDS value in .env');
+//   process.exit(1); // Exit the script with an error code
+// }
 
 const DistAdminSignUp = async(req, res) => {
     try{
-        const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds)
+        const encryptedPassword = await bcrypt.hash(req.body.password, 10)
 
         req.body.password = encryptedPassword
 

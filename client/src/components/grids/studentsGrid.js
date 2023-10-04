@@ -209,7 +209,7 @@ const StudentsGrid = () => {
                                             size='xxs'
                                             bg='gray.500'
                                             rounded="full"
-                                            right="2110%"
+                                            right="2035%"
                                             top="20%"
                                             zIndex='10'
                                             boxShadow="2xl"
