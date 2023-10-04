@@ -244,7 +244,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
     }
   };
 
-  const classOptions = ['Pre-K', 'K1', 'K2', 'K3', 'Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', 'PhD',];
+  const classOptions = ['', 'Pre-K', 'K1', 'K2', 'K3', 'Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', 'Diploma',];
 
   return (
     <>
@@ -409,14 +409,13 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                 </Select>
                   <Input
                     placeholder={data.scholarship1From}
-                    type='date'
+                 
                     name="scholarship1From"
                     // value={formData.scholarship1.from}
                     onChange={handleInputChange}
                   />
                   <Input
                     placeholder={data.scholarship1To}
-                    type='date'
                     name="scholarship1To"
                     // value={formData.scholarship1.to}
                     onChange={handleInputChange}
@@ -458,14 +457,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                 </Select>
                   <Input
                     placeholder={data.scholarship2From}
-                    type='date'
                     name="scholarship2From"
                     // value={formData.scholarship1.from}
                     onChange={handleInputChange}
                   />
                   <Input
                     placeholder={data.scholarship2To}
-                    type='date'
                     name="scholarship2To"
                     // value={formData.scholarship1.to}
                     onChange={handleInputChange}
@@ -507,14 +504,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                 </Select>
                   <Input
                     placeholder={data.scholarship3From}
-                    type='date'
                     name="scholarship3From"
                     // value={formData.scholarship1.from}
                     onChange={handleInputChange}
                   />
                   <Input
                     placeholder={data.scholarship3To}
-                    type='date'
                     name="scholarship3To"
                     // value={formData.scholarship1.to}
                     onChange={handleInputChange}
@@ -556,14 +551,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                 </Select>
                   <Input
                     placeholder={data.scholarship4From}
-                    type='date'
                     name="scholarship4From"
                     // value={formData.scholarship1.from}
                     onChange={handleInputChange}
                   />
                   <Input
                     placeholder={data.scholarship4To}
-                    type='date'
                     name="scholarship4To"
                     // value={formData.scholarship1.to}
                     onChange={handleInputChange}
@@ -604,14 +597,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                 </Select>
                   <Input
                     placeholder={data.scholarship5From}
-                    type='date'
                     name="scholarship5From"
                     // value={formData.scholarship1.from}
                     onChange={handleInputChange}
                   />
                   <Input
                     placeholder={data.scholarship5To}
-                    type='date'
                     name="scholarship5To"
                     // value={formData.scholarship1.to}
                     onChange={handleInputChange}
