@@ -8,6 +8,7 @@ import SuperAdminSidebar from '../components/navigation/sideBar/01-superAdminSid
 import EditSuperAdminProfile from '../pages/01-super-admin/01-auth/02-editSuperAdminProfile'
 import SuperAdminDashboard from '../pages/01-super-admin/01-SuperAdminDashboard';
 import ManageDistUsers from '../pages/01-super-admin/02-manageDistUsers';
+import NcacpStudentsList from '../pages/01-super-admin/03-ncacpStudentsList';
 
 //DIST ADMIN Routes
 import DistAdminSidebar from '../components/navigation/sideBar/02-distAdminSidebar';
@@ -40,6 +41,7 @@ const SuperAdminRoutes = () => {
         <Route path="/" element={<SuperAdminDashboard />} />
         <Route path="/profile" element={<EditSuperAdminProfile />} />
         <Route path="/user-management" element={<ManageDistUsers />} />
+        <Route path="/ncacp-students" element={<NcacpStudentsList />} />
 
       </Routes>
     </>

@@ -39,7 +39,7 @@ const studentProfileSchema = ({
         type: String,
     },
     //SCHOLARSHIP ONE
-    scholarship1Cartage: {
+    scholarship1Category: {
         type: String,
     },
     scholarship1Grade: {
@@ -58,7 +58,7 @@ const studentProfileSchema = ({
         type: String,
     },
         //SCHOLARSHIP TWO
-    scholarship2Cartage: {
+    scholarship2Category: {
         type: String,
     },
     scholarship2Grade: {
@@ -77,7 +77,7 @@ const studentProfileSchema = ({
         type: String,
     },
         //SCHOLARSHIP THREE
-    scholarship3Cartage: {
+    scholarship3Category: {
         type: String,
     },
     scholarship3Grade: {
@@ -96,7 +96,7 @@ const studentProfileSchema = ({
         type: String,
     },
         //SCHOLARSHIP FOUR
-    scholarship4Cartage: {
+    scholarship4Category: {
         type: String,
     },
     scholarship4Grade: {
@@ -115,7 +115,7 @@ const studentProfileSchema = ({
         type: String,
     },
         //SCHOLARSHIP FIVE
-    scholarship5Cartage: {
+    scholarship5Category: {
         type: String,
     },
     scholarship5Grade: {

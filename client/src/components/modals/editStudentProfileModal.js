@@ -23,35 +23,35 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
     email: '',
     birthCertificateNo: '',
 
-    scholarship1Cartage: '',
+    scholarship1Category: '',
     scholarship1Grade: '',
     scholarship1From: '',
     scholarship1To: '',
     scholarship1Gpa: '',
     scholarship1Remarks: '',
 
-    scholarship2Cartage: '',
+    scholarship2Category: '',
     scholarship2Grade: '',
     scholarship2From: '',
     scholarship2To: '',
     scholarship2Gpa: '',
     scholarship2Remarks: '',
 
-    scholarship3Cartage: '',
+    scholarship3Category: '',
     scholarship3Grade: '',
     scholarship3From: '',
     scholarship3To: '',
     scholarship3Gpa: '',
     scholarship3Remarks: '',
 
-    scholarship4Cartage: '',
+    scholarship4Category: '',
     scholarship4Grade: '',
     scholarship4From: '',
     scholarship4To: '',
     scholarship4Gpa: '',
     scholarship4Remarks: '',
 
-    scholarship5Cartage: '',
+    scholarship5Category: '',
     scholarship5Grade: '',
     scholarship5From: '',
     scholarship5To: '',
@@ -125,35 +125,35 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
       contactNumber: data.contactNumber,
       email: data.email,
 
-      scholarship1Cartage: data.scholarship1Cartage,
+      scholarship1Category: data.scholarship1Category,
       scholarship1Grade: data.scholarship1Grade,
       scholarship1From: data.scholarship1From,
       scholarship1To: data.scholarship1To,
       scholarship1Gpa: data.scholarship1Gpa,
       scholarship1Remarks: data.scholarship1Remarks,
 
-      scholarship2Cartage: data.scholarship2Cartage,
+      scholarship2Category: data.scholarship2Category,
       scholarship2Grade: data.scholarship2Grade,
       scholarship2From: data.scholarship2From,
       scholarship2To: data.scholarship2To,
       scholarship2Gpa: data.scholarship2Gpa,
       scholarship2Remarks: data.scholarship2Remarks,
 
-      scholarship3Cartage: data.scholarship3Cartage,
+      scholarship3Category: data.scholarship3Category,
       scholarship3Grade: data.scholarship3Grade,
       scholarship3From: data.scholarship3From,
       scholarship3To: data.scholarship3To,
       scholarship3Gpa: data.scholarship3Gpa,
       scholarship3Remarks: data.scholarship3Remarks,
 
-      scholarship4Cartage: data.scholarship4Cartage,
+      scholarship4Category: data.scholarship4Category,
       scholarship4Grade: data.scholarship4Grade,
       scholarship4From: data.scholarship4From,
       scholarship4To: data.scholarship4To,
       scholarship4Gpa: data.scholarship4Gpa,
       scholarship4Remarks: data.scholarship4Remarks,
 
-      scholarship5Cartage: data.scholarship5Cartage,
+      scholarship5Category: data.scholarship5Category,
       scholarship5Grade: data.scholarship5Grade,
       scholarship5From: data.scholarship5From,
       scholarship5To: data.scholarship5To,
@@ -245,6 +245,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
   };
 
   const classOptions = ['', 'Pre-K', 'K1', 'K2', 'K3', 'Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', 'Diploma',];
+  const scholarshipCategories = ["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"]
 
   return (
     <>
@@ -376,9 +377,9 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                 {/* SCHOLARSHIP */}
                 <FormControl>
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold" >Scholarship</FormLabel>
-                  <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} >
+                  <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
                     <FormLabel >SN</FormLabel>
-                    <FormLabel >Cartage</FormLabel>
+                    <FormLabel >Category</FormLabel>
                     <FormLabel>Class</FormLabel>
                     <FormLabel>From</FormLabel>
                     <FormLabel>To</FormLabel>
@@ -387,14 +388,19 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                   </Grid>
                   {/* SCHOLARSHIP ONE */}
                 </FormControl>
-                <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>1. </FormLabel>
-                  <Input
-                    placeholder={data.scholarship1Cartage}
-                    name="scholarship1Cartage"
-                    // value={formData.scholarship1.scholarshipCartage}
-                    onChange={handleInputChange}
-                  />
+                  <Select
+                  placeholder={data.scholarship1Category}
+                  name="scholarship1Category"
+                  onChange={(event) => handleInputChange}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                    <Select
                   placeholder={data.scholarship1Grade}
                   name="scholarship1Grade"
@@ -435,14 +441,19 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                   />
                 </Grid>
                 {/* SCHOLARSHIP TWO */}
-                <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>2. </FormLabel>
-                  <Input
-                    placeholder={data.scholarship2Cartage}
-                    name="scholarship2Cartage"
-                    // value={formData.scholarship1.scholarshipCartage}
-                    onChange={handleInputChange}
-                  />
+                  <Select
+                  placeholder={data.scholarship2Category}
+                  name="scholarship2Category"
+                  onChange={(event) => handleInputChange}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                   <Select
                   placeholder={data.scholarship2Grade}
                   name="scholarship2Grade"
@@ -482,14 +493,19 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                   />
                 </Grid>
                 {/* SCHOLARSHIP THREE */}
-                <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>3. </FormLabel>
-                  <Input
-                    placeholder={data.scholarship3Cartage}
-                    name="scholarship3Cartage"
-                    // value={formData.scholarship1.scholarshipCartage}
-                    onChange={handleInputChange}
-                  />
+                  <Select
+                  placeholder={data.scholarship3Category}
+                  name="scholarship3Category"
+                  onChange={(event) => handleInputChange}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                   <Select
                   placeholder={data.scholarship3Grade}
                   name="scholarship3Grade"
@@ -529,14 +545,19 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                   />
                 </Grid>
                 {/* SCHOLARSHIP FOUR */}
-                <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>4. </FormLabel>
-                  <Input
-                    placeholder={data.scholarship4Cartage}
-                    name="scholarship4Cartage"
-                    // value={formData.scholarship1.scholarshipCartage}
-                    onChange={handleInputChange}
-                  />
+                  <Select
+                  placeholder={data.scholarship4Category}
+                  name="scholarship4Category"
+                  onChange={(event) => handleInputChange}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                   <Select
                   placeholder={data.scholarship4Grade}
                   name="scholarship4Grade"
@@ -575,14 +596,19 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
                     onChange={handleInputChange}
                   />
                 </Grid>
-                <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>5. </FormLabel>
-                  <Input
-                    placeholder={data.scholarship5Cartage}
-                    name="scholarship5Cartage"
-                    // value={formData.scholarship1.scholarshipCartage}
-                    onChange={handleInputChange}
-                  />
+                  <Select
+                  placeholder={data.scholarship5Category}
+                  name="scholarship5Category"
+                  onChange={(event) => handleInputChange}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                    <Select
                   placeholder={data.scholarship5Grade}
                   name="scholarship5Grade"
