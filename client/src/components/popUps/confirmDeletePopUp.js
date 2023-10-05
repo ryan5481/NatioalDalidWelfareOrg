@@ -24,7 +24,7 @@ return (
                                 <Text as={'span'} fontWeight={'bold'}>
                                     Name:
                                 </Text>{' '}
-                                {data.fullName}
+                                {data.fullName || data.firstName + " " + data.middleName + " " + data.lastName }
                             </ListItem>
                             <ListItem>
                                 <Text as={'span'} fontWeight={'bold'}>
@@ -36,7 +36,7 @@ return (
                                 <Text as={'span'} fontWeight={'bold'}>
                                     District:
                                 </Text>{' '}
-                                {data.district}
+                                {data.district || data.schoolDistrict }
                             </ListItem>
                             <ListItem>
                                 <Text as={'span'} fontWeight={'bold'}>

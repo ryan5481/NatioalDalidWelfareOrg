@@ -275,7 +275,7 @@ const DistUsersGrid = () => {
                                     w="300px"
                                     border={'solid 1px gray'}
                                     h={8}
-                                    placeholder="Search name, school"
+                                    placeholder="Search name, email id"
                                     onChange={(e) => setSearchInput(e.target.value)}
                                     value={searchInput}
                                 />
@@ -313,10 +313,11 @@ const DistUsersGrid = () => {
                             templateColumns={{
                                 sm: '1fr',
                                 md: '1fr 1fr 1fr',
-                                lg: '1fr 1fr 2fr 2fr 2fr 1fr 1fr 1fr 1fr',
+                                lg: '0.5fr 1.5fr 2fr 2fr 1fr 1fr 0.3fr',
                             }}
+                            p={1}
                             m={1}
-                            h={8}
+                            h={9}
                             gap={1}
                             bg={originalBackgroundColor}
                             _hover={{
@@ -328,8 +329,8 @@ const DistUsersGrid = () => {
                             justify="center"
                         >
                             <Text
-                                w="100%"
-                                p={1}
+                                // w="100%"
+                                m={1}
                                 bg={textMouseStates.sn ? clickedBackgroundColor : originalBackgroundColor}
                                 onMouseDown={() => handleMouseDown('sn')}
                                 onMouseUp={() => handleMouseUp('sn')}
@@ -339,8 +340,8 @@ const DistUsersGrid = () => {
                                 SN
                             </Text>
                             <Text
-                                w="150px"
-                                p={1}
+                                // w="150px"
+                                m={1}
                                 bg={textMouseStates.district ? clickedBackgroundColor : originalBackgroundColor}
                                 onMouseDown={() => handleMouseDown('district')}
                                 onMouseUp={() => handleMouseUp('district')}
@@ -351,8 +352,8 @@ const DistUsersGrid = () => {
                                 District
                             </Text>
                             <Text
-                                w="200px"
-                                p={1}
+                                // w="200px"
+                                m={1}
                                 bg={textMouseStates.name ? clickedBackgroundColor : originalBackgroundColor}
                                 onMouseDown={() => handleMouseDown('name')}
                                 onMouseUp={() => handleMouseUp('name')}
@@ -363,8 +364,8 @@ const DistUsersGrid = () => {
                                 Name
                             </Text>
                             <Text
-                                w="200px"
-                                p={1}
+                                // w="200px"
+                                m={1}
                                 bg={textMouseStates.email ? clickedBackgroundColor : originalBackgroundColor}
                                 onMouseDown={() => handleMouseDown('email')}
                                 onMouseUp={() => handleMouseUp('email')}
@@ -375,7 +376,7 @@ const DistUsersGrid = () => {
                                 Email
                             </Text>
                             <Text
-                                w="120px"
+                                // w="120px"
                                 p={1}
                                 bg={textMouseStates.regdDate ? clickedBackgroundColor : originalBackgroundColor}
                                 onMouseDown={() => handleMouseDown('regdDate')}
@@ -387,7 +388,7 @@ const DistUsersGrid = () => {
                                 Regd date
                             </Text>
                             <Text
-                                w="120px"
+                                // w="120px"
                                 p={1}
                                 bg={textMouseStates.updatedDate ? clickedBackgroundColor : originalBackgroundColor}
                                 onMouseDown={() => handleMouseDown('updatedDate')}
@@ -398,15 +399,15 @@ const DistUsersGrid = () => {
                             >
                                 Updated date
                             </Text>
-                            <Text
+                            {/* <Text
                                 w="60px"
-                                p={1}
+                                m={1}
                             >
                                 Edit
-                            </Text>
+                            </Text> */}
                             <Text
                                 w="60px"
-                                p={1}
+                                m={1}
                             >
                                 Delete
                             </Text>
@@ -429,7 +430,7 @@ const DistUsersGrid = () => {
                                         templateColumns={{
                                             sm: '1fr',
                                             md: '1fr 1fr 1fr',
-                                            lg: '1fr 1fr 2fr 2fr 2fr 1fr 1fr 1fr 1fr',
+                                            lg: '0.5fr 1.5fr 2fr 2fr 1fr 1fr 0.3fr',
                                         }}
                                         p={1}
                                         m={1}
@@ -445,21 +446,21 @@ const DistUsersGrid = () => {
                                         key={distAdmin._id}
                                     >
 
-                                        <Text w="30px"  >{index + startIndex + 1}</Text>
-                                        <Text w="150px"  >{distAdmin.district}</Text>
-                                        <Text w="200px">{distAdmin.fullName}</Text>
-                                        <Text w="200px">{distAdmin.email}</Text>
-                                        <Text w="120px">{distAdmin.createdAt.slice(0, 10)}</Text>
-                                        <Text w="120px" >{distAdmin.updatedAt.slice(0, 10)}</Text>
-                                        <Box w="60px">
+                                        <Text m={1}   >{index + startIndex + 1}</Text>
+                                        <Text m={1}  >{distAdmin.district}</Text>
+                                        <Text m={1}>{distAdmin.fullName}</Text>
+                                        <Text m={1}>{distAdmin.email}</Text>
+                                        <Text m={1}>{distAdmin.createdAt.slice(0, 10)}</Text>
+                                        <Text m={1} >{distAdmin.updatedAt.slice(0, 10)}</Text>
+                                        {/* <Box >
                                             <EditIcon
                                                 style={{ cursor: 'pointer' }}
                                                 _hover={{ color: 'blue.400' }}
                                                 onClick={() => {
 
                                                 }} />
-                                        </Box>
-                                        <Box w="60px">
+                                        </Box> */}
+                                        <Box m={1} >
                                             <DeleteIcon
                                                 style={{ cursor: 'pointer' }}
                                                 _hover={{ color: 'blue.400' }}

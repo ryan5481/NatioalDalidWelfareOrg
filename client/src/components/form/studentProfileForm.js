@@ -45,31 +45,31 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
   const [contactNumber, setContactNumber] = useState('')
   const [email, setEmail] = useState('')
   const [birthCertificateNo, setBirthCertificateNo] = useState('')
-  const [scholarship1Cartage, setScholarship1Cartage] = useState('')
+  const [scholarship1Category, setScholarship1Category] = useState('')
   const [scholarship1Grade, setScholarship1Grade] = useState('')
   const [scholarship1From, setScholarship1From] = useState('')
   const [scholarship1To, setScholarship1To] = useState('')
   const [scholarship1Gpa, setScholarship1Gpa] = useState('')
   const [scholarship1Remarks, setScholarship1Remarks] = useState('')
-  const [scholarship2Cartage, setScholarship2Cartage] = useState('')
+  const [scholarship2Category, setScholarship2Category] = useState('')
   const [scholarship2Grade, setScholarship2Grade] = useState('')
   const [scholarship2From, setScholarship2From] = useState('')
   const [scholarship2To, setScholarship2To] = useState('')
   const [scholarship2Gpa, setScholarship2Gpa] = useState('')
   const [scholarship2Remarks, setScholarship2Remarks] = useState('')
-  const [scholarship3Cartage, setScholarship3Cartage] = useState('')
+  const [scholarship3Category, setScholarship3Category] = useState('')
   const [scholarship3Grade, setScholarship3Grade] = useState('')
   const [scholarship3From, setScholarship3From] = useState('')
   const [scholarship3To, setScholarship3To] = useState('')
   const [scholarship3Gpa, setScholarship3Gpa] = useState('')
   const [scholarship3Remarks, setScholarship3Remarks] = useState('')
-  const [scholarship4Cartage, setScholarship4Cartage] = useState('')
+  const [scholarship4Category, setScholarship4Category] = useState('')
   const [scholarship4Grade, setScholarship4Grade] = useState('')
   const [scholarship4From, setScholarship4From] = useState('')
   const [scholarship4To, setScholarship4To] = useState('')
   const [scholarship4Gpa, setScholarship4Gpa] = useState('')
   const [scholarship4Remarks, setScholarship4Remarks] = useState('')
-  const [scholarship5Cartage, setScholarship5Cartage] = useState('')
+  const [scholarship5Category, setScholarship5Category] = useState('')
   const [scholarship5Grade, setScholarship5Grade] = useState('')
   const [scholarship5From, setScholarship5From] = useState('')
   const [scholarship5To, setScholarship5To] = useState('')
@@ -168,31 +168,31 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
       formData.append('contactNumber', contactNumber)
       formData.append('email', email)
       formData.append('birthCertificateNo', birthCertificateNo)
-      formData.append('scholarship1Cartage', scholarship1Cartage)
+      formData.append('scholarship1Category', scholarship1Category)
       formData.append('scholarship1Grade', scholarship1Grade)
       formData.append('scholarship1From', scholarship1From)
       formData.append('scholarship1To', scholarship1To)
       formData.append('scholarship1Gpa', scholarship1Gpa)
       formData.append('scholarship1Remarks', scholarship1Remarks)
-      formData.append('scholarship2Cartage', scholarship2Cartage)
+      formData.append('scholarship2Category', scholarship2Category)
       formData.append('scholarship2Grade', scholarship2Grade)
       formData.append('scholarship2From', scholarship2From)
       formData.append('scholarship2To', scholarship2To)
       formData.append('scholarship2Gpa', scholarship2Gpa)
       formData.append('scholarship2Remarks', scholarship2Remarks)
-      formData.append('scholarship3Cartage', scholarship3Cartage)
+      formData.append('scholarship3Category', scholarship3Category)
       formData.append('scholarship3Grade', scholarship3Grade)
       formData.append('scholarship3From', scholarship3From)
       formData.append('scholarship3To', scholarship3To)
       formData.append('scholarship3Gpa', scholarship3Gpa)
       formData.append('scholarship3Remarks', scholarship3Remarks)
-      formData.append('scholarship4Cartage', scholarship4Cartage)
+      formData.append('scholarship4Category', scholarship4Category)
       formData.append('scholarship4Grade', scholarship4Grade)
       formData.append('scholarship4From', scholarship4From)
       formData.append('scholarship4To', scholarship4To)
       formData.append('scholarship4Gpa', scholarship4Gpa)
       formData.append('scholarship4Remarks', scholarship4Remarks)
-      formData.append('scholarship5Cartage', scholarship5Cartage)
+      formData.append('scholarship5Category', scholarship5Category)
       formData.append('scholarship5Grade', scholarship5Grade)
       formData.append('scholarship5From', scholarship5From)
       formData.append('scholarship5To', scholarship5To)
@@ -272,8 +272,23 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
       });
     }
   };
-
-  const classOptions = ['Pre-K', 'K1', 'K2', 'K3', 'Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', "Diploma"];
+  const provincesOfNepal = [
+    "Province 1",
+    "Province 2",
+    "Bagmati Province",
+    "Gandaki Province",
+    "Lumbini Province",
+    "Karnali Province",
+    "Sudurpashchim Province"
+  ];
+  const classOptions = ['Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', "Diploma"];
+  const scholarshipCategories = ["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"]
+  const conditionalDistrictInputProps = {
+  placeholder: 'District',
+  name: "permanentAddress.district",
+  ...(district !== "all" && { value: district }),
+  isReadOnly: district === "all" ? "true" : "false",
+  }
 
   return (
     <Center >
@@ -408,10 +423,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
             </Grid>
             {/* SCHOLARSHIP */}
             <FormLabel fontSize="22px" fontWeight="bold" >Scholarship</FormLabel>
-            <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} >
+            <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
               <FormLabel >SN</FormLabel>
-              <FormLabel >Cartage</FormLabel>
-              <FormLabel>Class</FormLabel>
+              <FormLabel >Category</FormLabel>
+              <FormLabel>Grade</FormLabel>
               <FormLabel>From</FormLabel>
               <FormLabel>To</FormLabel>
               <FormLabel>GPA</FormLabel>
@@ -419,14 +434,19 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
             </Grid>
             <FormControl>
               {/* SCHOLARSHIP ONE */}
-              <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
+              <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                 <FormLabel>1. </FormLabel>
-                <Input
-                  placeholder='Cartage'
-                  name="scholarship1.scholarshipCartage"
-                  // value={formData.scholarship1.scholarshipCartage}
-                  onChange={(e) => setScholarship1Cartage(e.target.value)}
-                />
+                 <Select
+                  placeholder='Category'
+                  name="scholarship1Category"
+                  onChange={(event) => setScholarship1Category(event.target.value)}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                 <Select
                   placeholder='Select'
                   name="scholarship1.grade"
@@ -439,6 +459,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                     </option>
                   ))}
                 </Select>
+               
                 <Input
                   placeholder='From'
                   type='date'
@@ -468,14 +489,19 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                 />
               </Grid>
               {/* SCHOLARSHIP TWO */}
-              <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
+              <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                 <FormLabel>2. </FormLabel>
-                <Input
-                  placeholder='Cartage'
-                  name="scholarship1.scholarshipCartage"
-                  // value={formData.scholarship1.scholarshipCartage}
-                  onChange={(e) => setScholarship2Cartage(e.target.value)}
-                />
+                <Select
+                  placeholder='Category'
+                  name="scholarship2Category"
+                  onChange={(event) => setScholarship2Category(event.target.value)}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                 <Select
                   placeholder='Select'
                   name="scholarship2.grade"
@@ -517,14 +543,19 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                 />
               </Grid>
               {/* SCHOLARSHIP THREE */}
-              <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
+              <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                 <FormLabel>3. </FormLabel>
-                <Input
-                  placeholder='Cartage'
-                  name="scholarship1.scholarshipCartage"
-                  // value={formData.scholarship1.scholarshipCartage}
-                  onChange={(e) => setScholarship3Cartage(e.target.value)}
-                />
+                <Select
+                  placeholder='Category'
+                  name="scholarship3Category"
+                  onChange={(event) => setScholarship3Category(event.target.value)}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                 <Select
                   placeholder='Select'
                   name="scholarship3.grade"
@@ -566,14 +597,19 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                 />
               </Grid>
               {/* SCHOLARSHIP FOUR */}
-              <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
+              <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                 <FormLabel>4. </FormLabel>
-                <Input
-                  placeholder='Cartage'
-                  name="scholarship1.scholarshipCartage"
-                  // value={formData.scholarship1.scholarshipCartage}
-                  onChange={(e) => setScholarship4Cartage(e.target.value)}
-                />
+                <Select
+                  placeholder='Category'
+                  name="scholarship4Category"
+                  onChange={(event) => setScholarship4Category(event.target.value)}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                 <Select
                   placeholder='Select'
                   name="scholarship4.grade"
@@ -615,14 +651,19 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                 />
               </Grid>
               {/* SCHOLARSHIP FIVE */}
-              <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 0.7fr 0.7fr 0.4fr 1.5fr"} gap={1} mb={1} >
+              <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                 <FormLabel>5. </FormLabel>
-                <Input
-                  placeholder='Cartage'
-                  name="scholarship1.scholarshipCartage"
-                  // value={formData.scholarship1.scholarshipCartage}
-                  onChange={(e) => setScholarship5Cartage(e.target.value)}
-                />
+                <Select
+                  placeholder='Category'
+                  name="scholarship5Category"
+                  onChange={(event) => setScholarship5Category(event.target.value)}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
                 <Select
                   placeholder='Select'
                   name="scholarship5.grade"
@@ -727,10 +768,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
                   onChange={(e) => setCurrentWardNumber(e.target.value)}
                 />
                 <Input
-                  placeholder='District'
-                  name="permanentAddress.district"
-                  value={district}
-                  isReadOnly
+                  {...conditionalDistrictInputProps}
                 />
                 <Input
                   placeholder='Province'

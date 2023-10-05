@@ -25,9 +25,86 @@ import EditStudentProfileModal from '../modals/editStudentProfileModal';
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
 
 const baseUrl = process.env.REACT_APP_BASE_URL
+const nepalDistricts = [
+    "Achham",
+    "Arghakhanchi",
+    "Baglung",
+    "Baitadi",
+    "Bajhang",
+    "Bajura",
+    "Banke",
+    "Bara",
+    "Bardiya",
+    "Bhaktapur",
+    "Bhojpur",
+    "Chitwan",
+    "Dadeldhura",
+    "Dailekh",
+    "Dang",
+    "Darchula",
+    "Dhading",
+    "Dhankuta",
+    "Dhanusa",
+    "Dholkha",
+    "Dolpa",
+    "Doti",
+    "Gorkha",
+    "Gulmi",
+    "Humla",
+    "Ilam",
+    "Jajarkot",
+    "Jhapa",
+    "Jumla",
+    "Kailali",
+    "Kalikot",
+    "Kanchanpur",
+    "Kapilvastu",
+    "Kaski",
+    "Kathmandu",
+    "Kavrepalanchok",
+    "Khotang",
+    "Lalitpur",
+    "Lamjung",
+    "Mahottari",
+    "Makwanpur",
+    "Manang",
+    "Morang",
+    "Mugu",
+    "Mustang",
+    "Myagdi",
+    "Nawalparasi",
+    "Nuwakot",
+    "Okhaldhunga",
+    "Palpa",
+    "Panchthar",
+    "Parbat",
+    "Parsa",
+    "Pyuthan",
+    "Ramechhap",
+    "Rasuwa",
+    "Rautahat",
+    "Rolpa",
+    "Rukum",
+    "Rupandehi",
+    "Salyan",
+    "Sankhuwasabha",
+    "Saptari",
+    "Sarlahi",
+    "Sindhuli",
+    "Sindhupalchok",
+    "Siraha",
+    "Solukhumbu",
+    "Sunsari",
+    "Surkhet",
+    "Syangja",
+    "Tanahun",
+    "Taplejung",
+    "Terhathum",
+    "Udayapur",
+];
 
 const StudentsGrid = () => {
-  const { district } = useSelector(state => state.user)
+    const { district } = useSelector(state => state.user)
     //FETCH
     const [studentsList, setStudentsList] = useState([])
     //EDIT
@@ -77,12 +154,17 @@ const StudentsGrid = () => {
     };
 
     //FILTER BY DISTRICT
+    const [selectedDistrict, setSelectedDistrict] = useState('');
+
     const filteredStudentsList = studentsList
+        .filter((item) =>
+            item.currentDistrict.toLowerCase().includes(selectedDistrict.toLowerCase())
+        )
         .filter(
             (item) =>
-            item.firstName.toLowerCase().includes(searchInput.toLowerCase()) ||
-            item.lastName.toLowerCase().includes(searchInput.toLowerCase()) ||
-            item.schoolName.toLowerCase().includes(searchInput.toLowerCase())
+                item.firstName.toLowerCase().includes(searchInput.toLowerCase()) ||
+                item.lastName.toLowerCase().includes(searchInput.toLowerCase()) ||
+                item.schoolName.toLowerCase().includes(searchInput.toLowerCase())
         );
     //SEARCH
 
@@ -106,7 +188,13 @@ const StudentsGrid = () => {
 
     //FETCH
     const fetchData = async () => {
-        const res = await axios.get(`${baseUrl}/get-student-profiles?currentDistrict=${district}`)
+        let apiUrl = `${baseUrl}/get-student-profiles`;
+
+        // Check if district is "all"
+        if (district !== "all") {
+            apiUrl += `?currentDistrict=${district}`;
+        }
+        const res = await axios.get(apiUrl)
         if (res) {
             const data = res.data.data
             setStudentsList(data.reverse())
@@ -191,42 +279,61 @@ const StudentsGrid = () => {
                     >
                         <HStack>
                             <FormControl>
-                            <InputGroup  >
-                                <Input
-                                    m={3}
-                                    rounded="full"
-                                    w="300px"
-                                    border={'solid 1px gray'}
-                                    h={8}
-                                    placeholder="Search student name, school"
-                                    onChange={(e) => setSearchInput(e.target.value)}
-                                    value={searchInput}
-                                />
-                                {searchInput && (
-                                    <InputRightElement>
-                                        <Box
-                                            as={IconButton}
-                                            size='xxs'
-                                            bg='gray.500'
+                                <HStack>
+                                    {district == "all" &&
+                                        <HStack>
+                                            <Text fontSize={"14px"} px={2} >District:</Text>
+                                            <Select
+                                                mx={1}
+                                                h={8}
+                                                w={"200px"}
+                                                id="district"
+                                                onChange={(e) => setSelectedDistrict(e.target.value)}
+                                                value={selectedDistrict}
+                                            >
+                                                <option value="">All Districts</option>
+                                                {nepalDistricts.map((district, index) => (
+                                                    <option key={index} value={district} >{district}</option>
+                                                ))}
+                                            </Select>
+                                        </HStack>}
+                                    <InputGroup  >
+                                        <Input
+                                            m={3}
                                             rounded="full"
-                                            right="2035%"
-                                            top="20%"
-                                            zIndex='10'
-                                            boxShadow="2xl"
-                                            _hover={{
-                                                bg: "darkgray"
-                                            }}
-                                            onClick={() => setSearchInput('')}
-                                        >
-                                            <SmallCloseIcon
-                                            w="19x"
-                                            h="19px"
-                                                color="gray.50"
-                                            />
-                                        </Box>
-                                    </InputRightElement>
-                                )}
-                            </InputGroup>
+                                            w="300px"
+                                            border={'solid 1px gray'}
+                                            h={8}
+                                            placeholder="Search student name, school"
+                                            onChange={(e) => setSearchInput(e.target.value)}
+                                            value={searchInput}
+                                        />
+                                        {searchInput && (
+                                            <InputRightElement>
+                                                <Box
+                                                    as={IconButton}
+                                                    size='xxs'
+                                                    bg='gray.500'
+                                                    rounded="full"
+                                                    right="2035%"
+                                                    top="20%"
+                                                    zIndex='10'
+                                                    boxShadow="2xl"
+                                                    _hover={{
+                                                        bg: "darkgray"
+                                                    }}
+                                                    onClick={() => setSearchInput('')}
+                                                >
+                                                    <SmallCloseIcon
+                                                        w="19x"
+                                                        h="19px"
+                                                        color="gray.50"
+                                                    />
+                                                </Box>
+                                            </InputRightElement>
+                                        )}
+                                    </InputGroup>
+                                </HStack>
                             </FormControl>
 
                         </HStack>
@@ -236,7 +343,7 @@ const StudentsGrid = () => {
                             templateColumns={{
                                 sm: '1fr',
                                 md: '1fr 1fr 1fr',
-                                lg: '1fr 2fr 2fr 1fr 1fr 1fr 1fr 1fr',
+                                lg: '0.5fr 2fr 2fr 1.5fr 1fr 1fr 0.3fr 0.3fr',
                             }}
                             m={1}
                             h={8}
@@ -281,6 +388,16 @@ const StudentsGrid = () => {
                                 School Name
                             </Text>
                             <Text
+                            w="200px"
+                            p={1}
+                            bg={textMouseStates.district ? clickedBackgroundColor : originalBackgroundColor}
+                            onMouseDown={() => handleMouseDown('district')}
+                            onMouseUp={() => handleMouseUp('district')}
+                            onMouseLeave={() => handleMouseUp('district')}
+                            onClick={() => handleSort('currentDistrict')}
+
+                            >District</Text>
+                            <Text
                                 w="120px"
                                 p={1}
                                 bg={textMouseStates.regdDate ? clickedBackgroundColor : originalBackgroundColor}
@@ -305,13 +422,13 @@ const StudentsGrid = () => {
                                 Updated date
                             </Text>
                             <Text
-                                w="60px"
+                                // w="60px"
                                 p={1}
                             >
                                 Edit
                             </Text>
                             <Text
-                                w="60px"
+                                // w="60px"
                                 p={1}
                             >
                                 Delete
@@ -328,13 +445,13 @@ const StudentsGrid = () => {
                             };
                             return (<>
                                 <Box
-                                    // mx={10}
+                                // mx={10}
                                 >
                                     <Grid
                                         templateColumns={{
                                             sm: '1fr',
                                             md: '1fr 1fr 1fr',
-                                            lg: '1fr 2fr 2fr 1fr 1fr 1fr 1fr 1fr',
+                                            lg: '0.5fr 2fr 2fr 1.5fr 1fr 1fr 0.3fr 0.3fr',
                                         }}
                                         p={1}
                                         m={1}
@@ -353,9 +470,10 @@ const StudentsGrid = () => {
                                         <Text w="30px"  >{index + startIndex + 1}</Text>
                                         <Text w="200px" isTruncated >{student.firstName} {student?.middleName} {student.lastName}</Text>
                                         <Text w="200px" isTruncated >{student.schoolName}</Text>
+                                        <Text w="200px" isTruncated >{student.currentDistrict}</Text>
                                         <Text w="120px">{student.createdAt.slice(0, 10)}</Text>
                                         <Text w="120px" >{student.updatedAt.slice(0, 10)}</Text>
-                                        <Box w="60px">
+                                        <Box  >
                                             <EditIcon
                                                 style={{ cursor: 'pointer' }}
                                                 _hover={{ color: 'blue.400' }}
@@ -363,7 +481,7 @@ const StudentsGrid = () => {
                                                     openEditModal(student)
                                                 }} />
                                         </Box>
-                                        <Box w="60px">
+                                        <Box  >
                                             <DeleteIcon
                                                 style={{ cursor: 'pointer' }}
                                                 _hover={{ color: 'blue.400' }}
@@ -410,10 +528,10 @@ const StudentsGrid = () => {
                         </Box>
                     </Box>)
                     :
-                    (<StudentProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive}  />)
+                    (<StudentProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive} />)
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="student profile" handleDelete={handleStudentProfileDelete} />
-                <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData}  closeEditModal={closeEditModal} />
+                <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData} closeEditModal={closeEditModal} />
             </Box>
 
         </>

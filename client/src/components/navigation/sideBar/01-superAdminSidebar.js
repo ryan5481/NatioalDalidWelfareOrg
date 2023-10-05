@@ -39,7 +39,7 @@ import {
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi'
-import { PiUsersFourBold } from 'react-icons/pi'
+import {PiUsersBold, PiUsersFourBold } from 'react-icons/pi'
 import { IconType } from 'react-icons'
 
 interface LinkItemProps {
@@ -61,8 +61,10 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, href: "/" },
-  { name: 'District admins', icon: PiUsersFourBold, href: "/user-management" },
+  { name: 'Dashboard', icon: FiHome, href: "/" },
+  { name: 'District Admins', icon: PiUsersBold, href: "/user-management" },
+  { name: 'NCACP Project', icon: PiUsersFourBold, href: "/ncacp-students" },
+  { name: 'PRL & ETH Project ', icon: PiUsersFourBold, href: "/ncacp-students" },
   // { name: 'Explore', icon: FiCompass },
   // { name: 'Favourites', icon: FiStar },
   // { name: 'Settings', icon: FiSettings },

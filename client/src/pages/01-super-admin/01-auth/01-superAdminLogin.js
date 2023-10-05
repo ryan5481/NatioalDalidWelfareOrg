@@ -61,6 +61,7 @@ const SuperAdminLogin = () => {
             email: response.data.email,
             id: response.data.id,
             fullName: response.data.fullName,
+            district: ""
           })
         );
         navigate("/");
