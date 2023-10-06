@@ -7,7 +7,7 @@ import { Box, HStack, Heading, Text, VStack } from '@chakra-ui/react'
 const StudentNumberDisplay = ({studentsList}) => {
 
     //TOTAL SCHOLARSHIPS
-    const totalStudents = studentsList.length
+    // const totalStudents = studentsList.length
 
     function getTotalscholarshhips(studentsList) {
         return studentsList.reduce((sum, student) => {
@@ -94,9 +94,8 @@ const StudentNumberDisplay = ({studentsList}) => {
 
     return (
         <>
-            <Box pos={"relative"} left="120px" >
+            <Box mb={10} >
                 <VStack>
-                    <Heading mb={1} fontSize="3xl" > Overall Scholarships Provided</Heading>
                     <Box>
                         <VStack p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
                             {studentsList && <Heading fontSize="5xl" >{totalScholarships}</Heading>}
