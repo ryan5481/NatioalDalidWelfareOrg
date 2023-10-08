@@ -14,6 +14,7 @@ const navbarRoutes = require('./05-routes/02-navbarRoutes.js')
 const carouselRoutes = require('./05-routes/03-carouselRoutes.js')
 const servicesRoutes = require('./05-routes/04-servicesRoutes.js')
 const studentProfileRoutes = require('./05-routes/03-studentProfile/01-studentProfileRoutes.js')
+const alumuniStudentProfileRoutes = require('./05-routes/03-studentProfile/02-alumuniStudentProfileRoutes.js')
 
 const port = 8000;
 
@@ -26,6 +27,7 @@ app.use(cors());
 app.use("/", superAdminUserRoutes);
 app.use("/", distAdminUserRoutes);
 app.use("/", studentProfileRoutes);
+app.use("/", alumuniStudentProfileRoutes);
 
 app.use("/", contactRoutes);
 app.use("/", logoRoutes);
