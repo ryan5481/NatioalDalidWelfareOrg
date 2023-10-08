@@ -4,18 +4,18 @@ import DistUsersGrid from '../../components/grids/distUsersGrid';
 import StudentsGrid from '../../components/grids/studentsGrid';
 
 
-const NcacpStudentsList = () => {
+const PrlEthStudentsList = () => {
     
     return (<>
         <Box
             textAlign="center"
         >
-            <Text textAlign={"center"} m={5} fontWeight={"bold"} fontSize={"22px"}> NCACP Students</Text>
-            <StudentsGrid district={""} />
+            <Text textAlign={"center"} m={5} fontWeight={"bold"} fontSize={"22px"}> PRL & ETH Students</Text>
+            <StudentsGrid district={""} scholarshipProject="prlEth" />
             
         </Box>
     </>
     )
 }
 
-export default NcacpStudentsList
+export default PrlEthStudentsList

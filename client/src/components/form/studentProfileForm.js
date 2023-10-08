@@ -32,11 +32,12 @@ import {
 import { SmallCloseIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
-const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
+const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipProject }) => {
   const imageInputRef = useRef()
   const { district } = useSelector(state => state.user)
   const toast = useToast();
   const [profileImageName, setProfileImageName] = useState('')
+  const [isPrlEthProject, setIsPrlEthProject] = useState(null)
   const [firstName, setFirstName] = useState('')
   const [middleName, setMiddleName] = useState('')
   const [lastName, setLastName] = useState()
@@ -160,6 +161,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
       if (selectedImage) {
         formData.append('profileImageName', selectedImage, selectedImage.filename);
       }
+      formData.append('isPrlEthProject', scholarshipProject == "prlEth" ?  true : false)
       formData.append('firstName', firstName)
       formData.append('middleName', middleName)
       formData.append('lastName', lastName)
@@ -282,7 +284,13 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData }) => {
     "Sudurpashchim Province"
   ];
   const classOptions = ['Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', "Diploma"];
-  const scholarshipCategories = ["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"]
+
+  const scholarshipCategories =  
+  scholarshipProject == "prlEth"
+   ? (["", "Pratap Ram Lohar", "ETH Project"]) : (["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"])
+
+  //  console.log(scholarshipProject)
+
   const conditionalDistrictInputProps = {
   placeholder: 'District',
   name: "permanentAddress.district",
