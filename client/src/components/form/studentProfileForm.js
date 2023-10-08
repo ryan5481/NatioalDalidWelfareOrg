@@ -29,10 +29,12 @@ import {
   FormErrorMessage,
   VStack, // Add this import for error message display
 } from '@chakra-ui/react';
+import AlumuniStudentForm from './alumuniStudentForm';
 import { SmallCloseIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipProject }) => {
+  const [isNewStudentForm, setIsnewStudentForm] = useState(true)
   const imageInputRef = useRef()
   const { district } = useSelector(state => state.user)
   const toast = useToast();
@@ -299,15 +301,25 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   }
 
   return (
-    <Center >
+    <>
+    <Box m={5} >
+      <Button 
+      h={7} 
+      minW="180px"
+      fontSize={"14px"}
+      onClick={() => setIsnewStudentForm(!isNewStudentForm)}
+       > {isNewStudentForm ?"Alumuni" : "New Student" }</Button>
+    </Box>
+    {isNewStudentForm ? 
+    (<Center >
       <Box
         justify={'center'}
-        m={5}
+        // m={5}
         bg="white"
         rounded={10}
         border={'solid 1px lightgray'}
       >
-        <Heading mt={5} textAlign="center" fontSize="26px" >Create Student Profile</Heading>
+        <Heading mt={5} textAlign="center" fontSize="26px" >New Student Form</Heading>
         <form
           onSubmit={submitForm}
         >
@@ -1020,13 +1032,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
           <Box justifySelf="center" m={5}  >
             <Center>
 
-            <Button colorScheme='red' mx={1} w={'200px'} >Cancel</Button>
+            <Button colorScheme='red' mx={1} w={'200px'} onClick={() => setIsCreateNewUserActive(false)} >Cancel</Button>
             <Button onClick={() => submitForm()} colorScheme='green' mx={1} w={'200px'} >Save</Button>
             </Center>
           </Box>
         </form>
       </Box>
-    </Center>
+    </Center>)
+    :
+    (<AlumuniStudentForm setIsCreateNewUserActive={setIsCreateNewUserActive} />)
+    }
+    </>
   );
 };
 
