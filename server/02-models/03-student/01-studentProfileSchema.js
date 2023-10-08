@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const studentProfileSchema = ({
 
+    isPrlEthProject: {
+        type: Boolean,
+    },
+
     //STUDENT
     profileImageName: {
         type: String,

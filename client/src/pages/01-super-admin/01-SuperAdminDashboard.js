@@ -23,6 +23,7 @@ const SuperAdminDashboard = () => {
     const [filteredStudentsList, setFilteredStudentsList] = useState([]);
     const toast = useToast(); // Initialize the useToast hook
     const [currentYearStudentsList, setCurrentYearStudentsList] = useState([]);
+    const [isCheckButtonDisabled, setIsCheckButtonDisabled] = useState(true);
 
 
     const fetchStudentsList = async () => {
@@ -82,8 +83,14 @@ const SuperAdminDashboard = () => {
             );
         });
         setFilteredStudentsList(filteredList);
+        setIsCheckButtonDisabled(true);
         // console.log("FILTERED STUDENTS:" + filteredStudentsList);
     };
+
+      // Enable the button when both startDate and endDate are selected
+  useEffect(() => {
+    setIsCheckButtonDisabled(!startDate || !endDate);
+  }, [startDate, endDate]);
 
     return (
         <>
@@ -102,12 +109,6 @@ const SuperAdminDashboard = () => {
                             <Input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
                         </HStack>
                     </FormControl>
-                    {/* <Button colorScheme="blue" w="100px" onClick={filterStudentsByDate} >
-                        Save
-                    </Button>
-                    <Button colorScheme="red" w="100px" onClick={filterStudentsByDate} >
-                        Clear
-                    </Button> */}
                                 <Box
                                     w='25px'
                                     as={IconButton}
@@ -119,6 +120,7 @@ const SuperAdminDashboard = () => {
                                     onClick={
                                         filterStudentsByDate
                                     }
+                                    isDisabled={isCheckButtonDisabled}
                                 >
                                     <CheckIcon
                                         color='gray.50'

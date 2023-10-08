@@ -103,7 +103,7 @@ const nepalDistricts = [
     "Udayapur",
 ];
 
-const StudentsGrid = () => {
+const StudentsGrid = ({scholarshipProject}) => {
     const { district } = useSelector(state => state.user)
     //FETCH
     const [studentsList, setStudentsList] = useState([])
@@ -196,8 +196,14 @@ const StudentsGrid = () => {
         }
         const res = await axios.get(apiUrl)
         if (res) {
-            const data = res.data.data
-            setStudentsList(data.reverse())
+            const data = res.data.data;
+
+    // Filter based on scholarshipProject
+    const filteredData = scholarshipProject === "prlEth"
+      ? data.filter(student => student.isPrlEthProject === true)
+      : data.filter(student => student.isPrlEthProject === false);
+
+    setStudentsList(filteredData.reverse());
         }
     }
     // console.log(distAdminList)
@@ -528,10 +534,10 @@ const StudentsGrid = () => {
                         </Box>
                     </Box>)
                     :
-                    (<StudentProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive} />)
+                    (<StudentProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive} scholarshipProject={scholarshipProject}  />)
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="student profile" handleDelete={handleStudentProfileDelete} />
-                <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData} closeEditModal={closeEditModal} />
+                <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData} closeEditModal={closeEditModal} scholarshipProject={scholarshipProject} />
             </Box>
 
         </>

@@ -7,7 +7,7 @@ import {
 import { Form } from 'react-router-dom'
 const baseUrl = process.env.REACT_APP_BASE_URL
 
-const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
+const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) => {
   const imageInputRef = useRef()
   const toast = useToast()
   const [scrollBehavior, setScrollBehavior] = React.useState('inside')
@@ -245,7 +245,10 @@ const EditStudentProfileModal = ({ isOpen, onClose, data }) => {
   };
 
   const classOptions = ['', 'Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', 'Diploma',];
-  const scholarshipCategories = ["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"]
+
+  const scholarshipCategories =  
+  scholarshipProject == "prlEth"
+   ? (["", "Pratap Ram Lohar", "ETH Project"]) : (["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"])
 
   return (
     <>
