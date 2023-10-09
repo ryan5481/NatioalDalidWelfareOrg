@@ -19,6 +19,7 @@ import ManageStudents from '../pages/02-district-admin/02-manageStudents';
 // import Header from '../components/header/header';
 import SuperAdminLogin from '../pages/01-super-admin/01-auth/01-superAdminLogin';
 import DistAdminLogin from '../pages/02-district-admin/01-auth/01-distAdminLogin';
+import BoardMembersGrid from '../components/grids/boardMembersGrid';
 
 
 const ConditionalRoute = () => {
@@ -44,6 +45,7 @@ const SuperAdminRoutes = () => {
         <Route path="/user-management" element={<ManageDistUsers />} />
         <Route path="/ncacp-students" element={<NcacpStudentsList />} />
         <Route path="/prl-eth-students" element={<PrlEthStudentsList />} />
+        <Route path="/board-members" element={<BoardMembersGrid />} />
 
       </Routes>
     </>

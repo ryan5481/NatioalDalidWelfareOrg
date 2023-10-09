@@ -9,18 +9,18 @@ const StudentNumberDisplay = ({studentsList}) => {
     //TOTAL SCHOLARSHIPS
     // const totalStudents = studentsList.length
 
-    function getTotalscholarshhips(studentsList) {
-        return studentsList.reduce((sum, student) => {
+    function getTotalscholarships(studentsList) {
+        return  studentsList.reduce((sum, student) => {
             for (let i = 1; i <= 5; i++) {
                 const categoryKey = `scholarship${i}Category`;
-                const categoryValue = student[categoryKey].trim();
+                const categoryValue = student[categoryKey]?.trim();
                 sum += categoryValue && typeof categoryValue === 'string' && categoryValue.trim() !== '' ? 1 : 0;
             }
             return sum;
         }, 0);
     }
 
-    const totalScholarships = getTotalscholarshhips(studentsList)
+    const totalScholarships = getTotalscholarships(studentsList)
 
     //EDUCATION NUMBER BY GRADES
     const basicEducationGrades = ["Grade1", "Grade2", "Grade3", "Grade4", "Grade5", "Grade6", "Grade7", "Grade8"];
@@ -44,6 +44,7 @@ const StudentNumberDisplay = ({studentsList}) => {
             return sum;
         }, 0);
     }
+
     const basicEducationNumber = getEducationNumber(basicEducationGrades, studentsList)
     const secondaryEducationNumber = getEducationNumber(secondaryEducationGrades, studentsList)
     const higherSecondaryEducationNumber = getEducationNumber(higherSecondaryEducationGrades, studentsList)
