@@ -65,6 +65,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'District Admins', icon: PiUsersBold, href: "/user-management" },
   { name: 'NCACP Project', icon: PiUsersFourBold, href: "/ncacp-students" },
   { name: 'PRL & ETH Project ', icon: PiUsersFourBold, href: "/prl-eth-students" },
+  { name: 'Board members', icon: PiUsersFourBold, href: "/board-members" },
   // { name: 'Explore', icon: FiCompass },
   // { name: 'Favourites', icon: FiStar },
   // { name: 'Settings', icon: FiSettings },

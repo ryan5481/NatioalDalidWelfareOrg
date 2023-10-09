@@ -66,8 +66,25 @@ const StudentProfileImageUpload = multer({
     // fileFilter: fileFilter
 }).single("profileImageName")
 
+//BOARD MEMBER PROFILE IMAGE
+const boardMemberProfileImageStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "../client/src/uploads/boardMemberImage/")
+    },
+    filename: function (req, file, cb) {
+        cb(null, "Board_member_profile_img_" + Date.now() + ".jpeg")
+    }
+})
+
+const BoardMemberProfileImageUpload = multer({
+    storage: boardMemberProfileImageStorage,
+    // limits: { fileSize: 1024 * 1024 * 4 }, //max file size 4 MB
+    // fileFilter: fileFilter
+}).single("profileImageName")
+
 
 exports.StudentProfileImageUpload = StudentProfileImageUpload;
+exports.BoardMemberProfileImageUpload = BoardMemberProfileImageUpload;
 /////////////////
 exports.CarouselImageUpload = CarouselImageUpload;
 exports.LogoImageUpload = LogoImageUpload;

@@ -32,12 +32,13 @@ return (
                                 </Text>{' '}
                                 {data.email}
                             </ListItem>
+                            {accountType !== "Board Member Profile" && 
                             <ListItem>
                                 <Text as={'span'} fontWeight={'bold'}>
                                     District:
                                 </Text>{' '}
                                 {data.district || data.schoolDistrict }
-                            </ListItem>
+                            </ListItem>}
                             <ListItem>
                                 <Text as={'span'} fontWeight={'bold'}>
                                     You can't undo this action afterwards.
