@@ -156,22 +156,27 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
       formData.append('contactNumber', contactNumber)
       formData.append('email', email)
       formData.append('citizenshipNumber', citizenshipNumber)
+
       formData.append('position1', position1)
       formData.append('joinedDate1', joinedDate1)
       formData.append('tenure1', tenure1)
       formData.append('remark1', remark1)
+
       formData.append('position2', position2)
       formData.append('joinedDate2', joinedDate2)
       formData.append('tenure2', tenure2)
       formData.append('remark2', remark2)
+
       formData.append('position3', position3)
       formData.append('joinedDate3', joinedDate3)
       formData.append('tenure3', tenure3)
       formData.append('remark3', remark3)
+
       formData.append('position4', position4)
       formData.append('joinedDate4', joinedDate4)
       formData.append('tenure4', tenure4)
       formData.append('remark4', remark4)
+
       formData.append('position5', position5)
       formData.append('joinedDate5', joinedDate5)
       formData.append('tenure5', tenure5)
@@ -378,172 +383,127 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
               </Box>
             </Grid>
             {/* SCHOLARSHIP */}
-            <FormLabel fontSize="22px" fontWeight="bold" >Scholarship</FormLabel>
-            <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
+            <FormLabel fontSize="22px" fontWeight="bold" >Designation</FormLabel>
+            <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} >
               <FormLabel >SN</FormLabel>
-              <FormLabel >Category</FormLabel>
-              <FormLabel>Grade</FormLabel>
-              <FormLabel>From</FormLabel>
-              <FormLabel>To</FormLabel>
-              <FormLabel>GPA</FormLabel>
+              <FormLabel >Position</FormLabel>
+              <FormLabel>Joined date</FormLabel>
+              <FormLabel>Tenure</FormLabel>
               <FormLabel>Remarks</FormLabel>
             </Grid>
             <FormControl>
               {/* Tenure ONE */}
-              <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr"} gap={1} mb={1} >
+              <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel>1. </FormLabel>
                 <Input
-                  placeholder='From'
-                  type='date'
-                  name="scholarship1.from"
-                  // value={formData.scholarship1.from}
+                  placeholder='Position'
                   onChange={(e) => setPosition1(e.target.value)}
                 />
                 <Input
-                  placeholder='To'
                   type='date'
-                  name="scholarship1.to"
-                  // value={formData.scholarship1.to}
                   onChange={(e) => setJoinedDate1(e.target.value)}
                 />
                 <Input
                   type='number'
-                  placeholder='GPA'
-                  name="scholarship1.gpa"
+                  placeholder='Tenure'
+                  name="tenure1"
                   // value={formData.scholarship1.gpa}
                   onChange={(e) => setTenure1(e.target.value)}
                 />
                 <Input
                   placeholder='Remarks'
                   name="remark1"
-                  // value={formData.scholarship1.remarks}
                   onChange={(e) => setRemark1(e.target.value)}
                 />
               </Grid>
               {/* Tenure TWO */}
-              <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr"} gap={1} mb={1} >
+              <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel>2. </FormLabel>
                 <Input
-                  placeholder='From'
-                  type='date'
-                  name="scholarship1.from"
-                  // value={formData.scholarship1.from}
+                  placeholder='Position'
                   onChange={(e) => setPosition2(e.target.value)}
                 />
                 <Input
-                  placeholder='To'
                   type='date'
-                  name="scholarship1.to"
-                  // value={formData.scholarship1.to}
                   onChange={(e) => setJoinedDate2(e.target.value)}
                 />
                 <Input
                   type='number'
-                  placeholder='GPA'
-                  name="scholarship1.gpa"
-                  // value={formData.scholarship1.gpa}
+                  placeholder='Tenure'
                   onChange={(e) => setTenure2(e.target.value)}
                 />
                 <Input
                   placeholder='Remarks'
                   name="remark1"
-                  // value={formData.scholarship1.remarks}
                   onChange={(e) => setRemark2(e.target.value)}
                 />
               </Grid>
               {/* Tenure THREE */}
-              <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr"} gap={1} mb={1} >
+              <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel>3. </FormLabel>
                 <Input
-                  placeholder='From'
-                  type='date'
-                  name="scholarship1.from"
-                  // value={formData.scholarship1.from}
+                  placeholder='Position'
                   onChange={(e) => setPosition3(e.target.value)}
                 />
                 <Input
-                  placeholder='To'
                   type='date'
-                  name="scholarship1.to"
-                  // value={formData.scholarship1.to}
                   onChange={(e) => setJoinedDate3(e.target.value)}
                 />
                 <Input
                   type='number'
-                  placeholder='GPA'
-                  name="scholarship1.gpa"
-                  // value={formData.scholarship1.gpa}
+                  placeholder='Tenure'
                   onChange={(e) => setTenure3(e.target.value)}
                 />
                 <Input
                   placeholder='Remarks'
-                  name="remark1"
-                  // value={formData.scholarship1.remarks}
                   onChange={(e) => setRemark3(e.target.value)}
                 />
               </Grid>
               {/* Tenure FOUR */}
-              <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr"} gap={1} mb={1} >
+              <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel>4. </FormLabel>
                 <Input
-                  placeholder='From'
-                  type='date'
-                  name="scholarship1.from"
-                  // value={formData.scholarship1.from}
+                  placeholder='Position'
                   onChange={(e) => setPosition4(e.target.value)}
                 />
                 <Input
-                  placeholder='To'
                   type='date'
-                  name="scholarship1.to"
-                  // value={formData.scholarship1.to}
                   onChange={(e) => setJoinedDate4(e.target.value)}
                 />
                 <Input
                   type='number'
-                  placeholder='GPA'
-                  name="scholarship1.gpa"
-                  // value={formData.scholarship1.gpa}
+                  placeholder='Tenure'
                   onChange={(e) => setTenure4(e.target.value)}
                 />
                 <Input
                   placeholder='Remarks'
                   name="remark1"
-                  // value={formData.scholarship1.remarks}
                   onChange={(e) => setRemark4(e.target.value)}
                 />
               </Grid>
               {/* Tenure FIVE */}
-              <Grid gridTemplateColumns={"0.1fr 1fr 0.5fr 0.7fr 0.7fr"} gap={1} mb={1} >
+              <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel>5. </FormLabel>
                 <Input
-                  placeholder='From'
-                  type='date'
-                  name="scholarship1.from"
-                  // value={formData.scholarship1.from}
+                  placeholder='Position'
                   onChange={(e) => setPosition5(e.target.value)}
                 />
                 <Input
-                  placeholder='To'
                   type='date'
-                  name="scholarship1.to"
-                  // value={formData.scholarship1.to}
                   onChange={(e) => setJoinedDate5(e.target.value)}
                 />
                 <Input
                   type='number'
-                  placeholder='GPA'
-                  name="scholarship1.gpa"
-                  // value={formData.scholarship1.gpa}
+                  placeholder='Tenure'
                   onChange={(e) => setTenure5(e.target.value)}
                 />
                 <Input
                   placeholder='Remarks'
                   name="remark1"
-                  // value={formData.scholarship1.remarks}
                   onChange={(e) => setRemark5(e.target.value)}
                 />
               </Grid>
+
 
             </FormControl>
 

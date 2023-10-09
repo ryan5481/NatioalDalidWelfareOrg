@@ -21,98 +21,20 @@ import {
 } from '@chakra-ui/react'
 import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import StudentProfileForm from '../form/studentProfileForm';
-import EditStudentProfileModal from '../modals/editStudentProfileModal';
+import EditBoardMemberProfileModal from '../modals/editBoardMemberProfileModal'
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
 import BoardMemberProfileForm from '../form/boardMemberProfileForm'
 
 const baseUrl = process.env.REACT_APP_BASE_URL
-const nepalDistricts = [
-    "Achham",
-    "Arghakhanchi",
-    "Baglung",
-    "Baitadi",
-    "Bajhang",
-    "Bajura",
-    "Banke",
-    "Bara",
-    "Bardiya",
-    "Bhaktapur",
-    "Bhojpur",
-    "Chitwan",
-    "Dadeldhura",
-    "Dailekh",
-    "Dang",
-    "Darchula",
-    "Dhading",
-    "Dhankuta",
-    "Dhanusa",
-    "Dholkha",
-    "Dolpa",
-    "Doti",
-    "Gorkha",
-    "Gulmi",
-    "Humla",
-    "Ilam",
-    "Jajarkot",
-    "Jhapa",
-    "Jumla",
-    "Kailali",
-    "Kalikot",
-    "Kanchanpur",
-    "Kapilvastu",
-    "Kaski",
-    "Kathmandu",
-    "Kavrepalanchok",
-    "Khotang",
-    "Lalitpur",
-    "Lamjung",
-    "Mahottari",
-    "Makwanpur",
-    "Manang",
-    "Morang",
-    "Mugu",
-    "Mustang",
-    "Myagdi",
-    "Nawalparasi",
-    "Nuwakot",
-    "Okhaldhunga",
-    "Palpa",
-    "Panchthar",
-    "Parbat",
-    "Parsa",
-    "Pyuthan",
-    "Ramechhap",
-    "Rasuwa",
-    "Rautahat",
-    "Rolpa",
-    "Rukum",
-    "Rupandehi",
-    "Salyan",
-    "Sankhuwasabha",
-    "Saptari",
-    "Sarlahi",
-    "Sindhuli",
-    "Sindhupalchok",
-    "Siraha",
-    "Solukhumbu",
-    "Sunsari",
-    "Surkhet",
-    "Syangja",
-    "Tanahun",
-    "Taplejung",
-    "Terhathum",
-    "Udayapur",
-];
+
 
 const BoardMembersGrid = ({scholarshipProject}) => {
-    const { district } = useSelector(state => state.user)
     //FETCH
     const [boardmembersList, setBoardMembersList] = useState([])
     //EDIT
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
     //DELETE
-    const disclosure = useDisclosure()
     const [studentProfileTodelete, setStudentProfileTodelete] = useState({})
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -503,7 +425,7 @@ const BoardMembersGrid = ({scholarshipProject}) => {
                     (<BoardMemberProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive} scholarshipProject={scholarshipProject}  />)
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="Board Member Profile" handleDelete={handleStudentProfileDelete} />
-                <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData} closeEditModal={closeEditModal} scholarshipProject={scholarshipProject} />
+                <EditBoardMemberProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData} closeEditModal={closeEditModal} scholarshipProject={scholarshipProject} />
             </Box>
 
         </>
