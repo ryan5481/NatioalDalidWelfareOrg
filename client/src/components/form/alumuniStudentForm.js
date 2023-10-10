@@ -10,7 +10,7 @@ const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
     const [name, setName] = useState("")
     const [contactNumber, setContactNumber] = useState("")
     const [email, setEmail] = useState("")
-    const [citizenship, setCitizenship] = useState("")
+    const [citizenshipNumber, setCitizenshipNumber] = useState("")
     const [currentStatus, setCurrentStatus] = useState("")
     const [occupation, setOccupation] = useState("")
     const [organization, setOrganization] = useState("")
@@ -26,7 +26,7 @@ const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
         formData.append('name', name)
         formData.append('contactNumber', contactNumber)
         formData.append('email', email)
-        formData.append('citizenship', citizenship)
+        formData.append('citizenshipNumber', citizenshipNumber)
         formData.append('currentStatus', currentStatus)
         formData.append('occupation', occupation)
         formData.append('organization', organization)
@@ -38,10 +38,11 @@ const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
 
         try {
             const res = await axios.post(`${baseUrl}/create-alumuni-student-profile`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
             if (res.status === 200) {
                 toast({
                     title: 'Success.',
@@ -101,6 +102,7 @@ const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
                             <FormControl>
                                 <FormLabel>Contact number</FormLabel>
                                 <Input
+                                type="number"
                                     placeholder='Contact number'
                                     onChange={(e) => setContactNumber(e.target.value)}
                                 />
@@ -108,6 +110,7 @@ const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
                             <FormControl>
                                 <FormLabel>Email</FormLabel>
                                 <Input
+                                type="email"
                                     placeholder='Email'
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
@@ -115,8 +118,9 @@ const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
                             <FormControl>
                                 <FormLabel>Citizenship number</FormLabel>
                                 <Input
+                                type="number"
                                     placeholder='Citizenship number'
-                                    onChange={(e) => setCitizenship(e.target.value)}
+                                    onChange={(e) => setCitizenshipNumber(e.target.value)}
                                 />
                             </FormControl>
                         </HStack>
@@ -162,6 +166,7 @@ const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
                             <FormControl>
                                 <FormLabel>Ward Number</FormLabel>
                                 <Input
+                                type="number"
                                     placeholder='Ward Number'
                                     onChange={(e) => setWardNo(e.target.value)}
                                 />
