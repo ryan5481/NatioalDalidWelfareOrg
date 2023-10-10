@@ -10,6 +10,10 @@ import SuperAdminDashboard from '../pages/01-super-admin/01-SuperAdminDashboard'
 import ManageDistUsers from '../pages/01-super-admin/02-manageDistUsers';
 import NcacpStudentsList from '../pages/01-super-admin/03-ncacpStudentsList';
 import PrlEthStudentsList from '../pages/01-super-admin/04-prlEthStudentsList';
+import SuperAdminLogin from '../pages/01-super-admin/01-auth/01-superAdminLogin';
+import DistAdminLogin from '../pages/02-district-admin/01-auth/01-distAdminLogin';
+import BoardMembersGrid from '../components/grids/boardMembersGrid';
+import AlumuniList from '../pages/01-super-admin/06-alumuniList';
 
 //DIST ADMIN Routes
 import DistAdminSidebar from '../components/navigation/sideBar/02-distAdminSidebar';
@@ -17,9 +21,7 @@ import ManageStudents from '../pages/02-district-admin/02-manageStudents';
 
 //NON USER ROUTES
 // import Header from '../components/header/header';
-import SuperAdminLogin from '../pages/01-super-admin/01-auth/01-superAdminLogin';
-import DistAdminLogin from '../pages/02-district-admin/01-auth/01-distAdminLogin';
-import BoardMembersGrid from '../components/grids/boardMembersGrid';
+
 
 
 const ConditionalRoute = () => {
@@ -46,6 +48,7 @@ const SuperAdminRoutes = () => {
         <Route path="/ncacp-students" element={<NcacpStudentsList />} />
         <Route path="/prl-eth-students" element={<PrlEthStudentsList />} />
         <Route path="/board-members" element={<BoardMembersGrid />} />
+        <Route path="/alumuni" element={<AlumuniList />} />
 
       </Routes>
     </>

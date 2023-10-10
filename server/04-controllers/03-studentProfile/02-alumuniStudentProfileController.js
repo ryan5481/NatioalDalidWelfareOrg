@@ -9,11 +9,6 @@ dotenv.config();
 
 const CreateAlumuniStudentProfile = async(req, res) => {
     try{
-        // const reqInclFile = {
-        //     ...req.body,
-        //     profileImageName: req.file.filename,
-        //   };
-
         const data = await AlumuniStudent.create(req.body)
         if(data){
             res.status(200).json({

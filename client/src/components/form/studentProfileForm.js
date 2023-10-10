@@ -302,19 +302,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
 
   return (
     <>
-    <Box m={5} >
-      <Button 
-      h={7} 
-      minW="180px"
-      fontSize={"14px"}
-      onClick={() => setIsnewStudentForm(!isNewStudentForm)}
-       > {isNewStudentForm ?"Alumuni" : "New Student" }</Button>
-    </Box>
-    {isNewStudentForm ? 
-    (<Center >
+   <Center >
       <Box
         justify={'center'}
-        // m={5}
+        m={2}
         bg="white"
         rounded={10}
         border={'solid 1px lightgray'}
@@ -1038,10 +1029,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
           </Box>
         </form>
       </Box>
-    </Center>)
-    :
-    (<AlumuniStudentForm setIsCreateNewUserActive={setIsCreateNewUserActive} />)
-    }
+    </Center>
     </>
   );
 };

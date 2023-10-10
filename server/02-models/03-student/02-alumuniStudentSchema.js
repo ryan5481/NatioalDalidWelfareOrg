@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 
 const AlumuniStudentSchema = ({
 
-    profileImageName: {
-        type: String,
-    },
-
     name: {
         type: String,
     },
@@ -18,7 +14,7 @@ const AlumuniStudentSchema = ({
         type: String,
     },
     
-    citizenship: {
+    citizenshipNumber: {
         type: String,
     },
 
@@ -53,7 +49,6 @@ const AlumuniStudentSchema = ({
     province: {
         type: String,
     },
-    
 
     
     createdAt: { type: Date, default: Date.now },

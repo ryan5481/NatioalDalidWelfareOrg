@@ -41,7 +41,7 @@ import {
 } from 'react-icons/fi'
 import { PiUsersFourFill } from 'react-icons/pi'
 import {FaUserTie } from 'react-icons/fa'
-import {FaUserGroup, FaGear } from 'react-icons/fa6'
+import {FaUserGroup, FaGear, FaUserGraduate } from 'react-icons/fa6'
 import {GoHomeFill } from 'react-icons/go'
 import {ImUsers} from 'react-icons/im'
 import { IconType } from 'react-icons'
@@ -70,10 +70,8 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'District Admins', icon: FaUserGroup, href: "/user-management" },
   { name: 'NCACP Project', icon: PiUsersFourFill, href: "/ncacp-students" },
   { name: 'PRL & ETH Project', icon: PiUsersFourFill, href: "/prl-eth-students" },
+  { name: 'Alumuni', icon: FaUserGraduate, href: "/alumuni" },
   { name: 'Settings', icon: FaGear, href: "/settings" },
-  // { name: 'Explore', icon: FiCompass },
-  // { name: 'Favourites', icon: FiStar },
-  // { name: 'Settings', icon: FiSettings },
 ]
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {

@@ -24,7 +24,7 @@ return (
                                 <Text as={'span'} fontWeight={'bold'}>
                                     Name:
                                 </Text>{' '}
-                                {data.fullName || data.firstName + " " + data.middleName + " " + data.lastName }
+                                {data.name || data.fullName || data.firstName + " " + data.middleName + " " + data.lastName }
                             </ListItem>
                             <ListItem>
                                 <Text as={'span'} fontWeight={'bold'}>
