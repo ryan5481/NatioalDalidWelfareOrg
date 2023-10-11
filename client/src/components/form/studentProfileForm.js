@@ -116,29 +116,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [previewImage, setPreviewImage] = useState(null)
 
 
-  // const validationSchema = Yup.object().shape({
-  //   firstName: Yup.string().required("First name is required"),
-  //   lastName: Yup.string().required("Last name is required"),
-  //   dateOfBirth: Yup.string().required("Date of birth is required"),
-  //   gender: Yup.string().required('Gender is required'),
-  //   contactNumber: Yup.string().required('Contact number is required'),
-  // })
-
-  // const formik = useFormik({
-  //   initialValues: {
-  //     firstName: formData.firstName || '',
-  //     lastName: formData.lastName || '',
-  //     dateOfBirth: formData.dateOfBirth || '',
-  //     gender: formData.gender || '',
-  //     contactNumber: formData.contactNumber || '',
-  //   },
-  //   validationSchema,
-  //   onSubmit: async(values) => {
-  //     if (formik.isValid) {
-  //       submitForm(values);
-  //     }
-  //   }
-  // })
+  
 
   const handleImageSelect = (event) => {
     setSelectedImage(event.target.files[0])
@@ -289,7 +267,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
 
   const scholarshipCategories =  
   scholarshipProject == "prlEth"
-   ? (["", "Pratap Ram Lohar", "ETH Project"]) : (["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"])
+   ? (["", "Pratap Ram Lohar", "ETHS Project"]) : (["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"])
 
   //  console.log(scholarshipProject)
 

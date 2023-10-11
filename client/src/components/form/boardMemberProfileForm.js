@@ -348,7 +348,7 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
                     />
                   </FormControl>
                   <FormControl>
-                    <FormLabel>Birth certificate number</FormLabel>
+                    <FormLabel>Citizenship number</FormLabel>
                     <Input
                       placeholder='citizenshipNumber'
                       type='number'
@@ -585,6 +585,7 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
             </FormControl>
             <FormControl>
                {/* Tenure FIVE */}
+            <FormLabel fontSize="22px" fontWeight="bold" >Personal Involvement</FormLabel>
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} >
               <FormLabel >SN</FormLabel>
               <FormLabel >Profession</FormLabel>
@@ -677,6 +678,7 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
                 />
               </Grid>
             {/* PERSONAL ONE */}
+
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
                 <FormLabel>3. </FormLabel>
                 <Input

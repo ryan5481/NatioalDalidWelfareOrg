@@ -14,6 +14,7 @@ import SuperAdminLogin from '../pages/01-super-admin/01-auth/01-superAdminLogin'
 import DistAdminLogin from '../pages/02-district-admin/01-auth/01-distAdminLogin';
 import BoardMembersGrid from '../components/grids/boardMembersGrid';
 import AlumuniList from '../pages/01-super-admin/06-alumuniList';
+import Settings from '../pages/01-super-admin/07-settings';
 
 //DIST ADMIN Routes
 import DistAdminSidebar from '../components/navigation/sideBar/02-distAdminSidebar';
@@ -49,6 +50,7 @@ const SuperAdminRoutes = () => {
         <Route path="/prl-eth-students" element={<PrlEthStudentsList />} />
         <Route path="/board-members" element={<BoardMembersGrid />} />
         <Route path="/alumuni" element={<AlumuniList />} />
+        <Route path="/settings" element={<Settings />} />
 
       </Routes>
     </>

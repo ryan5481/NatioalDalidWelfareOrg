@@ -248,7 +248,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
 
   const scholarshipCategories =  
   scholarshipProject == "prlEth"
-   ? (["", "Pratap Ram Lohar", "ETH Project"]) : (["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"])
+   ? (["", "Pratap Ram Lohar", "ETHS Project"]) : (["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"])
 
   return (
     <>

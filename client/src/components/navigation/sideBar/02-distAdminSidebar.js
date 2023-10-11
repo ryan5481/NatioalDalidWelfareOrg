@@ -62,7 +62,7 @@ interface SidebarProps extends BoxProps {
 }
 
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome, href: "/" },
+  // { name: 'Home', icon: FiHome, href: "/" },
   { name: 'Students', icon: PiUsersFourBold, href: "/student-management"},
 
 ]

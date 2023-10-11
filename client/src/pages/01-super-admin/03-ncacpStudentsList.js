@@ -10,8 +10,8 @@ const NcacpStudentsList = () => {
         <Box
             textAlign="center"
         >
-            <Text textAlign={"center"} m={5} fontWeight={"bold"} fontSize={"22px"}> NCACP Students</Text>
-            <StudentsGrid district={""} />
+            <Text textAlign={"center"} m={5} fontWeight={"bold"} fontSize={"22px"}> NCSEP Students</Text>
+            <StudentsGrid district={"all"} />
             
         </Box>
     </>
