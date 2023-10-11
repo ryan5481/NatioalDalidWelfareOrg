@@ -19,10 +19,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     lastName: '',
     gender: '',
     dateOfBirth: '',
+    studentType: '',
     contactNumber: '',
     email: '',
     birthCertificateNo: '',
 
+    scholarship1FundType: '',
     scholarship1Category: '',
     scholarship1Grade: '',
     scholarship1From: '',
@@ -30,6 +32,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship1Gpa: '',
     scholarship1Remarks: '',
 
+    scholarship2FundType: '',
     scholarship2Category: '',
     scholarship2Grade: '',
     scholarship2From: '',
@@ -37,6 +40,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship2Gpa: '',
     scholarship2Remarks: '',
 
+    scholarship3FundType: '',
     scholarship3Category: '',
     scholarship3Grade: '',
     scholarship3From: '',
@@ -44,6 +48,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship3Gpa: '',
     scholarship3Remarks: '',
 
+    scholarship4FundType: '',
     scholarship4Category: '',
     scholarship4Grade: '',
     scholarship4From: '',
@@ -51,6 +56,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship4Gpa: '',
     scholarship4Remarks: '',
 
+    scholarship5FundType: '',
     scholarship5Category: '',
     scholarship5Grade: '',
     scholarship5From: '',
@@ -121,10 +127,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       lastName: data.lastName,
       gender: data.gender,
       dateOfBirth: data.dateOfBirth,
+      studentType: data.studentType,
       birthCertificateNo: data.birthCertificateNo,
       contactNumber: data.contactNumber,
       email: data.email,
 
+      scholarship1FundType: data.scholarship1FundType,
       scholarship1Category: data.scholarship1Category,
       scholarship1Grade: data.scholarship1Grade,
       scholarship1From: data.scholarship1From,
@@ -132,6 +140,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship1Gpa: data.scholarship1Gpa,
       scholarship1Remarks: data.scholarship1Remarks,
 
+      scholarship2FundType: data.scholarship2FundType,
       scholarship2Category: data.scholarship2Category,
       scholarship2Grade: data.scholarship2Grade,
       scholarship2From: data.scholarship2From,
@@ -139,6 +148,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship2Gpa: data.scholarship2Gpa,
       scholarship2Remarks: data.scholarship2Remarks,
 
+      scholarship3FundType: data.scholarship3FundType,
       scholarship3Category: data.scholarship3Category,
       scholarship3Grade: data.scholarship3Grade,
       scholarship3From: data.scholarship3From,
@@ -146,6 +156,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship3Gpa: data.scholarship3Gpa,
       scholarship3Remarks: data.scholarship3Remarks,
 
+      scholarship4FundType: data.scholarship4FundType,
       scholarship4Category: data.scholarship4Category,
       scholarship4Grade: data.scholarship4Grade,
       scholarship4From: data.scholarship4From,
@@ -153,6 +164,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship4Gpa: data.scholarship4Gpa,
       scholarship4Remarks: data.scholarship4Remarks,
 
+      scholarship4FundType: data.scholarship4FundType,
       scholarship5Category: data.scholarship5Category,
       scholarship5Grade: data.scholarship5Grade,
       scholarship5From: data.scholarship5From,
@@ -355,6 +367,24 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     </HStack>
                     <HStack justify="flex-start" mb={5}>
                       <FormControl>
+                    <FormLabel>Student type</FormLabel>
+                    <Select
+                      placeholder={data.studentType}
+                      name="studentType"
+                      onChange={handleInputChange}
+                    >
+                      <option key="None" value="None">
+                        None
+                      </option>
+                      <option key="Orphan" value="Orphan">
+                        Orphan
+                      </option>
+                      <option key="Disabled" value="Disabled">
+                        Disabled
+                      </option>
+                    </Select>
+                  </FormControl>
+                      <FormControl>
                         <FormLabel>Contact number</FormLabel>
                         <Input placeholder={data.contactNumber}
                           type='number'
@@ -380,8 +410,9 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                 {/* SCHOLARSHIP */}
                 <FormControl>
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold" >Scholarship</FormLabel>
-                  <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
+                  <Grid gridTemplateColumns={"0.1fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
                     <FormLabel >SN</FormLabel>
+                    <FormLabel >Fund type</FormLabel>
                     <FormLabel >Category</FormLabel>
                     <FormLabel>Class</FormLabel>
                     <FormLabel>From</FormLabel>
@@ -391,12 +422,24 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   </Grid>
                   {/* SCHOLARSHIP ONE */}
                 </FormControl>
-                <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.1fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>1. </FormLabel>
+                  <Select
+                    placeholder={data.scholarship1FundType}
+                    name="scholarship1FundType"
+                    onChange={handleInputChange}
+                  >
+                    <option key="NEF" value="NEF">
+                      NEF
+                    </option>
+                    <option key="ARMF" value="ARMF">
+                      ARMF
+                    </option>
+                  </Select>
                   <Select
                   placeholder={data.scholarship1Category}
                   name="scholarship1Category"
-                  onChange={(event) => handleInputChange}
+                  onChange={handleInputChange}
                 >
                   {scholarshipCategories.map((option) => (
                     <option key={option} value={option}>
@@ -444,12 +487,24 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP TWO */}
-                <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.1fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>2. </FormLabel>
+                  <Select
+                    placeholder={data.scholarship2FundType}
+                    name="scholarship2FundType"
+                    onChange={handleInputChange}
+                  >
+                    <option key="NEF" value="NEF">
+                      NEF
+                    </option>
+                    <option key="ARMF" value="ARMF">
+                      ARMF
+                    </option>
+                  </Select>
                   <Select
                   placeholder={data.scholarship2Category}
                   name="scholarship2Category"
-                  onChange={(event) => handleInputChange}
+                  onChange={handleInputChange}
                 >
                   {scholarshipCategories.map((option) => (
                     <option key={option} value={option}>
@@ -496,12 +551,24 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP THREE */}
-                <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.1fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>3. </FormLabel>
+                  <Select
+                    placeholder={data.scholarship3FundType}
+                    name="scholarship3FundType"
+                    onChange={handleInputChange}
+                  >
+                    <option key="NEF" value="NEF">
+                      NEF
+                    </option>
+                    <option key="ARMF" value="ARMF">
+                      ARMF
+                    </option>
+                  </Select>
                   <Select
                   placeholder={data.scholarship3Category}
                   name="scholarship3Category"
-                  onChange={(event) => handleInputChange}
+                  onChange={handleInputChange}
                 >
                   {scholarshipCategories.map((option) => (
                     <option key={option} value={option}>
@@ -548,12 +615,24 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP FOUR */}
-                <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.1fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>4. </FormLabel>
+                  <Select
+                    placeholder={data.scholarship4FundType}
+                    name="scholarship4FundType"
+                    onChange={handleInputChange}
+                  >
+                    <option key="NEF" value="NEF">
+                      NEF
+                    </option>
+                    <option key="ARMF" value="ARMF">
+                      ARMF
+                    </option>
+                  </Select>
                   <Select
                   placeholder={data.scholarship4Category}
                   name="scholarship4Category"
-                  onChange={(event) => handleInputChange}
+                  onChange={handleInputChange}
                 >
                   {scholarshipCategories.map((option) => (
                     <option key={option} value={option}>
@@ -599,12 +678,24 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     onChange={handleInputChange}
                   />
                 </Grid>
-                <Grid gridTemplateColumns={"0.1fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.1fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>5. </FormLabel>
+                  <Select
+                    placeholder={data.scholarship5FundType}
+                    name="scholarship5FundType"
+                    onChange={handleInputChange}
+                  >
+                    <option key="NEF" value="NEF">
+                      NEF
+                    </option>
+                    <option key="ARMF" value="ARMF">
+                      ARMF
+                    </option>
+                  </Select>
                   <Select
                   placeholder={data.scholarship5Category}
                   name="scholarship5Category"
-                  onChange={(event) => handleInputChange}
+                  onChange={ handleInputChange}
                 >
                   {scholarshipCategories.map((option) => (
                     <option key={option} value={option}>

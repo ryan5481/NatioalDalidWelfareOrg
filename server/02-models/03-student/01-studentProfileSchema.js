@@ -31,6 +31,10 @@ const studentProfileSchema = ({
         type: String,
     },
 
+    studentType: {
+        type: String,
+    },
+
     contactNumber: {
         type: String,
     },
@@ -43,6 +47,10 @@ const studentProfileSchema = ({
         type: String,
     },
     //SCHOLARSHIP ONE
+    scholarship1FundType: {
+        type: String,
+    },
+
     scholarship1Category: {
         type: String,
     },
@@ -62,6 +70,10 @@ const studentProfileSchema = ({
         type: String,
     },
         //SCHOLARSHIP TWO
+        scholarship2FundType: {
+            type: String,
+        },
+
     scholarship2Category: {
         type: String,
     },
@@ -81,6 +93,10 @@ const studentProfileSchema = ({
         type: String,
     },
         //SCHOLARSHIP THREE
+        scholarship3FundType: {
+            type: String,
+        },
+
     scholarship3Category: {
         type: String,
     },
@@ -100,6 +116,10 @@ const studentProfileSchema = ({
         type: String,
     },
         //SCHOLARSHIP FOUR
+        scholarship4FundType: {
+            type: String,
+        },
+
     scholarship4Category: {
         type: String,
     },
@@ -119,6 +139,10 @@ const studentProfileSchema = ({
         type: String,
     },
         //SCHOLARSHIP FIVE
+        scholarship5FundType: {
+            type: String,
+        },
+        
     scholarship5Category: {
         type: String,
     },

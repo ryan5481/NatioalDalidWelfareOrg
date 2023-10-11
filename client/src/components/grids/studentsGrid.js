@@ -22,91 +22,34 @@ import {
 import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import StudentProfileForm from '../form/studentProfileForm';
 import EditStudentProfileModal from '../modals/editStudentProfileModal';
+import ViewStudentProfileModal from '../modals/viewStudentProfileModal'
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
-
+import nepalPoliticalDataset from "../datasets/nepalPoliticalDataset.json"
 const baseUrl = process.env.REACT_APP_BASE_URL
-const nepalDistricts = [
-    "Achham",
-    "Arghakhanchi",
-    "Baglung",
-    "Baitadi",
-    "Bajhang",
-    "Bajura",
-    "Banke",
-    "Bara",
-    "Bardiya",
-    "Bhaktapur",
-    "Bhojpur",
-    "Chitwan",
-    "Dadeldhura",
-    "Dailekh",
-    "Dang",
-    "Darchula",
-    "Dhading",
-    "Dhankuta",
-    "Dhanusa",
-    "Dholkha",
-    "Dolpa",
-    "Doti",
-    "Gorkha",
-    "Gulmi",
-    "Humla",
-    "Ilam",
-    "Jajarkot",
-    "Jhapa",
-    "Jumla",
-    "Kailali",
-    "Kalikot",
-    "Kanchanpur",
-    "Kapilvastu",
-    "Kaski",
-    "Kathmandu",
-    "Kavrepalanchok",
-    "Khotang",
-    "Lalitpur",
-    "Lamjung",
-    "Mahottari",
-    "Makwanpur",
-    "Manang",
-    "Morang",
-    "Mugu",
-    "Mustang",
-    "Myagdi",
-    "Nawalparasi",
-    "Nuwakot",
-    "Okhaldhunga",
-    "Palpa",
-    "Panchthar",
-    "Parbat",
-    "Parsa",
-    "Pyuthan",
-    "Ramechhap",
-    "Rasuwa",
-    "Rautahat",
-    "Rolpa",
-    "Rukum",
-    "Rupandehi",
-    "Salyan",
-    "Sankhuwasabha",
-    "Saptari",
-    "Sarlahi",
-    "Sindhuli",
-    "Sindhupalchok",
-    "Siraha",
-    "Solukhumbu",
-    "Sunsari",
-    "Surkhet",
-    "Syangja",
-    "Tanahun",
-    "Taplejung",
-    "Terhathum",
-    "Udayapur",
-];
+
+const districtNames = [];
+nepalPoliticalDataset.forEach(province => {
+    // Loop through districts in each province
+    Object.values(province.districts).forEach(district => {
+      // Add district name to the array
+      districtNames.push(district.name);
+      // Check if there are municipalities
+      if (district.municipalities) {
+        // Loop through municipalities in each district
+        Object.values(district.municipalities).forEach(municipality => {
+          // Add municipality name to the array
+          districtNames.push(municipality.name);
+        });
+      }
+    });
+  });
 
 const StudentsGrid = ({scholarshipProject}) => {
-    const { district } = useSelector(state => state.user)
+    const { userRole, district } = useSelector(state => state.user)
     //FETCH
     const [studentsList, setStudentsList] = useState([])
+    //VIEW
+    const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
     //EDIT
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
@@ -117,6 +60,7 @@ const StudentsGrid = ({scholarshipProject}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     //SWITCH BETWEEEN MANAGE USERS AND CREATE USERS
     const [isCreateNewUserActive, setIsCreateNewUserActive] = useState(false)
+    const [studentProfileToView, setStudentProfileToView] = useState({})
     const [studentProfileToEdit, setStudentProfileToEdit] = useState({})
 
     //PAGINATE FILTER SORT
@@ -191,7 +135,7 @@ const StudentsGrid = ({scholarshipProject}) => {
         let apiUrl = `${baseUrl}/get-student-profiles`;
 
         // Check if district is "all"
-        if (district !== "all") {
+        if (userRole !== "superAdmin") {
             apiUrl += `?currentDistrict=${district}`;
         }
         const res = await axios.get(apiUrl)
@@ -207,6 +151,18 @@ const StudentsGrid = ({scholarshipProject}) => {
         }
     }
     // console.log(distAdminList)
+
+    //VIEW
+    const openViewModal = (student) => {
+        setStudentProfileToView(student)
+        setIsViewDialogOpen(true);
+        onOpen()
+    };
+
+    const closeViewModal = () => {
+        setStudentProfileToView(null)
+        setIsViewDialogOpen(false);
+    };
 
     //EDIT
     const openEditModal = (student) => {
@@ -298,7 +254,7 @@ const StudentsGrid = ({scholarshipProject}) => {
                                                 value={selectedDistrict}
                                             >
                                                 <option value="">All Districts</option>
-                                                {nepalDistricts.map((district, index) => (
+                                                {districtNames.map((district, index) => (
                                                     <option key={index} value={district} >{district}</option>
                                                 ))}
                                             </Select>
@@ -349,7 +305,7 @@ const StudentsGrid = ({scholarshipProject}) => {
                             templateColumns={{
                                 sm: '1fr',
                                 md: '1fr 1fr 1fr',
-                                lg: '0.5fr 2fr 2fr 1.5fr 1fr 1fr 0.3fr 0.3fr',
+                                lg: '0.5fr 2fr 2fr 1.5fr 1fr 1fr 0.3fr 0.3fr 0.3fr',
                             }}
                             m={1}
                             h={8}
@@ -431,6 +387,12 @@ const StudentsGrid = ({scholarshipProject}) => {
                                 // w="60px"
                                 p={1}
                             >
+                                View
+                            </Text>
+                            <Text
+                                // w="60px"
+                                p={1}
+                            >
                                 Edit
                             </Text>
                             <Text
@@ -457,7 +419,7 @@ const StudentsGrid = ({scholarshipProject}) => {
                                         templateColumns={{
                                             sm: '1fr',
                                             md: '1fr 1fr 1fr',
-                                            lg: '0.5fr 2fr 2fr 1.5fr 1fr 1fr 0.3fr 0.3fr',
+                                            lg: '0.5fr 2fr 2fr 1.5fr 1fr 1fr 0.3fr 0.3fr 0.3fr',
                                         }}
                                         p={1}
                                         m={1}
@@ -479,6 +441,13 @@ const StudentsGrid = ({scholarshipProject}) => {
                                         <Text w="200px" isTruncated >{student.currentDistrict}</Text>
                                         <Text w="120px">{student.createdAt.slice(0, 10)}</Text>
                                         <Text w="120px" >{student.updatedAt.slice(0, 10)}</Text>
+                                        <Box  >
+                                            <ViewIcon
+                                                style={{ cursor: 'pointer' }}
+                                                _hover={{ color: 'blue.400' }}
+                                                onClick={() => {openViewModal(student)}}
+                                                 />
+                                        </Box>
                                         <Box  >
                                             <EditIcon
                                                 style={{ cursor: 'pointer' }}
@@ -525,7 +494,7 @@ const StudentsGrid = ({scholarshipProject}) => {
                             <Button
                                 m={2}
                                 onClick={() => setCurrentPage(currentPage + 1)}
-                                disabled={endIndex >= studentsList.length}
+                                disabled={endIndex >= sortedAndPaginatedStudentsList.length}
                                 isDisabled={currentPage === totalPages}
 
                             >
@@ -538,6 +507,7 @@ const StudentsGrid = ({scholarshipProject}) => {
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="student profile" handleDelete={handleStudentProfileDelete} />
                 <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData} closeEditModal={closeEditModal} scholarshipProject={scholarshipProject} />
+                <ViewStudentProfileModal isOpen={isViewDialogOpen} onClose={closeViewModal} data={studentProfileToView} fetchData={fetchData} closeEditModal={closeViewModal} scholarshipProject={scholarshipProject} />
             </Box>
 
         </>

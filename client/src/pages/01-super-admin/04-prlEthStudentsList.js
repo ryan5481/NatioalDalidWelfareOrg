@@ -10,7 +10,7 @@ const PrlEthStudentsList = () => {
         <Box
             textAlign="center"
         >
-            <Text textAlign={"center"} m={5} fontWeight={"bold"} fontSize={"22px"}> PRL & ETH Students</Text>
+            <Text textAlign={"center"} m={5} fontWeight={"bold"} fontSize={"22px"}> PRL & ETHS Students</Text>
             <StudentsGrid district={""} scholarshipProject="prlEth" />
             
         </Box>

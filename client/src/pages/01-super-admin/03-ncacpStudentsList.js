@@ -11,7 +11,7 @@ const NcacpStudentsList = () => {
             textAlign="center"
         >
             <Text textAlign={"center"} m={5} fontWeight={"bold"} fontSize={"22px"}> NCSEP Students</Text>
-            <StudentsGrid district={"all"} />
+            <StudentsGrid district={""} />
             
         </Box>
     </>
