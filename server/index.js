@@ -12,6 +12,8 @@ const distAdminUserRoutes = require("./05-routes/02-distAdmin/01-distAdminUserRo
 const studentProfileRoutes = require('./05-routes/03-studentProfile/01-studentProfileRoutes.js')
 const alumuniStudentProfileRoutes = require('./05-routes/03-studentProfile/02-alumuniStudentProfileRoutes.js')
 const boardMemberProfileRoutes = require('./05-routes/04-boardMember/01-boardMemberProfileRoutes.js')
+const logoImageRoutes = require('./05-routes/05-settings/01-logoImageRoutes.js')
+const loginBannerImageRoutes = require('./05-routes/05-settings/02-loginBannerImageRoutes.js')
 
 const port = 8000;
 
@@ -26,6 +28,8 @@ app.use("/", distAdminUserRoutes);
 app.use("/", studentProfileRoutes);
 app.use("/", alumuniStudentProfileRoutes);
 app.use("/", boardMemberProfileRoutes);
+app.use("/", logoImageRoutes);
+app.use("/", loginBannerImageRoutes);
 
 
 app.listen(port, () => {

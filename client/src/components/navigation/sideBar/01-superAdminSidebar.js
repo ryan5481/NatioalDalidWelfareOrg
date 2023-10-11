@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import axios from "axios"
 import { resetLoginDetails } from '../../../redux/reducers/userSlice'
 import {
   IconButton,
@@ -45,6 +47,8 @@ import {FaUserGroup, FaGear, FaUserGraduate } from 'react-icons/fa6'
 import {GoHomeFill } from 'react-icons/go'
 import {ImUsers} from 'react-icons/im'
 import { IconType } from 'react-icons'
+const baseUrl = process.env.REACT_APP_BASE_URL
+
 
 interface LinkItemProps {
   name: string,
@@ -68,8 +72,8 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Dashboard', icon: GoHomeFill, href: "/" },
   { name: 'Board members', icon: FaUserTie, href: "/board-members" },
   { name: 'District Admins', icon: FaUserGroup, href: "/user-management" },
-  { name: 'NCACP Project', icon: PiUsersFourFill, href: "/ncacp-students" },
-  { name: 'PRL & ETH Project', icon: PiUsersFourFill, href: "/prl-eth-students" },
+  { name: 'NCSEP Project', icon: PiUsersFourFill, href: "/ncacp-students" },
+  { name: 'PRL & ETHS Project', icon: PiUsersFourFill, href: "/prl-eth-students" },
   { name: 'Alumuni', icon: FaUserGraduate, href: "/alumuni" },
   { name: 'Settings', icon: FaGear, href: "/settings" },
 ]
@@ -139,7 +143,21 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { fullName } = useSelector((state) => state.user)
+  const [logoImageData, setLogoImageData] = useState({})
 
+  const fetchLogoImage = async () => {
+    const res = await axios.get(`${baseUrl}/get-logo-image`)
+    if (res) {
+        const data = res.data.data;
+        setLogoImageData(data);
+    }
+  }
+
+  useEffect(() => {
+    fetchLogoImage()
+  }, [])
+
+console.log("LOGO" + logoImageData)
 
   //PROFILE SECTION
   const handleSignOut = () => {
@@ -170,11 +188,13 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         icon={<FiMenu />}
       />
 
+      {logoImageData && logoImageData.logoImageName && 
       <Image
         pos={"relative"}
         left={"25%"}
-        src={require('../../../uploads/assets/nndswo-logo.jpeg')}
-      ></Image>
+        maxH="60px"
+        src={require(`../../../uploads/logoImage/${logoImageData.logoImageName}`)}
+      ></Image>}
 
       <HStack spacing={{ base: '0', md: '6' }}>
         <Stack
