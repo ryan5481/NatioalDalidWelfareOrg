@@ -27,22 +27,100 @@ import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
 import nepalPoliticalDataset from "../datasets/nepalPoliticalDataset.json"
 const baseUrl = process.env.REACT_APP_BASE_URL
 
-const districtNames = [];
-nepalPoliticalDataset.forEach(province => {
-    // Loop through districts in each province
-    Object.values(province.districts).forEach(district => {
-      // Add district name to the array
-      districtNames.push(district.name);
-      // Check if there are municipalities
-      if (district.municipalities) {
-        // Loop through municipalities in each district
-        Object.values(district.municipalities).forEach(municipality => {
-          // Add municipality name to the array
-          districtNames.push(municipality.name);
-        });
-      }
-    });
-  });
+// const districtNames = [];
+// nepalPoliticalDataset.forEach(province => {
+//     // Loop through districts in each province
+//     Object.values(province.districts).forEach(district => {
+//       // Add district name to the array
+//       districtNames.push(district.name);
+//       // Check if there are municipalities
+//       if (district.municipalities) {
+//         // Loop through municipalities in each district
+//         Object.values(district.municipalities).forEach(municipality => {
+//           // Add municipality name to the array
+//           districtNames.push(municipality.name);
+//         });
+//       }
+//     });
+//   });
+
+const districtNames = [
+    "Achham",
+    "Arghakhanchi",
+    "Baglung",
+    "Baitadi",
+    "Bajhang",
+    "Bajura",
+    "Banke",
+    "Bara",
+    "Bardiya",
+    "Bhaktapur",
+    "Bhojpur",
+    "Chitwan",
+    "Dadeldhura",
+    "Dailekh",
+    "Dang",
+    "Darchula",
+    "Dhading",
+    "Dhankuta",
+    "Dhanusa",
+    "Dholkha",
+    "Dolpa",
+    "Doti",
+    "Gorkha",
+    "Gulmi",
+    "Humla",
+    "Ilam",
+    "Jajarkot",
+    "Jhapa",
+    "Jumla",
+    "Kailali",
+    "Kalikot",
+    "Kanchanpur",
+    "Kapilvastu",
+    "Kaski",
+    "Kathmandu",
+    "Kavrepalanchok",
+    "Khotang",
+    "Lalitpur",
+    "Lamjung",
+    "Mahottari",
+    "Makwanpur",
+    "Manang",
+    "Morang",
+    "Mugu",
+    "Mustang",
+    "Myagdi",
+    "Nawalparasi",
+    "Nuwakot",
+    "Okhaldhunga",
+    "Palpa",
+    "Panchthar",
+    "Parbat",
+    "Parsa",
+    "Pyuthan",
+    "Ramechhap",
+    "Rasuwa",
+    "Rautahat",
+    "Rolpa",
+    "Rukum",
+    "Rupandehi",
+    "Salyan",
+    "Sankhuwasabha",
+    "Saptari",
+    "Sarlahi",
+    "Sindhuli",
+    "Sindhupalchok",
+    "Siraha",
+    "Solukhumbu",
+    "Sunsari",
+    "Surkhet",
+    "Syangja",
+    "Tanahun",
+    "Taplejung",
+    "Terhathum",
+    "Udayapur",
+];
 
 const StudentsGrid = ({scholarshipProject}) => {
     const { userRole, district } = useSelector(state => state.user)
@@ -283,7 +361,7 @@ const StudentsGrid = ({scholarshipProject}) => {
                         <HStack>
                             <FormControl>
                                 <HStack>
-                                    {district == "" &&
+                                    {district == "all" &&
                                         <HStack>
                                             <Text fontSize={"14px"} px={2} >District:</Text>
                                             <Select

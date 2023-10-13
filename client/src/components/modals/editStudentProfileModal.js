@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import axios from "axios"
 import {
   useToast, Grid, Image, Box, FormLabel, Select, EditablePreview, EditableInput, Input,
@@ -8,12 +9,14 @@ import { Form } from 'react-router-dom'
 const baseUrl = process.env.REACT_APP_BASE_URL
 
 const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) => {
+  const { district, userRole } = useSelector(state => state.user)
   const imageInputRef = useRef()
   const toast = useToast()
   const [scrollBehavior, setScrollBehavior] = React.useState('inside')
 
   const initialFormData = {
     // profileImageName: '',
+    project: '',
     firstName: '',
     middleName: '',
     lastName: '',
@@ -110,7 +113,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
+
+    if (scholarshipProject !== "prlEth"){
+      setFormData((prevData) => ({...prevData, project: "NCSEP", [name]: value}))
+    }else {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+    }
   };
 
 
@@ -122,6 +130,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
   }
   useEffect(() => {
     setFormData({
+      project: data.project,
       firstName: data.firstName,
       middleName: data.middleName,
       lastName: data.lastName,
@@ -256,6 +265,69 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     }
   };
 
+  const submitToArchiveAsAlumuni = async () => {
+    const formData = new FormData()
+    formData.append('registeredBy', district)
+    if(district !== "all"){
+        formData.append('project', "ncsep")
+    }else{
+        // formData.append('project', project)
+    }
+    formData.append('name', data.firstName + ' ' + data?.middleName + ' ' + + data.lastName)
+    formData.append('contactNumber', data.contactNumber)
+    formData.append('email', data.email)
+    // formData.append('citizenshipNumber', data.citizenshipNumber)
+    // formData.append('currentStatus', alumuniCurrentStatus)
+    // formData.append('occupation', alumuniOccupation)
+    // formData.append('organization', alumuniOrganization)
+    // formData.append('position', alumuniPosition)
+    formData.append('municipality', data.currentMunicipality)
+    formData.append('wardNo', data.currentWardNumber)
+    formData.append('alumuniDistrict', data.currentDistrict)
+    formData.append('province', data.currentDistrict)
+
+    try {
+        const res = await axios.post(`${baseUrl}/create-alumuni-student-profile`, formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }
+        );
+        if (res.status === 200) {
+            toast({
+                title: 'Success.',
+                description: 'Alumuni student profile created.',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+                position: 'top'
+            });
+            window.location.reload()
+
+        } else {
+            toast({
+                title: 'Error.',
+                description: 'Failed to create student profile.',
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+                position: 'top'
+            });
+        }
+    } catch (error) {
+        console.error('Error updating image: ', error);
+        toast({
+            title: 'Error.',
+            description: 'Failed to connect to server.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+            position: 'top'
+        });
+    }
+}
+
+
   const classOptions = ['', 'Grade1', 'Grade2', 'Grade3', 'Grade4', 'Grade5', 'Grade6', 'Grade7', 'Grade8', 'Grade9', 'Grade10', 'Grade11', 'Grade12', 'Bachelors', 'Masters', 'Diploma',];
 
   const scholarshipCategories =  
@@ -272,8 +344,9 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
           size="6xl"
         >
           <ModalOverlay />
-          <ModalContent>
+          <ModalContent >
             <ModalHeader textAlign="center" fontSize="24px" >Edit Student Profile</ModalHeader>
+            {/* <Button  py={5} colorScheme='red' mx={1} w={'300px'} onClick={onClose}>Archive student as alumuni</Button> */}
             <ModalCloseButton />
             <ModalBody m={5} >
               <form
@@ -293,6 +366,21 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     onChange={handleImageSelect}
                   />
                   <Box m={5} >
+                  {scholarshipProject == "prlEth" && <FormControl  mb={5} w={"270px"} >
+                      <FormLabel>Project</FormLabel>
+                      <Select
+                        placeholder={data.project}
+                        name='project'
+                        onChange={handleInputChange}
+                      >
+                        <option key="PRL" value="PRL">
+                          PRL
+                        </option>
+                        <option key="ETHS" value="ETHS">
+                          ETHS
+                        </option>
+                      </Select>
+                    </FormControl>}
                     <HStack justify="flex-start" mb={5} >
                       <FormControl>
                         <FormLabel >First name</FormLabel>

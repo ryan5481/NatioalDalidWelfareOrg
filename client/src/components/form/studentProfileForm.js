@@ -41,6 +41,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const toast = useToast();
   const [profileImageName, setProfileImageName] = useState('')
   const [isPrlEthProject, setIsPrlEthProject] = useState(null)
+  const [project, setProject] = useState("")
   const [firstName, setFirstName] = useState('')
   const [middleName, setMiddleName] = useState('')
   const [lastName, setLastName] = useState()
@@ -148,6 +149,11 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
         formData.append('profileImageName', selectedImage, selectedImage.filename);
       }
       formData.append('isPrlEthProject', scholarshipProject == "prlEth" ? true : false)
+      if(scholarshipProject == "prlEth"){
+        formData.append('project', project)
+    }else{
+        formData.append('project', "NCSEP")
+    }
       formData.append('firstName', firstName)
       formData.append('middleName', middleName)
       formData.append('lastName', lastName)
@@ -346,6 +352,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
             onSubmit={submitForm}
           >
             <Box m={5} >
+              
               <Grid gridTemplateColumns={"1fr 3fr"}>
                 <Center>
                   <Image
@@ -367,6 +374,20 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                   />
                 </Center>
                 <Box m={5} >
+                {scholarshipProject == "prlEth" && <FormControl  mb={5} w={"270px"} >
+                      <FormLabel>Project</FormLabel>
+                      <Select
+                        placeholder='Select'
+                        onChange={(event) => setProject(event.target.value)}
+                      >
+                        <option key="PRL" value="PRL">
+                          PRL
+                        </option>
+                        <option key="ETHS" value="ETHS">
+                          ETHS
+                        </option>
+                      </Select>
+                    </FormControl>}
                   <HStack justify="flex-start" mb={5} >
                     <FormControl>
                       <FormLabel >First name</FormLabel>

@@ -22,6 +22,9 @@ const SuperAdminDashboard = () => {
     const [endDate, setEndDate] = useState('');
     const [filteredStudentsList, setFilteredStudentsList] = useState([]);
     const toast = useToast(); // Initialize the useToast hook
+
+    // const [disabledStudentsList, setDisabledStudentsList] = useState([]);
+    const [orphanStudentsList, setOrphanStudentsList] = useState([]);
     const [currentYearStudentsList, setCurrentYearStudentsList] = useState([]);
     const [isCheckButtonDisabled, setIsCheckButtonDisabled] = useState(true);
 
@@ -92,6 +95,11 @@ const SuperAdminDashboard = () => {
     setIsCheckButtonDisabled(!startDate || !endDate);
   }, [startDate, endDate]);
 
+  const disabledAllStudentsList = studentsList.filter((obj) => obj.studentType === "Disabled");
+  const disabledCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.studentType === "Disabled");
+  const orphanAllStudentsList = studentsList.filter((obj) => obj.studentType === "Orphan");
+  const orphanCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.studentType === "Orphan");
+
     return (
         <>
             <Box  p={5} pos={"relative"} left={"120px"}   >
@@ -143,8 +151,17 @@ const SuperAdminDashboard = () => {
                                 </Box>
                 </HStack>
             <StudentNumberDisplay studentsList={filteredStudentsList} />
-            <Heading m={5} fontSize="3xl" textAlign="center" >New Recepients ({new Date().getFullYear()})</Heading>
+            <Heading m={5} fontSize="3xl" textAlign="center" >Current Year Scholarships ({new Date().getFullYear()})</Heading>
             <StudentNumberDisplay studentsList={currentYearStudentsList} />
+            {/* <Heading m={5} fontSize="3xl" textAlign="center" >Total Scholarships For Disabled or Orphan Recepients</Heading> */}
+            <Heading m={5} fontSize="3xl" textAlign="center" >Total Scholarships For Disabled Recepients</Heading>
+            <StudentNumberDisplay studentsList={disabledAllStudentsList} />
+            <Heading m={5} fontSize="3xl" textAlign="center" >Current Year Scholarships For Disabled Recepients ({new Date().getFullYear()})</Heading>
+            <StudentNumberDisplay studentsList={disabledCurrentYearStudentsList} />
+            <Heading m={5} fontSize="3xl" textAlign="center" >Total Scholarships For Orphan Recepients</Heading>
+            <StudentNumberDisplay studentsList={orphanAllStudentsList} />
+            <Heading m={5} fontSize="3xl" textAlign="center" >Current Year Scholarships For Orphan Recepients ({new Date().getFullYear()})</Heading>
+            <StudentNumberDisplay studentsList={orphanCurrentYearStudentsList} />
             </Box>
         </>
     );
