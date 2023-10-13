@@ -2,6 +2,14 @@ const mongoose = require("mongoose");
 
 const AlumuniStudentSchema = ({
 
+    registeredBy: {
+        type: String,
+    },
+
+    project: {
+        type: String,
+    },
+
     name: {
         type: String,
     },
@@ -42,7 +50,7 @@ const AlumuniStudentSchema = ({
         type: String,
     },
 
-    district: {
+    alumuniDistrict: {
         type: String,
     },
     

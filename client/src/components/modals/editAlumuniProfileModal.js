@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
+import { useSelector } from 'react-redux'
 import axios from "axios"
 import {
   useToast, Grid, Image, Box, FormLabel, Center, EditablePreview, EditableInput, Input,
@@ -8,6 +9,7 @@ import { Form } from 'react-router-dom'
 const baseUrl = process.env.REACT_APP_BASE_URL
 
 const EditAlumuniProfileModal = ({ isOpen, onClose, setIsCreateNewUserActive, data }) => {
+  const { userRole } = useSelector(state => state.user)
   const imageInputRef = useRef()
   const toast = useToast()
   const [scrollBehavior, setScrollBehavior] = React.useState('inside')
@@ -26,7 +28,7 @@ const EditAlumuniProfileModal = ({ isOpen, onClose, setIsCreateNewUserActive, da
 
     municipality: '',
     wardNo: '',
-    district: '',
+    alumuniDistrict: '',
     province: '',
   
   };
@@ -51,7 +53,7 @@ const EditAlumuniProfileModal = ({ isOpen, onClose, setIsCreateNewUserActive, da
 
       municipality: data.municipality,
       wardNo: data.wardNo,
-      district: data.district,
+      alumuniDistrict: data.alumuniDistrict,
       province: data.province,
     })
   }, [])
@@ -204,9 +206,10 @@ const EditAlumuniProfileModal = ({ isOpen, onClose, setIsCreateNewUserActive, da
                             <FormControl>
                                 <FormLabel>District</FormLabel>
                                 <Input
-                                    placeholder={data.district}
-                                    name='district'
+                                    placeholder={data.alumuniDistrict}
+                                    name='alumuniDistrict'
                                     onChange={handleInputChange}
+                                    isDisabled={userRole !== "superAdmin" }
                                 />
                             </FormControl>
                             <FormControl>

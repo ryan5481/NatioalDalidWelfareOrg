@@ -41,6 +41,7 @@ import {
   FiChevronUp,
 } from 'react-icons/fi'
 import {PiUsersFourBold} from 'react-icons/pi'
+import {FaUserGraduate} from 'react-icons/fa'
 import { IconType } from 'react-icons'
 
 interface LinkItemProps {
@@ -64,6 +65,8 @@ interface SidebarProps extends BoxProps {
 const LinkItems: Array<LinkItemProps> = [
   // { name: 'Home', icon: FiHome, href: "/" },
   { name: 'Students', icon: PiUsersFourBold, href: "/student-management"},
+  { name: 'Alumuni', icon: FaUserGraduate, href: "/alumuni" },
+
 
 ]
 

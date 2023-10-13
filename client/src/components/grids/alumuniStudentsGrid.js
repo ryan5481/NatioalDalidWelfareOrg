@@ -28,11 +28,13 @@ import AlumuniStudentForm from '../form/alumuniStudentForm'
 
 const baseUrl = process.env.REACT_APP_BASE_URL
 
-const AlumuniStudentsGrid = ({scholarshipProject}) => {
+const AlumuniStudentsGrid = ({ scholarshipProject }) => {
+    const { district, userRole } = useSelector(state => state.user)
+
     const [isCreateNewAlumuni, setIsCreateNewAlumuni] = useState(false)
 
     //FETCH
-    const [boardMembersList, setBoardMembersList] = useState([])
+    const [alumuniList, setAlumuniList] = useState([])
     //EDIT
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
 
@@ -66,15 +68,28 @@ const AlumuniStudentsGrid = ({scholarshipProject}) => {
     const originalBackgroundColor = 'blue.600';
     const clickedBackgroundColor = 'blue.400';
 
-        //FETCH
-        const fetchData = async () => {
-            const res = await axios.get(`${baseUrl}/get-alumuni-student-profiles`)
-            if (res) {
-                const data = res.data.data;
-                setBoardMembersList(data.reverse());
-            }
+    //FETCH
+    const fetchData = async () => {
+
+        // const res = await axios.get(`${baseUrl}/get-alumuni-student-profiles`)
+        let apiUrl = `${baseUrl}/get-alumuni-student-profiles`;
+
+        // Check if district is "all"
+        if (userRole !== "superAdmin") {
+            apiUrl += `?alumuniDistrict=${district}`;
         }
-        // console.log(distAdminList)
+        const res = await axios.get(apiUrl)
+        if (res) {
+            const data = res.data.data;
+            // Filter based on scholarshipProject
+            const alumuniFilteredByScholarshipProject = district !== "all"
+                ? data.filter(alumuni => alumuni.project === "ncsep")
+                : data;
+
+            setAlumuniList(alumuniFilteredByScholarshipProject.reverse());
+        }
+    }
+    // console.log(distAdminList)
 
     //PAGINATE FILTER SORT
     const handleSort = (column) => {
@@ -90,7 +105,7 @@ const AlumuniStudentsGrid = ({scholarshipProject}) => {
 
     //FILTER BY DISTRICT
 
-    const filteredBoardMembersList = boardMembersList && boardMembersList
+    const filteredBoardMembersList = alumuniList && alumuniList
         .filter(
             (item) =>
                 item.name.toLowerCase().includes(searchInput.toLowerCase())
@@ -98,7 +113,7 @@ const AlumuniStudentsGrid = ({scholarshipProject}) => {
     //SEARCH
 
     // Calculate the total number of pages
-    const totalPages = Math.ceil(boardMembersList.length / itemsPerPage);
+    const totalPages = Math.ceil(alumuniList.length / itemsPerPage);
 
     // Sorting logic and pagination for distAdminList
     const sortedAndPaginatedBoardMembersList = filteredBoardMembersList
@@ -184,7 +199,7 @@ const AlumuniStudentsGrid = ({scholarshipProject}) => {
                         >Create</Button>
                     </HStack>
                 </Center>
-                    { isCreateNewAlumuni == false ? (
+                {isCreateNewAlumuni == false ? (
                     <Box
                         pos={"absolute"}
                         px={10}
@@ -280,13 +295,13 @@ const AlumuniStudentsGrid = ({scholarshipProject}) => {
                                 Email
                             </Text>
                             <Text
-                            w="200px"
-                            p={1}
-                            bg={textMouseStates.number ? clickedBackgroundColor : originalBackgroundColor}
-                            onMouseDown={() => handleMouseDown('number')}
-                            onMouseUp={() => handleMouseUp('number')}
-                            onMouseLeave={() => handleMouseUp('number')}
-                            onClick={() => handleSort('contactNumber')}
+                                w="200px"
+                                p={1}
+                                bg={textMouseStates.number ? clickedBackgroundColor : originalBackgroundColor}
+                                onMouseDown={() => handleMouseDown('number')}
+                                onMouseUp={() => handleMouseUp('number')}
+                                onMouseLeave={() => handleMouseUp('number')}
+                                onClick={() => handleSort('contactNumber')}
 
                             >Contact No.</Text>
                             <Text
@@ -407,7 +422,7 @@ const AlumuniStudentsGrid = ({scholarshipProject}) => {
                             <Button
                                 m={2}
                                 onClick={() => setCurrentPage(currentPage + 1)}
-                                disabled={endIndex >= boardMembersList.length}
+                                disabled={endIndex >= alumuniList.length}
                                 isDisabled={currentPage === totalPages}
                             >
                                 Next Page
@@ -415,8 +430,8 @@ const AlumuniStudentsGrid = ({scholarshipProject}) => {
                         </Box>
                     </Box>)
                     :
-                    (<AlumuniStudentForm setIsCreateNewUserActive={setIsCreateNewUserActive} />)
-                    }
+                    (<AlumuniStudentForm setIsCreateNewUserActive={setIsCreateNewUserActive} scholarshipProject={scholarshipProject} />)
+                }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="Board Member Profile" handleDelete={handleStudentProfileDelete} />
                 <EditAlumuniProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData} closeEditModal={closeEditModal} scholarshipProject={scholarshipProject} />
             </Box>

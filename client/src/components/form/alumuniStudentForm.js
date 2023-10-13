@@ -1,12 +1,15 @@
 
 import { useState } from "react"
-import { Center, Button, Box, Heading, FormControl, FormLabel, Input, HStack, VStack, useToast, useStatStyles, Toast } from "@chakra-ui/react"
+import { useSelector } from "react-redux";
+import { Center, Button, Box, Heading, FormControl, FormLabel, Input, HStack, VStack, useToast, Select, Toast } from "@chakra-ui/react"
 import axios from 'axios';
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 
-const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
+    const AlumuniStudentForm = ({ setIsCreateNewUserActive, scholarshipProject }) => {
+    const { district, userRole } = useSelector(state => state.user)
     const toast = useToast()
+    const [project, setProject] = useState("")
     const [name, setName] = useState("")
     const [contactNumber, setContactNumber] = useState("")
     const [email, setEmail] = useState("")
@@ -17,12 +20,18 @@ const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
     const [position, setPosition] = useState("")
     const [municipality, setMunicipality] = useState("")
     const [wardNo, setWardNo] = useState("")
-    const [district, setDistrict] = useState("")
+    const [alumuniDistrict, setAlumuniDistrict] = useState("")
     const [province, setProvince] = useState("")
 
 
     const submitForm = async () => {
         const formData = new FormData()
+        formData.append('registeredBy', district)
+        if(district !== "all"){
+            formData.append('project', "ncsep")
+        }else{
+            formData.append('project', project)
+        }
         formData.append('name', name)
         formData.append('contactNumber', contactNumber)
         formData.append('email', email)
@@ -33,7 +42,7 @@ const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
         formData.append('position', position)
         formData.append('municipality', municipality)
         formData.append('wardNo', wardNo)
-        formData.append('district', district)
+        formData.append('alumuniDistrict', district)
         formData.append('province', province)
 
         try {
@@ -91,6 +100,20 @@ const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
 
                 <form>
                     <VStack>
+                    {district == "all" && <FormControl px={20} mb={5} w={"500px"} >
+                      <FormLabel>Project</FormLabel>
+                      <Select
+                        placeholder='Select'
+                        onChange={(event) => setProject(event.target.value)}
+                      >
+                        <option key="ncsep" value="ncsep">
+                          NCSEP
+                        </option>
+                        <option key="prlEths" value="prlEths">
+                          PRL & ETHS
+                        </option>
+                      </Select>
+                    </FormControl>}
                         <HStack mb={5} >
                             <FormControl>
                                 <FormLabel>Name</FormLabel>
@@ -175,7 +198,8 @@ const AlumuniStudentForm = ({ setIsCreateNewUserActive }) => {
                                 <FormLabel>District</FormLabel>
                                 <Input
                                     placeholder='District'
-                                    onChange={(e) => setDistrict(e.target.value)}
+                                    value={district}
+                                    isDisabled={userRole !== "superAdmin" }
                                 />
                             </FormControl>
                             <FormControl>

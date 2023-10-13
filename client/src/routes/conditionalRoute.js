@@ -19,6 +19,7 @@ import Settings from '../pages/01-super-admin/07-settings';
 //DIST ADMIN Routes
 import DistAdminSidebar from '../components/navigation/sideBar/02-distAdminSidebar';
 import ManageStudents from '../pages/02-district-admin/02-manageStudents';
+import AlumuniListDist from '../pages/02-district-admin/03-alumuniList';
 
 //NON USER ROUTES
 // import Header from '../components/header/header';
@@ -63,6 +64,7 @@ const DistAdminRoutes = () => {
       <DistAdminSidebar />
       <Routes >
         <Route path="/student-management" element={<ManageStudents />} />
+        <Route path="/alumuni" element={<AlumuniListDist />} />
       </Routes>
     </>
   )
