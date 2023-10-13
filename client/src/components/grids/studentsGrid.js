@@ -52,6 +52,9 @@ const StudentsGrid = ({scholarshipProject}) => {
     const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
     //EDIT
     const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+    //FILTER ACTIVE/INACTIVE STUDENTS
+    const [currentYearStudentsList, setCurrentYearStudentsList] = useState([]);
+
 
     //DELETE
     const disclosure = useDisclosure()
@@ -110,13 +113,50 @@ const StudentsGrid = ({scholarshipProject}) => {
                 item.lastName.toLowerCase().includes(searchInput.toLowerCase()) ||
                 item.schoolName.toLowerCase().includes(searchInput.toLowerCase())
         );
-    //SEARCH
 
+        // FILTER ACTIVE / INACTIVE STUEDNTS
+        const [selectedOption, setSelectedOption] = useState("Active");
+
+        const currentYear = new Date().getFullYear();
+        const filterActiveInactiveStudents = () => {
+            if (selectedOption === "Active") {
+                return filteredStudentsList.filter((student) => {
+                  for (let i = 1; i <= 5; i++) {
+                    const scholarshipFrom = student[`scholarship${i}From`];
+                    if (
+                      scholarshipFrom &&
+                      new Date(scholarshipFrom).getFullYear() === currentYear
+                    ) {
+                      return true;
+                    }
+                  }
+                  return false;
+                });
+              } else if (selectedOption === "Inactive") {
+                return filteredStudentsList.filter((student) => {
+                  for (let i = 1; i <= 5; i++) {
+                    const scholarshipFrom = student[`scholarship${i}From`];
+                    if (
+                      scholarshipFrom &&
+                      new Date(scholarshipFrom).getFullYear() >= currentYear
+                    ) {
+                      return false;
+                    }
+                  }
+                  return true;
+                });
+              }
+              return [];
+            };
+
+    const filteredActiveInactiveStudents = filterActiveInactiveStudents();
+
+    //SEARCH
     // Calculate the total number of pages
     const totalPages = Math.ceil(studentsList.length / itemsPerPage);
 
     // Sorting logic and pagination for distAdminList
-    const sortedAndPaginatedStudentsList = filteredStudentsList
+    const sortedAndPaginatedStudentsList = filteredActiveInactiveStudents
         .slice()
         .sort((a, b) => {
             const aValue = a[sortColumn] || '';
@@ -141,6 +181,7 @@ const StudentsGrid = ({scholarshipProject}) => {
         const res = await axios.get(apiUrl)
         if (res) {
             const data = res.data.data;
+            
 
     // Filter based on scholarshipProject
     const filteredData = scholarshipProject === "prlEth"
@@ -242,7 +283,7 @@ const StudentsGrid = ({scholarshipProject}) => {
                         <HStack>
                             <FormControl>
                                 <HStack>
-                                    {district == "all" &&
+                                    {district == "" &&
                                         <HStack>
                                             <Text fontSize={"14px"} px={2} >District:</Text>
                                             <Select
@@ -259,6 +300,10 @@ const StudentsGrid = ({scholarshipProject}) => {
                                                 ))}
                                             </Select>
                                         </HStack>}
+                                        <Select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
+        <option value="Active">Active students</option>
+        <option value="Inactive">Inactive students</option>
+      </Select>
                                     <InputGroup  >
                                         <Input
                                             m={3}

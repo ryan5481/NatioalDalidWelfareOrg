@@ -3,18 +3,18 @@ import { Box, Text } from '@chakra-ui/react'
 import AlumuniStudentsGrid from '../../components/grids/alumuniStudentsGrid'
 
 
-const AlumuniList = () => {
+const AlumuniListDist = () => {
     
     return (<>
         <Box
             textAlign="center"
         >
             <Text textAlign={"center"} m={5} fontWeight={"bold"} fontSize={"22px"}>Alumuni</Text>
-            <AlumuniStudentsGrid  />
-            
+            <AlumuniStudentsGrid />
+
         </Box>
     </>
     )
 }
 
-export default AlumuniList
+export default AlumuniListDist
