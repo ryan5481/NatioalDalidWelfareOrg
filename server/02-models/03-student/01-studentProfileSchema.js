@@ -6,6 +6,10 @@ const studentProfileSchema = ({
         type: Boolean,
     },
 
+    project: {
+        type: String,
+    },
+
     //STUDENT
     profileImageName: {
         type: String,

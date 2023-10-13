@@ -35,6 +35,11 @@ const ViewStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   rounded={10}
                   src={require(`../../uploads/studentImage/${data?.profileImageName}`)} w="200px"
                 />}
+                <Box>
+                <HStack mb={5} >
+                  <Text fontWeight="bold" >Project:</Text>
+                    <Text>{data.project}</Text>
+                  </HStack>
                 <Center>
                 <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr 1fr 1fr"} gap={1}   >
                   <VStack gap={8}  align="start" >
@@ -69,6 +74,7 @@ const ViewStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   </VStack>
                 </Grid>
                 </Center>
+                </Box>
               </Grid>
 
 
