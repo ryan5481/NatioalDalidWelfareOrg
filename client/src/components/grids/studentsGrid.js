@@ -122,7 +122,7 @@ const districtNames = [
     "Udayapur",
 ];
 
-const StudentsGrid = ({scholarshipProject}) => {
+const StudentsGrid = ({ scholarshipProject }) => {
     const { userRole, district } = useSelector(state => state.user)
     //FETCH
     const [studentsList, setStudentsList] = useState([])
@@ -192,40 +192,40 @@ const StudentsGrid = ({scholarshipProject}) => {
                 item.schoolName.toLowerCase().includes(searchInput.toLowerCase())
         );
 
-        // FILTER ACTIVE / INACTIVE STUEDNTS
-        const [selectedOption, setSelectedOption] = useState("Active");
+    // FILTER ACTIVE / INACTIVE STUEDNTS
+    const [selectedOption, setSelectedOption] = useState("Active");
 
-        const currentYear = new Date().getFullYear();
-        const filterActiveInactiveStudents = () => {
-            if (selectedOption === "Active") {
-                return filteredStudentsList.filter((student) => {
-                  for (let i = 1; i <= 5; i++) {
+    const currentYear = new Date().getFullYear();
+    const filterActiveInactiveStudents = () => {
+        if (selectedOption === "Active") {
+            return filteredStudentsList.filter((student) => {
+                for (let i = 1; i <= 5; i++) {
                     const scholarshipFrom = student[`scholarship${i}From`];
                     if (
-                      scholarshipFrom &&
-                      new Date(scholarshipFrom).getFullYear() === currentYear
+                        scholarshipFrom &&
+                        new Date(scholarshipFrom).getFullYear() === currentYear
                     ) {
-                      return true;
+                        return true;
                     }
-                  }
-                  return false;
-                });
-              } else if (selectedOption === "Inactive") {
-                return filteredStudentsList.filter((student) => {
-                  for (let i = 1; i <= 5; i++) {
+                }
+                return false;
+            });
+        } else if (selectedOption === "Inactive") {
+            return filteredStudentsList.filter((student) => {
+                for (let i = 1; i <= 5; i++) {
                     const scholarshipFrom = student[`scholarship${i}From`];
                     if (
-                      scholarshipFrom &&
-                      new Date(scholarshipFrom).getFullYear() >= currentYear
+                        scholarshipFrom &&
+                        new Date(scholarshipFrom).getFullYear() >= currentYear
                     ) {
-                      return false;
+                        return false;
                     }
-                  }
-                  return true;
-                });
-              }
-              return [];
-            };
+                }
+                return true;
+            });
+        }
+        return [];
+    };
 
     const filteredActiveInactiveStudents = filterActiveInactiveStudents();
 
@@ -259,14 +259,14 @@ const StudentsGrid = ({scholarshipProject}) => {
         const res = await axios.get(apiUrl)
         if (res) {
             const data = res.data.data;
-            
 
-    // Filter based on scholarshipProject
-    const filteredData = scholarshipProject === "prlEth"
-      ? data.filter(student => student.isPrlEthProject === true)
-      : data.filter(student => student.isPrlEthProject === false);
 
-    setStudentsList(filteredData.reverse());
+            // Filter based on scholarshipProject
+            const filteredData = scholarshipProject === "prlEth"
+                ? data.filter(student => student.isPrlEthProject === true)
+                : data.filter(student => student.isPrlEthProject === false);
+
+            setStudentsList(filteredData.reverse());
         }
     }
     // console.log(distAdminList)
@@ -350,7 +350,6 @@ const StudentsGrid = ({scholarshipProject}) => {
                             onClick={() => { setIsCreateNewUserActive(true) }}
                         >Create</Button>
                     </HStack>
-
                 </Center>
                 {isCreateNewUserActive == false ?
                     (<Box
@@ -378,10 +377,10 @@ const StudentsGrid = ({scholarshipProject}) => {
                                                 ))}
                                             </Select>
                                         </HStack>}
-                                        <Select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
-        <option value="Active">Active students</option>
-        <option value="Inactive">Inactive students</option>
-      </Select>
+                                    <Select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
+                                        <option value="Active">Active students</option>
+                                        <option value="Inactive">Inactive students</option>
+                                    </Select>
                                     <InputGroup  >
                                         <Input
                                             m={3}
@@ -473,13 +472,13 @@ const StudentsGrid = ({scholarshipProject}) => {
                                 School Name
                             </Text>
                             <Text
-                            w="200px"
-                            p={1}
-                            bg={textMouseStates.district ? clickedBackgroundColor : originalBackgroundColor}
-                            onMouseDown={() => handleMouseDown('district')}
-                            onMouseUp={() => handleMouseUp('district')}
-                            onMouseLeave={() => handleMouseUp('district')}
-                            onClick={() => handleSort('currentDistrict')}
+                                w="200px"
+                                p={1}
+                                bg={textMouseStates.district ? clickedBackgroundColor : originalBackgroundColor}
+                                onMouseDown={() => handleMouseDown('district')}
+                                onMouseUp={() => handleMouseUp('district')}
+                                onMouseLeave={() => handleMouseUp('district')}
+                                onClick={() => handleSort('currentDistrict')}
 
                             >District</Text>
                             <Text
@@ -568,8 +567,8 @@ const StudentsGrid = ({scholarshipProject}) => {
                                             <ViewIcon
                                                 style={{ cursor: 'pointer' }}
                                                 _hover={{ color: 'blue.400' }}
-                                                onClick={() => {openViewModal(student)}}
-                                                 />
+                                                onClick={() => { openViewModal(student) }}
+                                            />
                                         </Box>
                                         <Box  >
                                             <EditIcon
@@ -626,7 +625,7 @@ const StudentsGrid = ({scholarshipProject}) => {
                         </Box>
                     </Box>)
                     :
-                    (<StudentProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive} scholarshipProject={scholarshipProject}  />)
+                    (<StudentProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive} scholarshipProject={scholarshipProject} />)
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="student profile" handleDelete={handleStudentProfileDelete} />
                 <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData} closeEditModal={closeEditModal} scholarshipProject={scholarshipProject} />

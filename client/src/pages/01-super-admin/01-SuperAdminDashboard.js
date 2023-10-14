@@ -9,13 +9,92 @@ import {
     Input,
     useToast,
     Heading,
-    IconButton
+    IconButton,
+    Center,
+    Divider,
+    Select
 } from '@chakra-ui/react';
 import StudentNumberDisplay from '../../components/dataDisplay/studentNumberDisplay';
 import { CheckIcon, RepeatClockIcon } from '@chakra-ui/icons';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
-
+const districtNames = [
+    "Achham",
+    "Arghakhanchi",
+    "Baglung",
+    "Baitadi",
+    "Bajhang",
+    "Bajura",
+    "Banke",
+    "Bara",
+    "Bardiya",
+    "Bhaktapur",
+    "Bhojpur",
+    "Chitwan",
+    "Dadeldhura",
+    "Dailekh",
+    "Dang",
+    "Darchula",
+    "Dhading",
+    "Dhankuta",
+    "Dhanusa",
+    "Dholkha",
+    "Dolpa",
+    "Doti",
+    "Gorkha",
+    "Gulmi",
+    "Humla",
+    "Ilam",
+    "Jajarkot",
+    "Jhapa",
+    "Jumla",
+    "Kailali",
+    "Kalikot",
+    "Kanchanpur",
+    "Kapilvastu",
+    "Kaski",
+    "Kathmandu",
+    "Kavrepalanchok",
+    "Khotang",
+    "Lalitpur",
+    "Lamjung",
+    "Mahottari",
+    "Makwanpur",
+    "Manang",
+    "Morang",
+    "Mugu",
+    "Mustang",
+    "Myagdi",
+    "Nawalparasi",
+    "Nuwakot",
+    "Okhaldhunga",
+    "Palpa",
+    "Panchthar",
+    "Parbat",
+    "Parsa",
+    "Pyuthan",
+    "Ramechhap",
+    "Rasuwa",
+    "Rautahat",
+    "Rolpa",
+    "Rukum",
+    "Rupandehi",
+    "Salyan",
+    "Sankhuwasabha",
+    "Saptari",
+    "Sarlahi",
+    "Sindhuli",
+    "Sindhupalchok",
+    "Siraha",
+    "Solukhumbu",
+    "Sunsari",
+    "Surkhet",
+    "Syangja",
+    "Tanahun",
+    "Taplejung",
+    "Terhathum",
+    "Udayapur",
+];
 const SuperAdminDashboard = () => {
     const [studentsList, setStudentsList] = useState([]);
     const [startDate, setStartDate] = useState('');
@@ -27,6 +106,10 @@ const SuperAdminDashboard = () => {
     const [orphanStudentsList, setOrphanStudentsList] = useState([]);
     const [currentYearStudentsList, setCurrentYearStudentsList] = useState([]);
     const [isCheckButtonDisabled, setIsCheckButtonDisabled] = useState(true);
+
+    const [dataToDisplayByStudentType, setDataToDisplayByStudentType] = useState("disabled");
+    const [dataToDisplayByProject, setDataToDisplayByProject] = useState("NCSEP");
+
 
 
     const fetchStudentsList = async () => {
@@ -90,21 +173,89 @@ const SuperAdminDashboard = () => {
         // console.log("FILTERED STUDENTS:" + filteredStudentsList);
     };
 
-      // Enable the button when both startDate and endDate are selected
-  useEffect(() => {
-    setIsCheckButtonDisabled(!startDate || !endDate);
-  }, [startDate, endDate]);
+    // Enable the button when both startDate and endDate are selected
+    useEffect(() => {
+        setIsCheckButtonDisabled(!startDate || !endDate);
+    }, [startDate, endDate]);
 
-  const disabledAllStudentsList = studentsList.filter((obj) => obj.studentType === "Disabled");
-  const disabledCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.studentType === "Disabled");
-  const orphanAllStudentsList = studentsList.filter((obj) => obj.studentType === "Orphan");
-  const orphanCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.studentType === "Orphan");
+    //FILTER BY DISTRICT
+    const [selectedDistrict, setSelectedDistrict] = useState('');
+
+    const studentsListFilteredByDistrict = filteredStudentsList
+        .filter((item) =>
+            item.currentDistrict.toLowerCase().includes(selectedDistrict.toLowerCase())
+        )
+
+    const [selectedFundType, setSelectedFundType] = useState("all");
+
+    const filterByFundType = (studentsListFilteredByDistrict, selectedFundType) => {
+        if (selectedFundType === 'all') {
+          return studentsListFilteredByDistrict;
+        } else {
+          return studentsListFilteredByDistrict.filter((student) => {
+            for (let i = 1; i <= 5; i++) {
+              const fundType = student[`scholarship${i}FundType`];
+              if (fundType === selectedFundType) {
+                return true;
+              }
+            }
+            return false;
+          });
+        }
+      };
+
+    const allStudentsListFilteredByFundType =  filterByFundType(studentsListFilteredByDistrict)
+    
+
+    const disabledAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.studentType === "Disabled");
+    const disabledCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.studentType === "Disabled");
+    const orphanAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.studentType === "Orphan");
+    const orphanCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.studentType === "Orphan");
+
+    const ncsepAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.project === "NCSEP");
+    const prlAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.project === "PRL");
+    const ethsAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.project === "ETHS");
+    const ncsepCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.project === "NCSEP");
+    const prlCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.project === "PRL");
+    const ethsCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.project === "ETHS");
+
 
     return (
         <>
-            <Box  p={5} pos={"relative"} left={"120px"}   >
-                <Heading mb={5} fontSize="3xl" textAlign="center" > Overall Scholarships Provided</Heading>
-                <HStack justify="center" spacing={3} m={5} >
+            <Box p={5} pos={"relative"} left={"120px"} mb={10}  >
+                <Heading mb={5} fontSize="2xl" textAlign="center" > Overall Scholarships Provided</Heading>
+                <HStack zIndex={5} pos="fixed" bottom="0px" left={"20%"} bg={"gray.100"} border={'solid 1px lightgray'} p={2} px={4} rounded={10} justify="center" spacing={3} m={5} >
+                    <Select
+                        mx={1}
+                        h={8}
+                        w={"200px"}
+                        id="district"
+                        onChange={(e) => setSelectedDistrict(e.target.value)}
+                        value={selectedDistrict}
+                        placeholder="All districts"
+                    >
+                        <option value="">All Districts</option>
+                        {districtNames.map((district, index) => (
+                            <option key={index} value={district} >{district}</option>
+                        ))}
+                    </Select>
+                    <Select
+                        mx={1}
+                        h={8}
+                        w={"200px"}
+                        onChange={(e) => setSelectedFundType(e.target.value)}
+                        placeholder='Fund type'
+                    >
+                        <option key="all" value="all">
+                            All
+                        </option>
+                        <option key="NEF" value="NEF">
+                            NEF
+                        </option>
+                        <option key="ARMF" value="ARMF">
+                            ARMF
+                        </option>
+                    </Select>
                     <FormControl w={"220px"} >
                         <HStack>
                             <FormLabel>From:</FormLabel>
@@ -117,54 +268,117 @@ const SuperAdminDashboard = () => {
                             <Input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} />
                         </HStack>
                     </FormControl>
-                                <Box
-                                    w='25px'
-                                    as={IconButton}
-                                    size='xs'
-                                    colorScheme='green'
-                                    rounded="full"
+                    <Box
+                        w='25px'
+                        as={IconButton}
+                        size='xs'
+                        colorScheme='green'
+                        rounded="full"
 
-                                    boxShadow="2xl"
-                                    onClick={
-                                        filterStudentsByDate
-                                    }
-                                    isDisabled={isCheckButtonDisabled}
-                                >
-                                    <CheckIcon
-                                        color='gray.50'
-                                        w='25px'
-                                    />
-                                </Box>
-                                <Box
-                                    w='25px'
-                                    as={IconButton}
-                                    size='xs'
-                                    colorScheme='red'
-                                    rounded="full"
-                                    boxShadow="2xl"
-                                    onClick={()=> window.location.reload()}
-                                >
-                                    <RepeatClockIcon
-                                        color='gray.50'
-                                        w='30px'
-                                    />
-                                </Box>
+                        boxShadow="2xl"
+                        onClick={
+                            filterStudentsByDate
+                        }
+                        isDisabled={isCheckButtonDisabled}
+                    >
+                        <CheckIcon
+                            color='gray.50'
+                            w='25px'
+                        />
+                    </Box>
+                    <Box
+                        w='25px'
+                        as={IconButton}
+                        size='xs'
+                        colorScheme='red'
+                        rounded="full"
+                        boxShadow="2xl"
+                        onClick={() => window.location.reload()}
+                    >
+                        <RepeatClockIcon
+                            color='gray.50'
+                            w='30px'
+                        />
+                    </Box>
                 </HStack>
-            <StudentNumberDisplay studentsList={filteredStudentsList} />
-            <Heading m={5} fontSize="3xl" textAlign="center" >Current Year Scholarships ({new Date().getFullYear()})</Heading>
-            <StudentNumberDisplay studentsList={currentYearStudentsList} />
-            {/* <Heading m={5} fontSize="3xl" textAlign="center" >Total Scholarships For Disabled or Orphan Recepients</Heading> */}
-            <Heading m={5} fontSize="3xl" textAlign="center" >Total Scholarships For Disabled Recepients</Heading>
-            <StudentNumberDisplay studentsList={disabledAllStudentsList} />
-            <Heading m={5} fontSize="3xl" textAlign="center" >Current Year Scholarships For Disabled Recepients ({new Date().getFullYear()})</Heading>
-            <StudentNumberDisplay studentsList={disabledCurrentYearStudentsList} />
-            <Heading m={5} fontSize="3xl" textAlign="center" >Total Scholarships For Orphan Recepients</Heading>
-            <StudentNumberDisplay studentsList={orphanAllStudentsList} />
-            <Heading m={5} fontSize="3xl" textAlign="center" >Current Year Scholarships For Orphan Recepients ({new Date().getFullYear()})</Heading>
-            <StudentNumberDisplay studentsList={orphanCurrentYearStudentsList} />
+                <StudentNumberDisplay studentsList={filteredStudentsList} />
+                <Heading m={5} fontSize="2xl" textAlign="center" >Current Year Scholarships ({new Date().getFullYear()})</Heading>
+                <StudentNumberDisplay studentsList={currentYearStudentsList} />
+                <Divider alignItems="center" my={5} borderColor={"gray.400"} w="1100px" mx={"auto"} />
+                <Center >
+                    <HStack>
+                        <Button
+                            h={8}
+                            colorScheme={dataToDisplayByStudentType == "disabled" ? "blue" : "gray"}
+                            _hover={{ border: '2px solid #1C6FEB' }}
+                            transition="0.15s ease-in-out"
+                            onClick={() => { setDataToDisplayByStudentType("disabled") }}
+                        >Disabled</Button>
+                        <Button
+                            h={8}
+                            colorScheme={dataToDisplayByStudentType == "orphan" ? "blue" : "gray"}
+                            _hover={{ border: '2px solid #1C6FEB' }}
+                            transition="0.15s ease-in-out"
+                            onClick={() => { setDataToDisplayByStudentType("orphan") }}
+                        >Orphans</Button>
+                    </HStack>
+                </Center>
+
+
+                {dataToDisplayByStudentType == "disabled" ?
+                    (<><Heading m={5} fontSize="2xl" textAlign="center" >Total Scholarships For Disabled Recepients</Heading>
+                        <StudentNumberDisplay studentsList={disabledAllStudentsList} />
+                        <Heading m={5} fontSize="2xl" textAlign="center" >Current Year Scholarships For Disabled Recepients ({new Date().getFullYear()})</Heading>
+                        <StudentNumberDisplay studentsList={disabledCurrentYearStudentsList} /></>)
+                    :
+                    (<><Heading m={5} fontSize="2xl" textAlign="center" >Total Scholarships For Orphan Recepients</Heading>
+                        <StudentNumberDisplay studentsList={orphanAllStudentsList} />
+                        <Heading m={5} fontSize="2xl" textAlign="center" >Current Year Scholarships For Orphan Recepients ({new Date().getFullYear()})</Heading>
+                        <StudentNumberDisplay studentsList={orphanCurrentYearStudentsList} /></>)}
+                <Divider alignItems="center" my={5} borderColor={"gray.400"} w="1100px" mx={"auto"} />
+
+                <Center >
+                    <HStack>
+                        <Button
+                            h={8}
+                            colorScheme={dataToDisplayByProject == "NCSEP" ? "blue" : "gray"}
+                            _hover={{ border: '2px solid #1C6FEB' }}
+                            transition="0.15s ease-in-out"
+                            onClick={() => { setDataToDisplayByProject("NCSEP") }}
+                        >NCSEP</Button>
+                        <Button
+                            h={8}
+                            colorScheme={dataToDisplayByProject == "PRL" ? "blue" : "gray"}
+                            _hover={{ border: '2px solid #1C6FEB' }}
+                            transition="0.15s ease-in-out"
+                            onClick={() => { setDataToDisplayByProject("PRL") }}
+                        >PRL</Button>
+                        <Button
+                            h={8}
+                            colorScheme={dataToDisplayByProject == "ETHS" ? "blue" : "gray"}
+                            _hover={{ border: '2px solid #1C6FEB' }}
+                            transition="0.15s ease-in-out"
+                            onClick={() => { setDataToDisplayByProject("ETHS") }}
+                        >ETHS</Button>
+                    </HStack>
+                </Center>
+                {dataToDisplayByProject == "NCSEP" && <> <Heading m={5} fontSize="2xl" textAlign="center" >Total NCSEP Recepients </Heading>
+                    <StudentNumberDisplay studentsList={ncsepAllStudentsList} />
+                    <Heading m={5} fontSize="2xl" textAlign="center" >Current Year NCSEP Recepients ({new Date().getFullYear()})</Heading>
+                    <StudentNumberDisplay studentsList={ncsepCurrentYearStudentsList} /></>}
+                {dataToDisplayByProject == "PRL" && <><Heading m={5} fontSize="2xl" textAlign="center" >Total PRL Recepients</Heading>
+                    <StudentNumberDisplay studentsList={prlAllStudentsList} />
+                    <Heading m={5} fontSize="2xl" textAlign="center" >Current Year PRL Recepients ({new Date().getFullYear()})</Heading>
+                    <StudentNumberDisplay studentsList={prlCurrentYearStudentsList} /></>}
+                {dataToDisplayByProject == "ETHS" && <>
+                    <Heading m={5} fontSize="2xl" textAlign="center" >Total ETHS Recepients</Heading>
+                    <StudentNumberDisplay studentsList={ethsAllStudentsList} />
+                    <Heading m={5} fontSize="2xl" textAlign="center" >Current Year ETHS Recepients ({new Date().getFullYear()})</Heading>
+                    <StudentNumberDisplay studentsList={ethsCurrentYearStudentsList} /></>}
             </Box>
         </>
     );
 };
 
 export default SuperAdminDashboard;
+
