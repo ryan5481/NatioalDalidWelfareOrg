@@ -14,6 +14,11 @@ const distAdminUserSchema = ({
     profileImageName: {
         type: String,
     },
+
+    phoneNumber: {
+        type: Number,
+        required: true,
+    },
     
     email: {
         type: String,
@@ -22,6 +27,11 @@ const distAdminUserSchema = ({
     },
 
     password: {
+        type: String,
+        required: true,
+    },
+
+    backup2FaCode: {
         type: String,
         required: true,
     },

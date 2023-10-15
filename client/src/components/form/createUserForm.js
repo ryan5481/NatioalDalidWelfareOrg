@@ -113,6 +113,7 @@ const CreateUserForm = ({ setIsCreateNewUserActive, fetchData }) => {
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('Full name is required'),
     email: Yup.string().required('Email is required').email('Invalid email address'),
+    phoneNumber: Yup.string().required('Phone number is required'),
     password: Yup.string()
       .required('Password is required')
       .matches(
@@ -129,12 +130,14 @@ const CreateUserForm = ({ setIsCreateNewUserActive, fetchData }) => {
     initialValues: {
       fullName: '',
       email: '',
+      phoneNumber: '',
       password: '',
       confirmPassword: '',
       district: '',
     },
     validationSchema,
     onSubmit: (values) => {
+      console.log(values)
       // Remove confirmPassword from the formData before submitting
       const { confirmPassword, ...formData } = values;
       submitForm(formData);
@@ -220,6 +223,21 @@ const CreateUserForm = ({ setIsCreateNewUserActive, fetchData }) => {
               {formik.errors.fullName && formik.touched.fullName && (
                 <Box color="red.500" mt={1}>
                   {formik.errors.fullName}
+                </Box>
+              )}
+            </FormControl>
+            <FormControl id="phoneNumber" isRequired>
+              <FormLabel>Phone number</FormLabel>
+              <Input
+                placeholder="Phone number"
+                _placeholder={{ color: 'gray.500' }}
+                type="number"
+                id="phoneNumber"
+                {...formik.getFieldProps('phoneNumber')}
+              />
+              {formik.errors.phoneNumber && formik.touched.phoneNumber && (
+                <Box color="red.500" mt={1}>
+                  {formik.errors.phoneNumber}
                 </Box>
               )}
             </FormControl>
