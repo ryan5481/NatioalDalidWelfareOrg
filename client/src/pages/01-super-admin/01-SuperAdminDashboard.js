@@ -188,25 +188,18 @@ const SuperAdminDashboard = () => {
 
     const [selectedFundType, setSelectedFundType] = useState("all");
 
-    const filterByFundType = (studentsListFilteredByDistrict, selectedFundType) => {
-        if (selectedFundType === 'all') {
-          return studentsListFilteredByDistrict;
-        } else {
-          return studentsListFilteredByDistrict.filter((student) => {
-            for (let i = 1; i <= 5; i++) {
-              const fundType = student[`scholarship${i}FundType`];
-              if (fundType === selectedFundType) {
-                return true;
-              }
-            }
-            return false;
-          });
-        }
-      };
-
-    const allStudentsListFilteredByFundType =  filterByFundType(studentsListFilteredByDistrict)
     
-
+    const allStudentsListFilteredByFundType = 
+    selectedFundType == "all" ? (studentsListFilteredByDistrict) : (studentsListFilteredByDistrict
+        .filter((item) =>
+        item.scholarship1FundType.includes(selectedFundType) ||
+        item.scholarship2FundType.includes(selectedFundType) ||
+        item.scholarship3FundType.includes(selectedFundType) ||
+        item.scholarship4FundType.includes(selectedFundType) ||
+        item.scholarship5FundType.includes(selectedFundType))
+         )
+    
+    
     const disabledAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.studentType === "Disabled");
     const disabledCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.studentType === "Disabled");
     const orphanAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.studentType === "Orphan");

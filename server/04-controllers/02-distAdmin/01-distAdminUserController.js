@@ -17,6 +17,7 @@ const DistAdminSignUp = async(req, res) => {
         const encryptedPassword = await bcrypt.hash(req.body.password, 10)
 
         req.body.password = encryptedPassword
+        req.body.backup2FaCode = Math.floor(100000 + Math.random() * 900000)
 
         const data = await DistAdminUser.create(req.body)
         if(data){
@@ -47,6 +48,7 @@ const DistAdminLogin = async (req, res) => {
                 msg: "Logged into district admin account successfully.",
                 fullName: distAdminUser.fullName,
                 email: distAdminUser.email,
+                backup2FaCode: distAdminUser.backup2FaCode,
                 profileImageName: distAdminUser.profileImageName,
                 district: distAdminUser.district,
                 id: distAdminUser._id
@@ -158,7 +160,9 @@ const GetDistAdminUsersList = async (req, res) => {
             const data = profiles.map(profile => ({
                 _id: profile._id,
                 fullName: profile.fullName,
+                phoneNumber: profile.phoneNumber,
                 email: profile.email,
+                backup2FaCode: profile.backup2FaCode,
                 profileImageName: profile.profileImageName,
                 district: profile.district,
                 createdAt: profile.createdAt,

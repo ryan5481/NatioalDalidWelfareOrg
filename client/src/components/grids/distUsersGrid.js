@@ -18,9 +18,10 @@ import {
     Input,
     FormControl
 } from '@chakra-ui/react'
-import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon, ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import CreateUserForm from '../form/createUserForm';
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
+import ViewDistAdminProfileModal from '../modals/viewDistAdminProfileModal';
 
 const baseUrl = process.env.REACT_APP_BASE_URL
 
@@ -32,6 +33,10 @@ const DistUsersGrid = () => {
     const [distAdminTodelete, setDistAdminTodelete] = useState({})
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
+    //DELETE
+    const [distAdminToView, setDistAdminToView] = useState({})
+    const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+    const { isOpenViewModal, onOpenViewModal, onCloseViewModal } = useDisclosure();
     //SWITCH BETWEEEN MANAGE USERS AND CREATE USERS
     const [isCreateNewUserActive, setIsCreateNewUserActive] = useState(false)
     //PAGINATE FILTER SORT
@@ -188,6 +193,17 @@ const DistUsersGrid = () => {
     }
     console.log(distAdminList)
 
+    //VIEW PROFILE
+    const openViewProfileModal = (distAdmin) => {
+        setDistAdminToView(distAdmin)
+        setIsViewModalOpen(true);
+    };
+
+    const closeViewProfileModal = () => {
+        setDistAdminToView(null)
+        setIsViewModalOpen(false);
+    };
+
     //DELETE
     const openModal = (distAdmin) => {
         setDistAdminTodelete(distAdmin)
@@ -201,6 +217,7 @@ const DistUsersGrid = () => {
     };
 
     const handleDistAdminDelete = async () => {
+        console.log()
         if (distAdminTodelete) {
             try {
                 const res = await axios.delete(`${baseUrl}/delete-dist-admin/${distAdminTodelete._id}`)
@@ -268,53 +285,49 @@ const DistUsersGrid = () => {
                             </Select>
                             <Text fontSize={"14px"} px={2} >Search:</Text>
                             <FormControl>
-                            <InputGroup  >
-                                <Input
-                                    m={3}
-                                    rounded="full"
-                                    w="300px"
-                                    border={'solid 1px gray'}
-                                    h={8}
-                                    placeholder="Search name, email id"
-                                    onChange={(e) => setSearchInput(e.target.value)}
-                                    value={searchInput}
-                                />
-                                {searchInput && (
-                                    <InputRightElement>
-                                        <Box
-                                            as={IconButton}
-                                            size='xxs'
-                                            bg='gray.500'
-                                            rounded="full"
-                                            right="1320%"
-                                            top="20%"
-                                            zIndex='10'
-                                            boxShadow="2xl"
-                                            _hover={{
-                                                bg: "darkgray"
-                                            }}
-                                            onClick={() => setSearchInput('')}
-                                        >
-                                            <SmallCloseIcon
-                                            w="19x"
-                                            h="19px"
-                                                color="gray.50"
-                                            />
-                                        </Box>
-                                    </InputRightElement>
-                                )}
-                            </InputGroup>
+                                <InputGroup  >
+                                    <Input
+                                        m={3}
+                                        rounded="full"
+                                        w="300px"
+                                        border={'solid 1px gray'}
+                                        h={8}
+                                        placeholder="Search name, email id"
+                                        onChange={(e) => setSearchInput(e.target.value)}
+                                        value={searchInput}
+                                    />
+                                    {searchInput && (
+                                        <InputRightElement>
+                                            <Box
+                                                as={IconButton}
+                                                size='xxs'
+                                                bg='gray.500'
+                                                rounded="full"
+                                                right="1320%"
+                                                top="20%"
+                                                zIndex='10'
+                                                boxShadow="2xl"
+                                                _hover={{
+                                                    bg: "darkgray"
+                                                }}
+                                                onClick={() => setSearchInput('')}
+                                            >
+                                                <SmallCloseIcon
+                                                    w="19x"
+                                                    h="19px"
+                                                    color="gray.50"
+                                                />
+                                            </Box>
+                                        </InputRightElement>
+                                    )}
+                                </InputGroup>
                             </FormControl>
 
                         </HStack>
                         {/* LIST HEADER */}
                         <Grid
                             color="white"
-                            templateColumns={{
-                                sm: '1fr',
-                                md: '1fr 1fr 1fr',
-                                lg: '0.5fr 1.5fr 2fr 2fr 1fr 1fr 0.3fr',
-                            }}
+                            templateColumns={'0.2fr 1fr 1fr 1fr 1fr 1fr 1fr 0.3fr 0.3fr'}
                             p={1}
                             m={1}
                             h={9}
@@ -349,7 +362,7 @@ const DistUsersGrid = () => {
                                 onClick={() => handleSort('district')}
 
                             >
-                                District
+                                District{sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
                             </Text>
                             <Text
                                 // w="200px"
@@ -361,7 +374,19 @@ const DistUsersGrid = () => {
                                 onClick={() => handleSort('fullName')}
 
                             >
-                                Name
+                                Name{sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
+                            </Text>
+                            <Text
+                                // w="200px"
+                                m={1}
+                                // bg={textMouseStates.number ? clickedBackgroundColor : originalBackgroundColor}
+                                onMouseDown={() => handleMouseDown('number')}
+                                onMouseUp={() => handleMouseUp('number')}
+                                onMouseLeave={() => handleMouseUp('number')}
+                            // onClick={() => handleSort('phoneNumber')}
+
+                            >
+                                Phone number{sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
                             </Text>
                             <Text
                                 // w="200px"
@@ -373,7 +398,7 @@ const DistUsersGrid = () => {
                                 onClick={() => handleSort('email')}
 
                             >
-                                Email
+                                Email{sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
                             </Text>
                             <Text
                                 // w="120px"
@@ -385,7 +410,7 @@ const DistUsersGrid = () => {
                                 onClick={() => handleSort('createdAt')}
 
                             >
-                                Regd date
+                                Regd date{sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
                             </Text>
                             <Text
                                 // w="120px"
@@ -397,7 +422,7 @@ const DistUsersGrid = () => {
                                 onClick={() => handleSort('updatedAt')}
 
                             >
-                                Updated date
+                                Updated date{sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
                             </Text>
                             {/* <Text
                                 w="60px"
@@ -405,6 +430,12 @@ const DistUsersGrid = () => {
                             >
                                 Edit
                             </Text> */}
+                            <Text
+                                w="60px"
+                                m={1}
+                            >
+                                View
+                            </Text>
                             <Text
                                 w="60px"
                                 m={1}
@@ -427,11 +458,7 @@ const DistUsersGrid = () => {
                                     isCentered
                                 >
                                     <Grid
-                                        templateColumns={{
-                                            sm: '1fr',
-                                            md: '1fr 1fr 1fr',
-                                            lg: '0.5fr 1.5fr 2fr 2fr 1fr 1fr 0.3fr',
-                                        }}
+                                        templateColumns={'0.2fr 1fr 1fr 1fr 1fr 1fr 1fr 0.3fr 0.3fr'}
                                         p={1}
                                         m={1}
                                         h={8}
@@ -446,21 +473,38 @@ const DistUsersGrid = () => {
                                         key={distAdmin._id}
                                     >
 
-                                        <Text m={1}   >{index + startIndex + 1}</Text>
-                                        <Text m={1}  >{distAdmin.district}</Text>
+                                        <Text m={1}>{index + startIndex + 1}</Text>
+                                        <Text m={1}>{distAdmin.district}</Text>
                                         <Text m={1}>{distAdmin.fullName}</Text>
-                                        <Text m={1}>{distAdmin.email}</Text>
+                                        <Text m={1}>
+                                            {distAdmin.phoneNumber ?
+                                                (() => {
+                                                    const phoneNumberString = distAdmin.phoneNumber.toString();
+                                                    console.log('Original Phone Number:', phoneNumberString);
+                                                    const maskedPhoneNumber = phoneNumberString.replace(/(\d{3})\d{4}(\d{3})/, '$1****$2');
+                                                    console.log('Masked Phone Number:', maskedPhoneNumber);
+                                                    return maskedPhoneNumber;
+                                                })() :
+                                                'Invalid Phone Number'
+                                            }
+                                        </Text>
+                                        <Text m={1}>
+                                            {distAdmin.email ?
+                                                distAdmin.email.replace(/^(.)([^@]*)/, (match, firstLetter, rest) => firstLetter + rest.replace(/[a-zA-Z]/g, '*')) :
+                                                'Invalid Email Address'
+                                            }
+                                        </Text>
                                         <Text m={1}>{distAdmin.createdAt.slice(0, 10)}</Text>
                                         <Text m={1} >{distAdmin.updatedAt.slice(0, 10)}</Text>
-                                        {/* <Box >
-                                            <EditIcon
+                                        <Center >
+                                            <ViewIcon
                                                 style={{ cursor: 'pointer' }}
                                                 _hover={{ color: 'blue.400' }}
                                                 onClick={() => {
-
+                                                    openViewProfileModal(distAdmin)
                                                 }} />
-                                        </Box> */}
-                                        <Box m={1} >
+                                        </Center>
+                                        <Center m={1} >
                                             <DeleteIcon
                                                 style={{ cursor: 'pointer' }}
                                                 _hover={{ color: 'blue.400' }}
@@ -468,7 +512,7 @@ const DistUsersGrid = () => {
                                                     openModal(distAdmin)
                                                 }}
                                             />
-                                        </Box>
+                                        </Center>
                                     </Grid>
                                 </Box>
                             </>)
@@ -509,7 +553,12 @@ const DistUsersGrid = () => {
                     :
                     (<CreateUserForm setIsCreateNewUserActive={setIsCreateNewUserActive} fetchData={fetchData} />)
                 }
-                <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={distAdminTodelete} accountType="district admin account" handleDistAdminDelete={handleDistAdminDelete} />
+                <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={distAdminTodelete} accountType="district admin account" handleDelete={handleDistAdminDelete} />
+                
+    {/* // const [distAdminToView, setDistAdminToView] = useState({})
+    // const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+    // const { isOpenViewModal, onOpenViewModal, onCloseViewModal } = useDisclosure(); */}
+                <ViewDistAdminProfileModal isOpen={isViewModalOpen} onClose={closeViewProfileModal} data={distAdminToView} />
             </Box>
 
         </>

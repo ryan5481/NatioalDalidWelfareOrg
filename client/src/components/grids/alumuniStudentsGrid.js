@@ -20,7 +20,7 @@ import {
     FormControl,
     VStack
 } from '@chakra-ui/react'
-import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon, ChevronDownIcon, ChevronUpIcon } from '@chakra-ui/icons';
 import StudentProfileForm from '../form/studentProfileForm';
 import EditAlumuniProfileModal from '../modals/editAlumuniProfileModal'
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
@@ -277,10 +277,10 @@ const AlumuniStudentsGrid = ({ scholarshipProject }) => {
                                 onMouseDown={() => handleMouseDown('name')}
                                 onMouseUp={() => handleMouseUp('name')}
                                 onMouseLeave={() => handleMouseUp('name')}
-                                onClick={() => handleSort('firstName')}
+                                onClick={() => handleSort('name')}
 
                             >
-                                Name
+                                Name{ sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
                             </Text>
                             <Text
                                 w="200px"
@@ -292,7 +292,7 @@ const AlumuniStudentsGrid = ({ scholarshipProject }) => {
                                 onClick={() => handleSort('email')}
 
                             >
-                                Email
+                                Email { sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
                             </Text>
                             <Text
                                 w="200px"
@@ -303,7 +303,7 @@ const AlumuniStudentsGrid = ({ scholarshipProject }) => {
                                 onMouseLeave={() => handleMouseUp('number')}
                                 onClick={() => handleSort('contactNumber')}
 
-                            >Contact No.</Text>
+                            >Contact No. { sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}</Text>
                             <Text
                                 w="120px"
                                 p={1}
@@ -314,7 +314,7 @@ const AlumuniStudentsGrid = ({ scholarshipProject }) => {
                                 onClick={() => handleSort('createdAt')}
 
                             >
-                                Regd date
+                                Regd date{ sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
                             </Text>
                             <Text
                                 w="120px"
@@ -326,7 +326,7 @@ const AlumuniStudentsGrid = ({ scholarshipProject }) => {
                                 onClick={() => handleSort('updatedAt')}
 
                             >
-                                Updated date
+                                Updated date{ sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
                             </Text>
                             <Text
                                 // w="60px"
