@@ -26,7 +26,7 @@ import EditStudentProfileModal from '../modals/editStudentProfileModal';
 import ViewStudentProfileModal from '../modals/viewStudentProfileModal'
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
 import Confirm2FAPopUp from '../popUps/confirm2FaPopUp'
-import nepalPoliticalDataset from "../datasets/nepalPoliticalDataset.json"
+import Confirm2FAToEditPopUp from '../popUps/confirm2FaToEditPopUp'
 const baseUrl = process.env.REACT_APP_BASE_URL
 
 // const districtNames = [];
@@ -290,6 +290,7 @@ const StudentsGrid = ({ scholarshipProject }) => {
 
     //EDIT
     const openEditModal = (student) => {
+        // console.log("EDIT MODAL IS OPEN")
         setStudentProfileToEdit(student)
         setIsEditDialogOpen(true);
         onOpen()
@@ -299,7 +300,24 @@ const StudentsGrid = ({ scholarshipProject }) => {
         setStudentProfileToEdit(null)
         setIsEditDialogOpen(false);
     };
-    //CONFIRM 2FA CODE TO DELETE isOpen={isCheck2FaDialogOpen} onClose={closeCheck2FaModal}
+
+    useEffect(() => {
+        console.log("isEditDialogOpen in EditStudentProfileModal:", isOpen);
+    }, [isOpen]);
+    
+    //CONFIRM 2FA CODE TO EDIT 
+    const [isCheck2FaEditDialogOpen,setIsCheck2FaEditDialogOpen] = useState(false)
+    const openCheck2FaEditModal = (student) => {
+        // setStudentProfileTodelete(student)
+        setIsCheck2FaEditDialogOpen(true);
+        onOpen()
+    };
+
+    const closeCheck2FaEditModal = () => {
+        // setStudentProfileTodelete(null)
+        setIsCheck2FaEditDialogOpen(false);
+    };
+    //CONFIRM 2FA CODE TO DELETE 
     const openCheck2FaModal = (student) => {
         setStudentProfileTodelete(student)
         setIsCheck2FaDialogOpen(true);
@@ -600,7 +618,7 @@ const StudentsGrid = ({ scholarshipProject }) => {
                                                 style={{ cursor: 'pointer' }}
                                                 _hover={{ color: 'blue.400' }}
                                                 onClick={() => {
-                                                    openEditModal(student)
+                                                    district == "all" ? (openEditModal(student)) : (openCheck2FaEditModal(student))
                                                 }} />
                                         </Box>
                                         <Box  >
@@ -653,7 +671,8 @@ const StudentsGrid = ({ scholarshipProject }) => {
                     (<StudentProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive} scholarshipProject={scholarshipProject} />)
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="student profile" handleDelete={handleStudentProfileDelete} />
-                <Confirm2FAPopUp isOpen={isCheck2FaDialogOpen} onClose={closeCheck2FaModal} data={studentProfileTodelete} accountType="student profile" handleDelete={handleStudentProfileDelete} />
+                <Confirm2FAPopUp isOpen={isCheck2FaDialogOpen} onClose={closeCheck2FaModal} data={studentProfileTodelete} action="delete" triggerFunctionOn2FaMatch={handleStudentProfileDelete} />
+                <Confirm2FAToEditPopUp isOpen={isCheck2FaEditDialogOpen} onClose={closeCheck2FaEditModal} action="edit" openEditModal={openEditModal} />
                 <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData} closeEditModal={closeEditModal} scholarshipProject={scholarshipProject} />
                 <ViewStudentProfileModal isOpen={isViewDialogOpen} onClose={closeViewModal} data={studentProfileToView} fetchData={fetchData} closeEditModal={closeViewModal} scholarshipProject={scholarshipProject} />
             </Box>

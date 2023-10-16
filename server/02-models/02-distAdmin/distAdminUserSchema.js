@@ -40,6 +40,10 @@ const distAdminUserSchema = ({
         type: String
     },
    
+    otp: {
+        type: String
+    },
+   
     createdAt: { type: Date, default: Date.now },
     
     updatedAt: { type: Date, default: Date.now },

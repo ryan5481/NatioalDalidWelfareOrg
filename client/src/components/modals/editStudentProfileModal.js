@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import axios from "axios"
 import {
-  useToast, Grid, Image, Box, FormLabel, Select, EditablePreview, EditableInput, Input,
+  useToast, Grid, Image, Box, FormLabel, Select, useDisclosure, EditableInput, Input,
   Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Text, HStack, FormControl, VStack
 } from '@chakra-ui/react'
-import { Form } from 'react-router-dom'
+import Confirm2FAPopUp from '../popUps/confirm2FaPopUp'
 const baseUrl = process.env.REACT_APP_BASE_URL
 
 const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) => {
@@ -13,7 +13,9 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
   const imageInputRef = useRef()
   const toast = useToast()
   const [scrollBehavior, setScrollBehavior] = React.useState('inside')
-
+    // CHECK 2FA TO SUBMIT EDIT
+    const { onOpen } = useDisclosure();
+    const [isCheck2FaDialogOpen, setIsCheck2FaDialogOpen] = useState(false);
   const initialFormData = {
     // profileImageName: '',
     project: '',
@@ -222,6 +224,17 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     })
   }, [])
 
+    //CONFIRM 2FA CODE TO EDIT 
+    const openCheck2FaModal = (student) => {
+      // setStudentProfileTodelete(student)
+      setIsCheck2FaDialogOpen(true);
+      onOpen()
+  };
+
+  const closeCheck2FaModal = () => {
+      // setStudentProfileTodelete(null)
+      setIsCheck2FaDialogOpen(false);
+  };
 
   const handleSubmit = async (event) => {
     try {
@@ -1103,10 +1116,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
           </ModalBody>
           <ModalFooter justifyContent="center" >
             <Button colorScheme='red' mx={1} w={'200px'} onClick={onClose}>Cancel</Button>
-            <Button colorScheme='green' mx={1} w={'200px'} onClick={() => handleSubmit()} >Save Changes</Button>
+            <Button colorScheme='green' mx={1} w={'200px'} onClick={() =>  handleSubmit()} >Save Changes</Button>
           </ModalFooter>
         </ModalContent>
-        </Modal >}
+        </Modal >
+        }
+
     </>
   )
 }

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 const baseUrl = process.env.REACT_APP_BASE_URL
 
-const Confirm2FAPopUp = ({ isOpen, onClose, data, action, triggerFunctionOn2FaMatch }) => {
+const Confirm2FAToEditPopUp = ({ isOpen, onClose, data, action, openEditModal }) => {
     const cancelRef = useRef()
     const toast = useToast()
     const { id } = useSelector(state => state.user)
@@ -16,7 +16,8 @@ const Confirm2FAPopUp = ({ isOpen, onClose, data, action, triggerFunctionOn2FaMa
         try {
             const res = await axios.post(`${baseUrl}/check-2FA-backup-code/${id}`, { backup2FaCodeForCheck: backupCode })
             if (res.status == 200) {
-                triggerFunctionOn2FaMatch()
+                openEditModal()
+                // onClose()
             } else if (res.status == 401) {
                 toast({
                     title: 'Error.',
@@ -88,8 +89,8 @@ const Confirm2FAPopUp = ({ isOpen, onClose, data, action, triggerFunctionOn2FaMa
                                     onClick={onClose}>
                                     Cancel
                                 </Button>
-                                <Button colorScheme="red" onClick={checkBackup2FaCode} ml={3}>
-                                    Delete
+                                <Button colorScheme="green" onClick={checkBackup2FaCode} ml={3}>
+                                    Submit
                                 </Button>
                             </AlertDialogFooter>
                         </form>
@@ -100,4 +101,4 @@ const Confirm2FAPopUp = ({ isOpen, onClose, data, action, triggerFunctionOn2FaMa
     )
 }
 
-export default Confirm2FAPopUp
+export default Confirm2FAToEditPopUp
