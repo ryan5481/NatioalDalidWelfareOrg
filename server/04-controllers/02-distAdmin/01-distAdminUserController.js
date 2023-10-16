@@ -88,31 +88,31 @@ const ChangeDistAdminUserProfile = async (req, res) => {
 
 
 const ChangeDistAdminUserPassword = async (req, res) => {
-    try {
-        const { oldPassword, newPassword, _id } = req.body
+    // try {
+    //     const { oldPassword, newPassword, _id } = req.body
 
-        const user = await DistAdminUser.findById(_id)
+    //     const user = await DistAdminUser.findById(_id)
 
-        if (!user) {
-            return res.status(404).json({ msg: "Super admin user not found." })
-        }
+    //     if (!user) {
+    //         return res.status(404).json({ msg: "Super admin user not found." })
+    //     }
 
-        const isMatch = bcrypt.compare(oldPassword, user.password)
+    //     const isMatch = bcrypt.compare(oldPassword, user.password)
 
-        if (!isMatch) {
-            return res.status(401).json({ msg: "Old password is incorrect." })
-        }
+    //     if (!isMatch) {
+    //         return res.status(401).json({ msg: "Old password is incorrect." })
+    //     }
 
-        const hashedNewPassword = await bcrypt.hash(newPassword, 10)
-        user.password = hashedNewPassword
-        await user.save()
+    //     const hashedNewPassword = await bcrypt.hash(newPassword, 10)
+    //     user.password = hashedNewPassword
+    //     await user.save()
 
-        return res.status(200).json({ msg: "Password updated successfully." })
+    //     return res.status(200).json({ msg: "Password updated successfully." })
 
-    } catch (error) {
-        console.error("Authentication error:", error);
-        return res.status(500).json({ msg: "Internal server error." });
-    }
+    // } catch (error) {
+    //     console.error("Authentication error:", error);
+    //     return res.status(500).json({ msg: "Internal server error." });
+    // }
 }
 
 const GetDistAdminUserProfile = async (req, res) => {
@@ -196,6 +196,36 @@ const DeleteDistAdmin = async(req, res) => {
     }
 }
 
+const CheckBackUp2FaCode = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const data = await DistAdminUser.findById(id);
+        // console.log(data.backup2FaCode, req.body)
+        if (!data) {
+            // User not found
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        if (!data.backup2FaCode) {
+            // Backup 2FA code not set for the user
+            return res.status(401).json({ message: 'Backup 2FA code not set.' });
+        }
+
+        if (data.backup2FaCode === req.body.backup2FaCodeForCheck) {
+            res.status(200).json({ message: 'Backup 2FA code matches.' });
+        } else {
+            res.status(401).json({ message: 'Invalid backup 2FA code.' });
+        }
+
+    } catch (error) {
+        console.error('Error checking 2FA backup code:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+
 
 exports.DistAdminSignUp = DistAdminSignUp
 exports.DistAdminLogin = DistAdminLogin
@@ -204,3 +234,4 @@ exports.ChangeDistAdminUserPassword = ChangeDistAdminUserPassword
 exports.GetDistAdminUserProfile = GetDistAdminUserProfile
 exports.GetDistAdminUsersList = GetDistAdminUsersList
 exports.DeleteDistAdmin = DeleteDistAdmin
+exports.CheckBackUp2FaCode = CheckBackUp2FaCode

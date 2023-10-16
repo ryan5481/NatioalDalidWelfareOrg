@@ -17,13 +17,15 @@ import {
     InputRightElement,
     IconButton,
     Input,
-    FormControl
+    FormControl,
+    useToast
 } from '@chakra-ui/react'
 import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon, ChevronUpIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import StudentProfileForm from '../form/studentProfileForm';
 import EditStudentProfileModal from '../modals/editStudentProfileModal';
 import ViewStudentProfileModal from '../modals/viewStudentProfileModal'
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
+import Confirm2FAPopUp from '../popUps/confirm2FaPopUp'
 import nepalPoliticalDataset from "../datasets/nepalPoliticalDataset.json"
 const baseUrl = process.env.REACT_APP_BASE_URL
 
@@ -123,6 +125,7 @@ const districtNames = [
 ];
 
 const StudentsGrid = ({ scholarshipProject }) => {
+    const toast = useToast()
     const { userRole, district } = useSelector(state => state.user)
     //FETCH
     const [studentsList, setStudentsList] = useState([])
@@ -139,6 +142,8 @@ const StudentsGrid = ({ scholarshipProject }) => {
     const [studentProfileTodelete, setStudentProfileTodelete] = useState({})
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
+    // CHECK 2FA FOR DELETION
+    const [isCheck2FaDialogOpen, setIsCheck2FaDialogOpen] = useState(false);
     //SWITCH BETWEEEN MANAGE USERS AND CREATE USERS
     const [isCreateNewUserActive, setIsCreateNewUserActive] = useState(false)
     const [studentProfileToView, setStudentProfileToView] = useState({})
@@ -294,6 +299,17 @@ const StudentsGrid = ({ scholarshipProject }) => {
         setStudentProfileToEdit(null)
         setIsEditDialogOpen(false);
     };
+    //CONFIRM 2FA CODE TO DELETE isOpen={isCheck2FaDialogOpen} onClose={closeCheck2FaModal}
+    const openCheck2FaModal = (student) => {
+        setStudentProfileTodelete(student)
+        setIsCheck2FaDialogOpen(true);
+        onOpen()
+    };
+
+    const closeCheck2FaModal = () => {
+        setStudentProfileTodelete(null)
+        setIsCheck2FaDialogOpen(false);
+    };
     //DELETE
     const openModal = (student) => {
         setStudentProfileTodelete(student)
@@ -313,8 +329,16 @@ const StudentsGrid = ({ scholarshipProject }) => {
                 if (res) {
                     fetchData();
                     closeModal()
-                    window.location.reload()
+                    closeCheck2FaModal()
                     console.log("Job deleted.")
+                    toast({
+                        title: 'Success.',
+                        description: 'Student profile deleted.',
+                        status: 'success',
+                        duration: 5000,
+                        isClosable: true,
+                        position: 'top'
+                    });
                 }
             } catch (error) {
                 console.error("Error deleting the job: ", error)
@@ -584,7 +608,7 @@ const StudentsGrid = ({ scholarshipProject }) => {
                                                 style={{ cursor: 'pointer' }}
                                                 _hover={{ color: 'blue.400' }}
                                                 onClick={() => {
-                                                    openModal(student)
+                                                    district == "all" ? (openModal(student)) : (openCheck2FaModal(student))
                                                 }}
                                             />
                                         </Box>
@@ -629,6 +653,7 @@ const StudentsGrid = ({ scholarshipProject }) => {
                     (<StudentProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive} scholarshipProject={scholarshipProject} />)
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="student profile" handleDelete={handleStudentProfileDelete} />
+                <Confirm2FAPopUp isOpen={isCheck2FaDialogOpen} onClose={closeCheck2FaModal} data={studentProfileTodelete} accountType="student profile" handleDelete={handleStudentProfileDelete} />
                 <EditStudentProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData} closeEditModal={closeEditModal} scholarshipProject={scholarshipProject} />
                 <ViewStudentProfileModal isOpen={isViewDialogOpen} onClose={closeViewModal} data={studentProfileToView} fetchData={fetchData} closeEditModal={closeViewModal} scholarshipProject={scholarshipProject} />
             </Box>
