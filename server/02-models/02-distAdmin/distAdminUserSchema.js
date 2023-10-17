@@ -1,6 +1,7 @@
 const mongoose = require ("mongoose");
+const { Schema } = mongoose;
 
-const distAdminUserSchema = ({
+const distAdminUserSchema = new Schema ({
     landmark: {
         type: String,
         default: "radiantInfoTech"
@@ -37,11 +38,15 @@ const distAdminUserSchema = ({
     },
 
     district: {
-        type: String
+        type: String,
     },
    
     otp: {
-        type: String
+        type: String,
+    },
+
+    otpExpiresAt: {
+        type: String,
     },
    
     createdAt: { type: Date, default: Date.now },

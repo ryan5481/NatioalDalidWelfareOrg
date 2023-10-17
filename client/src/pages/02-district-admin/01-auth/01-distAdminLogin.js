@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
@@ -38,9 +38,14 @@ const DistAdminLogin = () => {
   })
 
   //VERIFY OTP
-  const [isUserVerified, setIsUserVerified] = useState(false);
+  const [isUserOtpVerified, setIsOtpVerified] = useState(false);
   const [isUserCredentialsVerified, setIsUserCredentialsVerified] = useState(false);
   const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+
+  const handleTogglePassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
 
   const handleInputChange = (event) => {
     // console.log(event); // Log the event to see if it's capturing changes
@@ -61,27 +66,9 @@ const DistAdminLogin = () => {
 
       if (response.status === 200) {
         setIsUserCredentialsVerified(true)
-        setEmail(response.data.email)
-        // Successful login
-        // dispatch(assignUserRole("distAdmin"));
-        // dispatch(
-        //   setLoginDetails({
-        //     email: response.data.email,
-        //     id: response.data.id,
-        //     fullName: response.data.fullName,
-        //     isLoggedIn: true,
-        //     district: response.data.district
-        //   })
-        // );
-        // navigate("/");
-        toast({
-          title: 'Success.',
-          description: 'Logged into admin dashboard.',
-          status: 'success',
-          duration: 5000,
-          isClosable: true,
-          position: 'top'
-        });
+        const data = response.data
+        setEmail(data.email)
+        // console.log(data)
       } else {
         // Wrong credentials or other error
         toast({
@@ -93,7 +80,6 @@ const DistAdminLogin = () => {
           position: 'top'
         });
       }
-
       // console.log('POST response', response.data);
     } catch (error) {
       console.error('Error:', error.response);
@@ -108,41 +94,77 @@ const DistAdminLogin = () => {
     }
   }
 
-  const handleTogglePassword = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  };
-
   //VERIFY OTP
-  const handleOtpInputChange = (event) => {
-    // console.log(event); // Log the event to see if it's capturing changes
-    const { name, value } = event.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
+  const sendOtp = async() => {
+console.log(email)
+  try {
+    const response = await axios.post(`${baseUrl}/send-dist-admin-otp`, {
+      email: email,
+    })
+    if(response){
+      toast({
+        title: 'Success.',
+        description: 'OTP code sent to your email.',
+        status: 'success',
+        duration: 10000,
+        isClosable: true,
+        position: 'top'
+      });
+    } else {
+      // Wrong credentials or other error
+      toast({
+        title: 'Failure.',
+        description: 'Failed to send OTP.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top'
+      });
+    }
+  } catch (error) {
+    console.error('Error:', error.response);
+    toast({
+      title: 'Error.',
+      description: 'Wrong email or password.',
+      status: 'error',
+      duration: 5000,
+      isClosable: true,
+      position: 'top'
+    });
+  }
+}
+
+useEffect(() => {
+  if(email){
+    sendOtp()
+  }
+}, [email])
+
   const handleOtpSubmit = async (event) => {
     event.preventDefault();
 
     try {
       // console.log('Form Data:', formData);
-      const response = await axios.post(`${baseUrl}/dist-admin-login`, {
-        email: formData.email,
-        password: formData.password,
+      const response = await axios.post(`${baseUrl}/verify-dist-admin-otp`, {
+        email: email,
+        otp: otp,
       })
 
       if (response.status === 200) {
         setIsUserCredentialsVerified(true)
-        setEmail(response.data.email)
+        setEmail(response.email)
         // Successful login
-        // dispatch(assignUserRole("distAdmin"));
-        // dispatch(
-        //   setLoginDetails({
-        //     email: response.data.email,
-        //     id: response.data.id,
-        //     fullName: response.data.fullName,
-        //     isLoggedIn: true,
-        //     district: response.data.district
-        //   })
-        // );
-        // navigate("/");
+        dispatch(assignUserRole("distAdmin"));
+        dispatch(
+          setLoginDetails({
+            email: response.data.email,
+            id: response.data.id,
+            fullName: response.data.fullName,
+            isLoggedIn: true,
+            district: response.data.district
+          })
+        );
+        // navigate("/student-management");
         toast({
           title: 'Success.',
           description: 'Logged into admin dashboard.',
@@ -165,16 +187,27 @@ const DistAdminLogin = () => {
 
       // console.log('POST response', response.data);
     } catch (error) {
-      console.error('Error:', error.response);
-      toast({
-        title: 'Error.',
-        description: 'Wrong email or password.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-        position: 'top'
-      });
-    }
+      console.log(error);
+            if (error.response && error.response.status === 401) {
+                toast({
+                    title: 'OTP code expired.',
+                    description: 'Please login again.',
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                    position: 'top'
+                });
+            } else {
+                toast({
+                    title: 'Error.',
+                    description: 'Could not connect to server.',
+                    status: 'error',
+                    duration: 5000,
+                    isClosable: true,
+                    position: 'top'
+                });
+            }
+        }
   }
 
 
@@ -276,7 +309,7 @@ const DistAdminLogin = () => {
                       type='alphanumeric'
                       mask
                       // value={backupCode}
-                      onChange={handleInputChange}
+                      onChange={(value)=> setOtp(value)}
                     >
                       <PinInputField />
                       <PinInputField />
