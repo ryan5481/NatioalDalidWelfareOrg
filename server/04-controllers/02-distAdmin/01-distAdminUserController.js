@@ -1,10 +1,15 @@
 
 const DistAdminUser = require("../../02-models/02-distAdmin/distAdminUserSchema.js");
-const bcrypt = require ("bcrypt")
+const bcrypt = require("bcrypt")
 const dotenv = require("dotenv");
 const nodemailer = require("nodemailer");
-const speakeasy = require('speakeasy');
+// const speakeasy = require('speakeasy');
 dotenv.config();
+
+const otpEmailHost = process.env.OTP_SENDING_EMAIL_HOST
+const otpEmailPort = process.env.OTP_SENDING_EMAIL_PORT
+const otpEmailAddress = process.env.OTP_SENDING_EMAIL
+const otpEmailPassword = process.env.OTP_SENDING_EMAIL_PASSWORD
 
 // // Retrieve the salt rounds from the environment
 // const saltRounds = parseInt(process.env.SALT_ROUNDS);
@@ -14,116 +19,134 @@ dotenv.config();
 //   process.exit(1); // Exit the script with an error code
 // }
 
-const DistAdminSignUp = async(req, res) => {
-    try{
+const DistAdminSignUp = async (req, res) => {
+    try {
         const encryptedPassword = await bcrypt.hash(req.body.password, 10)
 
         req.body.password = encryptedPassword
         req.body.backup2FaCode = Math.floor(100000 + Math.random() * 900000)
 
         const data = await DistAdminUser.create(req.body)
-        if(data){
+        if (data) {
             res.status(200).json({
                 msg: "Admin account created successfully."
             })
-        }else{
+        } else {
             res.status(403).json({
                 msg: "Admin account registration failed."
             })
         }
-    }catch(error){
+    } catch (error) {
         console.error("Authentication error:", error);
         return res.status(500).json({ msg: "Internal server error." });
     }
 }
 
 
-// Create a Nodemailer transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'your_email@gmail.com',
-    pass: 'your_email_password',
-  },
-});
+const SendDistAdminOtp = async (req, res) => {
+    try {
+        const { email } = req.body;
 
-const SendOtp = async (req, res) => {
-  const { email } = req.body;
+        // Find the user by email (in your real app, fetch from database)
+        const user = await DistAdminUser.findOne({ email })
 
-  // Find the user by email (in your real app, fetch from database)
-  const user = DistAdminUser.findOne(email);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const otp = Math.ceil(Math.random() * 918376)
 
-  if (!user) {
-    return res.status(404).json({ message: 'User not found' });
-  }
 
-  // Generate and save OTP secret
-  user.otpSecret = speakeasy.generateSecret().base32;
+        // Send OTP via email
+        if (email) {
+            // console.log(email)
+            // let testAccount = await nodemailer.createTestAccount()
+            const transporter = nodemailer.createTransport({
+                host: otpEmailHost,
+                port: otpEmailPort,
+                auth: {
+                    user: otpEmailAddress,
+                    pass: otpEmailPassword
+                }
+            });
+            let info = await transporter.sendMail({
+                from: 'NNDSWO Headquarters', // sender address
+                to: email, // list of receivers
+                subject: 'NNDSWO Login OTP', // Subject line
+                text: 'Verify your login to district admin account', // plain text body
+                html: `<h>Verify your login to NNDSWO district admin account.</h><br><h>Your one time password to verify login code is <h><h1  style="color:#5A0047;">${otp}</h1><br><h>The code is valid for 5 minutes.  <h> `
+            })
 
-  // Generate OTP
-  const otp = speakeasy.totp({
-    secret: user.otpSecret,
-    encoding: 'base32',
-    // window: 30
-  });
+            console.log("Message sent: %s", info.messageId);
+        } else {
+            return res.status(401).json({ msg: "The email address doesn't exist" });
+        }
+        console.log(otp)
+        const hashedOTP = await bcrypt.hash(otp.toString(), 10)
+        //OTP VALID DURATION
+        const otpExpiresAt = Date.now() + 300000
+        const updated = await DistAdminUser.updateMany(
+            { email: email },
+            { $set: { otp: hashedOTP, otpExpiresAt: otpExpiresAt } }
+        )
+        if (updated) {
+            return res.status(200).json({ msg: "Encrypted OTP saved to the DB and expiry set." });
+        } else {
+            return res.status(401).json({ msg: "Failed to save OTP to the DB and set expiry." });
+        }
 
-// Send OTP via email
-try {
-    if (email) {
-        console.log(email)
-        // let testAccount = await nodemailer.createTestAccount()
-        const transporter = nodemailer.createTransport({
-            host: 'smtp.ethereal.email',
-            port: 587,
-            auth: {
-                user: 'brent.bednar64@ethereal.email',
-                pass: '7kGuVczKaRn2k5nGvU'
-            }
-        });
-        let info = await transporter.sendMail({
-            from: 'NNDSWO Headquarters', // sender address
-            to: email, // list of receivers
-            subject: 'NNDSWO Login OTP', // Subject line
-            text: 'Verify your login to district admin account', // plain text body
-            html: `<h>Verify your login to NNDSWO district admin account.</h><br><h>Your one time password to verify login code is <h><h1  style="color:#5A0047;">${otp}</h1><br><h>The code is valid for 30 seconds.  <h `
-        })
-
-        console.log("Message sent: %s", info.messageId);
-    } else {
-        res.status(401).json({ msg: "The email address doesn't exist" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Failed to send OTP' });
     }
-} catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Failed to send OTP' });
-}
 
 }
 
 // Controller to verify OTP
-const verifyOtp = async(req, res) => {
-  const { email, otp } = req.body;
+const verifyDistAdminOtp = async (req, res) => {
+    const email = req.body.email
+    const reqOtp = req.body.otp
+    try {
+        if (!email || !reqOtp) {
+            return res.status(400).json({ message: 'Invalid request. Empty values.' });
+        }
+        // Find the user by email (in your real app, fetch from database)
+        const data = await DistAdminUser.findOne({ email });
 
-  // Find the user by email (in your real app, fetch from database)
-  const user = DistAdminUser.findOne(email);
-
-  if (!user || !user.otpSecret) {
-    return res.status(400).json({ message: 'Invalid request' });
-  }
-
-  // Verify OTP
-  const isValidOTP = speakeasy.totp.verify({
-    secret: user.otpSecret,
-    encoding: 'base32',
-    token: otp,
-  });
-
-  if (isValidOTP) {
-    // Clear OTP secret after successful verification
-    user.otpSecret = null;
-    res.status(200).json({ message: 'OTP verified successfully' });
-  } else {
-    res.status(401).json({ message: 'Invalid OTP' });
-  }
+        if (data) {
+            const hashedOtp = data.otp;
+            const expiresAt = data.otpExpiresAt
+            if (expiresAt < Date.now()) {
+                res.status(401).json({
+                    msg: "The OTP code has expired."
+                })
+            } else {
+                const isValidOtp = await bcrypt.compare(reqOtp, hashedOtp)
+                if (!isValidOtp) {
+                    res.status(401).json({
+                        msg: "The OTP code is invalid."
+                    })
+                } else {
+                    res.status(200).json({
+                        msg: "The OTP code his verified successfully.",
+                        fullName: data.fullName,
+                        email: data.email,
+                        profileImageName: data.profileImageName,
+                        district: data.district,
+                        id: data._id
+                    })
+                }
+            }
+        } else {
+            res.status(400).json({
+                msg: "No data found."
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            msg: "Failed to verify OTP."
+        })
+    }
 }
 
 
@@ -140,7 +163,6 @@ const DistAdminLogin = async (req, res) => {
                 msg: "Logged into district admin account successfully.",
                 fullName: distAdminUser.fullName,
                 email: distAdminUser.email,
-                backup2FaCode: distAdminUser.backup2FaCode,
                 profileImageName: distAdminUser.profileImageName,
                 district: distAdminUser.district,
                 id: distAdminUser._id
@@ -260,7 +282,7 @@ const GetDistAdminUsersList = async (req, res) => {
                 createdAt: profile.createdAt,
                 updatedAt: profile.updatedAt,
             }))
-            res.status(200).json({data })
+            res.status(200).json({ data })
         } else {
             res.json({ msg: "DistAdminUser profiles not found." })
         }
@@ -271,7 +293,7 @@ const GetDistAdminUsersList = async (req, res) => {
     }
 }
 
-const DeleteDistAdmin = async(req, res) => {
+const DeleteDistAdmin = async (req, res) => {
     try {
         const id = req.params.id;
 
@@ -327,5 +349,5 @@ exports.GetDistAdminUserProfile = GetDistAdminUserProfile
 exports.GetDistAdminUsersList = GetDistAdminUsersList
 exports.DeleteDistAdmin = DeleteDistAdmin
 exports.CheckBackUp2FaCode = CheckBackUp2FaCode
-exports.SendOtp = SendOtp
-exports.verifyOtp = verifyOtp
+exports.SendDistAdminOtp = SendDistAdminOtp
+exports.verifyDistAdminOtp = verifyDistAdminOtp
