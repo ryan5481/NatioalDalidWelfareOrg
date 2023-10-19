@@ -28,6 +28,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL
 
 const DistAdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const toast = useToast()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -167,47 +168,53 @@ useEffect(() => {
         navigate("/student-management");
         toast({
           title: 'Success.',
-          description: 'Logged into admin dashboard.',
+          description: 'Logged into district admin dashboard.',
           status: 'success',
           duration: 5000,
           isClosable: true,
           position: 'top'
         });
-      } else {
-        // Wrong credentials or other error
-        toast({
-          title: 'Failure.',
-          description: 'Wrong credentials.',
-          status: 'error',
-          duration: 5000,
-          isClosable: true,
-          position: 'top'
-        });
+      } else if (response.data && response.data.error) {
+        setOtp('')
+        const errorCode = response.data.error.code;
+        // const errorMsg = response.data.error.msg;
+        if (errorCode === 'expired_otp') {
+          toast({
+            title: 'Failure.',
+            description: 'The OTP has expired.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+            position: 'top'
+          })
+        } else if (errorCode === 'invalid_otp') {
+          setOtp('')
+          toast({
+            title: 'Failure.',
+            description: 'The OTP is invalid.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+            position: 'top'
+          })
+        }
       }
 
       // console.log('POST response', response.data);
     } catch (error) {
-      console.log(error);
-            if (error.response && error.response.status === 401) {
-                toast({
-                    title: 'OTP code expired.',
-                    description: 'Please login again.',
-                    status: 'error',
-                    duration: 5000,
-                    isClosable: true,
-                    position: 'top'
-                });
-            } else {
-                toast({
-                    title: 'Error.',
-                    description: 'Could not connect to server.',
-                    status: 'error',
-                    duration: 5000,
-                    isClosable: true,
-                    position: 'top'
-                });
-            }
-        }
+      console.error('Error:', error.response);
+      const errorMsgFromServer = error.response?.data?.msg || 'An unexpected error occurred.';
+      setErrorMessage(errorMsgFromServer);
+      toast({
+        title: 'Error',
+        description: errorMessage,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      });
+      setOtp("")
+    }
   }
 
 
@@ -308,7 +315,7 @@ useEffect(() => {
                     <PinInput
                       type='alphanumeric'
                       mask
-                      // value={backupCode}
+                      value={otp}
                       onChange={(value)=> setOtp(value)}
                     >
                       <PinInputField />

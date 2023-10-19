@@ -117,12 +117,14 @@ const verifyDistAdminOtp = async (req, res) => {
             const expiresAt = data.otpExpiresAt
             if (expiresAt < Date.now()) {
                 res.status(401).json({
+                    code: "expired_otp",
                     msg: "The OTP code has expired."
                 })
             } else {
                 const isValidOtp = await bcrypt.compare(reqOtp, hashedOtp)
                 if (!isValidOtp) {
                     res.status(401).json({
+                        code: "invalid_otp",
                         msg: "The OTP code is invalid."
                     })
                 } else {

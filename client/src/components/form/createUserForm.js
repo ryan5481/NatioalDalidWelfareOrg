@@ -27,88 +27,14 @@ import {
   FormErrorMessage, // Add this import for error message display
 } from '@chakra-ui/react';
 import { SmallCloseIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import districts from "../datasets/districts.json"
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const CreateUserForm = ({ setIsCreateNewUserActive, fetchData }) => {
   const [showPassword, setShowPassword] = useState(false);
   const toast = useToast();
-  const nepalDistricts = [
-    "Achham",
-    "Arghakhanchi",
-    "Baglung",
-    "Baitadi",
-    "Bajhang",
-    "Bajura",
-    "Banke",
-    "Bara",
-    "Bardiya",
-    "Bhaktapur",
-    "Bhojpur",
-    "Chitwan",
-    "Dadeldhura",
-    "Dailekh",
-    "Dang",
-    "Darchula",
-    "Dhading",
-    "Dhankuta",
-    "Dhanusa",
-    "Dholkha",
-    "Dolpa",
-    "Doti",
-    "Gorkha",
-    "Gulmi",
-    "Humla",
-    "Ilam",
-    "Jajarkot",
-    "Jhapa",
-    "Jumla",
-    "Kailali",
-    "Kalikot",
-    "Kanchanpur",
-    "Kapilvastu",
-    "Kaski",
-    "Kathmandu",
-    "Kavrepalanchok",
-    "Khotang",
-    "Lalitpur",
-    "Lamjung",
-    "Mahottari",
-    "Makwanpur",
-    "Manang",
-    "Morang",
-    "Mugu",
-    "Mustang",
-    "Myagdi",
-    "Nawalparasi",
-    "Nuwakot",
-    "Okhaldhunga",
-    "Palpa",
-    "Panchthar",
-    "Parbat",
-    "Parsa",
-    "Pyuthan",
-    "Ramechhap",
-    "Rasuwa",
-    "Rautahat",
-    "Rolpa",
-    "Rukum",
-    "Rupandehi",
-    "Salyan",
-    "Sankhuwasabha",
-    "Saptari",
-    "Sarlahi",
-    "Sindhuli",
-    "Sindhupalchok",
-    "Siraha",
-    "Solukhumbu",
-    "Sunsari",
-    "Surkhet",
-    "Syangja",
-    "Tanahun",
-    "Taplejung",
-    "Terhathum",
-    "Udayapur",
-  ];
+  
+  const nepalDistrcitsList = districts.map(item => item.name).sort();
 
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('Full name is required'),
@@ -308,7 +234,7 @@ const CreateUserForm = ({ setIsCreateNewUserActive, fetchData }) => {
                 id="district"
                 {...formik.getFieldProps('district')}
               >
-                {nepalDistricts.map((district) => (
+                {nepalDistrcitsList.map((district) => (
                   <option key={district} value={district}>
                     {district}
                   </option>

@@ -87,63 +87,63 @@ const SuperAdminLogin = () => {
       const errorMsgFromServer = await error.response?.data?.msg || 'An unexpected error occurred.';
       setErrorMessage(errorMsgFromServer);
       errorMessage &&
-      toast({
-        title: 'Error',
-        description: errorMessage,
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-        position: 'top',
-      });
+        toast({
+          title: 'Error',
+          description: errorMessage,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top',
+        });
     }
   }
 
   //VERIFY OTP
-  const sendOtp = async() => {
-console.log(email)
-  try {
-    const response = await axios.post(`${baseUrl}/send-super-admin-otp`, {
-      email: email,
-    })
-    if(response){
-      toast({
-        title: 'Success.',
-        description: 'OTP code sent to your email.',
-        status: 'success',
-        duration: 10000,
-        isClosable: true,
-        position: 'top'
-      });
-    } else {
-      // Wrong credentials or other error
-      toast({
-        title: 'Failure.',
-        description: 'Failed to send OTP.',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-        position: 'top'
-      });
+  const sendOtp = async () => {
+    console.log(email)
+    try {
+      const response = await axios.post(`${baseUrl}/send-super-admin-otp`, {
+        email: email,
+      })
+      if (response) {
+        toast({
+          title: 'Success.',
+          description: 'OTP code sent to your email.',
+          status: 'success',
+          duration: 10000,
+          isClosable: true,
+          position: 'top'
+        });
+      } else {
+        // Wrong credentials or other error
+        toast({
+          title: 'Failure.',
+          description: 'Failed to send OTP.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top'
+        });
+      }
+    } catch (error) {
+      console.error('Error:', error.response);
+      errorMessage &&
+        toast({
+          title: 'Error.',
+          description: 'Wrong email or password.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top'
+        });
     }
-  } catch (error) {
-    console.error('Error:', error.response);
-    errorMessage &&
-    toast({
-      title: 'Error.',
-      description: 'Wrong email or password.',
-      status: 'error',
-      duration: 5000,
-      isClosable: true,
-      position: 'top'
-    });
   }
-}
 
-useEffect(() => {
-  if(email){
-    sendOtp()
-  }
-}, [email])
+  useEffect(() => {
+    if (email) {
+      sendOtp()
+    }
+  }, [email])
 
   const handleOtpSubmit = async (event) => {
     event.preventDefault();
@@ -166,9 +166,10 @@ useEffect(() => {
             id: response.data.id,
             fullName: response.data.fullName,
             isLoggedIn: true,
+            district: "all",
           })
         );
-        navigate("/student-management");
+        navigate("/");
         toast({
           title: 'Success.',
           description: 'Logged into admin dashboard.',
@@ -177,28 +178,30 @@ useEffect(() => {
           isClosable: true,
           position: 'top'
         });
-      } else if(response.data && response.data.error) {
+      } else if (response.data && response.data.error) {
+        setOtp('')
         const errorCode = response.data.error.code;
         // const errorMsg = response.data.error.msg;
-        if(errorCode === 'expired_otp'){
-        toast({
-          title: 'Failure.',
-          description: 'The OTP has expired.',
-          status: 'error',
-          duration: 5000,
-          isClosable: true,
-          position: 'top'
-        })
-      }else if(errorCode === 'invalid_otp'){
-        toast({
-          title: 'Failure.',
-          description: 'The OTP is invalid.',
-          status: 'error',
-          duration: 5000,
-          isClosable: true,
-          position: 'top'
-        })
-      }
+        if (errorCode === 'expired_otp') {
+          toast({
+            title: 'Failure.',
+            description: 'The OTP has expired.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+            position: 'top'
+          })
+        } else if (errorCode === 'invalid_otp') {
+          setOtp('')
+          toast({
+            title: 'Failure.',
+            description: 'The OTP is invalid.',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+            position: 'top'
+          })
+        }
       }
 
       // console.log('POST response', response.data);
@@ -214,6 +217,7 @@ useEffect(() => {
         isClosable: true,
         position: 'top',
       });
+      setOtp("")
     }
   }
 
@@ -227,7 +231,7 @@ useEffect(() => {
 
               <Center><Image w={600}
                 src={require('../../../uploads/assets/nndswo-logo.jpeg')}></Image></Center>
-              <Heading fontSize={'4xl'} textAlign="center" >District Admin Login</Heading>
+              <Heading fontSize={'4xl'} textAlign="center" >Super Admin Login</Heading>
               <FormControl>
                 <form
                   onSubmit={handleSubmit}
@@ -315,8 +319,8 @@ useEffect(() => {
                     <PinInput
                       type='alphanumeric'
                       mask
-                      // value={backupCode}
-                      onChange={(value)=> setOtp(value)}
+                      value={otp}
+                      onChange={(value) => setOtp(value)}
                     >
                       <PinInputField />
                       <PinInputField />
