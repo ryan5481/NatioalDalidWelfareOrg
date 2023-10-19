@@ -42,7 +42,7 @@ const DistAdminSignUp = async (req, res) => {
     }
 }
 
-
+// SEND OTP BY EMAIL
 const SendDistAdminOtp = async (req, res) => {
     try {
         const { email } = req.body;
