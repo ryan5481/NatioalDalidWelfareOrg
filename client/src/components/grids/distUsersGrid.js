@@ -22,8 +22,12 @@ import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon, ChevronDownIcon, Chevro
 import CreateUserForm from '../form/createUserForm';
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
 import ViewDistAdminProfileModal from '../modals/viewDistAdminProfileModal';
+import districts from "../datasets/districts.json"
 
 const baseUrl = process.env.REACT_APP_BASE_URL
+
+
+const nepalDistrcitsList = districts.map(item => item.name).sort();
 
 const DistUsersGrid = () => {
     //FETCH
@@ -60,83 +64,7 @@ const DistUsersGrid = () => {
     // Define the original and clicked background colors
     const originalBackgroundColor = 'cyan.900';
     const clickedBackgroundColor = 'cyan.500';
-    const nepalDistricts = [
-        "Achham",
-        "Arghakhanchi",
-        "Baglung",
-        "Baitadi",
-        "Bajhang",
-        "Bajura",
-        "Banke",
-        "Bara",
-        "Bardiya",
-        "Bhaktapur",
-        "Bhojpur",
-        "Chitwan",
-        "Dadeldhura",
-        "Dailekh",
-        "Dang",
-        "Darchula",
-        "Dhading",
-        "Dhankuta",
-        "Dhanusa",
-        "Dholkha",
-        "Dolpa",
-        "Doti",
-        "Gorkha",
-        "Gulmi",
-        "Humla",
-        "Ilam",
-        "Jajarkot",
-        "Jhapa",
-        "Jumla",
-        "Kailali",
-        "Kalikot",
-        "Kanchanpur",
-        "Kapilvastu",
-        "Kaski",
-        "Kathmandu",
-        "Kavrepalanchok",
-        "Khotang",
-        "Lalitpur",
-        "Lamjung",
-        "Mahottari",
-        "Makwanpur",
-        "Manang",
-        "Morang",
-        "Mugu",
-        "Mustang",
-        "Myagdi",
-        "Nawalparasi",
-        "Nuwakot",
-        "Okhaldhunga",
-        "Palpa",
-        "Panchthar",
-        "Parbat",
-        "Parsa",
-        "Pyuthan",
-        "Ramechhap",
-        "Rasuwa",
-        "Rautahat",
-        "Rolpa",
-        "Rukum",
-        "Rupandehi",
-        "Salyan",
-        "Sankhuwasabha",
-        "Saptari",
-        "Sarlahi",
-        "Sindhuli",
-        "Sindhupalchok",
-        "Siraha",
-        "Solukhumbu",
-        "Sunsari",
-        "Surkhet",
-        "Syangja",
-        "Tanahun",
-        "Taplejung",
-        "Terhathum",
-        "Udayapur",
-    ];
+
     //PAGINATE FILTER SORT
     const handleSort = (column) => {
         if (column === sortColumn) {
@@ -279,7 +207,7 @@ const DistUsersGrid = () => {
                                 value={selectedDistrict}
                             >
                                 <option value="">All Districts</option>
-                                {nepalDistricts.map((district, index) => (
+                                {nepalDistrcitsList.map((district, index) => (
                                     <option key={index} value={district} >{district}</option>
                                 ))}
                             </Select>

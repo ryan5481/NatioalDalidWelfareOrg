@@ -6,17 +6,18 @@ import { useSelector } from 'react-redux'
 import axios from 'axios'
 const baseUrl = process.env.REACT_APP_BASE_URL
 
-const Confirm2FAToEditPopUp = ({ isOpen, onClose, data, action, openEditModal }) => {
+const Confirm2FAToEditPopUp = ({ isOpen, onClose, data, action, openEditModal, student }) => {
     const cancelRef = useRef()
     const toast = useToast()
     const { id } = useSelector(state => state.user)
     const [backupCode, setBackupCode] = useState('');
     const checkBackup2FaCode = async (event) => {
+        console.log("Student data before calling openEditModal: ", student);
         event.preventDefault();
         try {
             const res = await axios.post(`${baseUrl}/check-2FA-backup-code/${id}`, { backup2FaCodeForCheck: backupCode })
             if (res.status == 200) {
-                openEditModal()
+                openEditModal(student)
                 // onClose()
             } else if (res.status == 401) {
                 toast({
