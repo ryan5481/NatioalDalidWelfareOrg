@@ -25,6 +25,14 @@ const superAdminUserSchema = ({
         type: String,
         required: true,
     },
+
+    otp: {
+        type: String,
+    },
+
+    otpExpiresAt: {
+        type: String,
+    },
    
     createdAt: { type: Date, default: Date.now },
     
