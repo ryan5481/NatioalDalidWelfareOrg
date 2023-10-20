@@ -7,6 +7,10 @@ const boardMemberProfileSchema = ({
         type: String,
     },
 
+    citizenshipFileName: {
+        type: String,
+    },
+
     firstName: {
         type: String,
     },
@@ -35,6 +39,26 @@ const boardMemberProfileSchema = ({
         type: String,
     },
 
+    membershipType:{
+        type: String,
+    },
+
+    //EDUCATION
+    qualification: {
+        type: String,
+    },
+
+    graduatedYear: {
+        type: String,
+    },
+
+    institutionName: {
+        type: String,
+    },
+    
+    institutionAddress: {
+        type: String,
+    },
     //TENURE ONE
     position1: {
         type: String,

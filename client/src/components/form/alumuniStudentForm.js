@@ -3,6 +3,11 @@ import { useState } from "react"
 import { useSelector } from "react-redux";
 import { Center, Button, Box, Heading, FormControl, FormLabel, Input, HStack, VStack, useToast, Select, Toast } from "@chakra-ui/react"
 import axios from 'axios';
+import provinces from "../datasets/provinces.json"
+import districts from "../datasets/districts.json"
+import municipalities from "../datasets/municipalities.json"
+const nepalProvincesList = provinces.map(item => item.name).sort();
+const nepalDistrcitsList = districts.map(item => item.name).sort();
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 
@@ -43,7 +48,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
         formData.append('municipality', municipality)
         formData.append('wardNo', wardNo)
         formData.append('alumuniDistrict', district)
-        formData.append('province', province)
+        formData.append('province', loggedInDistAdminProvince)
 
         try {
             const res = await axios.post(`${baseUrl}/create-alumuni-student-profile`, formData, {
@@ -61,7 +66,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
                     isClosable: true,
                     position: 'top'
                 });
-                window.location.reload()
+                // window.location.reload()
 
             } else {
                 toast({
@@ -86,6 +91,31 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
         }
     }
 
+// CONDITIONAL ADDRESS DROPDOWN
+  let selectedCurrentProvince = {}
+  if(province){
+    selectedCurrentProvince = provinces.find(province => province.name == province)
+  }
+  const selectedProvinceDistricts = selectedCurrentProvince !== null ? districts.filter(district => district.province_id === selectedCurrentProvince?.id) : nepalDistrcitsList
+
+  let selectedCurrentDistrict = {}
+  if(alumuniDistrict){
+    selectedCurrentDistrict = districts.find(district => district.name == alumuniDistrict)
+  }
+  const selectedDistrictMunicipalities = selectedCurrentDistrict ? municipalities.filter(municipality => municipality.district_id === selectedCurrentDistrict?.id) : []
+
+//GET MUNICIPALITIES OF THE LOGGED DISTRICT ADMIN'S DISTRICT to AUTO UPDATE
+let loggedInDistrictObject = {}
+loggedInDistrictObject = districts.find(item => item.name == district)
+ console.log(loggedInDistrictObject)
+const loggedInDistrictMunicipalities = municipalities.filter(municipality => municipality.district_id === loggedInDistrictObject?.id)
+  
+//GET PROVINCE OF THE LOGGED DISTRICT ADMIN'S DISTRICT to AUTO UPDATE
+let loggedInProvinceId = loggedInDistrictObject?.province_id
+let loggedInProvinceObject = provinces.find(item => item.id == loggedInProvinceId)
+let loggedInDistAdminProvince = loggedInProvinceObject?.name
+
+
     return (
         <>
             <Box
@@ -95,6 +125,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
                 left={"100px"}
                 rounded={10}
                 border={'solid 1px lightgray'}
+                p={5}
             >
                 <Heading m={5} textAlign="center" fontSize="26px" >Alumini Student Form</Heading>
 
@@ -178,38 +209,73 @@ const baseUrl = process.env.REACT_APP_BASE_URL;
                                 />
                             </FormControl>
                         </HStack>
-                        <HStack mb={5} >
-                            <FormControl>
-                                <FormLabel>Municipality</FormLabel>
-                                <Input
-                                    placeholder='Municipality'
-                                    onChange={(e) => setMunicipality(e.target.value)}
-                                />
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Ward Number</FormLabel>
-                                <Input
-                                type="number"
-                                    placeholder='Ward Number'
-                                    onChange={(e) => setWardNo(e.target.value)}
-                                />
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>District</FormLabel>
-                                <Input
-                                    placeholder='District'
-                                    value={district}
-                                    isDisabled={userRole !== "superAdmin" }
-                                />
-                            </FormControl>
-                            <FormControl>
-                                <FormLabel>Province</FormLabel>
-                                <Input
-                                    placeholder='Province'
-                                    onChange={(e) => setProvince(e.target.value)}
-                                />
-                            </FormControl>
-                        </HStack>
+                        <HStack>
+                {/* Province is set to the district admin's province, is only selectable by super admin */}
+                <FormControl>
+                    <FormLabel>Province</FormLabel>
+                  {district == "all" ?
+                    <Select
+                      placeholder="Province"
+                      onChange={(e) => setProvince(e.target.value)}
+                  >
+                      {nepalProvincesList.map((province, index) => (
+                          <option key={index} value={province} >{province}</option>
+                      ))}
+                  </Select>
+                  :
+                  <Input
+                  placeholder={loggedInDistAdminProvince}
+s                  isDisabled
+                />
+                  }
+                </FormControl>
+                {/* District is set to the district admin's district, is only selectable by super admin */}
+                <FormControl>
+                    <FormLabel>District</FormLabel>
+                 { 
+                 district == "all" ?
+                 <Select
+                      placeholder="District"
+                      onChange={(e) => setAlumuniDistrict(e.target.value)}
+                  >
+                      {selectedProvinceDistricts.map((district, index) => (
+                          <option key={index} value={district.name} >{district.name}</option>
+                      ))}
+                  </Select>
+                  :
+                  <Input
+                    placeholder={district}
+                    // value={formData.permanentAddress.wardNumber}
+                    isDisabled
+                  />
+                  }
+                </FormControl>
+                <FormControl>
+                    <FormLabel>Municipality</FormLabel>
+                  <Select
+                      placeholder="Municipality"
+                      onChange={(e) => setMunicipality(e.target.value)}
+                  >
+                      {
+                        district == "all" ?
+                      selectedDistrictMunicipalities.map((municipality, index) => (
+                          <option key={index} value={municipality.name} >{municipality.name}</option>
+                      ))
+                      :
+                      loggedInDistrictMunicipalities.map((municipality, index) => (
+                        <option key={index} value={municipality.name} >{municipality.name}</option>))
+                    }
+                  </Select>
+                </FormControl>
+                <FormControl>
+                    <FormLabel>Ward no.</FormLabel>
+                  <Input
+                    placeholder='Ward no.'
+                    type='number'
+                    onChange={(e) => setWardNo(e.target.value)}
+                  />
+                </FormControl>
+                </HStack>
                     </VStack>
                     <Box justifySelf="center" m={5}  >
                         <Center>

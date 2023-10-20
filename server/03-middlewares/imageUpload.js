@@ -65,9 +65,22 @@ const LoginBannerImageUpload = multer({
     // fileFilter: fileFilter
 }).single("loginBannerImageName")
 
+//CITIZENSHIP FILE
+const citizenshipFileStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "../client/public/assets/boardmemberCitizenshipFile/")
+    },
+    filename: function (req, file, cb) {
+        cb(null, "Board_member_ctzn_" + Date.now() + ".pdf")
+    }
+})
+
+const CitizenshipFileUpload = multer({
+    storage: citizenshipFileStorage,
+}).single("citizenshipFileName");
 
 exports.StudentProfileImageUpload = StudentProfileImageUpload;
 exports.BoardMemberProfileImageUpload = BoardMemberProfileImageUpload;
 exports.LogoImageUpload = LogoImageUpload;
 exports.LoginBannerImageUpload = LoginBannerImageUpload;
-/////////////////
+exports.CitizenshipFileUpload = CitizenshipFileUpload;

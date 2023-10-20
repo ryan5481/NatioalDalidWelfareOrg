@@ -18,7 +18,8 @@ const Confirm2FAToEditPopUp = ({ isOpen, onClose, data, action, openEditModal, s
             const res = await axios.post(`${baseUrl}/check-2FA-backup-code/${id}`, { backup2FaCodeForCheck: backupCode })
             if (res.status == 200) {
                 openEditModal(student)
-                // onClose()
+                onClose()
+                setBackupCode('')
             } else if (res.status == 401) {
                 toast({
                     title: 'Error.',
