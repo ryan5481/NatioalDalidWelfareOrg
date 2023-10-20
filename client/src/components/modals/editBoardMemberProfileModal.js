@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from "axios"
 import {
-  useToast, Grid, Image, Box, FormLabel, Select, EditablePreview, EditableInput, Input,
+  useToast, Grid, Image, Box, FormLabel, Select, Stack, RadioGroup, Radio, Input,
   Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Text, HStack, FormControl, VStack
 } from '@chakra-ui/react'
 import { Form } from 'react-router-dom'
@@ -21,6 +21,13 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
     contactNumber: '',
     email: '',
     citizenshipNumber: '',
+
+    membershipType: '',
+
+    qualification: '',
+    graduatedYear: '',
+    institutionName: '',
+    institutionAddress: '',
 
     position1: '',
     joinedDate1: '',
@@ -105,76 +112,83 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
 
   useEffect(() => {
     setFormData({
-      firstName: data.firstName,
-      middleName: data.middleName,
-      lastName: data.lastName,
-      dateOfBirth: data.dateOfBirth,
-      citizenshipNumber: data.citizenshipNumber,
-      contactNumber: data.contactNumber,
-      email: data.email,
+      firstName: data?.firstName,
+      middleName: data?.middleName,
+      lastName: data?.lastName,
+      dateOfBirth: data?.dateOfBirth,
+      citizenshipNumber: data?.citizenshipNumber,
+      contactNumber: data?.contactNumber,
+      email: data?.email,
+      
+      membershipType: data?.membershipType,
 
-      position1: data.position1,
-      joinedDate1: data.joinedDate1,
-      tenure1: data.tenure1,
-      remark1: data.remark1,
+      qualification: data?.qualification,
+      graduatedYear: data?.graduatedYear,
+      institutionName: data?.institutionName,
+      institutionAddress: data?.institutionAddress,
 
-      position2: data.position2,
-      joinedDate2: data.joinedDate2,
-      tenure2: data.tenure2,
-      remark2: data.remark2,
+      position1: data?.position1,
+      joinedDate1: data?.joinedDate1,
+      tenure1: data?.tenure1,
+      remark1: data?.remark1,
 
-      position3: data.position3,
-      joinedDate3: data.joinedDate3,
-      tenure3: data.tenure3,
-      remark3: data.remark3,
+      position2: data?.position2,
+      joinedDate2: data?.joinedDate2,
+      tenure2: data?.tenure2,
+      remark2: data?.remark2,
 
-      position4: data.position4,
-      joinedDate4: data.joinedDate4,
-      tenure4: data.tenure4,
-      remark4: data.remark4,
+      position3: data?.position3,
+      joinedDate3: data?.joinedDate3,
+      tenure3: data?.tenure3,
+      remark3: data?.remark3,
 
-      position5: data.position5,
-      joinedDate5: data.joinedDate5,
-      tenure5: data.tenure5,
-      remark5: data.remark5,
+      position4: data?.position4,
+      joinedDate4: data?.joinedDate4,
+      tenure4: data?.tenure4,
+      remark4: data?.remark4,
 
-      permanentMunicipality: data.permanentMunicipality,
-      permanentWardNumber: data.permanentWardNumber,
-      permanentDistrict: data.permanentDistrict,
-      permanentProvince: data.permanentProvince,
+      position5: data?.position5,
+      joinedDate5: data?.joinedDate5,
+      tenure5: data?.tenure5,
+      remark5: data?.remark5,
 
-      temporaryMunicipality: data.temporaryMunicipality,
-      temporaryWardNumber: data.temporaryWardNumber,
-      temporaryDistrict: data.temporaryDistrict,
-      temporaryProvince: data.temporaryProvince,
+      permanentMunicipality: data?.permanentMunicipality,
+      permanentWardNumber: data?.permanentWardNumber,
+      permanentDistrict: data?.permanentDistrict,
+      permanentProvince: data?.permanentProvince,
 
-      profession1: data.profession1,
-      organization1: data.organization1,
-      address1: data.address1,
-      startingDate1: data.startingDate1,
-      currentStatus1: data.currentStatus1,
-      pRemark1: data.pRemark1,
+      temporaryMunicipality: data?.temporaryMunicipality,
+      temporaryWardNumber: data?.temporaryWardNumber,
+      temporaryDistrict: data?.temporaryDistrict,
+      temporaryProvince: data?.temporaryProvince,
 
-      profession2: data.profession2,
-      organization2: data.organization2,
-      address2: data.address2,
-      startingDate2: data.startingDate2,
-      currentStatus2: data.currentStatus2,
-      pRemark2: data.pRemark2,
+      profession1: data?.profession1,
+      organization1: data?.organization1,
+      address1: data?.address1,
+      startingDate1: data?.startingDate1,
+      currentStatus1: data?.currentStatus1,
+      pRemark1: data?.pRemark1,
 
-      profession3: data.profession3,
-      organization3: data.organization3,
-      address3: data.address3,
-      startingDate3: data.startingDate3,
-      currentStatus3: data.currentStatus3,
-      pRemark3: data.pRemark3,
+      profession2: data?.profession2,
+      organization2: data?.organization2,
+      address2: data?.address2,
+      startingDate2: data?.startingDate2,
+      currentStatus2: data?.currentStatus2,
+      pRemark2: data?.pRemark2,
 
-      profession4: data.profession4,
-      organization4: data.organization4,
-      address4: data.address4,
-      startingDate4: data.startingDate4,
-      currentStatus4: data.currentStatus4,
-      pRemark4: data.pRemark4,
+      profession3: data?.profession3,
+      organization3: data?.organization3,
+      address3: data?.address3,
+      startingDate3: data?.startingDate3,
+      currentStatus3: data?.currentStatus3,
+      pRemark3: data?.pRemark3,
+
+      profession4: data?.profession4,
+      organization4: data?.organization4,
+      address4: data?.address4,
+      startingDate4: data?.startingDate4,
+      currentStatus4: data?.currentStatus4,
+      pRemark4: data?.pRemark4,
     })
   }, [])
 
@@ -256,7 +270,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                       <FormControl>
                         <FormLabel >First name</FormLabel>
                         <Input
-                          placeholder={data.firstName}
+                          placeholder={data?.firstName}
                           name='firstName'
                           onChange={handleInputChange}
                           isRequired
@@ -265,19 +279,19 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                       <FormControl>
                         <FormLabel>Middle name</FormLabel>
                         <Input
-                          placeholder={data.middleName}
+                          placeholder={data?.middleName}
                           name="middleName"
-                          // value={formData.middleName}
+                          // value={formdata?.middleName}
                           onChange={handleInputChange}
                         />
                       </FormControl>
                       <FormControl>
                         <FormLabel>Last name</FormLabel>
                         <Input
-                          placeholder={data.lastName}
+                          placeholder={data?.lastName}
                           isRequired
                           name="lastName"
-                          // value={formData.lastName}
+                          // value={formdata?.lastName}
                           onChange={handleInputChange}
                         />
                       </FormControl>
@@ -287,20 +301,20 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                       <FormControl>
                         <FormLabel>Date of birth</FormLabel>
                         <Input
-                          placeholder={data.dateOfBirth}
+                          placeholder={data?.dateOfBirth}
                           isRequired
                           name="dateOfBirth"
-                          // value={formData.dateOfBirth}
+                          // value={formdata?.dateOfBirth}
                           onChange={handleInputChange}
                         />
                       </FormControl>
                       <FormControl>
                         <FormLabel>Birth certificate number</FormLabel>
                         <Input
-                          placeholder={data.citizenshipNumber}
+                          placeholder={data?.citizenshipNumber}
                           type='number'
                           name="citizenshipNumber"
-                          // value={formData.birthCertificateNo}
+                          // value={formdata?.birthCertificateNo}
                           onChange={handleInputChange}
                         />
                       </FormControl>
@@ -308,21 +322,21 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                     <HStack justify="flex-start" mb={5}>
                       <FormControl>
                         <FormLabel>Contact number</FormLabel>
-                        <Input placeholder={data.contactNumber}
+                        <Input placeholder={data?.contactNumber}
                           type='number'
                           isRequired
                           name="contactNumber"
-                          // value={formData.contactNumber}
+                          // value={formdata?.contactNumber}
                           onChange={handleInputChange}
                         />
                       </FormControl>
                       <FormControl>
                         <FormLabel>Email ID</FormLabel>
                         <Input
-                          placeholder={data.email}
+                          placeholder={data?.email}
                           type='email'
                           name="email"
-                          // value={formData.email}
+                          // value={formdata?.email}
                           onChange={handleInputChange}
                         />
                       </FormControl>
@@ -330,7 +344,63 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                   </Box>
                 </Grid>
 
-                {/* SCHOLARSHIP */}
+                <FormControl mb={5} >
+            <FormLabel fontSize="22px" fontWeight="bold" >Membership type</FormLabel>
+            <Select w="500px"
+                        placeholder={data?.membershipType}
+                        name='membershipType'
+                        onChange={handleInputChange}
+                      >
+                        <option key="General" value="General">
+                        General
+                        </option>
+                        <option key="Active" value="Active">
+                        Active
+                        </option>
+                        <option key="Honorary" value="Honorary">
+                        Honorary
+                        </option>
+                        <option key="Lifetime" value="Lifetime">
+                        Lifetime
+                        </option>
+                      </Select>
+            </FormControl>
+               {/* QUALIFICATION */}
+               <FormControl mb={5} >
+                <FormLabel mt={5} fontSize="22px" fontWeight="bold"  >Education</FormLabel>
+                <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
+                  <FormLabel >Qualification</FormLabel>
+                  <FormLabel>Graduated year</FormLabel>
+                  <FormLabel>Institution name</FormLabel>
+                  <FormLabel>Address</FormLabel>
+                </Grid>
+                <HStack>
+                  <Input
+                    placeholder={data?.qualification}
+                    name="qualification"
+                    // value={formdata?.permanentAddress.municipality}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data?.graduatedYear}
+                    type='number'
+                    name='graduatedYear'
+                    onChange={handleInputChange}
+                  />
+
+                  <Input
+                    placeholder={data?.institutionName}
+                    name="institutionName"
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data?.institutionAddress}
+                    name='institutionAddress'
+                    onChange={handleInputChange}
+                  />
+                </HStack>
+              </FormControl>
+                {/* TENURE */}
             <FormLabel fontSize="22px" fontWeight="bold" >Designation</FormLabel>
             <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} >
               <FormLabel >SN</FormLabel>
@@ -344,22 +414,22 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel>1. </FormLabel>
                 <Input
-                  placeholder={data.position1}
+                  placeholder={data?.position1}
                   name="position1"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.joinedDate1}
+                  placeholder={data?.joinedDate1}
                    name="joinedDate1"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.tenure1}
+                  placeholder={data?.tenure1}
                   name="tenure1"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.remark1}
+                  placeholder={data?.remark1}
                   name="remark1"
                   onChange={handleInputChange}
                 />
@@ -368,22 +438,22 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel>2. </FormLabel>
                 <Input
-                  placeholder={data.position2}
+                  placeholder={data?.position2}
                   name="position2"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.joinedDate2}
+                  placeholder={data?.joinedDate2}
                   name="joinedDate2"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.tenure2}
+                  placeholder={data?.tenure2}
                   name="tenure2"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.remark2}
+                  placeholder={data?.remark2}
                   name="remark2"
                   onChange={handleInputChange}
                 />
@@ -392,22 +462,22 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel>3. </FormLabel>
                 <Input
-                  placeholder={data.position3}
+                  placeholder={data?.position3}
                   name="position3"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.joinedDate3}
+                  placeholder={data?.joinedDate3}
                   name="joinedDate3"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.tenure3}
+                  placeholder={data?.tenure3}
                   name="tenure3"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.remark3}
+                  placeholder={data?.remark3}
                   name="remark3"
                   onChange={handleInputChange}
                 />
@@ -416,22 +486,22 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel>4. </FormLabel>
                 <Input
-                  placeholder={data.position4}
+                  placeholder={data?.position4}
                   name="position4"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.joinedDate4}
+                  placeholder={data?.joinedDate4}
                   name="joinedDate4"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.tenure4}
+                  placeholder={data?.tenure4}
                   name="tenure4"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.remark4}
+                  placeholder={data?.remark4}
                   name="remark4"
                   onChange={handleInputChange}
                 />
@@ -440,22 +510,22 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel>5. </FormLabel>
                 <Input
-                  placeholder={data.position5}
+                  placeholder={data?.position5}
                   name="position5"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.joinedDate5}
+                  placeholder={data?.joinedDate5}
                   name="joinedDate5"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.tenure5}
+                  placeholder={data?.tenure5}
                   name="tenure5"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.remark5}
+                  placeholder={data?.remark5}
                   name="remark5"
                   onChange={handleInputChange}
                 />
@@ -475,23 +545,23 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               </Grid>
               <HStack>
                 <Input
-                  placeholder={data.permanentMunicipality}
+                  placeholder={data?.permanentMunicipality}
                   name="permanentMunicipality"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.permanentWardNo}
+                  placeholder={data?.permanentWardNo}
                   type='number'
                   name="permanentWardNo"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.permanentDistrict}
+                  placeholder={data?.permanentDistrict}
                   name="permanentDistrict"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.permanentProvince}
+                  placeholder={data?.permanentProvince}
                   name="permanentProvince"
                   onChange={handleInputChange}
                 />
@@ -509,24 +579,24 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               </Grid>
               <HStack>
                 <Input
-                  placeholder={data.temporaryMunicipality}
+                  placeholder={data?.temporaryMunicipality}
                   name="temporaryMunicipality"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.temporaryWardNo}
+                  placeholder={data?.temporaryWardNo}
                   type='number'
                   name="temporaryWardNo"
                   onChange={handleInputChange}
                 />
                 
                 <Input
-                  placeholder={data.temporaryDistrict}
+                  placeholder={data?.temporaryDistrict}
                   name="temporaryDistrict"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.temporaryProvince}
+                  placeholder={data?.temporaryProvince}
                   name="temporaryProvince"
                   onChange={handleInputChange}
                 />
@@ -547,32 +617,32 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
                 <FormLabel>1. </FormLabel>
                 <Input
-                  placeholder={data.profession1}
+                  placeholder={data?.profession1}
                   name="profession1"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.organization1}
+                  placeholder={data?.organization1}
                   name="organization1"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.address1}
+                  placeholder={data?.address1}
                   name="address1"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.startingDate1}
+                  placeholder={data?.startingDate1}
                   name="startingDate1"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.currentStatus1}
+                  placeholder={data?.currentStatus1}
                   name="currentStatus1"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.pRemark1}
+                  placeholder={data?.pRemark1}
                   name="pRemark1"
                   onChange={handleInputChange}
                 />
@@ -581,32 +651,32 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
                 <FormLabel>2. </FormLabel>
                 <Input
-                  placeholder={data.profession2}
+                  placeholder={data?.profession2}
                   name="profession2"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.organization2}
+                  placeholder={data?.organization2}
                   name="organization2"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.address2}
+                  placeholder={data?.address2}
                   name="address2"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.startingDate2}
+                  placeholder={data?.startingDate2}
                   name="startingDate2"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.currentStatus2}
+                  placeholder={data?.currentStatus2}
                   name="currentStatus2"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.pRemark2}
+                  placeholder={data?.pRemark2}
                   name="pRemark2"
                   onChange={handleInputChange}
                 />
@@ -615,32 +685,32 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
                 <FormLabel>1. </FormLabel>
                 <Input
-                  placeholder={data.profession3}
+                  placeholder={data?.profession3}
                   name="profession3"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.organization3}
+                  placeholder={data?.organization3}
                   name="organization3"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.address3}
+                  placeholder={data?.address3}
                   name="address3"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.startingDate3}
+                  placeholder={data?.startingDate3}
                   name="startingDate3"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.currentStatus3}
+                  placeholder={data?.currentStatus3}
                   name="currentStatus3"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.pRemark3}
+                  placeholder={data?.pRemark3}
                   name="pRemark3"
                   onChange={handleInputChange}
                 />
@@ -649,32 +719,32 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
                 <FormLabel>4. </FormLabel>
                 <Input
-                  placeholder={data.profession4}
+                  placeholder={data?.profession4}
                   name="profession4"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.organization4}
+                  placeholder={data?.organization4}
                   name="organization4"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.address4}
+                  placeholder={data?.address4}
                   name="address4"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.startingDate4}
+                  placeholder={data?.startingDate4}
                   name="startingDate4"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.currentStatus4}
+                  placeholder={data?.currentStatus4}
                   name="currentStatus4"
                   onChange={handleInputChange}
                 />
                 <Input
-                  placeholder={data.pRemark4}
+                  placeholder={data?.pRemark4}
                   name="pRemark4"
                   onChange={handleInputChange}
                 />
