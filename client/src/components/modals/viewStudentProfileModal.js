@@ -92,6 +92,7 @@ const ViewStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   <Text>Remarks</Text>
                 </Grid>
                 {/* SCHOLARSHIP ONE */}
+                {data.scholarship1FundType &&
                 <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <Text ml={1}>1.</Text>
                   <Text>{data.scholarship1FundType}</Text>
@@ -101,8 +102,9 @@ const ViewStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   <Text>{data.scholarship1To}</Text>
                   <Text>{data.scholarship1Gpa}</Text>
                   <Text>{data.scholarship1Remarks}</Text>
-                </Grid>
+                </Grid>}
                 {/* SCHOLARSHIP TWO */}
+                {data.scholarship2FundType &&
                 <Grid bg="gray.200" gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <Text ml={1}>2.</Text>
                   <Text>{data.scholarship2FundType}</Text>
@@ -112,8 +114,9 @@ const ViewStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   <Text>{data.scholarship2To}</Text>
                   <Text>{data.scholarship2Gpa}</Text>
                   <Text>{data.scholarship2Remarks}</Text>
-                </Grid>
+                </Grid>}
                 {/* SCHOLARSHIP THREE */}
+                {data.scholarship3FundType &&
                 <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <Text ml={1}>3.</Text>
                   <Text>{data.scholarship3FundType}</Text>
@@ -123,9 +126,10 @@ const ViewStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   <Text>{data.scholarship3To}</Text>
                   <Text>{data.scholarship3Gpa}</Text>
                   <Text>{data.scholarship3Remarks}</Text>
-                </Grid>
+                </Grid>}
                 {/* SCHOLARSHIP FOUR */}
-                <Grid bg="gray.200" gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                {data.scholarship4FundType &&
+                  <Grid bg="gray.200" gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <Text ml={1}>4.</Text>
                   <Text>{data.scholarship4FundType}</Text>
                   <Text>{data.scholarship4Category}</Text>
@@ -134,9 +138,10 @@ const ViewStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   <Text>{data.scholarship4To}</Text>
                   <Text>{data.scholarship4Gpa}</Text>
                   <Text>{data.scholarship4Remarks}</Text>
-                </Grid>
+                </Grid>}
                 {/* SCHOLARSHIP FIVE */}
-                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                {data.scholarship5FundType &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <Text ml={1}>5.</Text>
                   <Text>{data.scholarship5FundType}</Text>
                   <Text>{data.scholarship5Category}</Text>
@@ -145,7 +150,67 @@ const ViewStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   <Text>{data.scholarship5To}</Text>
                   <Text>{data.scholarship5Gpa}</Text>
                   <Text>{data.scholarship5Remarks}</Text>
-                </Grid>
+                </Grid>}
+                {/* SCHOLARSHIP SIX */}
+                {data.scholarship6FundType &&
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Text ml={1}>6.</Text>
+                  <Text>{data.scholarship6FundType}</Text>
+                  <Text>{data.scholarship6Category}</Text>
+                  <Text>{data.scholarship6Grade}</Text>
+                  <Text>{data.scholarship6From}</Text>
+                  <Text>{data.scholarship6To}</Text>
+                  <Text>{data.scholarship6Gpa}</Text>
+                  <Text>{data.scholarship6Remarks}</Text>
+                </Grid>}
+                {/* SCHOLARSHIP Seven */}
+                {data.scholarship7FundType &&
+                <Grid bg="gray.200" gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Text ml={1}>7.</Text>
+                  <Text>{data.scholarship7FundType}</Text>
+                  <Text>{data.scholarship7Category}</Text>
+                  <Text>{data.scholarship7Grade}</Text>
+                  <Text>{data.scholarship7From}</Text>
+                  <Text>{data.scholarship7To}</Text>
+                  <Text>{data.scholarship7Gpa}</Text>
+                  <Text>{data.scholarship7Remarks}</Text>
+                </Grid>}
+                {/* SCHOLARSHIP THREE */}
+                {data.scholarship8FundType &&
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Text ml={1}>8.</Text>
+                  <Text>{data.scholarship8FundType}</Text>
+                  <Text>{data.scholarship8Category}</Text>
+                  <Text>{data.scholarship8Grade}</Text>
+                  <Text>{data.scholarship8From}</Text>
+                  <Text>{data.scholarship8To}</Text>
+                  <Text>{data.scholarship8Gpa}</Text>
+                  <Text>{data.scholarship8Remarks}</Text>
+                </Grid>}
+                {/* SCHOLARSHIP FOUR */}
+                {data.scholarship9FundType &&
+                  <Grid bg="gray.200" gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Text ml={1}>9.</Text>
+                  <Text>{data.scholarship9FundType}</Text>
+                  <Text>{data.scholarship9Category}</Text>
+                  <Text>{data.scholarship9Grade}</Text>
+                  <Text>{data.scholarship9From}</Text>
+                  <Text>{data.scholarship9To}</Text>
+                  <Text>{data.scholarship9Gpa}</Text>
+                  <Text>{data.scholarship9Remarks}</Text>
+                </Grid>}
+                {/* SCHOLARSHIP FIVE */}
+                {data.scholarship10FundType &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Text ml={1}>10.</Text>
+                  <Text>{data.scholarship10FundType}</Text>
+                  <Text>{data.scholarship10Category}</Text>
+                  <Text>{data.scholarship10Grade}</Text>
+                  <Text>{data.scholarship10From}</Text>
+                  <Text>{data.scholarship10To}</Text>
+                  <Text>{data.scholarship10Gpa}</Text>
+                  <Text>{data.scholarship10Remarks}</Text>
+                </Grid>}
               </Box>
 
               {/* PERMANANT ADDRESS */}

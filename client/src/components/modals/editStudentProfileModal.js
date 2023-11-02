@@ -22,7 +22,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     const { onOpen } = useDisclosure();
     const [isCheck2FaDialogOpen, setIsCheck2FaDialogOpen] = useState(false);
   const initialFormData = {
-    // profileImageName: '',
+    profileImageName: null,
     project: '',
     firstName: '',
     middleName: '',
@@ -73,6 +73,54 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship5To: '',
     scholarship5Gpa: '',
     scholarship5Remarks: '',
+
+    scholarship6FundType: '',
+    scholarship6Category: '',
+    scholarship6Grade: '',
+    scholarship6From: '',
+    scholarship6To: '',
+    scholarship6Gpa: '',
+    scholarship6Remarks: '',
+
+    scholarship7FundType: '',
+    scholarship7Category: '',
+    scholarship7Grade: '',
+    scholarship7From: '',
+    scholarship7To: '',
+    scholarship7Gpa: '',
+    scholarship7Remarks: '',
+
+    scholarship8FundType: '',
+    scholarship8Category: '',
+    scholarship8Grade: '',
+    scholarship8From: '',
+    scholarship8To: '',
+    scholarship8Gpa: '',
+    scholarship8Remarks: '',
+
+    scholarship9FundType: '',
+    scholarship9Category: '',
+    scholarship9Grade: '',
+    scholarship9From: '',
+    scholarship9To: '',
+    scholarship9Gpa: '',
+    scholarship9Remarks: '',
+
+    scholarship9FundType: '',
+    scholarship9Category: '',
+    scholarship9Grade: '',
+    scholarship9From: '',
+    scholarship9To: '',
+    scholarship9Gpa: '',
+    scholarship9Remarks: '',
+
+    scholarshipcFundType: '',
+    scholarship10Category: '',
+    scholarship10Grade: '',
+    scholarship10From: '',
+    scholarship10To: '',
+    scholarship10Gpa: '',
+    scholarship10Remarks: '',
 
     permanentMunicipality: '',
     permanentWardNumber: '',
@@ -130,10 +178,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
 
 
   const handleImageSelect = (event) => {
-    setSelectedImage(event.target.files[0])
-    if (event.target.files && event.target.files[0]) {
-      setPreviewImage(URL.createObjectURL(event.target.files[0]));
+    const selectedFile = event.target.files[0]
+    setSelectedImage(selectedFile)
+    if (selectedFile) {
+      setPreviewImage(URL.createObjectURL(selectedFile));
     }
+    console.log(selectedImage)
   }
   useEffect(() => {
     setFormData({
@@ -180,13 +230,53 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship4Gpa: data?.scholarship4Gpa,
       scholarship4Remarks: data?.scholarship4Remarks,
 
-      scholarship4FundType: data?.scholarship4FundType,
+      scholarship5FundType: data?.scholarship5FundType,
       scholarship5Category: data?.scholarship5Category,
       scholarship5Grade: data?.scholarship5Grade,
       scholarship5From: data?.scholarship5From,
       scholarship5To: data?.scholarship5To,
       scholarship5Gpa: data?.scholarship5Gpa,
       scholarship5Remarks: data?.scholarship5Remarks,
+
+      scholarship6FundType: data?.scholarship6FundType,
+      scholarship6Category: data?.scholarship6Category,
+      scholarship6Grade: data?.scholarship6Grade,
+      scholarship6From: data?.scholarship6From,
+      scholarship6To: data?.scholarship6To,
+      scholarship6Gpa: data?.scholarship6Gpa,
+      scholarship6Remarks: data?.scholarship6Remarks,
+
+      scholarship7FundType: data?.scholarship7FundType,
+      scholarship7Category: data?.scholarship7Category,
+      scholarship7Grade: data?.scholarship7Grade,
+      scholarship7From: data?.scholarship7From,
+      scholarship7To: data?.scholarship7To,
+      scholarship7Gpa: data?.scholarship7Gpa,
+      scholarship7Remarks: data?.scholarship7Remarks,
+
+      scholarship8FundType: data?.scholarship8FundType,
+      scholarship8Category: data?.scholarship8Category,
+      scholarship8Grade: data?.scholarship8Grade,
+      scholarship8From: data?.scholarship8From,
+      scholarship8To: data?.scholarship8To,
+      scholarship8Gpa: data?.scholarship8Gpa,
+      scholarship8Remarks: data?.scholarship8Remarks,
+
+      scholarship9FundType: data?.scholarship9FundType,
+      scholarship9Category: data?.scholarship9Category,
+      scholarship9Grade: data?.scholarship9Grade,
+      scholarship9From: data?.scholarship9From,
+      scholarship9To: data?.scholarship9To,
+      scholarship9Gpa: data?.scholarship9Gpa,
+      scholarship9Remarks: data?.scholarship9Remarks,
+
+      scholarship10FundType: data?.scholarship10FundType,
+      scholarship10Category: data?.scholarship10Category,
+      scholarship10Grade: data?.scholarship10Grade,
+      scholarship10From: data?.scholarship10From,
+      scholarship10To: data?.scholarship10To,
+      scholarship10Gpa: data?.scholarship10Gpa,
+      scholarship10Remarks: data?.scholarship10Remarks,
 
       permanentMunicipality: data?.permanentMunicipality,
       permanentWardNumber: data?.permanentWardNumber,
@@ -242,11 +332,148 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
   };
 
   const handleSubmit = async (event) => {
+    // event.preventDefault();
+
+    const formDataToUpdate = new FormData();
+  
+    //Append only the fields that need to be updated
+    formData.project && formDataToUpdate.append('project', formData.project);
+    formData.firstName &&formDataToUpdate.append('firstName', formData.firstName);
+    formData.middleName &&formDataToUpdate.append('middleName', formData.middleName);
+    formData.lastName && formDataToUpdate.append('lastName', formData.lastName);
+    formData.gender && formDataToUpdate.append('gender', formData.gender);
+    formData.dateOfBirth && formDataToUpdate.append('dateOfBirth', formData.dateOfBirth);
+    formData.studentType && formDataToUpdate.append('studentType', formData.studentType);
+    formData.contactNumber && formDataToUpdate.append('contactNumber', formData.contactNumber);
+    formData.email && formDataToUpdate.append('email', formData.email);
+    formData.birthCertificateNo && formDataToUpdate.append('birthCertificateNo', formData.birthCertificateNo);
+    
+    formData.scholarship1FundType && formDataToUpdate.append('scholarship1FundType', formData.scholarship1FundType);
+    formData.scholarship1Category && formDataToUpdate.append('scholarship1Category', formData.scholarship1Category);
+    formData.scholarship1Grade && formDataToUpdate.append('scholarship1Grade', formData.scholarship1Grade);
+    formData.scholarship1From && formDataToUpdate.append('scholarship1From', formData.scholarship1From);
+    formData.scholarship1To && formDataToUpdate.append('scholarship1To', formData.scholarship1To);
+    formData.scholarship1Gpa && formDataToUpdate.append('scholarship1Gpa', formData.scholarship1Gpa);
+    formData.scholarship1Remarks && formDataToUpdate.append('scholarship1Remarks', formData.scholarship1Remarks);
+  
+    formData.scholarship2FundType && formDataToUpdate.append('scholarship2FundType', formData.scholarship2FundType);
+    formData.scholarship2Category && formDataToUpdate.append('scholarship2Category', formData.scholarship2Category);
+    formData.scholarship2Grade && formDataToUpdate.append('scholarship2Grade', formData.scholarship2Grade);
+    formData.scholarship2From && formDataToUpdate.append('scholarship2From', formData.scholarship2From);
+    formData.scholarship2To && formDataToUpdate.append('scholarship2To', formData.scholarship2To);
+    formData.scholarship2Gpa && formDataToUpdate.append('scholarship2Gpa', formData.scholarship2Gpa);
+    formData.scholarship2Remarks && formDataToUpdate.append('scholarship2Remarks', formData.scholarship2Remarks);
+
+    formData.scholarship3FundType && formDataToUpdate.append('scholarship3FundType', formData.scholarship3FundType);
+    formData.scholarship3Category && formDataToUpdate.append('scholarship3Category', formData.scholarship3Category);
+    formData.scholarship3Grade && formDataToUpdate.append('scholarship3Grade', formData.scholarship3Grade);
+    formData.scholarship3From && formDataToUpdate.append('scholarship3From', formData.scholarship3From);
+    formData.scholarship3To && formDataToUpdate.append('scholarship3To', formData.scholarship3To);
+    formData.scholarship3Gpa && formDataToUpdate.append('scholarship3Gpa', formData.scholarship3Gpa);
+    formData.scholarship3Remarks && formDataToUpdate.append('scholarship3Remarks', formData.scholarship3Remarks);
+
+    formData.scholarship4FundType && formDataToUpdate.append('scholarship4FundType', formData.scholarship4FundType);
+    formData.scholarship4Category && formDataToUpdate.append('scholarship4Category', formData.scholarship4Category);
+    formData.scholarship4Grade && formDataToUpdate.append('scholarship4Grade', formData.scholarship4Grade);
+    formData.scholarship4From && formDataToUpdate.append('scholarship4From', formData.scholarship4From);
+    formData.scholarship4To && formDataToUpdate.append('scholarship4To', formData.scholarship4To);
+    formData.scholarship4Gpa && formDataToUpdate.append('scholarship4Gpa', formData.scholarship4Gpa);
+    formData.scholarship4Remarks && formDataToUpdate.append('scholarship4Remarks', formData.scholarship4Remarks);
+
+    formData.scholarship5FundType && formDataToUpdate.append('scholarship5FundType', formData.scholarship5FundType);
+    formData.scholarship5Category && formDataToUpdate.append('scholarship5Category', formData.scholarship5Category);
+    formData.scholarship5Grade && formDataToUpdate.append('scholarship5Grade', formData.scholarship5Grade);
+    formData.scholarship5From && formDataToUpdate.append('scholarship5From', formData.scholarship5From);
+    formData.scholarship5To && formDataToUpdate.append('scholarship5To', formData.scholarship5To);
+    formData.scholarship5Gpa && formDataToUpdate.append('scholarship5Gpa', formData.scholarship5Gpa);
+    formData.scholarship5Remarks && formDataToUpdate.append('scholarship5Remarks', formData.scholarship5Remarks);
+
+    formData.scholarship6FundType && formDataToUpdate.append('scholarship6FundType', formData.scholarship6FundType);
+    formData.scholarship6Category && formDataToUpdate.append('scholarship6Category', formData.scholarship6Category);
+    formData.scholarship6Grade && formDataToUpdate.append('scholarship6Grade', formData.scholarship6Grade);
+    formData.scholarship6From && formDataToUpdate.append('scholarship6From', formData.scholarship6From);
+    formData.scholarship6To && formDataToUpdate.append('scholarship6To', formData.scholarship6To);
+    formData.scholarship6Gpa && formDataToUpdate.append('scholarship6Gpa', formData.scholarship6Gpa);
+    formData.scholarship6Remarks && formDataToUpdate.append('scholarship6Remarks', formData.scholarship6Remarks);
+
+    formData.scholarship7FundType && formDataToUpdate.append('scholarship7FundType', formData.scholarship7FundType);
+    formData.scholarship7Category && formDataToUpdate.append('scholarship7Category', formData.scholarship7Category);
+    formData.scholarship7Grade && formDataToUpdate.append('scholarship7Grade', formData.scholarship7Grade);
+    formData.scholarship7From && formDataToUpdate.append('scholarship7From', formData.scholarship7From);
+    formData.scholarship7To && formDataToUpdate.append('scholarship7To', formData.scholarship7To);
+    formData.scholarship7Gpa && formDataToUpdate.append('scholarship7Gpa', formData.scholarship7Gpa);
+    formData.scholarship7Remarks && formDataToUpdate.append('scholarship7Remarks', formData.scholarship7Remarks);
+
+    formData.scholarship8FundType && formDataToUpdate.append('scholarship8FundType', formData.scholarship8FundType);
+    formData.scholarship8Category && formDataToUpdate.append('scholarship8Category', formData.scholarship8Category);
+    formData.scholarship8Grade && formDataToUpdate.append('scholarship8Grade', formData.scholarship8Grade);
+    formData.scholarship8From && formDataToUpdate.append('scholarship8From', formData.scholarship8From);
+    formData.scholarship8To && formDataToUpdate.append('scholarship8To', formData.scholarship8To);
+    formData.scholarship8Gpa && formDataToUpdate.append('scholarship8Gpa', formData.scholarship8Gpa);
+    formData.scholarship8Remarks && formDataToUpdate.append('scholarship8Remarks', formData.scholarship8Remarks);
+
+    formData.scholarship9FundType && formDataToUpdate.append('scholarship9FundType', formData.scholarship9FundType);
+    formData.scholarship9Category && formDataToUpdate.append('scholarship9Category', formData.scholarship9Category);
+    formData.scholarship9Grade && formDataToUpdate.append('scholarship9Grade', formData.scholarship9Grade);
+    formData.scholarship9From && formDataToUpdate.append('scholarship9From', formData.scholarship9From);
+    formData.scholarship9To && formDataToUpdate.append('scholarship9To', formData.scholarship9To);
+    formData.scholarship9Gpa && formDataToUpdate.append('scholarship9Gpa', formData.scholarship9Gpa);
+    formData.scholarship9Remarks && formDataToUpdate.append('scholarship9Remarks', formData.scholarship9Remarks);
+
+    formData.scholarship10FundType && formDataToUpdate.append('scholarship10FundType', formData.scholarship10FundType);
+    formData.scholarship10Category && formDataToUpdate.append('scholarship10Category', formData.scholarship10Category);
+    formData.scholarship10Grade && formDataToUpdate.append('scholarship10Grade', formData.scholarship10Grade);
+    formData.scholarship10From && formDataToUpdate.append('scholarship10From', formData.scholarship10From);
+    formData.scholarship10To && formDataToUpdate.append('scholarship10To', formData.scholarship10To);
+    formData.scholarship10Gpa && formDataToUpdate.append('scholarship10Gpa', formData.scholarship10Gpa);
+    formData.scholarship10Remarks && formDataToUpdate.append('scholarship10Remarks', formData.scholarship10Remarks);
+    
+    formData.permanentMunicipality && formDataToUpdate.append('permanentMunicipality', formData.permanentMunicipality);
+    formData.permanentWardNumber && formDataToUpdate.append('permanentWardNumber', formData.permanentWardNumber);
+    formData.permanentDistrict && formDataToUpdate.append('permanentDistrict', formData.permanentDistrict);
+    formData.permanentProvince && formDataToUpdate.append('permanentProvince', formData.permanentProvince);
+  
+    formData.currentMunicipality && formDataToUpdate.append('currentMunicipality', formData.currentMunicipality);
+    formData.currentWardNumber && formDataToUpdate.append('currentWardNumber', formData.currentWardNumber);
+    formData.currentDistrict && formDataToUpdate.append('currentDistrict', formData.currentDistrict);
+    formData.currentProvince && formDataToUpdate.append('currentProvince', formData.currentProvince);
+    
+    formData.schoolName && formDataToUpdate.append('schoolName', formData.schoolName);
+    formData.principalName && formDataToUpdate.append('principalName', formData.principalName);
+    formData.schoolNumber && formDataToUpdate.append('schoolNumber', formData.schoolNumber);
+    formData.contactPersonName && formDataToUpdate.append('contactPersonName', formData.contactPersonName);
+    formData.contactPersonPosition && formDataToUpdate.append('contactPersonPosition', formData.contactPersonPosition);
+    formData.contactPersonNumber && formDataToUpdate.append('contactPersonNumber', formData.contactPersonNumber);
+    formData.schoolMunicipality && formDataToUpdate.append('schoolMunicipality', formData.schoolMunicipality);
+    formData.schoolWardNumber && formDataToUpdate.append('schoolWardNumber', formData.schoolWardNumber);
+    formData.schoolDistrict && formDataToUpdate.append('schoolDistrict', formData.schoolDistrict);
+    formData.schoolProvince && formDataToUpdate.append('schoolProvince', formData.schoolProvince);
+    
+    formData.fatherName && formDataToUpdate.append('fatherName', formData.fatherName);
+    formData.fatherAddress && formDataToUpdate.append('fatherAddress', formData.fatherAddress);
+    formData.fatherCitizenshipNumber && formDataToUpdate.append('fatherCitizenshipNumber', formData.fatherCitizenshipNumber);
+    formData.fatherOccupation && formDataToUpdate.append('fatherOccupation', formData.fatherOccupation);
+    formData.fatherContactNumber && formDataToUpdate.append('fatherContactNumber', formData.fatherContactNumber);
+    
+    formData.motherName && formDataToUpdate.append('motherName', formData.motherName);
+    formData.motherAddress && formDataToUpdate.append('motherAddress', formData.motherAddress);
+    formData.motherCitizenshipNumber && formDataToUpdate.append('motherCitizenshipNumber', formData.motherCitizenshipNumber);
+    formData.motherOccupation && formDataToUpdate.append('motherOccupation', formData.motherOccupation);
+    formData.motherContactNumber && formDataToUpdate.append('motherContactNumber', formData.motherContactNumber);
+
+    formData.guardianName && formDataToUpdate.append('guardianName', formData.guardianName);
+    formData.guardianAddress && formDataToUpdate.append('guardianAddress', formData.guardianAddress);
+    formData.guardianCitizenshipNumber && formDataToUpdate.append('guardianCitizenshipNumber', formData.guardianCitizenshipNumber);
+    formData.guardianOccupation && formDataToUpdate.append('guardianOccupation', formData.guardianOccupation);
+    formData.guardianContactNumber && formDataToUpdate.append('guardianContactNumber', formData.guardianContactNumber);
+
+    // Append the new image if it's selected
+    if (selectedImage) {
+      formDataToUpdate.append('profileImageName', selectedImage);
+    }
     try {
-      const res = await axios.patch(`${baseUrl}/edit-student-profile/${data._id}`, formData,
-        // {headers: {
-        //     'Content-Type': 'multipart/form-data',
-        //   }}
+      const res = await axios.patch(`${baseUrl}/edit-student-profile/${data._id}`, formDataToUpdate,
+     
       )
       if (res.status === 200) {
         window.location.reload()
@@ -283,70 +510,73 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     }
   };
 
-  const submitToArchiveAsAlumuni = async () => {
-    const formData = new FormData()
-    formData.append('registeredBy', district)
-    if(district !== "all"){
-        formData.append('project', "ncsep")
-    }else{
-        // formData.append('project', project)
-    }
-    formData.append('name', data.firstName + ' ' + data?.middleName + ' ' + + data.lastName)
-    formData.append('contactNumber', data.contactNumber)
-    formData.append('email', data.email)
-    // formData.append('citizenshipNumber', data.citizenshipNumber)
-    // formData.append('currentStatus', alumuniCurrentStatus)
-    // formData.append('occupation', alumuniOccupation)
-    // formData.append('organization', alumuniOrganization)
-    // formData.append('position', alumuniPosition)
-    formData.append('municipality', data.currentMunicipality)
-    formData.append('wardNo', data.currentWardNumber)
-    formData.append('alumuniDistrict', data.currentDistrict)
-    formData.append('province', data.currentDistrict)
+//   const submitToArchiveAsAlumuni = async () => {
+//     const formData = new FormData()
+//     formData.append('registeredBy', district)
+//     if(district !== "all"){
+//         formData.append('project', "ncsep")
+//     }else{
+//         // formData.append('project', project)
+//     }
+//     formData.append('name', data.firstName + ' ' + data?.middleName + ' ' + + data.lastName)
+//     formData.append('contactNumber', data.contactNumber)
+//     formData.append('email', data.email)
+//     // formData.append('citizenshipNumber', data.citizenshipNumber)
+//     // formData.append('currentStatus', alumuniCurrentStatus)
+//     // formData.append('occupation', alumuniOccupation)
+//     // formData.append('organization', alumuniOrganization)
+//     // formData.append('position', alumuniPosition)
+//     formData.append('municipality', data.currentMunicipality)
+//     formData.append('wardNo', data.currentWardNumber)
+//     formData.append('alumuniDistrict', data.currentDistrict)
+//     formData.append('province', data.currentDistrict)
 
-    try {
-        const res = await axios.post(`${baseUrl}/create-alumuni-student-profile`, formData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }
-        );
-        if (res.status === 200) {
-            toast({
-                title: 'Success.',
-                description: 'Alumuni student profile created.',
-                status: 'success',
-                duration: 5000,
-                isClosable: true,
-                position: 'top'
-            });
-            window.location.reload()
+//     try {
+//         const res = await axios.post(`${baseUrl}/create-alumuni-student-profile`, formData, {
+//                 headers: {
+//                     'Content-Type': 'application/json',
+//                 },
+//             }
+//         );
+//         if (res.status === 200) {
+//             toast({
+//                 title: 'Success.',
+//                 description: 'Alumuni student profile created.',
+//                 status: 'success',
+//                 duration: 5000,
+//                 isClosable: true,
+//                 position: 'top'
+//             });
+//             window.location.reload()
 
-        } else {
-            toast({
-                title: 'Error.',
-                description: 'Failed to create student profile.',
-                status: 'error',
-                duration: 5000,
-                isClosable: true,
-                position: 'top'
-            });
-        }
-    } catch (error) {
-        console.error('Error updating image: ', error);
-        toast({
-            title: 'Error.',
-            description: 'Failed to connect to server.',
-            status: 'error',
-            duration: 5000,
-            isClosable: true,
-            position: 'top'
-        });
-    }
-}
+//         } else {
+//             toast({
+//                 title: 'Error.',
+//                 description: 'Failed to create student profile.',
+//                 status: 'error',
+//                 duration: 5000,
+//                 isClosable: true,
+//                 position: 'top'
+//             });
+//         }
+//     } catch (error) {
+//         console.error('Error updating image: ', error);
+//         toast({
+//             title: 'Error.',
+//             description: 'Failed to connect to server.',
+//             status: 'error',
+//             duration: 5000,
+//             isClosable: true,
+//             position: 'top'
+//         });
+//     }
+// }
+
+
 
   //filter municipalities from selected district from selected province
   //PERMANENT DISTRICT
+  
   let selectedPermanentProvince = {}
   if(formData?.permanentProvince){
     selectedPermanentProvince = provinces.find(item => item?.name === formData?.permanentProvince)
@@ -411,7 +641,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                 <Grid gridTemplateColumns={"1fr 3fr"}>
                   {data?.profileImageName && <Image
                     rounded={10}
-                    src={require(`../../uploads/studentImage/${data?.profileImageName}`)} w="200px"
+                    src={ previewImage || require(`../../uploads/studentImage/${data?.profileImageName}`)} w="200px"
                     onClick={() => imageInputRef.current.click()}
                   />}
                   <input
@@ -430,6 +660,9 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                         name='project'
                         onChange={handleInputChange}
                       >
+                        <option key="" value="">
+                      None
+                    </option>
                         <option key="PRL" value="PRL">
                           PRL
                         </option>
@@ -555,7 +788,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                 {/* SCHOLARSHIP */}
                 <FormControl>
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold" >Scholarship</FormLabel>
-                  <Grid gridTemplateColumns={"0.1fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
                     <FormLabel >SN</FormLabel>
                     <FormLabel >Fund type</FormLabel>
                     <FormLabel >Category</FormLabel>
@@ -567,13 +800,16 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   </Grid>
                   {/* SCHOLARSHIP ONE */}
                 </FormControl>
-                <Grid gridTemplateColumns={"0.1fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>1. </FormLabel>
                   <Select
                     placeholder={data.scholarship1FundType}
                     name="scholarship1FundType"
                     onChange={handleInputChange}
                   >
+                    <option key="" value="">
+                      None
+                    </option>
                     <option key="NEF" value="NEF">
                       NEF
                     </option>
@@ -632,13 +868,16 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP TWO */}
-                <Grid gridTemplateColumns={"0.1fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>2. </FormLabel>
                   <Select
                     placeholder={data.scholarship2FundType}
                     name="scholarship2FundType"
                     onChange={handleInputChange}
                   >
+                    <option key="" value="">
+                      None
+                    </option>
                     <option key="NEF" value="NEF">
                       NEF
                     </option>
@@ -696,13 +935,16 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP THREE */}
-                <Grid gridTemplateColumns={"0.1fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>3. </FormLabel>
                   <Select
                     placeholder={data.scholarship3FundType}
                     name="scholarship3FundType"
                     onChange={handleInputChange}
                   >
+                    <option key="" value="">
+                      None
+                    </option>
                     <option key="NEF" value="NEF">
                       NEF
                     </option>
@@ -760,13 +1002,16 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP FOUR */}
-                <Grid gridTemplateColumns={"0.1fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>4. </FormLabel>
                   <Select
                     placeholder={data.scholarship4FundType}
                     name="scholarship4FundType"
                     onChange={handleInputChange}
                   >
+                    <option key="" value="">
+                      None
+                    </option>
                     <option key="NEF" value="NEF">
                       NEF
                     </option>
@@ -823,13 +1068,17 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     onChange={handleInputChange}
                   />
                 </Grid>
-                <Grid gridTemplateColumns={"0.1fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                {/* SCHOLARSHIP FIVE */}
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>5. </FormLabel>
                   <Select
                     placeholder={data.scholarship5FundType}
                     name="scholarship5FundType"
                     onChange={handleInputChange}
                   >
+                    <option key="" value="">
+                      None
+                    </option>
                     <option key="NEF" value="NEF">
                       NEF
                     </option>
@@ -886,7 +1135,341 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     onChange={handleInputChange}
                   />
                 </Grid>
-
+                {/* SCHOLARSHIP SIX */}
+                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <FormLabel>6. </FormLabel>
+                  <Select
+                    placeholder={data.scholarship6FundType}
+                    name="scholarship6FundType"
+                    onChange={handleInputChange}
+                  >
+                    <option key="" value="">
+                      None
+                    </option>
+                    <option key="NEF" value="NEF">
+                      NEF
+                    </option>
+                    <option key="ARMF" value="ARMF">
+                      ARMF
+                    </option>
+                  </Select>
+                  <Select
+                  placeholder={data.scholarship6Category}
+                  name="scholarship6Category"
+                  onChange={handleInputChange}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+                   <Select
+                  placeholder={data.scholarship6Grade}
+                  name="scholarship6Grade"
+                  // value={formData.scholarship1.grade}
+                  onChange={handleInputChange}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+                  <Input
+                    placeholder={data.scholarship6From}
+                 
+                    name="scholarship6From"
+                    // value={formData.scholarship1.from}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data.scholarship6To}
+                    name="scholarship6To"
+                    // value={formData.scholarship1.to}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    type='number'
+                    placeholder={data.scholarship6Gpa}
+                    name="scholarship6Gpa"
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data.scholarship6Remarks}
+                    name="scholarship6Remarks"
+                    // value={formData.scholarship1.remarks}
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                {/* SCHOLARSHIP SEVEN */}
+                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <FormLabel>7. </FormLabel>
+                  <Select
+                    placeholder={data.scholarship7FundType}
+                    name="scholarship7FundType"
+                    onChange={handleInputChange}
+                  >
+                    <option key="" value="">
+                      None
+                    </option>
+                    <option key="NEF" value="NEF">
+                      NEF
+                    </option>
+                    <option key="ARMF" value="ARMF">
+                      ARMF
+                    </option>
+                  </Select>
+                  <Select
+                  placeholder={data.scholarship7Category}
+                  name="scholarship7Category"
+                  onChange={handleInputChange}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+                  <Select
+                  placeholder={data.scholarship7Grade}
+                  name="scholarship7Grade"
+                  // value={formData.scholarship1.grade}
+                  onChange={handleInputChange}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+                  <Input
+                    placeholder={data.scholarship7From}
+                    name="scholarship7From"
+                    // value={formData.scholarship1.from}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data.scholarship7To}
+                    name="scholarship7To"
+                    // value={formData.scholarship1.to}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    type='number'
+                    placeholder={data.scholarship7Gpa}
+                    name="scholarship7Gpa"
+                    // value={formData.scholarship1.gpa}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data.scholarship7Remarks}
+                    name="scholarship7Remarks"
+                    // value={formData.scholarship1.remarks}
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                {/* SCHOLARSHIP EIGHT */}
+                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <FormLabel>8. </FormLabel>
+                  <Select
+                    placeholder={data.scholarship8FundType}
+                    name="scholarship8FundType"
+                    onChange={handleInputChange}
+                  >
+                    <option key="" value="">
+                      None
+                    </option>
+                    <option key="NEF" value="NEF">
+                      NEF
+                    </option>
+                    <option key="ARMF" value="ARMF">
+                      ARMF
+                    </option>
+                  </Select>
+                  <Select
+                  placeholder={data.scholarship8Category}
+                  name="scholarship8Category"
+                  onChange={handleInputChange}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+                  <Select
+                  placeholder={data.scholarship8Grade}
+                  name="scholarship8Grade"
+                  // value={formData.scholarship1.grade}
+                  onChange={handleInputChange}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+                  <Input
+                    placeholder={data.scholarship8From}
+                    name="scholarship8From"
+                    // value={formData.scholarship1.from}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data.scholarship8To}
+                    name="scholarship8To"
+                    // value={formData.scholarship1.to}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    type='number'
+                    placeholder={data.scholarship8Gpa}
+                    name="scholarship8Gpa"
+                    // value={formData.scholarship1.gpa}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data.scholarship8Remarks}
+                    name="scholarship8Remarks"
+                    // value={formData.scholarship1.remarks}
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                {/* SCHOLARSHIP NINE */}
+                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <FormLabel>9. </FormLabel>
+                  <Select
+                    placeholder={data.scholarship9FundType}
+                    name="scholarship9FundType"
+                    onChange={handleInputChange}
+                  >
+                    <option key="" value="">
+                      None
+                    </option>
+                    <option key="NEF" value="NEF">
+                      NEF
+                    </option>
+                    <option key="ARMF" value="ARMF">
+                      ARMF
+                    </option>
+                  </Select>
+                  <Select
+                  placeholder={data.scholarship9Category}
+                  name="scholarship9Category"
+                  onChange={handleInputChange}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+                  <Select
+                  placeholder={data.scholarship9Grade}
+                  name="scholarship9Grade"
+                  // value={formData.scholarship1.grade}
+                  onChange={handleInputChange}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+                  <Input
+                    placeholder={data.scholarship9From}
+                    name="scholarship9From"
+                    // value={formData.scholarship1.from}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data.scholarship9To}
+                    name="scholarship9To"
+                    // value={formData.scholarship1.to}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    type='number'
+                    placeholder={data.scholarship9Gpa}
+                    name="scholarship9Gpa"
+                    // value={formData.scholarship1.gpa}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data.scholarship9Remarks}
+                    name="scholarship9Remarks"
+                    // value={formData.scholarship1.remarks}
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                {/* SCHOLARSHIP TEN */}
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <FormLabel>10. </FormLabel>
+                  <Select
+                    placeholder={data.scholarship10FundType}
+                    name="scholarship10FundType"
+                    onChange={handleInputChange}
+                  >
+                    <option key="" value="">
+                      None
+                    </option>
+                    <option key="NEF" value="NEF">
+                      NEF
+                    </option>
+                    <option key="ARMF" value="ARMF">
+                      ARMF
+                    </option>
+                  </Select>
+                  <Select
+                  placeholder={data.scholarship10Category}
+                  name="scholarship10Category"
+                  onChange={ handleInputChange}
+                >
+                  {scholarshipCategories.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+                   <Select
+                  placeholder={data.scholarship10Grade}
+                  name="scholarship10Grade"
+                  // value={formData.scholarship1.grade}
+                  onChange={handleInputChange}
+                >
+                  {classOptions.map((option) => (
+                    <option key={option} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </Select>
+                  <Input
+                    placeholder={data.scholarship10From}
+                    name="scholarship10From"
+                    // value={formData.scholarship1.from}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data.scholarship10To}
+                    name="scholarship10To"
+                    // value={formData.scholarship1.to}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    type='number'
+                    placeholder={data.scholarship10Gpa}
+                    name="scholarship10Gpa"
+                    // value={formData.scholarship1.gpa}
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data.scholarship10Remarks}
+                    name="scholarship10Remarks"
+                    // value={formData.scholarship1.remarks}
+                    onChange={handleInputChange}
+                  />
+                </Grid>
 
                 {/* PERMANENT ADDRESS */}
               <FormControl>

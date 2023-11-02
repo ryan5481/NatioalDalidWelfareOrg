@@ -39,6 +39,38 @@ const CreateBoardMemberProfile = async(req, res) => {
     }
 }
 
+const UploadBoardMemberCtznship = async(req, res) => {
+    try{
+
+        // console.log(req.body)
+
+        if (!req.file) {
+            return res.status(400).json({
+                msg: "File not received."
+            });
+        }
+
+        const reqInclFile = {
+            ...req.body,
+            citizenshipFileName: req.file.filename,
+          };
+
+        const data = await BoardMemberProfile.create(reqInclFile)
+        if(data){
+            res.status(200).json({
+                msg: "Board member profile created successfully."
+            })
+        }else{
+            res.status(403).json({
+                msg: "Board member profile registration failed."
+            })
+        }
+    }catch(error){
+        console.error("Authentication error:", error);
+        return res.status(500).json({ msg: "Internal server error." });
+    }
+}
+
 const GetBoardMemberProfiles = async (req, res) => {
     try {
         // Filter
@@ -119,6 +151,7 @@ const DeleteBoardMemberProfile = async(req, res) => {
 }
 
 exports.CreateBoardMemberProfile = CreateBoardMemberProfile
+exports.UploadBoardMemberCtznship = UploadBoardMemberCtznship
 exports.GetBoardMemberProfiles = GetBoardMemberProfiles
 exports.EditBoardMemberProfile = EditBoardMemberProfile
 exports.DeleteBoardMemberProfile = DeleteBoardMemberProfile

@@ -88,6 +88,41 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [scholarship5To, setScholarship5To] = useState('')
   const [scholarship5Gpa, setScholarship5Gpa] = useState('')
   const [scholarship5Remarks, setScholarship5Remarks] = useState('')
+  const [scholarship6FundType, setScholarship6FundType] = useState('')
+  const [scholarship6Category, setScholarship6Category] = useState('')
+  const [scholarship6Grade, setScholarship6Grade] = useState('')
+  const [scholarship6From, setScholarship6From] = useState('')
+  const [scholarship6To, setScholarship6To] = useState('')
+  const [scholarship6Gpa, setScholarship6Gpa] = useState('')
+  const [scholarship6Remarks, setScholarship6Remarks] = useState('')
+  const [scholarship7FundType, setScholarship7FundType] = useState('')
+  const [scholarship7Category, setScholarship7Category] = useState('')
+  const [scholarship7Grade, setScholarship7Grade] = useState('')
+  const [scholarship7From, setScholarship7From] = useState('')
+  const [scholarship7To, setScholarship7To] = useState('')
+  const [scholarship7Gpa, setScholarship7Gpa] = useState('')
+  const [scholarship7Remarks, setScholarship7Remarks] = useState('')
+  const [scholarship8FundType, setScholarship8FundType] = useState('')
+  const [scholarship8Category, setScholarship8Category] = useState('')
+  const [scholarship8Grade, setScholarship8Grade] = useState('')
+  const [scholarship8From, setScholarship8From] = useState('')
+  const [scholarship8To, setScholarship8To] = useState('')
+  const [scholarship8Gpa, setScholarship8Gpa] = useState('')
+  const [scholarship8Remarks, setScholarship8Remarks] = useState('')
+  const [scholarship9FundType, setScholarship9FundType] = useState('')
+  const [scholarship9Category, setScholarship9Category] = useState('')
+  const [scholarship9Grade, setScholarship9Grade] = useState('')
+  const [scholarship9From, setScholarship9From] = useState('')
+  const [scholarship9To, setScholarship9To] = useState('')
+  const [scholarship9Gpa, setScholarship9Gpa] = useState('')
+  const [scholarship9Remarks, setScholarship9Remarks] = useState('')
+  const [scholarship10FundType, setScholarship10FundType] = useState('')
+  const [scholarship10Category, setScholarship10Category] = useState('')
+  const [scholarship10Grade, setScholarship10Grade] = useState('')
+  const [scholarship10From, setScholarship10From] = useState('')
+  const [scholarship10To, setScholarship10To] = useState('')
+  const [scholarship10Gpa, setScholarship10Gpa] = useState('')
+  const [scholarship10Remarks, setScholarship10Remarks] = useState('')
   const [permanentMunicipality, setPermanentMunicipality] = useState('')
   const [permanentWardNumber, setPermanentWardNumber] = useState('')
   const [permanentDistrict, setPermanentDistrict] = useState('')
@@ -130,49 +165,49 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   //filter municipalities from selected district from selected province
   //PERMANENT ADDRESS
   let selectedPermanentProvince = {}
-  if(permanentProvince){
+  if (permanentProvince) {
     selectedPermanentProvince = provinces.find(province => province.name == permanentProvince)
   }
   const selectedPermanentProvinceDistricts = selectedPermanentProvince !== null ? districts.filter(district => district.province_id === selectedPermanentProvince?.id) : nepalDistrcitsList
 
   let selectedPermanentDistrict = {}
-  if(permanentDistrict){
+  if (permanentDistrict) {
     selectedPermanentDistrict = districts.find(district => district.name == permanentDistrict)
   }
   const selectedPermanentDistrictMunicipalities = selectedPermanentDistrict ? municipalities.filter(municipality => municipality.district_id === selectedPermanentDistrict?.id) : []
   //CURRENT ADDRESS
   let selectedCurrentProvince = {}
-  if(currentProvince){
+  if (currentProvince) {
     selectedCurrentProvince = provinces.find(province => province.name == currentProvince)
   }
   const selectedCurrentProvinceDistricts = selectedCurrentProvince !== null ? districts.filter(district => district.province_id === selectedCurrentProvince?.id) : nepalDistrcitsList
 
   let selectedCurrentDistrict = {}
-  if(currentDistrict){
+  if (currentDistrict) {
     selectedCurrentDistrict = districts.find(district => district.name == currentDistrict)
   }
   const selectedCurrentDistrictMunicipalities = selectedCurrentDistrict ? municipalities.filter(municipality => municipality.district_id === selectedCurrentDistrict?.id) : []
 
-//GET MUNICIPALITIES OF THE LOGGED DISTRICT ADMIN'S DISTRICT to AUTO UPDATE
-let loggedInDistrictObject = {}
-loggedInDistrictObject = districts.find(item => item.name == district)
- console.log(loggedInDistrictObject)
-const loggedInDistrictMunicipalities = municipalities.filter(municipality => municipality.district_id === loggedInDistrictObject?.id)
-  
-//GET PROVINCE OF THE LOGGED DISTRICT ADMIN'S DISTRICT to AUTO UPDATE
-let loggedInProvinceId = loggedInDistrictObject?.province_id
-let loggedInProvinceObject = provinces.find(item => item.id == loggedInProvinceId)
-let loggedInDistAdminProvince = loggedInProvinceObject?.name
+  //GET MUNICIPALITIES OF THE LOGGED DISTRICT ADMIN'S DISTRICT to AUTO UPDATE
+  let loggedInDistrictObject = {}
+  loggedInDistrictObject = districts.find(item => item.name == district)
+  console.log(loggedInDistrictObject)
+  const loggedInDistrictMunicipalities = municipalities.filter(municipality => municipality.district_id === loggedInDistrictObject?.id)
 
-//SCHOOL ADDRESS
+  //GET PROVINCE OF THE LOGGED DISTRICT ADMIN'S DISTRICT to AUTO UPDATE
+  let loggedInProvinceId = loggedInDistrictObject?.province_id
+  let loggedInProvinceObject = provinces.find(item => item.id == loggedInProvinceId)
+  let loggedInDistAdminProvince = loggedInProvinceObject?.name
+
+  //SCHOOL ADDRESS
   let selectedSchoolProvince = {}
-  if(schoolProvince){
+  if (schoolProvince) {
     selectedSchoolProvince = provinces.find(province => province.name == schoolProvince)
   }
   const selectedSchoolProvinceDistricts = selectedSchoolProvince !== null ? districts.filter(district => district.province_id === selectedSchoolProvince?.id) : nepalDistrcitsList
 
   let selectedSchoolDistrict = {}
-  if(schoolDistrict){
+  if (schoolDistrict) {
     selectedSchoolDistrict = districts.find(district => district.name == schoolDistrict)
   }
   const selectedSchoolDistrictMunicipalities = selectedSchoolDistrict ? municipalities.filter(municipality => municipality.district_id === selectedSchoolDistrict?.id) : []
@@ -200,11 +235,11 @@ let loggedInDistAdminProvince = loggedInProvinceObject?.name
         formData.append('profileImageName', selectedImage, selectedImage.filename);
       }
       formData.append('isPrlEthProject', scholarshipProject == "prlEth" ? true : false)
-      if(scholarshipProject == "prlEth"){
+      if (scholarshipProject == "prlEth") {
         formData.append('project', project)
-    }else{
+      } else {
         formData.append('project', "NCSEP")
-    }
+      }
       formData.append('firstName', firstName)
       formData.append('middleName', middleName)
       formData.append('lastName', lastName)
@@ -249,13 +284,48 @@ let loggedInDistAdminProvince = loggedInProvinceObject?.name
       formData.append('scholarship5To', scholarship5To)
       formData.append('scholarship5Gpa', scholarship5Gpa)
       formData.append('scholarship5Remarks', scholarship5Remarks)
+      formData.append('scholarship6FundType', scholarship6FundType)
+      formData.append('scholarship6Category', scholarship6Category)
+      formData.append('scholarship6Grade', scholarship6Grade)
+      formData.append('scholarship6From', scholarship6From)
+      formData.append('scholarship6To', scholarship6To)
+      formData.append('scholarship6Gpa', scholarship6Gpa)
+      formData.append('scholarship6Remarks', scholarship6Remarks)
+      formData.append('scholarship7FundType', scholarship7FundType)
+      formData.append('scholarship7Category', scholarship7Category)
+      formData.append('scholarship7Grade', scholarship7Grade)
+      formData.append('scholarship7From', scholarship7From)
+      formData.append('scholarship7To', scholarship7To)
+      formData.append('scholarship7Gpa', scholarship7Gpa)
+      formData.append('scholarship7Remarks', scholarship7Remarks)
+      formData.append('scholarship8FundType', scholarship8FundType)
+      formData.append('scholarship8Category', scholarship8Category)
+      formData.append('scholarship8Grade', scholarship8Grade)
+      formData.append('scholarship8From', scholarship8From)
+      formData.append('scholarship8To', scholarship8To)
+      formData.append('scholarship8Gpa', scholarship8Gpa)
+      formData.append('scholarship8Remarks', scholarship8Remarks)
+      formData.append('scholarship9FundType', scholarship9FundType)
+      formData.append('scholarship9Category', scholarship9Category)
+      formData.append('scholarship9Grade', scholarship9Grade)
+      formData.append('scholarship9From', scholarship9From)
+      formData.append('scholarship9To', scholarship9To)
+      formData.append('scholarship9Gpa', scholarship9Gpa)
+      formData.append('scholarship9Remarks', scholarship9Remarks)
+      formData.append('scholarship10FundType', scholarship10FundType)
+      formData.append('scholarship10Category', scholarship10Category)
+      formData.append('scholarship10Grade', scholarship10Grade)
+      formData.append('scholarship10From', scholarship10From)
+      formData.append('scholarship10To', scholarship10To)
+      formData.append('scholarship10Gpa', scholarship10Gpa)
+      formData.append('scholarship10Remarks', scholarship10Remarks)
       formData.append('permanentMunicipality', permanentMunicipality)
       formData.append('permanentWardNumber', permanentWardNumber)
       formData.append('permanentDistrict', permanentDistrict)
       formData.append('permanentProvince', permanentProvince)
       formData.append('currentMunicipality', currentMunicipality)
       formData.append('currentWardNumber', currentWardNumber)
-      formData.append('currentDistrict', district == "all" ? currentDistrict : district) 
+      formData.append('currentDistrict', district == "all" ? currentDistrict : district)
       formData.append('currentProvince', district == "all" ? currentProvince : loggedInDistAdminProvince)
       formData.append('schoolName', schoolName)
       formData.append('principalName', principalName)
@@ -300,7 +370,7 @@ let loggedInDistAdminProvince = loggedInProvinceObject?.name
           isClosable: true,
           position: 'top'
         });
-        window.location.reload()
+        // window.location.reload()
 
       } else {
         toast({
@@ -388,6 +458,22 @@ let loggedInDistAdminProvince = loggedInProvinceObject?.name
     }
   }, [selectedRadio]);
 
+  //ADD SCHOLARSHIPFIELDS
+  const [numFields, setNumFields] = useState(1);
+
+  const handleAddField = () => {
+    // Limit the number of fields to 5
+    if (numFields < 10) {
+      setNumFields(numFields + 1);
+    }
+  };
+
+  const handleRemoveField = () => {
+    // Limit the number of fields to 5
+    if (numFields > 1) {
+      setNumFields(numFields - 1);
+    }
+  };
 
   return (
     <>
@@ -404,7 +490,7 @@ let loggedInDistAdminProvince = loggedInProvinceObject?.name
             onSubmit={submitForm}
           >
             <Box m={5} >
-              
+
               <Grid gridTemplateColumns={"1fr 3fr"}>
                 <Center>
                   <Image
@@ -426,20 +512,20 @@ let loggedInDistAdminProvince = loggedInProvinceObject?.name
                   />
                 </Center>
                 <Box m={5} >
-                {scholarshipProject == "prlEth" && <FormControl  mb={5} w={"270px"} >
-                      <FormLabel>Project</FormLabel>
-                      <Select
-                        placeholder='Select'
-                        onChange={(event) => setProject(event.target.value)}
-                      >
-                        <option key="PRL" value="PRL">
-                          PRL
-                        </option>
-                        <option key="ETHS" value="ETHS">
-                          ETHS
-                        </option>
-                      </Select>
-                    </FormControl>}
+                  {scholarshipProject == "prlEth" && <FormControl mb={5} w={"270px"} >
+                    <FormLabel>Project</FormLabel>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setProject(event.target.value)}
+                    >
+                      <option key="PRL" value="PRL">
+                        PRL
+                      </option>
+                      <option key="ETHS" value="ETHS">
+                        ETHS
+                      </option>
+                    </Select>
+                  </FormControl>}
                   <HStack justify="flex-start" mb={5} >
                     <FormControl>
                       <FormLabel >First name</FormLabel>
@@ -556,8 +642,9 @@ let loggedInDistAdminProvince = loggedInProvinceObject?.name
                 </Box>
               </Grid>
               {/* SCHOLARSHIP */}
+              {/* <text>{numFields}</text> */}
               <FormLabel fontSize="22px" fontWeight="bold" >Scholarship</FormLabel>
-              <Grid gridTemplateColumns={"0.1fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
+              <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
                 <FormLabel >SN</FormLabel>
                 <FormLabel >Fund type</FormLabel>
                 <FormLabel >Category</FormLabel>
@@ -569,332 +656,577 @@ let loggedInDistAdminProvince = loggedInProvinceObject?.name
               </Grid>
               <FormControl>
                 {/* SCHOLARSHIP ONE */}
-                <Grid gridTemplateColumns={"0.1fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
-                  <FormLabel>1. </FormLabel>
-                  <Select
-                    placeholder='Select'
-                    onChange={(event) => setScholarship1FundType(event.target.value)}
-                  >
-                    <option key="NEF" value="NEF">
-                      NEF
-                    </option>
-                    <option key="ARMF" value="ARMF">
-                      ARMF
-                    </option>
-                  </Select>
-                  <Select
-                    placeholder='Category'
-                    name="scholarship1Category"
-                    onChange={(event) => setScholarship1Category(event.target.value)}
-                  >
-                    {scholarshipCategories.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                {numFields >= 1 &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                    <FormLabel>1. </FormLabel>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship1FundType(event.target.value)}
+                    >
+                      <option key="NEF" value="NEF">
+                        NEF
                       </option>
-                    ))}
-                  </Select>
-                  <Select
-                    placeholder='Select'
-                    name="scholarship1.grade"
-                    // value={formData.scholarship1.grade}
-                    onChange={(event) => setScholarship1Grade(event.target.value)}
-                  >
-                    {classOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                      <option key="ARMF" value="ARMF">
+                        ARMF
                       </option>
-                    ))}
-                  </Select>
+                    </Select>
+                    <Select
+                      placeholder='Category'
+                      onChange={(event) => setScholarship1Category(event.target.value)}
+                    >
+                      {scholarshipCategories.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship1Grade(event.target.value)}
+                    >
+                      {classOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
 
-                  <Input
-                    placeholder='From'
-                    type='date'
-                    name="scholarship1.from"
-                    // value={formData.scholarship1.from}
-                    onChange={(e) => setScholarship1From(e.target.value)}
-                  />
-                  <Input
-                    placeholder='To'
-                    type='date'
-                    name="scholarship1.to"
-                    // value={formData.scholarship1.to}
-                    onChange={(e) => setScholarship1To(e.target.value)}
-                  />
-                  <Input
-                    type='number'
-                    placeholder='GPA'
-                    name="scholarship1.gpa"
-                    // value={formData.scholarship1.gpa}
-                    onChange={(e) => setScholarship1Gpa(e.target.value)}
-                  />
-                  <Input
-                    placeholder='Remarks'
-                    name="scholarship1.remarks"
-                    // value={formData.scholarship1.remarks}
-                    onChange={(e) => setScholarship1Remarks(e.target.value)}
-                  />
-                </Grid>
+                    <Input
+                      placeholder='From'
+                      type='date'
+                      onChange={(e) => setScholarship1From(e.target.value)}
+                    />
+                    <Input
+                      placeholder='To'
+                      type='date'
+                      onChange={(e) => setScholarship1To(e.target.value)}
+                    />
+                    <Input
+                      type='number'
+                      placeholder='GPA'
+                      onChange={(e) => setScholarship1Gpa(e.target.value)}
+                    />
+                    <Input
+                      placeholder='Remarks'
+                      onChange={(e) => setScholarship1Remarks(e.target.value)}
+                    />
+                  </Grid>}
                 {/* SCHOLARSHIP TWO */}
-                <Grid gridTemplateColumns={"0.1fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
-                  <FormLabel>2. </FormLabel>
-                  <Select
-                    placeholder='Select'
-                    onChange={(event) => setScholarship2FundType(event.target.value)}
-                  >
-                    <option key="NEF" value="NEF">
-                      NEF
-                    </option>
-                    <option key="ARMF" value="ARMF">
-                      ARMF
-                    </option>
-                  </Select>
-                  <Select
-                    placeholder='Category'
-                    name="scholarship2Category"
-                    onChange={(event) => setScholarship2Category(event.target.value)}
-                  >
-                    {scholarshipCategories.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                {numFields >= 2 &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                    <FormLabel>2. </FormLabel>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship2FundType(event.target.value)}
+                    >
+                      <option key="NEF" value="NEF">
+                        NEF
                       </option>
-                    ))}
-                  </Select>
-                  <Select
-                    placeholder='Select'
-                    name="scholarship2.grade"
-                    // value={formData.scholarship1.grade}
-                    onChange={(event) => setScholarship2Grade(event.target.value)}
-                  >
-                    {classOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                      <option key="ARMF" value="ARMF">
+                        ARMF
                       </option>
-                    ))}
-                  </Select>
-                  <Input
-                    placeholder='From'
-                    type='date'
-                    name="scholarship1.from"
-                    // value={formData.scholarship1.from}
-                    onChange={(e) => setScholarship2From(e.target.value)}
-                  />
-                  <Input
-                    placeholder='To'
-                    type='date'
-                    name="scholarship1.to"
-                    // value={formData.scholarship1.to}
-                    onChange={(e) => setScholarship2To(e.target.value)}
-                  />
-                  <Input
-                    type='number'
-                    placeholder='GPA'
-                    name="scholarship1.gpa"
-                    // value={formData.scholarship1.gpa}
-                    onChange={(e) => setScholarship2Gpa(e.target.value)}
-                  />
-                  <Input
-                    placeholder='Remarks'
-                    name="scholarship1.remarks"
-                    // value={formData.scholarship1.remarks}
-                    onChange={(e) => setScholarship2Remarks(e.target.value)}
-                  />
-                </Grid>
+                    </Select>
+                    <Select
+                      placeholder='Category'
+                      onChange={(event) => setScholarship2Category(event.target.value)}
+                    >
+                      {scholarshipCategories.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship2Grade(event.target.value)}
+                    >
+                      {classOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Input
+                      placeholder='From'
+                      type='date'
+                      onChange={(e) => setScholarship2From(e.target.value)}
+                    />
+                    <Input
+                      placeholder='To'
+                      type='date'
+                      onChange={(e) => setScholarship2To(e.target.value)}
+                    />
+                    <Input
+                      type='number'
+                      placeholder='GPA'
+                      onChange={(e) => setScholarship2Gpa(e.target.value)}
+                    />
+                    <Input
+                      placeholder='Remarks'
+                      onChange={(e) => setScholarship2Remarks(e.target.value)}
+                    />
+                  </Grid>
+                }
                 {/* SCHOLARSHIP THREE */}
-                <Grid gridTemplateColumns={"0.1fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
-                  <FormLabel>3. </FormLabel>
-                  <Select
-                    placeholder='Select'
-                    onChange={(event) => setScholarship3FundType(event.target.value)}
-                  >
-                    <option key="NEF" value="NEF">
-                      NEF
-                    </option>
-                    <option key="ARMF" value="ARMF">
-                      ARMF
-                    </option>
-                  </Select>
-                  <Select
-                    placeholder='Category'
-                    name="scholarship3Category"
-                    onChange={(event) => setScholarship3Category(event.target.value)}
-                  >
-                    {scholarshipCategories.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                {numFields >= 3 &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                    <FormLabel>3. </FormLabel>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship3FundType(event.target.value)}
+                    >
+                      <option key="NEF" value="NEF">
+                        NEF
                       </option>
-                    ))}
-                  </Select>
-                  <Select
-                    placeholder='Select'
-                    name="scholarship3.grade"
-                    // value={formData.scholarship1.grade}
-                    onChange={(event) => setScholarship3Grade(event.target.value)}
-                  >
-                    {classOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                      <option key="ARMF" value="ARMF">
+                        ARMF
                       </option>
-                    ))}
-                  </Select>
-                  <Input
-                    placeholder='From'
-                    type='date'
-                    name="scholarship1.from"
-                    // value={formData.scholarship1.from}
-                    onChange={(e) => setScholarship3From(e.target.value)}
-                  />
-                  <Input
-                    placeholder='To'
-                    type='date'
-                    name="scholarship1.to"
-                    // value={formData.scholarship1.to}
-                    onChange={(e) => setScholarship3To(e.target.value)}
-                  />
-                  <Input
-                    type='number'
-                    placeholder='GPA'
-                    name="scholarship1.gpa"
-                    // value={formData.scholarship1.gpa}
-                    onChange={(e) => setScholarship3Gpa(e.target.value)}
-                  />
-                  <Input
-                    placeholder='Remarks'
-                    name="scholarship1.remarks"
-                    // value={formData.scholarship1.remarks}
-                    onChange={(e) => setScholarship3Remarks(e.target.value)}
-                  />
-                </Grid>
+                    </Select>
+                    <Select
+                      placeholder='Category'
+                      onChange={(event) => setScholarship3Category(event.target.value)}
+                    >
+                      {scholarshipCategories.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Select
+                      placeholder='Select'
+                      name="scholarship3.grade"
+                      // value={formData.scholarship1.grade}
+                      onChange={(event) => setScholarship3Grade(event.target.value)}
+                    >
+                      {classOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Input
+                      placeholder='From'
+                      type='date'
+                      onChange={(e) => setScholarship3From(e.target.value)}
+                    />
+                    <Input
+                      placeholder='To'
+                      type='date'
+                      onChange={(e) => setScholarship3To(e.target.value)}
+                    />
+                    <Input
+                      type='number'
+                      placeholder='GPA'
+                      onChange={(e) => setScholarship3Gpa(e.target.value)}
+                    />
+                    <Input
+                      placeholder='Remarks'
+                      onChange={(e) => setScholarship3Remarks(e.target.value)}
+                    />
+                  </Grid>
+                }
                 {/* SCHOLARSHIP FOUR */}
-                <Grid gridTemplateColumns={"0.1fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
-                  <FormLabel>4. </FormLabel>
-                  <Select
-                    placeholder='Select'
-                    onChange={(event) => setScholarship4FundType(event.target.value)}
-                  >
-                    <option key="NEF" value="NEF">
-                      NEF
-                    </option>
-                    <option key="ARMF" value="ARMF">
-                      ARMF
-                    </option>
-                  </Select>
-                  <Select
-                    placeholder='Category'
-                    name="scholarship4Category"
-                    onChange={(event) => setScholarship4Category(event.target.value)}
-                  >
-                    {scholarshipCategories.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                {numFields >= 4 &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                    <FormLabel>4. </FormLabel>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship4FundType(event.target.value)}
+                    >
+                      <option key="NEF" value="NEF">
+                        NEF
                       </option>
-                    ))}
-                  </Select>
-                  <Select
-                    placeholder='Select'
-                    name="scholarship4.grade"
-                    // value={formData.scholarship1.grade}
-                    onChange={(event) => setScholarship4Grade(event.target.value)}
-                  >
-                    {classOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                      <option key="ARMF" value="ARMF">
+                        ARMF
                       </option>
-                    ))}
-                  </Select>
-                  <Input
-                    placeholder='From'
-                    type='date'
-                    name="scholarship1.from"
-                    // value={formData.scholarship1.from}
-                    onChange={(e) => setScholarship4From(e.target.value)}
-                  />
-                  <Input
-                    placeholder='To'
-                    type='date'
-                    name="scholarship1.to"
-                    // value={formData.scholarship1.to}
-                    onChange={(e) => setScholarship4To(e.target.value)}
-                  />
-                  <Input
-                    type='number'
-                    placeholder='GPA'
-                    name="scholarship1.gpa"
-                    // value={formData.scholarship1.gpa}
-                    onChange={(e) => setScholarship4Gpa(e.target.value)}
-                  />
-                  <Input
-                    placeholder='Remarks'
-                    name="scholarship1.remarks"
-                    // value={formData.scholarship1.remarks}
-                    onChange={(e) => setScholarship4Remarks(e.target.value)}
-                  />
-                </Grid>
+                    </Select>
+                    <Select
+                      placeholder='Category'
+                      onChange={(event) => setScholarship4Category(event.target.value)}
+                    >
+                      {scholarshipCategories.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship4Grade(event.target.value)}
+                    >
+                      {classOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Input
+                      placeholder='From'
+                      type='date'
+                      onChange={(e) => setScholarship4From(e.target.value)}
+                    />
+                    <Input
+                      placeholder='To'
+                      type='date'
+                      onChange={(e) => setScholarship4To(e.target.value)}
+                    />
+                    <Input
+                      type='number'
+                      placeholder='GPA'
+                      onChange={(e) => setScholarship4Gpa(e.target.value)}
+                    />
+                    <Input
+                      placeholder='Remarks'
+                      onChange={(e) => setScholarship4Remarks(e.target.value)}
+                    />
+                  </Grid>
+                }
                 {/* SCHOLARSHIP FIVE */}
-                <Grid gridTemplateColumns={"0.1fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
-                  <FormLabel>5. </FormLabel>
-                  <Select
-                    placeholder='Select'
-                    onChange={(event) => setScholarship5FundType(event.target.value)}
-                  >
-                    <option key="NEF" value="NEF">
-                      NEF
-                    </option>
-                    <option key="ARMF" value="ARMF">
-                      ARMF
-                    </option>
-                  </Select>
-                  <Select
-                    placeholder='Category'
-                    name="scholarship5Category"
-                    onChange={(event) => setScholarship5Category(event.target.value)}
-                  >
-                    {scholarshipCategories.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                {numFields >= 5 &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                    <FormLabel>5. </FormLabel>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship5FundType(event.target.value)}
+                    >
+                      <option key="NEF" value="NEF">
+                        NEF
                       </option>
-                    ))}
-                  </Select>
-                  <Select
-                    placeholder='Select'
-                    name="scholarship5.grade"
-                    // value={formData.scholarship1.grade}
-                    onChange={(event) => setScholarship5Grade(event.target.value)}
-                  >
-                    {classOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
+                      <option key="ARMF" value="ARMF">
+                        ARMF
                       </option>
-                    ))}
-                  </Select>
-                  <Input
-                    placeholder='From'
-                    type='date'
-                    name="scholarship1.from"
-                    // value={formData.scholarship1.from}
-                    onChange={(e) => setScholarship5From(e.target.value)}
-                  />
-                  <Input
-                    placeholder='To'
-                    type='date'
-                    name="scholarship1.to"
-                    // value={formData.scholarship1.to}
-                    onChange={(e) => setScholarship5To(e.target.value)}
-                  />
-                  <Input
-                    type='number'
-                    placeholder='GPA'
-                    name="scholarship1.gpa"
-                    // value={formData.scholarship1.gpa}
-                    onChange={(e) => setScholarship5Gpa(e.target.value)}
-                  />
-                  <Input
-                    placeholder='Remarks'
-                    name="scholarship1.remarks"
-                    // value={formData.scholarship1.remarks}
-                    onChange={(e) => setScholarship5Remarks(e.target.value)}
-                  />
-                </Grid>
+                    </Select>
+                    <Select
+                      placeholder='Category'
+                      name="scholarship5Category"
+                      onChange={(event) => setScholarship5Category(event.target.value)}
+                    >
+                      {scholarshipCategories.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Select
+                      placeholder='Select'
+                      name="scholarship5.grade"
+                      // value={formData.scholarship1.grade}
+                      onChange={(event) => setScholarship5Grade(event.target.value)}
+                    >
+                      {classOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Input
+                      placeholder='From'
+                      type='date'
+                      onChange={(e) => setScholarship5From(e.target.value)}
+                    />
+                    <Input
+                      placeholder='To'
+                      type='date'
+                      onChange={(e) => setScholarship5To(e.target.value)}
+                    />
+                    <Input
+                      type='number'
+                      placeholder='GPA'
+                      onChange={(e) => setScholarship5Gpa(e.target.value)}
+                    />
+                    <Input
+                      placeholder='Remarks'
+                      onChange={(e) => setScholarship5Remarks(e.target.value)}
+                    />
+                  </Grid>
+                }
+                {/* SCHOLARSHIP SIX */}
+                {numFields >= 6 &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                    <FormLabel>6. </FormLabel>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship6FundType(event.target.value)}
+                    >
+                      <option key="NEF" value="NEF">
+                        NEF
+                      </option>
+                      <option key="ARMF" value="ARMF">
+                        ARMF
+                      </option>
+                    </Select>
+                    <Select
+                      placeholder='Category'
+                      onChange={(event) => setScholarship6Category(event.target.value)}
+                    >
+                      {scholarshipCategories.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship6Grade(event.target.value)}
+                    >
+                      {classOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+
+                    <Input
+                      placeholder='From'
+                      type='date'
+                      name="scholarship6.from"
+                      // value={formData.scholarship1.from}
+                      onChange={(e) => setScholarship6From(e.target.value)}
+                    />
+                    <Input
+                      placeholder='To'
+                      type='date'
+                      onChange={(e) => setScholarship6To(e.target.value)}
+                    />
+                    <Input
+                      type='number'
+                      placeholder='GPA'
+                      onChange={(e) => setScholarship6Gpa(e.target.value)}
+                    />
+                    <Input
+                      placeholder='Remarks'
+                      onChange={(e) => setScholarship6Remarks(e.target.value)}
+                    />
+                  </Grid>}
+                {/* SCHOLARSHIP SEVEN */}
+                {numFields >= 7 &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                    <FormLabel>7. </FormLabel>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship7FundType(event.target.value)}
+                    >
+                      <option key="NEF" value="NEF">
+                        NEF
+                      </option>
+                      <option key="ARMF" value="ARMF">
+                        ARMF
+                      </option>
+                    </Select>
+                    <Select
+                      placeholder='Category'
+                      onChange={(event) => setScholarship7Category(event.target.value)}
+                    >
+                      {scholarshipCategories.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship7Grade(event.target.value)}
+                    >
+                      {classOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Input
+                      placeholder='From'
+                      type='date'
+                      onChange={(e) => setScholarship7From(e.target.value)}
+                    />
+                    <Input
+                      placeholder='To'
+                      type='date'
+                      onChange={(e) => setScholarship7To(e.target.value)}
+                    />
+                    <Input
+                      type='number'
+                      placeholder='GPA'
+                      onChange={(e) => setScholarship7Gpa(e.target.value)}
+                    />
+                    <Input
+                      placeholder='Remarks'
+                      onChange={(e) => setScholarship7Remarks(e.target.value)}
+                    />
+                  </Grid>
+                }
+                {/* SCHOLARSHIP EIGHT */}
+                {numFields >= 8 &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                    <FormLabel>8. </FormLabel>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship8FundType(event.target.value)}
+                    >
+                      <option key="NEF" value="NEF">
+                        NEF
+                      </option>
+                      <option key="ARMF" value="ARMF">
+                        ARMF
+                      </option>
+                    </Select>
+                    <Select
+                      placeholder='Category'
+                      onChange={(event) => setScholarship8Category(event.target.value)}
+                    >
+                      {scholarshipCategories.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship8Grade(event.target.value)}
+                    >
+                      {classOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Input
+                      placeholder='From'
+                      type='date'
+                      onChange={(e) => setScholarship8From(e.target.value)}
+                    />
+                    <Input
+                      placeholder='To'
+                      type='date'
+                      onChange={(e) => setScholarship8To(e.target.value)}
+                    />
+                    <Input
+                      type='number'
+                      placeholder='GPA'
+                      onChange={(e) => setScholarship8Gpa(e.target.value)}
+                    />
+                    <Input
+                      placeholder='Remarks'
+                      onChange={(e) => setScholarship8Remarks(e.target.value)}
+                    />
+                  </Grid>
+                }
+                {/* SCHOLARSHIP NINE */}
+                {numFields >= 9 &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                    <FormLabel>9. </FormLabel>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship9FundType(event.target.value)}
+                    >
+                      <option key="NEF" value="NEF">
+                        NEF
+                      </option>
+                      <option key="ARMF" value="ARMF">
+                        ARMF
+                      </option>
+                    </Select>
+                    <Select
+                      placeholder='Category'
+                      onChange={(event) => setScholarship9Category(event.target.value)}
+                    >
+                      {scholarshipCategories.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Select
+                      placeholder='Select'
+                      name="scholarship4.grade"
+                      // value={formData.scholarship1.grade}
+                      onChange={(event) => setScholarship9Grade(event.target.value)}
+                    >
+                      {classOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Input
+                      placeholder='From'
+                      type='date'
+                      onChange={(e) => setScholarship9From(e.target.value)}
+                    />
+                    <Input
+                      placeholder='To'
+                      type='date'
+                      onChange={(e) => setScholarship9To(e.target.value)}
+                    />
+                    <Input
+                      type='number'
+                      placeholder='GPA'
+                      onChange={(e) => setScholarship9Gpa(e.target.value)}
+                    />
+                    <Input
+                      placeholder='Remarks'
+                      onChange={(e) => setScholarship9Remarks(e.target.value)}
+                    />
+                  </Grid>
+                }
+                {/* SCHOLARSHIP TEN */}
+                {numFields >= 10 &&
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                    <FormLabel>10. </FormLabel>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship10FundType(event.target.value)}
+                    >
+                      <option key="NEF" value="NEF">
+                        NEF
+                      </option>
+                      <option key="ARMF" value="ARMF">
+                        ARMF
+                      </option>
+                    </Select>
+                    <Select
+                      placeholder='Category'
+                      onChange={(event) => setScholarship10Category(event.target.value)}
+                    >
+                      {scholarshipCategories.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Select
+                      placeholder='Select'
+                      onChange={(event) => setScholarship10Grade(event.target.value)}
+                    >
+                      {classOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </Select>
+                    <Input
+                      placeholder='From'
+                      type='date'
+                      onChange={(e) => setScholarship10From(e.target.value)}
+                    />
+                    <Input
+                      placeholder='To'
+                      type='date'
+                      onChange={(e) => setScholarship10To(e.target.value)}
+                    />
+                    <Input
+                      type='number'
+                      placeholder='GPA'
+                      onChange={(e) => setScholarship10Gpa(e.target.value)}
+                    />
+                    <Input
+                      placeholder='Remarks'
+                      onChange={(e) => setScholarship10Remarks(e.target.value)}
+                    />
+                  </Grid>
+                }
               </FormControl>
+              { numFields < 10 && <Button mx={1} w="150px" h="30px" onClick={handleAddField} colorScheme="blue">Add field</Button>}
+              { numFields > 1 && <Button mx={1} w="150px" h="30px" onClick={handleRemoveField} colorScheme="red">Remove field</Button>}
 
               {/* PERMANENT ADDRESS */}
               <FormControl>
@@ -907,28 +1239,28 @@ let loggedInDistAdminProvince = loggedInProvinceObject?.name
                 </Grid>
                 <HStack>
                   <Select
-                      placeholder="Province"
-                      onChange={(e) => setPermanentProvince(e.target.value)}
+                    placeholder="Province"
+                    onChange={(e) => setPermanentProvince(e.target.value)}
                   >
-                      {nepalProvincesList.map((province, index) => (
-                          <option key={index} value={province} >{province}</option>
-                      ))}
+                    {nepalProvincesList.map((province, index) => (
+                      <option key={index} value={province} >{province}</option>
+                    ))}
                   </Select>
                   <Select
-                      placeholder="District"
-                      onChange={(e) => setPermanentDistrict(e.target.value)}
+                    placeholder="District"
+                    onChange={(e) => setPermanentDistrict(e.target.value)}
                   >
-                      {selectedPermanentProvinceDistricts.map((district, index) => (
-                          <option key={index} value={district.name} >{district.name}</option>
-                      ))}
+                    {selectedPermanentProvinceDistricts.map((district, index) => (
+                      <option key={index} value={district.name} >{district.name}</option>
+                    ))}
                   </Select>
                   <Select
-                      placeholder="Municipality"
-                      onChange={(e) => setPermanentMunicipality(e.target.value)}
+                    placeholder="Municipality"
+                    onChange={(e) => setPermanentMunicipality(e.target.value)}
                   >
-                      {selectedPermanentDistrictMunicipalities.map((municipality, index) => (
-                          <option key={index} value={municipality.name} >{municipality.name}</option>
-                      ))}
+                    {selectedPermanentDistrictMunicipalities.map((municipality, index) => (
+                      <option key={index} value={municipality.name} >{municipality.name}</option>
+                    ))}
                   </Select>
                   <Input
                     placeholder='Ward no.'
@@ -937,7 +1269,7 @@ let loggedInDistAdminProvince = loggedInProvinceObject?.name
                     // value={formData.permanentAddress.wardNumber}
                     onChange={(e) => setPermanentWardNumber(e.target.value)}
                   />
-                  
+
                 </HStack>
               </FormControl>
 
@@ -945,58 +1277,58 @@ let loggedInDistAdminProvince = loggedInProvinceObject?.name
               <FormControl>
                 <FormLabel mt={5} fontSize="22px" fontWeight="bold"  >Current address</FormLabel>
                 <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
-                <FormLabel>Province</FormLabel>
+                  <FormLabel>Province</FormLabel>
                   <FormLabel>District</FormLabel>
                   <FormLabel >Municipality</FormLabel>
                   <FormLabel>Ward No.</FormLabel>
                 </Grid>
                 <HStack>
-                {/* currentProvince is set to the district admin's district, is only selectable by super admin */}
+                  {/* currentProvince is set to the district admin's district, is only selectable by super admin */}
                   {district == "all" ?
                     <Select
                       placeholder="Province"
                       onChange={(e) => setCurrentProvince(e.target.value)}
-                  >
+                    >
                       {nepalProvincesList.map((province, index) => (
-                          <option key={index} value={province} >{province}</option>
+                        <option key={index} value={province} >{province}</option>
                       ))}
-                  </Select>
-                  :
-                  <Input
-                  placeholder={loggedInDistAdminProvince}
-s                  isDisabled
-                />
+                    </Select>
+                    :
+                    <Input
+                      placeholder={loggedInDistAdminProvince}
+                      s isDisabled
+                    />
                   }
-                {/* currentDistrict is set to the district admin's district, is only selectable by super admin */}
-                 { 
-                 district == "all" ?
-                 <Select
-                      placeholder="District"
-                      onChange={(e) => setCurrentDistrict(e.target.value)}
-                  >
-                      {selectedCurrentProvinceDistricts.map((district, index) => (
+                  {/* currentDistrict is set to the district admin's district, is only selectable by super admin */}
+                  {
+                    district == "all" ?
+                      <Select
+                        placeholder="District"
+                        onChange={(e) => setCurrentDistrict(e.target.value)}
+                      >
+                        {selectedCurrentProvinceDistricts.map((district, index) => (
                           <option key={index} value={district.name} >{district.name}</option>
-                      ))}
-                  </Select>
-                  :
-                  <Input
-                    placeholder={district}
-                    // value={formData.permanentAddress.wardNumber}
-                    isDisabled
-                  />
+                        ))}
+                      </Select>
+                      :
+                      <Input
+                        placeholder={district}
+                        // value={formData.permanentAddress.wardNumber}
+                        isDisabled
+                      />
                   }
                   <Select
-                      placeholder="Municipality"
-                      onChange={(e) => setCurrentMunicipality(e.target.value)}
+                    placeholder="Municipality"
+                    onChange={(e) => setCurrentMunicipality(e.target.value)}
                   >
-                      {
-                        district == "all" ?
-                      selectedCurrentDistrictMunicipalities.map((municipality, index) => (
+                    {
+                      district == "all" ?
+                        selectedCurrentDistrictMunicipalities.map((municipality, index) => (
                           <option key={index} value={municipality.name} >{municipality.name}</option>
-                      ))
-                      :
-                      loggedInDistrictMunicipalities.map((municipality, index) => (
-                        <option key={index} value={municipality.name} >{municipality.name}</option>))
+                        ))
+                        :
+                        loggedInDistrictMunicipalities.map((municipality, index) => (
+                          <option key={index} value={municipality.name} >{municipality.name}</option>))
                     }
                   </Select>
                   <Input
@@ -1004,7 +1336,7 @@ s                  isDisabled
                     type='number'
                     onChange={(e) => setCurrentWardNumber(e.target.value)}
                   />
-                  
+
                 </HStack>
               </FormControl>
 
@@ -1069,42 +1401,42 @@ s                  isDisabled
               <FormControl>
                 <FormLabel mt={5} fontSize="22px" fontWeight="bold"  >Current address</FormLabel>
                 <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
-                <FormLabel>Province</FormLabel>
+                  <FormLabel>Province</FormLabel>
                   <FormLabel>District</FormLabel>
                   <FormLabel >Municipality</FormLabel>
                   <FormLabel>Ward No.</FormLabel>
                 </Grid>
                 <HStack>
-                    <Select
-                      placeholder="Province"
-                      onChange={(e) => setSchoolProvince(e.target.value)}
+                  <Select
+                    placeholder="Province"
+                    onChange={(e) => setSchoolProvince(e.target.value)}
                   >
-                      {nepalProvincesList.map((province, index) => (
-                          <option key={index} value={province} >{province}</option>
-                      ))}
-                  </Select>
-                 <Select
-                      placeholder="District"
-                      onChange={(e) => setSchoolDistrict(e.target.value)}
-                  >
-                      {selectedSchoolProvinceDistricts.map((district, index) => (
-                          <option key={index} value={district.name} >{district.name}</option>
-                      ))}
+                    {nepalProvincesList.map((province, index) => (
+                      <option key={index} value={province} >{province}</option>
+                    ))}
                   </Select>
                   <Select
-                      placeholder="Municipality"
-                      onChange={(e) => setCurrentMunicipality(e.target.value)}
+                    placeholder="District"
+                    onChange={(e) => setSchoolDistrict(e.target.value)}
                   >
-                      {selectedSchoolDistrictMunicipalities.map((municipality, index) => (
-                          <option key={index} value={municipality.name} >{municipality.name}</option>
-                      ))}
+                    {selectedSchoolProvinceDistricts.map((district, index) => (
+                      <option key={index} value={district.name} >{district.name}</option>
+                    ))}
+                  </Select>
+                  <Select
+                    placeholder="Municipality"
+                    onChange={(e) => setCurrentMunicipality(e.target.value)}
+                  >
+                    {selectedSchoolDistrictMunicipalities.map((municipality, index) => (
+                      <option key={index} value={municipality.name} >{municipality.name}</option>
+                    ))}
                   </Select>
                   <Input
                     placeholder='Ward no.'
                     type='number'
                     onChange={(e) => setSschoolWardNumber(e.target.value)}
                   />
-                  
+
                 </HStack>
               </FormControl>
 
@@ -1199,16 +1531,16 @@ s                  isDisabled
               {/* GUARDIAN */}
 
               <FormControl  >
-              <FormLabel mt={5} fontSize="22px" fontWeight="bold">Guardian</FormLabel>
+                <FormLabel mt={5} fontSize="22px" fontWeight="bold">Guardian</FormLabel>
 
-              <HStack>
-              <RadioGroup onChange={(value) => handleRadioButton(value)} value={selectedRadio}>
-          <HStack spacing={4}>
-            <Radio value="father">Same as Father</Radio>
-            <Radio value="mother">Same as Mother</Radio>
-          </HStack>
-        </RadioGroup>
-          </HStack>
+                <HStack>
+                  <RadioGroup onChange={(value) => handleRadioButton(value)} value={selectedRadio}>
+                    <HStack spacing={4}>
+                      <Radio value="father">Same as Father</Radio>
+                      <Radio value="mother">Same as Mother</Radio>
+                    </HStack>
+                  </RadioGroup>
+                </HStack>
                 <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr 1fr"} gap={5} >
                   <FormLabel >Name</FormLabel>
                   <FormLabel>Address</FormLabel>
@@ -1217,7 +1549,7 @@ s                  isDisabled
                   <FormLabel>Contact No.</FormLabel>
                 </Grid>
                 <HStack>
-                <Input
+                  <Input
                     placeholder='Name'
                     value={guardianName}
                     isDisabled={selectedRadio !== null}
