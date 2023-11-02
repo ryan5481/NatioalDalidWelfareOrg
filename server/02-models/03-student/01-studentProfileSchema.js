@@ -165,6 +165,121 @@ const studentProfileSchema = ({
     scholarship5Remarks: {
         type: String,
     },
+    //SCHOLARSHIP SIX
+    scholarship6FundType: {
+        type: String,
+    },
+
+    scholarship6Category: {
+        type: String,
+    },
+    scholarship6Grade: {
+        type: String,
+    },
+    scholarship6From: {
+        type: String,
+    },
+    scholarship6To: {
+        type: String,
+    },
+    scholarship6Gpa: {
+        type: String,
+    },
+    scholarship6Remarks: {
+        type: String,
+    },
+        //SCHOLARSHIP SEVEN
+        scholarship7FundType: {
+            type: String,
+        },
+
+    scholarship7Category: {
+        type: String,
+    },
+    scholarship7Grade: {
+        type: String,
+    },
+    scholarship7From: {
+        type: String,
+    },
+    scholarship7To: {
+        type: String,
+    },
+    scholarship7Gpa: {
+        type: String,
+    },
+    scholarship7Remarks: {
+        type: String,
+    },
+        //SCHOLARSHIP EIGHT
+        scholarship8FundType: {
+            type: String,
+        },
+
+    scholarship8Category: {
+        type: String,
+    },
+    scholarship8Grade: {
+        type: String,
+    },
+    scholarship8From: {
+        type: String,
+    },
+    scholarship8To: {
+        type: String,
+    },
+    scholarship8Gpa: {
+        type: String,
+    },
+    scholarship8Remarks: {
+        type: String,
+    },
+        //SCHOLARSHIP NINE
+        scholarship4FundType: {
+            type: String,
+        },
+
+    scholarship9Category: {
+        type: String,
+    },
+    scholarship9Grade: {
+        type: String,
+    },
+    scholarship9From: {
+        type: String,
+    },
+    scholarship9To: {
+        type: String,
+    },
+    scholarship9Gpa: {
+        type: String,
+    },
+    scholarship9Remarks: {
+        type: String,
+    },
+        //SCHOLARSHIP TEN
+        scholarship10FundType: {
+            type: String,
+        },
+        
+    scholarship10Category: {
+        type: String,
+    },
+    scholarship10Grade: {
+        type: String,
+    },
+    scholarship10From: {
+        type: String,
+    },
+    scholarship10To: {
+        type: String,
+    },
+    scholarship10Gpa: {
+        type: String,
+    },
+    scholarship10Remarks: {
+        type: String,
+    },
         //PERMANENT ADDRESS
     permanentMunicipality: {
         type: String,
