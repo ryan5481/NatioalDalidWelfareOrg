@@ -781,8 +781,8 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                       name="studentType"
                       onChange={handleInputChange}
                     >
-                      <option key="None" value="None">
-                        None
+                      <option key="Normal" value="Normal">
+                        Normal
                       </option>
                       <option key="Orphan" value="Orphan">
                         Orphan

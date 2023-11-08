@@ -24,10 +24,20 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
 
     membershipType: '',
 
-    qualification: '',
-    graduatedYear: '',
-    institutionName: '',
-    institutionAddress: '',
+    qualification1: '',
+    graduatedYear1: '',
+    institutionName1: '',
+    institutionAddress1: '',
+
+    qualification2: '',
+    graduatedYear2: '',
+    institutionName2: '',
+    institutionAddress2: '',
+
+    qualification3: '',
+    graduatedYear3: '',
+    institutionName3: '',
+    institutionAddress3: '',
 
     position1: '',
     joinedDate1: '',
@@ -122,10 +132,20 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
       
       membershipType: data?.membershipType,
 
-      qualification: data?.qualification,
-      graduatedYear: data?.graduatedYear,
-      institutionName: data?.institutionName,
-      institutionAddress: data?.institutionAddress,
+      qualification1: data?.qualification1,
+      graduatedYear1: data?.graduatedYear1,
+      institutionName1: data?.institutionName1,
+      institutionAddress1: data?.institutionAddress1,
+
+      qualification2: data?.qualification2,
+      graduatedYear2: data?.graduatedYear2,
+      institutionName2: data?.institutionName2,
+      institutionAddress2: data?.institutionAddress2,
+
+      qualification3: data?.qualification3,
+      graduatedYear3: data?.graduatedYear3,
+      institutionName3: data?.institutionName3,
+      institutionAddress3: data?.institutionAddress3,
 
       position1: data?.position1,
       joinedDate1: data?.joinedDate1,
@@ -365,40 +385,94 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                         </option>
                       </Select>
             </FormControl>
-               {/* QUALIFICATION */}
+               {/* QUALIFICATION*/}
                <FormControl mb={5} >
                 <FormLabel mt={5} fontSize="22px" fontWeight="bold"  >Education</FormLabel>
-                <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
+                <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
+                  <FormLabel >SN</FormLabel>
                   <FormLabel >Qualification</FormLabel>
                   <FormLabel>Graduated year</FormLabel>
                   <FormLabel>Institution name</FormLabel>
                   <FormLabel>Address</FormLabel>
                 </Grid>
-                <HStack>
+                {/* QUALIFICATION ONE*/}
+                <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
+                <FormLabel>1.</FormLabel>
                   <Input
-                    placeholder={data?.qualification}
-                    name="qualification"
-                    // value={formdata?.permanentAddress.municipality}
+                    placeholder={data?.qualification1}
+                    name="qualification1"
                     onChange={handleInputChange}
                   />
                   <Input
-                    placeholder={data?.graduatedYear}
+                    placeholder={data?.graduatedYear1}
                     type='number'
-                    name='graduatedYear'
+                    name='graduatedYear1'
                     onChange={handleInputChange}
                   />
 
                   <Input
-                    placeholder={data?.institutionName}
-                    name="institutionName"
+                    placeholder={data?.institutionName1}
+                    name="institutionName1"
                     onChange={handleInputChange}
                   />
                   <Input
-                    placeholder={data?.institutionAddress}
-                    name='institutionAddress'
+                    placeholder={data?.institutionAddress1}
+                    name='institutionAddress1'
                     onChange={handleInputChange}
                   />
-                </HStack>
+                  </Grid>
+                {/* QUALIFICATION TWO*/}
+                <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
+                <FormLabel>2.</FormLabel>
+                  <Input
+                    placeholder={data?.qualification2}
+                    name="qualification2"
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data?.graduatedYear2}
+                    type='number'
+                    name='graduatedYear2'
+                    onChange={handleInputChange}
+                  />
+
+                  <Input
+                    placeholder={data?.institutionName2}
+                    name="institutionName2"
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data?.institutionAddress2}
+                    name='institutionAddress2'
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                {/* QUALIFICATION THREE*/}
+                <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
+                <FormLabel>3.</FormLabel>
+                  <Input
+                    placeholder={data?.qualification3}
+                    name="qualification3"
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data?.graduatedYear3}
+                    type='number'
+                    name='graduatedYear3'
+                    onChange={handleInputChange}
+                  />
+
+                  <Input
+                    placeholder={data?.institutionName3}
+                    name="institutionName3"
+                    onChange={handleInputChange}
+                  />
+                  <Input
+                    placeholder={data?.institutionAddress3}
+                    name='institutionAddress3'
+                    onChange={handleInputChange}
+                  />
+                </Grid>
               </FormControl>
                 {/* TENURE */}
             <FormLabel fontSize="22px" fontWeight="bold" >Designation</FormLabel>

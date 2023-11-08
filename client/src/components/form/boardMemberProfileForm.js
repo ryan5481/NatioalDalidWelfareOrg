@@ -44,59 +44,86 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
   const [contactNumber, setContactNumber] = useState('')
   const [email, setEmail] = useState('')
   const [citizenshipNumber, setCitizenshipNumber] = useState('')
+  
+  const [qualification1, setQualification1] = useState('')
+  const [graduatedYear1, setGraduatedYear1] = useState('')
+  const [institutionName1, setInstitutionName1] = useState('')
+  const [institutionAddress1, setInstitutionAddress1] = useState('')
+  
+  const [qualification2, setQualification2] = useState('')
+  const [graduatedYear2, setGraduatedYear2] = useState('')
+  const [institutionName2, setInstitutionName2] = useState('')
+  const [institutionAddress2, setInstitutionAddress2] = useState('')
+
+  const [qualification3, setQualification3] = useState('')
+  const [graduatedYear3, setGraduatedYear3] = useState('')
+  const [institutionName3, setInstitutionName3] = useState('')
+  const [institutionAddress3, setInstitutionAddress3] = useState('')
+
+  const [membershipType, setMembershipType] = useState('')
+  
   const [position1, setPosition1] = useState('')
   const [joinedDate1, setJoinedDate1] = useState('')
   const [tenure1, setTenure1] = useState('')
   const [remark1, setRemark1] = useState('')
+
   const [position2, setPosition2] = useState('')
   const [joinedDate2, setJoinedDate2] = useState('')
   const [tenure2, setTenure2] = useState('')
   const [remark2, setRemark2] = useState('')
+
   const [position3, setPosition3] = useState('')
   const [joinedDate3, setJoinedDate3] = useState('')
   const [tenure3, setTenure3] = useState('')
   const [remark3, setRemark3] = useState('')
+
   const [position4, setPosition4] = useState('')
   const [joinedDate4, setJoinedDate4] = useState('')
   const [tenure4, setTenure4] = useState('')
   const [remark4, setRemark4] = useState('')
+
   const [position5, setPosition5] = useState('')
   const [joinedDate5, setJoinedDate5] = useState('')
   const [tenure5, setTenure5] = useState('')
   const [remark5, setRemark5] = useState('')
+  
   const [permanentMunicipality, setPermanentMunicipality] = useState('')
   const [permanentWardNo, setPermanentWardNo] = useState('')
   const [permanentDistrict, setPermanentDistrict] = useState('')
   const [permanentProvince, setPermanentProvince] = useState('')
+
   const [temporaryMunicipality, setTemporaryMunicipality] = useState('')
   const [temporaryWardNo, setTemporaryWardNo] = useState('')
   const [temporaryDistrict, setTemporaryDistrict] = useState('')
   const [temporaryProvince, setTemporaryProvince] = useState('')
+
   const [profession1, setProfession1] = useState('')
   const [organization1, setOrganization1] = useState('')
   const [address1, setAddress1] = useState('')
   const [startingDate1, setStartingDate1] = useState('')
   const [currentStatus1, setCurrentStatus1] = useState('')
   const [pRemark1, setPRemark1] = useState('')
+
   const [profession2, setProfession2] = useState('')
   const [organization2, setOrganization2] = useState('')
   const [address2, setAddress2] = useState('')
   const [startingDate2, setStartingDate2] = useState('')
   const [currentStatus2, setCurrentStatus2] = useState('')
   const [pRemark2, setPRemark2] = useState('')
+
   const [profession3, setProfession3] = useState('')
   const [organization3, setOrganization3] = useState('')
   const [address3, setAddress3] = useState('')
   const [startingDate3, setStartingDate3] = useState('')
   const [currentStatus3, setCurrentStatus3] = useState('')
   const [pRemark3, setPRemark3] = useState('')
+
   const [profession4, setProfession4] = useState('')
   const [organization4, setOrganization4] = useState('')
   const [address4, setAddress4] = useState('')
   const [startingDate4, setStartingDate4] = useState('')
   const [currentStatus4, setCurrentStatus4] = useState('')
   const [pRemark4, setPRemark4] = useState('')
-
   
   const [selectedImage, setSelectedImage] = useState(null)
   const [previewImage, setPreviewImage] = useState(null)
@@ -143,7 +170,7 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
       if (selectedImage === null) {
         toast({
           title: 'Error',
-          description: 'Please select a student image.',
+          description: 'Please select a profile image.',
           status: 'error',
           duration: 3000,
           isClosable: true,
@@ -164,6 +191,23 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
       formData.append('contactNumber', contactNumber)
       formData.append('email', email)
       formData.append('citizenshipNumber', citizenshipNumber)
+      
+      formData.append('membershipType', membershipType)
+
+      formData.append('qualification1', qualification1)
+      formData.append('graduatedYear1', graduatedYear1)
+      formData.append('institutionName1', institutionName1)
+      formData.append('institutionAddress1', institutionAddress1)
+      
+      formData.append('qualification2', qualification2)
+      formData.append('graduatedYear2', graduatedYear2)
+      formData.append('institutionName2', institutionName2)
+      formData.append('institutionAddress2', institutionAddress2)
+
+      formData.append('qualification3', qualification3)
+      formData.append('graduatedYear3', graduatedYear3)
+      formData.append('institutionName3', institutionName3)
+      formData.append('institutionAddress3', institutionAddress3)
 
       formData.append('position1', position1)
       formData.append('joinedDate1', joinedDate1)
@@ -365,6 +409,7 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
                       onChange={(e) => setCitizenshipNumber(e.target.value)}
                     />
                   </FormControl>
+                 
                 </HStack>
                 <HStack justify="flex-start" mb={5}>
                   <FormControl>
@@ -396,6 +441,98 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
                 </HStack>
               </Box>
             </Grid>
+            {/* EDUCATION */}
+            <FormLabel fontSize="22px" fontWeight="bold" >Education</FormLabel>
+            <FormControl mb={5}>
+            <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
+              <FormLabel >SN</FormLabel>
+              <FormLabel >Qualification</FormLabel>
+              <FormLabel >Graduated Year</FormLabel>
+              <FormLabel>Institution name</FormLabel>
+              <FormLabel>Institution Address</FormLabel>
+            </Grid>
+              {/* EDUCATION ONE */}
+              <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} mb={1} >
+                <FormLabel>1. </FormLabel>
+                <Input
+                  placeholder='Qualification'
+                  onChange={(e) => setQualification1(e.target.value)}
+                />
+                <Input
+                  type='date'
+                  onChange={(e) => setGraduatedYear1(e.target.value)}
+                />
+                <Input
+                  placeholder='Institution Name'
+                  onChange={(e) => setInstitutionName1(e.target.value)}
+                />
+                <Input
+                  placeholder='Address'
+                  onChange={(e) => setInstitutionAddress1(e.target.value)}
+                />
+              </Grid>
+              {/* EDUCATION TWO */}
+              <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} mb={1} >
+                <FormLabel>2. </FormLabel>
+                <Input
+                  placeholder='Qualification'
+                  onChange={(e) => setQualification2(e.target.value)}
+                />
+                <Input
+                  type='date'
+                  onChange={(e) => setGraduatedYear2(e.target.value)}
+                />
+                <Input
+                  placeholder='Institution Name'
+                  onChange={(e) => setInstitutionName2(e.target.value)}
+                />
+                <Input
+                  placeholder='Address'
+                  onChange={(e) => setInstitutionAddress2(e.target.value)}
+                />
+              </Grid>
+              {/* EDUCATION THREE */}
+              <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} mb={1} >
+                <FormLabel>3. </FormLabel>
+                <Input
+                  placeholder='Qualification'
+                  onChange={(e) => setQualification3(e.target.value)}
+                />
+                <Input
+                  type='date'
+                  onChange={(e) => setGraduatedYear3(e.target.value)}
+                />
+                <Input
+                  placeholder='Institution Name'
+                  onChange={(e) => setInstitutionName3(e.target.value)}
+                />
+                <Input
+                  placeholder='Address'
+                  onChange={(e) => setInstitutionAddress3(e.target.value)}
+                />
+              </Grid>
+            </FormControl>
+            <FormControl mb={5}>
+                  <FormLabel fontSize="22px" fontWeight="bold" >Membership Type:</FormLabel>
+                      <Select
+                      maxW="300px"
+                        placeholder='Select'
+                        onChange={(event) => setMembershipType(event.target.value)}
+                      >
+                        <option key="General" value="General">
+                          General
+                        </option>
+                        <option key="Active" value="Active">
+                          Active
+                        </option>
+                        <option key="Honorary" value="Honorary">
+                          Honorary
+                        </option>
+                        <option key="Lifetime" value="Lifetime">
+                          Lifetime
+                        </option>
+                      </Select>
+                  </FormControl>
             {/* SCHOLARSHIP */}
             <FormLabel fontSize="22px" fontWeight="bold" >Designation</FormLabel>
             <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} >
