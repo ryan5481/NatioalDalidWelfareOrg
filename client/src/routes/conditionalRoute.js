@@ -47,8 +47,8 @@ const SuperAdminRoutes = () => {
         <Route path="/" element={<SuperAdminDashboard />} />
         <Route path="/profile" element={<EditSuperAdminProfile />} />
         <Route path="/user-management" element={<ManageDistUsers />} />
-        <Route path="/ncacp-students" element={<NcacpStudentsList />} />
-        <Route path="/prl-eth-students" element={<PrlEthStudentsList />} />
+        <Route path="/ncsep-students" element={<NcacpStudentsList />} />
+        <Route path="/prlmsp-eth-students" element={<PrlEthStudentsList />} />
         <Route path="/board-members" element={<BoardMembersGrid />} />
         <Route path="/alumuni" element={<AlumuniList />} />
         <Route path="/settings" element={<Settings />} />

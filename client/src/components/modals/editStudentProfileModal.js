@@ -37,6 +37,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship1FundType: '',
     scholarship1Category: '',
     scholarship1Grade: '',
+    scholarship1Field: '',
     scholarship1From: '',
     scholarship1To: '',
     scholarship1Gpa: '',
@@ -45,6 +46,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship2FundType: '',
     scholarship2Category: '',
     scholarship2Grade: '',
+    scholarship2Field: '',
     scholarship2From: '',
     scholarship2To: '',
     scholarship2Gpa: '',
@@ -53,6 +55,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship3FundType: '',
     scholarship3Category: '',
     scholarship3Grade: '',
+    scholarship3Field: '',
     scholarship3From: '',
     scholarship3To: '',
     scholarship3Gpa: '',
@@ -61,6 +64,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship4FundType: '',
     scholarship4Category: '',
     scholarship4Grade: '',
+    scholarship4Field: '',
     scholarship4From: '',
     scholarship4To: '',
     scholarship4Gpa: '',
@@ -69,6 +73,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship5FundType: '',
     scholarship5Category: '',
     scholarship5Grade: '',
+    scholarship5Field: '',
     scholarship5From: '',
     scholarship5To: '',
     scholarship5Gpa: '',
@@ -77,6 +82,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship6FundType: '',
     scholarship6Category: '',
     scholarship6Grade: '',
+    scholarship6Field: '',
     scholarship6From: '',
     scholarship6To: '',
     scholarship6Gpa: '',
@@ -85,6 +91,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship7FundType: '',
     scholarship7Category: '',
     scholarship7Grade: '',
+    scholarship7Field: '',
     scholarship7From: '',
     scholarship7To: '',
     scholarship7Gpa: '',
@@ -93,6 +100,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship8FundType: '',
     scholarship8Category: '',
     scholarship8Grade: '',
+    scholarship8Field: '',
     scholarship8From: '',
     scholarship8To: '',
     scholarship8Gpa: '',
@@ -101,6 +109,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship9FundType: '',
     scholarship9Category: '',
     scholarship9Grade: '',
+    scholarship9Field: '',
     scholarship9From: '',
     scholarship9To: '',
     scholarship9Gpa: '',
@@ -109,6 +118,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     scholarship9FundType: '',
     scholarship9Category: '',
     scholarship9Grade: '',
+    scholarship10Field: '',
     scholarship9From: '',
     scholarship9To: '',
     scholarship9Gpa: '',
@@ -201,6 +211,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship1FundType: data?.scholarship1FundType,
       scholarship1Category: data?.scholarship1Category,
       scholarship1Grade: data?.scholarship1Grade,
+      scholarship1Field: data?.scholarship1Field,
       scholarship1From: data?.scholarship1From,
       scholarship1To: data?.scholarship1To,
       scholarship1Gpa: data?.scholarship1Gpa,
@@ -209,6 +220,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship2FundType: data?.scholarship2FundType,
       scholarship2Category: data?.scholarship2Category,
       scholarship2Grade: data?.scholarship2Grade,
+      scholarship2Field: data?.scholarship2Field,
       scholarship2From: data?.scholarship2From,
       scholarship2To: data?.scholarship2To,
       scholarship2Gpa: data?.scholarship2Gpa,
@@ -217,6 +229,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship3FundType: data?.scholarship3FundType,
       scholarship3Category: data?.scholarship3Category,
       scholarship3Grade: data?.scholarship3Grade,
+      scholarship3Field: data?.scholarship3Field,
       scholarship3From: data?.scholarship3From,
       scholarship3To: data?.scholarship3To,
       scholarship3Gpa: data?.scholarship3Gpa,
@@ -225,6 +238,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship4FundType: data?.scholarship4FundType,
       scholarship4Category: data?.scholarship4Category,
       scholarship4Grade: data?.scholarship4Grade,
+      scholarship4Field: data?.scholarship4Field,
       scholarship4From: data?.scholarship4From,
       scholarship4To: data?.scholarship4To,
       scholarship4Gpa: data?.scholarship4Gpa,
@@ -233,6 +247,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship5FundType: data?.scholarship5FundType,
       scholarship5Category: data?.scholarship5Category,
       scholarship5Grade: data?.scholarship5Grade,
+      scholarship5Field: data?.scholarship5Field,
       scholarship5From: data?.scholarship5From,
       scholarship5To: data?.scholarship5To,
       scholarship5Gpa: data?.scholarship5Gpa,
@@ -241,6 +256,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship6FundType: data?.scholarship6FundType,
       scholarship6Category: data?.scholarship6Category,
       scholarship6Grade: data?.scholarship6Grade,
+      scholarship6Field: data?.scholarship6Field,
       scholarship6From: data?.scholarship6From,
       scholarship6To: data?.scholarship6To,
       scholarship6Gpa: data?.scholarship6Gpa,
@@ -249,6 +265,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship7FundType: data?.scholarship7FundType,
       scholarship7Category: data?.scholarship7Category,
       scholarship7Grade: data?.scholarship7Grade,
+      scholarship7Field: data?.scholarship7Field,
       scholarship7From: data?.scholarship7From,
       scholarship7To: data?.scholarship7To,
       scholarship7Gpa: data?.scholarship7Gpa,
@@ -257,6 +274,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship8FundType: data?.scholarship8FundType,
       scholarship8Category: data?.scholarship8Category,
       scholarship8Grade: data?.scholarship8Grade,
+      scholarship8Field: data?.scholarship8Field,
       scholarship8From: data?.scholarship8From,
       scholarship8To: data?.scholarship8To,
       scholarship8Gpa: data?.scholarship8Gpa,
@@ -265,6 +283,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship9FundType: data?.scholarship9FundType,
       scholarship9Category: data?.scholarship9Category,
       scholarship9Grade: data?.scholarship9Grade,
+      scholarship9Field: data?.scholarship9Field,
       scholarship9From: data?.scholarship9From,
       scholarship9To: data?.scholarship9To,
       scholarship9Gpa: data?.scholarship9Gpa,
@@ -273,6 +292,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       scholarship10FundType: data?.scholarship10FundType,
       scholarship10Category: data?.scholarship10Category,
       scholarship10Grade: data?.scholarship10Grade,
+      scholarship10Field: data?.scholarship10Field,
       scholarship10From: data?.scholarship10From,
       scholarship10To: data?.scholarship10To,
       scholarship10Gpa: data?.scholarship10Gpa,
@@ -351,6 +371,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     formData.scholarship1FundType && formDataToUpdate.append('scholarship1FundType', formData.scholarship1FundType);
     formData.scholarship1Category && formDataToUpdate.append('scholarship1Category', formData.scholarship1Category);
     formData.scholarship1Grade && formDataToUpdate.append('scholarship1Grade', formData.scholarship1Grade);
+    formData.scholarship1Field && formDataToUpdate.append('scholarship1Field', formData.scholarship1Field);
     formData.scholarship1From && formDataToUpdate.append('scholarship1From', formData.scholarship1From);
     formData.scholarship1To && formDataToUpdate.append('scholarship1To', formData.scholarship1To);
     formData.scholarship1Gpa && formDataToUpdate.append('scholarship1Gpa', formData.scholarship1Gpa);
@@ -359,6 +380,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     formData.scholarship2FundType && formDataToUpdate.append('scholarship2FundType', formData.scholarship2FundType);
     formData.scholarship2Category && formDataToUpdate.append('scholarship2Category', formData.scholarship2Category);
     formData.scholarship2Grade && formDataToUpdate.append('scholarship2Grade', formData.scholarship2Grade);
+    formData.scholarship2Field && formDataToUpdate.append('scholarship2Field', formData.scholarship2Field);
     formData.scholarship2From && formDataToUpdate.append('scholarship2From', formData.scholarship2From);
     formData.scholarship2To && formDataToUpdate.append('scholarship2To', formData.scholarship2To);
     formData.scholarship2Gpa && formDataToUpdate.append('scholarship2Gpa', formData.scholarship2Gpa);
@@ -367,6 +389,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     formData.scholarship3FundType && formDataToUpdate.append('scholarship3FundType', formData.scholarship3FundType);
     formData.scholarship3Category && formDataToUpdate.append('scholarship3Category', formData.scholarship3Category);
     formData.scholarship3Grade && formDataToUpdate.append('scholarship3Grade', formData.scholarship3Grade);
+    formData.scholarship3Field && formDataToUpdate.append('scholarship3Field', formData.scholarship3Field);
     formData.scholarship3From && formDataToUpdate.append('scholarship3From', formData.scholarship3From);
     formData.scholarship3To && formDataToUpdate.append('scholarship3To', formData.scholarship3To);
     formData.scholarship3Gpa && formDataToUpdate.append('scholarship3Gpa', formData.scholarship3Gpa);
@@ -375,6 +398,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     formData.scholarship4FundType && formDataToUpdate.append('scholarship4FundType', formData.scholarship4FundType);
     formData.scholarship4Category && formDataToUpdate.append('scholarship4Category', formData.scholarship4Category);
     formData.scholarship4Grade && formDataToUpdate.append('scholarship4Grade', formData.scholarship4Grade);
+    formData.scholarship4Field && formDataToUpdate.append('scholarship4Field', formData.scholarship4Field);
     formData.scholarship4From && formDataToUpdate.append('scholarship4From', formData.scholarship4From);
     formData.scholarship4To && formDataToUpdate.append('scholarship4To', formData.scholarship4To);
     formData.scholarship4Gpa && formDataToUpdate.append('scholarship4Gpa', formData.scholarship4Gpa);
@@ -383,6 +407,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     formData.scholarship5FundType && formDataToUpdate.append('scholarship5FundType', formData.scholarship5FundType);
     formData.scholarship5Category && formDataToUpdate.append('scholarship5Category', formData.scholarship5Category);
     formData.scholarship5Grade && formDataToUpdate.append('scholarship5Grade', formData.scholarship5Grade);
+    formData.scholarship5Field && formDataToUpdate.append('scholarship5Field', formData.scholarship5Field);
     formData.scholarship5From && formDataToUpdate.append('scholarship5From', formData.scholarship5From);
     formData.scholarship5To && formDataToUpdate.append('scholarship5To', formData.scholarship5To);
     formData.scholarship5Gpa && formDataToUpdate.append('scholarship5Gpa', formData.scholarship5Gpa);
@@ -391,6 +416,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     formData.scholarship6FundType && formDataToUpdate.append('scholarship6FundType', formData.scholarship6FundType);
     formData.scholarship6Category && formDataToUpdate.append('scholarship6Category', formData.scholarship6Category);
     formData.scholarship6Grade && formDataToUpdate.append('scholarship6Grade', formData.scholarship6Grade);
+    formData.scholarship6Field && formDataToUpdate.append('scholarship6Field', formData.scholarship6Field);
     formData.scholarship6From && formDataToUpdate.append('scholarship6From', formData.scholarship6From);
     formData.scholarship6To && formDataToUpdate.append('scholarship6To', formData.scholarship6To);
     formData.scholarship6Gpa && formDataToUpdate.append('scholarship6Gpa', formData.scholarship6Gpa);
@@ -399,6 +425,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     formData.scholarship7FundType && formDataToUpdate.append('scholarship7FundType', formData.scholarship7FundType);
     formData.scholarship7Category && formDataToUpdate.append('scholarship7Category', formData.scholarship7Category);
     formData.scholarship7Grade && formDataToUpdate.append('scholarship7Grade', formData.scholarship7Grade);
+    formData.scholarship7Field && formDataToUpdate.append('scholarship7Field', formData.scholarship7Field);
     formData.scholarship7From && formDataToUpdate.append('scholarship7From', formData.scholarship7From);
     formData.scholarship7To && formDataToUpdate.append('scholarship7To', formData.scholarship7To);
     formData.scholarship7Gpa && formDataToUpdate.append('scholarship7Gpa', formData.scholarship7Gpa);
@@ -407,6 +434,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     formData.scholarship8FundType && formDataToUpdate.append('scholarship8FundType', formData.scholarship8FundType);
     formData.scholarship8Category && formDataToUpdate.append('scholarship8Category', formData.scholarship8Category);
     formData.scholarship8Grade && formDataToUpdate.append('scholarship8Grade', formData.scholarship8Grade);
+    formData.scholarship8Field && formDataToUpdate.append('scholarship8Field', formData.scholarship8Field);
     formData.scholarship8From && formDataToUpdate.append('scholarship8From', formData.scholarship8From);
     formData.scholarship8To && formDataToUpdate.append('scholarship8To', formData.scholarship8To);
     formData.scholarship8Gpa && formDataToUpdate.append('scholarship8Gpa', formData.scholarship8Gpa);
@@ -415,6 +443,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     formData.scholarship9FundType && formDataToUpdate.append('scholarship9FundType', formData.scholarship9FundType);
     formData.scholarship9Category && formDataToUpdate.append('scholarship9Category', formData.scholarship9Category);
     formData.scholarship9Grade && formDataToUpdate.append('scholarship9Grade', formData.scholarship9Grade);
+    formData.scholarship9Field && formDataToUpdate.append('scholarship9Field', formData.scholarship9Field);
     formData.scholarship9From && formDataToUpdate.append('scholarship9From', formData.scholarship9From);
     formData.scholarship9To && formDataToUpdate.append('scholarship9To', formData.scholarship9To);
     formData.scholarship9Gpa && formDataToUpdate.append('scholarship9Gpa', formData.scholarship9Gpa);
@@ -423,6 +452,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     formData.scholarship10FundType && formDataToUpdate.append('scholarship10FundType', formData.scholarship10FundType);
     formData.scholarship10Category && formDataToUpdate.append('scholarship10Category', formData.scholarship10Category);
     formData.scholarship10Grade && formDataToUpdate.append('scholarship10Grade', formData.scholarship10Grade);
+    formData.scholarship10Field && formDataToUpdate.append('scholarship10Field', formData.scholarship10Field);
     formData.scholarship10From && formDataToUpdate.append('scholarship10From', formData.scholarship10From);
     formData.scholarship10To && formDataToUpdate.append('scholarship10To', formData.scholarship10To);
     formData.scholarship10Gpa && formDataToUpdate.append('scholarship10Gpa', formData.scholarship10Gpa);
@@ -788,11 +818,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                 {/* SCHOLARSHIP */}
                 <FormControl>
                   <FormLabel mt={5} fontSize="18px" fontWeight="bold" >Scholarship</FormLabel>
-                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
                     <FormLabel >SN</FormLabel>
                     <FormLabel >Fund type</FormLabel>
                     <FormLabel >Category</FormLabel>
-                    <FormLabel>Class</FormLabel>
+                    <FormLabel>Grade</FormLabel>
+                    <FormLabel>Field</FormLabel>
                     <FormLabel>From</FormLabel>
                     <FormLabel>To</FormLabel>
                     <FormLabel>GPA</FormLabel>
@@ -800,7 +831,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   </Grid>
                   {/* SCHOLARSHIP ONE */}
                 </FormControl>
-                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>1. </FormLabel>
                   <Select
                     placeholder={data.scholarship1FundType}
@@ -841,6 +872,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   ))}
                 </Select>
                   <Input
+                    placeholder={data.scholarship1Field}
+                 
+                    name="scholarship1Field"
+                    onChange={handleInputChange}
+                  />
+                  <Input
                     placeholder={data.scholarship1From}
                  
                     name="scholarship1From"
@@ -868,7 +905,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP TWO */}
-                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>2. </FormLabel>
                   <Select
                     placeholder={data.scholarship2FundType}
@@ -908,6 +945,11 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     </option>
                   ))}
                 </Select>
+                <Input
+                    placeholder={data.scholarship2Field}
+                    name="scholarship2Field"
+                    onChange={handleInputChange}
+                  />
                   <Input
                     placeholder={data.scholarship2From}
                     name="scholarship2From"
@@ -935,7 +977,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP THREE */}
-                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>3. </FormLabel>
                   <Select
                     placeholder={data.scholarship3FundType}
@@ -975,6 +1017,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     </option>
                   ))}
                 </Select>
+                <Input
+                    placeholder={data.scholarship3Field}
+                 
+                    name="scholarship3Field"
+                    onChange={handleInputChange}
+                  />
                   <Input
                     placeholder={data.scholarship3From}
                     name="scholarship3From"
@@ -1002,7 +1050,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP FOUR */}
-                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>4. </FormLabel>
                   <Select
                     placeholder={data.scholarship4FundType}
@@ -1042,6 +1090,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     </option>
                   ))}
                 </Select>
+                <Input
+                    placeholder={data.scholarship4Field}
+                 
+                    name="scholarship4Field"
+                    onChange={handleInputChange}
+                  />
                   <Input
                     placeholder={data.scholarship4From}
                     name="scholarship4From"
@@ -1069,7 +1123,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP FIVE */}
-                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>5. </FormLabel>
                   <Select
                     placeholder={data.scholarship5FundType}
@@ -1109,6 +1163,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     </option>
                   ))}
                 </Select>
+                <Input
+                    placeholder={data.scholarship5Field}
+                 
+                    name="scholarship5Field"
+                    onChange={handleInputChange}
+                  />
                   <Input
                     placeholder={data.scholarship5From}
                     name="scholarship5From"
@@ -1136,7 +1196,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP SIX */}
-                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>6. </FormLabel>
                   <Select
                     placeholder={data.scholarship6FundType}
@@ -1176,6 +1236,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     </option>
                   ))}
                 </Select>
+                <Input
+                    placeholder={data.scholarship6Field}
+                 
+                    name="scholarship6Field"
+                    onChange={handleInputChange}
+                  />
                   <Input
                     placeholder={data.scholarship6From}
                  
@@ -1203,7 +1269,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP SEVEN */}
-                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>7. </FormLabel>
                   <Select
                     placeholder={data.scholarship7FundType}
@@ -1243,6 +1309,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     </option>
                   ))}
                 </Select>
+                <Input
+                    placeholder={data.scholarship7Field}
+                 
+                    name="scholarship7Field"
+                    onChange={handleInputChange}
+                  />
                   <Input
                     placeholder={data.scholarship7From}
                     name="scholarship7From"
@@ -1270,7 +1342,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP EIGHT */}
-                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>8. </FormLabel>
                   <Select
                     placeholder={data.scholarship8FundType}
@@ -1310,6 +1382,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     </option>
                   ))}
                 </Select>
+                <Input
+                    placeholder={data.scholarship8Field}
+                 
+                    name="scholarship8Field"
+                    onChange={handleInputChange}
+                  />
                   <Input
                     placeholder={data.scholarship8From}
                     name="scholarship8From"
@@ -1337,7 +1415,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP NINE */}
-                <Grid gridTemplateColumns={"0.2fr 0.5fr  1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>9. </FormLabel>
                   <Select
                     placeholder={data.scholarship9FundType}
@@ -1377,6 +1455,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     </option>
                   ))}
                 </Select>
+                <Input
+                    placeholder={data.scholarship9Field}
+                 
+                    name="scholarship9Field"
+                    onChange={handleInputChange}
+                  />
                   <Input
                     placeholder={data.scholarship9From}
                     name="scholarship9From"
@@ -1404,7 +1488,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
                 {/* SCHOLARSHIP TEN */}
-                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                <Grid gridTemplateColumns={"0.2fr 0.5fr 1.1fr 0.5fr 0.7fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                   <FormLabel>10. </FormLabel>
                   <Select
                     placeholder={data.scholarship10FundType}
@@ -1444,6 +1528,12 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                     </option>
                   ))}
                 </Select>
+                <Input
+                    placeholder={data.scholarship10Field}
+                 
+                    name="scholarship10Field"
+                    onChange={handleInputChange}
+                  />
                   <Input
                     placeholder={data.scholarship10From}
                     name="scholarship10From"

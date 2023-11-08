@@ -53,7 +53,7 @@ const SendDistAdminOtp = async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        const otp = Math.ceil(Math.random() * 918376)
+        const otp = Math.floor(100000 + Math.random() * 900000)
 
 
         // Send OTP via email
