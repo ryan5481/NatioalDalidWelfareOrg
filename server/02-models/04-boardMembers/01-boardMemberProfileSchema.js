@@ -43,20 +43,52 @@ const boardMemberProfileSchema = ({
         type: String,
     },
 
-    //EDUCATION
-    qualification: {
+    //EDUCATION ONE
+    qualification1: {
         type: String,
     },
 
-    graduatedYear: {
+    graduatedYear1: {
         type: String,
     },
 
-    institutionName: {
+    institutionName1: {
         type: String,
     },
     
-    institutionAddress: {
+    institutionAddress1: {
+        type: String,
+    },
+    //EDUCATION ONE
+    qualification2: {
+        type: String,
+    },
+
+    graduatedYear2: {
+        type: String,
+    },
+
+    institutionName2: {
+        type: String,
+    },
+    
+    institutionAddress2: {
+        type: String,
+    },
+    //EDUCATION ONE
+    qualification3: {
+        type: String,
+    },
+
+    graduatedYear3: {
+        type: String,
+    },
+
+    institutionName3: {
+        type: String,
+    },
+    
+    institutionAddress3: {
         type: String,
     },
     //TENURE ONE
