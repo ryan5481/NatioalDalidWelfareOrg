@@ -61,6 +61,9 @@ const studentProfileSchema = ({
     scholarship1Grade: {
         type: String,
     },
+    scholarship1Field: {
+        type: String,
+    },
     scholarship1From: {
         type: String,
     },
@@ -73,15 +76,18 @@ const studentProfileSchema = ({
     scholarship1Remarks: {
         type: String,
     },
-        //SCHOLARSHIP TWO
-        scholarship2FundType: {
-            type: String,
-        },
+    //SCHOLARSHIP TWO
+    scholarship2FundType: {
+        type: String,
+    },
 
     scholarship2Category: {
         type: String,
     },
     scholarship2Grade: {
+        type: String,
+    },
+    scholarship2Field: {
         type: String,
     },
     scholarship2From: {
@@ -96,15 +102,18 @@ const studentProfileSchema = ({
     scholarship2Remarks: {
         type: String,
     },
-        //SCHOLARSHIP THREE
-        scholarship3FundType: {
-            type: String,
-        },
+    //SCHOLARSHIP THREE
+    scholarship3FundType: {
+        type: String,
+    },
 
     scholarship3Category: {
         type: String,
     },
     scholarship3Grade: {
+        type: String,
+    },
+    scholarship3Field: {
         type: String,
     },
     scholarship3From: {
@@ -119,15 +128,18 @@ const studentProfileSchema = ({
     scholarship3Remarks: {
         type: String,
     },
-        //SCHOLARSHIP FOUR
-        scholarship4FundType: {
-            type: String,
-        },
+    //SCHOLARSHIP FOUR
+    scholarship4FundType: {
+        type: String,
+    },
 
     scholarship4Category: {
         type: String,
     },
     scholarship4Grade: {
+        type: String,
+    },
+    scholarship4Field: {
         type: String,
     },
     scholarship4From: {
@@ -142,15 +154,18 @@ const studentProfileSchema = ({
     scholarship4Remarks: {
         type: String,
     },
-        //SCHOLARSHIP FIVE
-        scholarship5FundType: {
-            type: String,
-        },
-        
+    //SCHOLARSHIP FIVE
+    scholarship5FundType: {
+        type: String,
+    },
+
     scholarship5Category: {
         type: String,
     },
     scholarship5Grade: {
+        type: String,
+    },
+    scholarship5Field: {
         type: String,
     },
     scholarship5From: {
@@ -169,11 +184,13 @@ const studentProfileSchema = ({
     scholarship6FundType: {
         type: String,
     },
-
     scholarship6Category: {
         type: String,
     },
     scholarship6Grade: {
+        type: String,
+    },
+    scholarship6Field: {
         type: String,
     },
     scholarship6From: {
@@ -188,15 +205,18 @@ const studentProfileSchema = ({
     scholarship6Remarks: {
         type: String,
     },
-        //SCHOLARSHIP SEVEN
-        scholarship7FundType: {
-            type: String,
-        },
+    //SCHOLARSHIP SEVEN
+    scholarship7FundType: {
+        type: String,
+    },
 
     scholarship7Category: {
         type: String,
     },
     scholarship7Grade: {
+        type: String,
+    },
+    scholarship7Field: {
         type: String,
     },
     scholarship7From: {
@@ -211,15 +231,18 @@ const studentProfileSchema = ({
     scholarship7Remarks: {
         type: String,
     },
-        //SCHOLARSHIP EIGHT
-        scholarship8FundType: {
-            type: String,
-        },
+    //SCHOLARSHIP EIGHT
+    scholarship8FundType: {
+        type: String,
+    },
 
     scholarship8Category: {
         type: String,
     },
     scholarship8Grade: {
+        type: String,
+    },
+    scholarship8Field: {
         type: String,
     },
     scholarship8From: {
@@ -234,15 +257,18 @@ const studentProfileSchema = ({
     scholarship8Remarks: {
         type: String,
     },
-        //SCHOLARSHIP NINE
-        scholarship4FundType: {
-            type: String,
-        },
+    //SCHOLARSHIP NINE
+    scholarship4FundType: {
+        type: String,
+    },
 
     scholarship9Category: {
         type: String,
     },
     scholarship9Grade: {
+        type: String,
+    },
+    scholarship9Field: {
         type: String,
     },
     scholarship9From: {
@@ -257,15 +283,18 @@ const studentProfileSchema = ({
     scholarship9Remarks: {
         type: String,
     },
-        //SCHOLARSHIP TEN
-        scholarship10FundType: {
-            type: String,
-        },
-        
+    //SCHOLARSHIP TEN
+    scholarship10FundType: {
+        type: String,
+    },
+
     scholarship10Category: {
         type: String,
     },
     scholarship10Grade: {
+        type: String,
+    },
+    scholarship10Field: {
         type: String,
     },
     scholarship10From: {
@@ -280,7 +309,7 @@ const studentProfileSchema = ({
     scholarship10Remarks: {
         type: String,
     },
-        //PERMANENT ADDRESS
+    //PERMANENT ADDRESS
     permanentMunicipality: {
         type: String,
     },
@@ -293,7 +322,7 @@ const studentProfileSchema = ({
     permanentProvince: {
         type: String,
     },
-        //CURRENT ADDRESS
+    //CURRENT ADDRESS
     currentMunicipality: {
         type: String,
     },
@@ -306,7 +335,7 @@ const studentProfileSchema = ({
     currentProvince: {
         type: String,
     },
-        //SCHOOL
+    //SCHOOL
     schoolName: {
         type: String,
     },
@@ -337,7 +366,7 @@ const studentProfileSchema = ({
     schoolProvince: {
         type: String,
     },
-        //FATHER
+    //FATHER
     fatherName: {
         type: String,
     },
@@ -388,7 +417,7 @@ const studentProfileSchema = ({
     guardianContactNumber: {
         type: String,
     },
-    
+
     createdAt: { type: Date, default: Date.now },
 
     updatedAt: { type: Date, default: Date.now },

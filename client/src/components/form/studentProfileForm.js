@@ -56,6 +56,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [scholarship1FundType, setScholarship1FundType] = useState('')
   const [scholarship1Category, setScholarship1Category] = useState('')
   const [scholarship1Grade, setScholarship1Grade] = useState('')
+  const [scholarship1Field, setScholarship1Field] = useState('')
   const [scholarship1From, setScholarship1From] = useState('')
   const [scholarship1To, setScholarship1To] = useState('')
   const [scholarship1Gpa, setScholarship1Gpa] = useState('')
@@ -63,6 +64,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [scholarship2FundType, setScholarship2FundType] = useState('')
   const [scholarship2Category, setScholarship2Category] = useState('')
   const [scholarship2Grade, setScholarship2Grade] = useState('')
+  const [scholarship2Field, setScholarship2Field] = useState('')
   const [scholarship2From, setScholarship2From] = useState('')
   const [scholarship2To, setScholarship2To] = useState('')
   const [scholarship2Gpa, setScholarship2Gpa] = useState('')
@@ -70,6 +72,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [scholarship3FundType, setScholarship3FundType] = useState('')
   const [scholarship3Category, setScholarship3Category] = useState('')
   const [scholarship3Grade, setScholarship3Grade] = useState('')
+  const [scholarship3Field, setScholarship3Field] = useState('')
   const [scholarship3From, setScholarship3From] = useState('')
   const [scholarship3To, setScholarship3To] = useState('')
   const [scholarship3Gpa, setScholarship3Gpa] = useState('')
@@ -77,6 +80,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [scholarship4FundType, setScholarship4FundType] = useState('')
   const [scholarship4Category, setScholarship4Category] = useState('')
   const [scholarship4Grade, setScholarship4Grade] = useState('')
+  const [scholarship4Field, setScholarship4Field] = useState('')
   const [scholarship4From, setScholarship4From] = useState('')
   const [scholarship4To, setScholarship4To] = useState('')
   const [scholarship4Gpa, setScholarship4Gpa] = useState('')
@@ -84,6 +88,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [scholarship5FundType, setScholarship5FundType] = useState('')
   const [scholarship5Category, setScholarship5Category] = useState('')
   const [scholarship5Grade, setScholarship5Grade] = useState('')
+  const [scholarship5Field, setScholarship5Field] = useState('')
   const [scholarship5From, setScholarship5From] = useState('')
   const [scholarship5To, setScholarship5To] = useState('')
   const [scholarship5Gpa, setScholarship5Gpa] = useState('')
@@ -91,6 +96,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [scholarship6FundType, setScholarship6FundType] = useState('')
   const [scholarship6Category, setScholarship6Category] = useState('')
   const [scholarship6Grade, setScholarship6Grade] = useState('')
+  const [scholarship6Field, setScholarship6Field] = useState('')
   const [scholarship6From, setScholarship6From] = useState('')
   const [scholarship6To, setScholarship6To] = useState('')
   const [scholarship6Gpa, setScholarship6Gpa] = useState('')
@@ -98,6 +104,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [scholarship7FundType, setScholarship7FundType] = useState('')
   const [scholarship7Category, setScholarship7Category] = useState('')
   const [scholarship7Grade, setScholarship7Grade] = useState('')
+  const [scholarship7Field, setScholarship7Field] = useState('')
   const [scholarship7From, setScholarship7From] = useState('')
   const [scholarship7To, setScholarship7To] = useState('')
   const [scholarship7Gpa, setScholarship7Gpa] = useState('')
@@ -105,6 +112,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [scholarship8FundType, setScholarship8FundType] = useState('')
   const [scholarship8Category, setScholarship8Category] = useState('')
   const [scholarship8Grade, setScholarship8Grade] = useState('')
+  const [scholarship8Field, setScholarship8Field] = useState('')
   const [scholarship8From, setScholarship8From] = useState('')
   const [scholarship8To, setScholarship8To] = useState('')
   const [scholarship8Gpa, setScholarship8Gpa] = useState('')
@@ -112,6 +120,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [scholarship9FundType, setScholarship9FundType] = useState('')
   const [scholarship9Category, setScholarship9Category] = useState('')
   const [scholarship9Grade, setScholarship9Grade] = useState('')
+  const [scholarship9Field, setScholarship9Field] = useState('')
   const [scholarship9From, setScholarship9From] = useState('')
   const [scholarship9To, setScholarship9To] = useState('')
   const [scholarship9Gpa, setScholarship9Gpa] = useState('')
@@ -119,6 +128,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [scholarship10FundType, setScholarship10FundType] = useState('')
   const [scholarship10Category, setScholarship10Category] = useState('')
   const [scholarship10Grade, setScholarship10Grade] = useState('')
+  const [scholarship10Field, setScholarship10Field] = useState('')
   const [scholarship10From, setScholarship10From] = useState('')
   const [scholarship10To, setScholarship10To] = useState('')
   const [scholarship10Gpa, setScholarship10Gpa] = useState('')
@@ -252,6 +262,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('scholarship1FundType', scholarship1FundType)
       formData.append('scholarship1Category', scholarship1Category)
       formData.append('scholarship1Grade', scholarship1Grade)
+      formData.append('scholarship1Field', scholarship1Field)
       formData.append('scholarship1From', scholarship1From)
       formData.append('scholarship1To', scholarship1To)
       formData.append('scholarship1Gpa', scholarship1Gpa)
@@ -259,6 +270,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('scholarship2FundType', scholarship2FundType)
       formData.append('scholarship2Category', scholarship2Category)
       formData.append('scholarship2Grade', scholarship2Grade)
+      formData.append('scholarship2Field', scholarship2Field)
       formData.append('scholarship2From', scholarship2From)
       formData.append('scholarship2To', scholarship2To)
       formData.append('scholarship2Gpa', scholarship2Gpa)
@@ -266,6 +278,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('scholarship3FundType', scholarship3FundType)
       formData.append('scholarship3Category', scholarship3Category)
       formData.append('scholarship3Grade', scholarship3Grade)
+      formData.append('scholarship3Field', scholarship3Field)
       formData.append('scholarship3From', scholarship3From)
       formData.append('scholarship3To', scholarship3To)
       formData.append('scholarship3Gpa', scholarship3Gpa)
@@ -273,6 +286,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('scholarship4FundType', scholarship4FundType)
       formData.append('scholarship4Category', scholarship4Category)
       formData.append('scholarship4Grade', scholarship4Grade)
+      formData.append('scholarship4Field', scholarship4Field)
       formData.append('scholarship4From', scholarship4From)
       formData.append('scholarship4To', scholarship4To)
       formData.append('scholarship4Gpa', scholarship4Gpa)
@@ -280,6 +294,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('scholarship5FundType', scholarship5FundType)
       formData.append('scholarship5Category', scholarship5Category)
       formData.append('scholarship5Grade', scholarship5Grade)
+      formData.append('scholarship5Field', scholarship5Field)
       formData.append('scholarship5From', scholarship5From)
       formData.append('scholarship5To', scholarship5To)
       formData.append('scholarship5Gpa', scholarship5Gpa)
@@ -287,6 +302,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('scholarship6FundType', scholarship6FundType)
       formData.append('scholarship6Category', scholarship6Category)
       formData.append('scholarship6Grade', scholarship6Grade)
+      formData.append('scholarship6Field', scholarship6Field)
       formData.append('scholarship6From', scholarship6From)
       formData.append('scholarship6To', scholarship6To)
       formData.append('scholarship6Gpa', scholarship6Gpa)
@@ -294,6 +310,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('scholarship7FundType', scholarship7FundType)
       formData.append('scholarship7Category', scholarship7Category)
       formData.append('scholarship7Grade', scholarship7Grade)
+      formData.append('scholarship7Field', scholarship7Field)
       formData.append('scholarship7From', scholarship7From)
       formData.append('scholarship7To', scholarship7To)
       formData.append('scholarship7Gpa', scholarship7Gpa)
@@ -301,6 +318,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('scholarship8FundType', scholarship8FundType)
       formData.append('scholarship8Category', scholarship8Category)
       formData.append('scholarship8Grade', scholarship8Grade)
+      formData.append('scholarship8Field', scholarship8Field)
       formData.append('scholarship8From', scholarship8From)
       formData.append('scholarship8To', scholarship8To)
       formData.append('scholarship8Gpa', scholarship8Gpa)
@@ -308,6 +326,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('scholarship9FundType', scholarship9FundType)
       formData.append('scholarship9Category', scholarship9Category)
       formData.append('scholarship9Grade', scholarship9Grade)
+      formData.append('scholarship9Field', scholarship9Field)
       formData.append('scholarship9From', scholarship9From)
       formData.append('scholarship9To', scholarship9To)
       formData.append('scholarship9Gpa', scholarship9Gpa)
@@ -315,6 +334,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('scholarship10FundType', scholarship10FundType)
       formData.append('scholarship10Category', scholarship10Category)
       formData.append('scholarship10Grade', scholarship10Grade)
+      formData.append('scholarship10Field', scholarship10Field)
       formData.append('scholarship10From', scholarship10From)
       formData.append('scholarship10To', scholarship10To)
       formData.append('scholarship10Gpa', scholarship10Gpa)
@@ -353,7 +373,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('guardianOccupation', guardianOccupation)
       formData.append('guardianContactNumber', guardianContactNumber)
 
-
+      console.log(baseUrl)
       const res = await axios.post(`${baseUrl}/create-student-profile`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -370,7 +390,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
           isClosable: true,
           position: 'top'
         });
-        // window.location.reload()
+        window.location.reload()
 
       } else {
         toast({
@@ -503,7 +523,6 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
 
                   />
                   <input
-                    id='jobImage'
                     type='file'
                     accept='image/*'
                     ref={imageInputRef}
@@ -512,17 +531,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                   />
                 </Center>
                 <Box m={5} >
-                  {scholarshipProject == "prlEth" && <FormControl mb={5} w={"270px"} >
+                  {scholarshipProject == "prlEth" && <FormControl mb={5} maxW={"500px"} >
                     <FormLabel>Project</FormLabel>
                     <Select
                       placeholder='Select'
                       onChange={(event) => setProject(event.target.value)}
                     >
                       <option key="PRL" value="PRL">
-                        PRL
+                        Pratap Ram Lohar Memorial Scholarship Program
                       </option>
                       <option key="ETHS" value="ETHS">
-                        ETHS
+                        Etela Tapiola High School
                       </option>
                     </Select>
                   </FormControl>}
@@ -644,11 +663,12 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
               {/* SCHOLARSHIP */}
               {/* <text>{numFields}</text> */}
               <FormLabel fontSize="22px" fontWeight="bold" >Scholarship</FormLabel>
-              <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
+              <Grid gridTemplateColumns={"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} >
                 <FormLabel >SN</FormLabel>
                 <FormLabel >Fund type</FormLabel>
                 <FormLabel >Category</FormLabel>
                 <FormLabel>Grade</FormLabel>
+                <FormLabel>Field</FormLabel>
                 <FormLabel>From</FormLabel>
                 <FormLabel>To</FormLabel>
                 <FormLabel>GPA</FormLabel>
@@ -657,17 +677,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
               <FormControl>
                 {/* SCHOLARSHIP ONE */}
                 {numFields >= 1 &&
-                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                     <FormLabel>1. </FormLabel>
                     <Select
                       placeholder='Select'
                       onChange={(event) => setScholarship1FundType(event.target.value)}
                     >
                       <option key="NEF" value="NEF">
-                        NEF
+                        Nepal Endowment Fund
                       </option>
                       <option key="ARMF" value="ARMF">
-                        ARMF
+                        Ansley Rose MacCormack Fund
                       </option>
                     </Select>
                     <Select
@@ -690,7 +710,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                         </option>
                       ))}
                     </Select>
-
+                    <Input
+                      placeholder='Field'
+                      onChange={(e) => setScholarship1Field(e.target.value)}
+                    />
                     <Input
                       placeholder='From'
                       type='date'
@@ -713,17 +736,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                   </Grid>}
                 {/* SCHOLARSHIP TWO */}
                 {numFields >= 2 &&
-                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                     <FormLabel>2. </FormLabel>
                     <Select
                       placeholder='Select'
                       onChange={(event) => setScholarship2FundType(event.target.value)}
                     >
                       <option key="NEF" value="NEF">
-                        NEF
+                        Nepal Endowment Fund
                       </option>
                       <option key="ARMF" value="ARMF">
-                        ARMF
+                        Ansley Rose MacCormack Fund
                       </option>
                     </Select>
                     <Select
@@ -747,6 +770,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       ))}
                     </Select>
                     <Input
+                      placeholder='Field'
+                      onChange={(e) => setScholarship2Field(e.target.value)}
+                    />
+                    <Input
                       placeholder='From'
                       type='date'
                       onChange={(e) => setScholarship2From(e.target.value)}
@@ -769,17 +796,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                 }
                 {/* SCHOLARSHIP THREE */}
                 {numFields >= 3 &&
-                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                     <FormLabel>3. </FormLabel>
                     <Select
                       placeholder='Select'
                       onChange={(event) => setScholarship3FundType(event.target.value)}
                     >
                       <option key="NEF" value="NEF">
-                        NEF
+                        Nepal Endowment Fund
                       </option>
                       <option key="ARMF" value="ARMF">
-                        ARMF
+                        Ansley Rose MacCormack Fund
                       </option>
                     </Select>
                     <Select
@@ -805,6 +832,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       ))}
                     </Select>
                     <Input
+                      placeholder='Field'
+                      onChange={(e) => setScholarship3Field(e.target.value)}
+                    />
+                    <Input
                       placeholder='From'
                       type='date'
                       onChange={(e) => setScholarship3From(e.target.value)}
@@ -827,17 +858,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                 }
                 {/* SCHOLARSHIP FOUR */}
                 {numFields >= 4 &&
-                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                     <FormLabel>4. </FormLabel>
                     <Select
                       placeholder='Select'
                       onChange={(event) => setScholarship4FundType(event.target.value)}
                     >
                       <option key="NEF" value="NEF">
-                        NEF
+                        Nepal Endowment Fund
                       </option>
                       <option key="ARMF" value="ARMF">
-                        ARMF
+                        Ansley Rose MacCormack Fund
                       </option>
                     </Select>
                     <Select
@@ -861,6 +892,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       ))}
                     </Select>
                     <Input
+                      placeholder='Field'
+                      onChange={(e) => setScholarship4Field(e.target.value)}
+                    />
+                    <Input
                       placeholder='From'
                       type='date'
                       onChange={(e) => setScholarship4From(e.target.value)}
@@ -883,17 +918,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                 }
                 {/* SCHOLARSHIP FIVE */}
                 {numFields >= 5 &&
-                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                     <FormLabel>5. </FormLabel>
                     <Select
                       placeholder='Select'
                       onChange={(event) => setScholarship5FundType(event.target.value)}
                     >
                       <option key="NEF" value="NEF">
-                        NEF
+                        Nepal Endowment Fund
                       </option>
                       <option key="ARMF" value="ARMF">
-                        ARMF
+                        Ansley Rose MacCormack Fund
                       </option>
                     </Select>
                     <Select
@@ -920,6 +955,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       ))}
                     </Select>
                     <Input
+                      placeholder='Field'
+                      onChange={(e) => setScholarship5Field(e.target.value)}
+                    />
+                    <Input
                       placeholder='From'
                       type='date'
                       onChange={(e) => setScholarship5From(e.target.value)}
@@ -942,17 +981,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                 }
                 {/* SCHOLARSHIP SIX */}
                 {numFields >= 6 &&
-                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                     <FormLabel>6. </FormLabel>
                     <Select
                       placeholder='Select'
                       onChange={(event) => setScholarship6FundType(event.target.value)}
                     >
                       <option key="NEF" value="NEF">
-                        NEF
+                        Nepal Endowment Fund
                       </option>
                       <option key="ARMF" value="ARMF">
-                        ARMF
+                        Ansley Rose MacCormack Fund
                       </option>
                     </Select>
                     <Select
@@ -975,7 +1014,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                         </option>
                       ))}
                     </Select>
-
+                    <Input
+                      placeholder='Field'
+                      onChange={(e) => setScholarship6Field(e.target.value)}
+                    />
                     <Input
                       placeholder='From'
                       type='date'
@@ -1000,17 +1042,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                   </Grid>}
                 {/* SCHOLARSHIP SEVEN */}
                 {numFields >= 7 &&
-                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                     <FormLabel>7. </FormLabel>
                     <Select
                       placeholder='Select'
                       onChange={(event) => setScholarship7FundType(event.target.value)}
                     >
                       <option key="NEF" value="NEF">
-                        NEF
+                        Nepal Endowment Fund
                       </option>
                       <option key="ARMF" value="ARMF">
-                        ARMF
+                        Ansley Rose MacCormack Fund
                       </option>
                     </Select>
                     <Select
@@ -1034,6 +1076,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       ))}
                     </Select>
                     <Input
+                      placeholder='Field'
+                      onChange={(e) => setScholarship7Field(e.target.value)}
+                    />
+                    <Input
                       placeholder='From'
                       type='date'
                       onChange={(e) => setScholarship7From(e.target.value)}
@@ -1056,17 +1102,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                 }
                 {/* SCHOLARSHIP EIGHT */}
                 {numFields >= 8 &&
-                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                     <FormLabel>8. </FormLabel>
                     <Select
                       placeholder='Select'
                       onChange={(event) => setScholarship8FundType(event.target.value)}
                     >
                       <option key="NEF" value="NEF">
-                        NEF
+                        Nepal Endowment Fund
                       </option>
                       <option key="ARMF" value="ARMF">
-                        ARMF
+                        Ansley Rose MacCormack Fund
                       </option>
                     </Select>
                     <Select
@@ -1090,6 +1136,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       ))}
                     </Select>
                     <Input
+                      placeholder='Field'
+                      onChange={(e) => setScholarship8Field(e.target.value)}
+                    />
+                    <Input
                       placeholder='From'
                       type='date'
                       onChange={(e) => setScholarship8From(e.target.value)}
@@ -1112,17 +1162,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                 }
                 {/* SCHOLARSHIP NINE */}
                 {numFields >= 9 &&
-                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                     <FormLabel>9. </FormLabel>
                     <Select
                       placeholder='Select'
                       onChange={(event) => setScholarship9FundType(event.target.value)}
                     >
                       <option key="NEF" value="NEF">
-                        NEF
+                        Nepal Endowment Fund
                       </option>
                       <option key="ARMF" value="ARMF">
-                        ARMF
+                        Ansley Rose MacCormack Fund
                       </option>
                     </Select>
                     <Select
@@ -1148,6 +1198,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       ))}
                     </Select>
                     <Input
+                      placeholder='Field'
+                      onChange={(e) => setScholarship9Field(e.target.value)}
+                    />
+                    <Input
                       placeholder='From'
                       type='date'
                       onChange={(e) => setScholarship9From(e.target.value)}
@@ -1170,17 +1224,17 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                 }
                 {/* SCHOLARSHIP TEN */}
                 {numFields >= 10 &&
-                  <Grid gridTemplateColumns={"0.2fr 0.5fr 1fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
+                  <Grid gridTemplateColumns={"0.2fr 0.5fr 0.5fr 0.5fr 0.5fr 0.7fr 0.7fr 0.4fr 1fr"} gap={1} mb={1} >
                     <FormLabel>10. </FormLabel>
                     <Select
                       placeholder='Select'
                       onChange={(event) => setScholarship10FundType(event.target.value)}
                     >
                       <option key="NEF" value="NEF">
-                        NEF
+                        Nepal Endowment Fund
                       </option>
                       <option key="ARMF" value="ARMF">
-                        ARMF
+                        Ansley Rose MacCormack Fund
                       </option>
                     </Select>
                     <Select
@@ -1203,6 +1257,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                         </option>
                       ))}
                     </Select>
+                    <Input
+                      placeholder='Field'
+                      onChange={(e) => setScholarship10Field(e.target.value)}
+                    />
                     <Input
                       placeholder='From'
                       type='date'
