@@ -15,9 +15,11 @@ import {
     Select
 } from '@chakra-ui/react';
 import StudentNumberDisplay from '../../components/dataDisplay/studentNumberDisplay';
+import BoardMembersDataDisplay from '../../components/dataDisplay/boardMembersDataDisplay';
 import { CheckIcon, RepeatClockIcon } from '@chakra-ui/icons';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
+const dalitEthnicitiesList = ['Badi', 'Gandarva', 'Madeshi Origin', 'Pariyar', 'Sarki', 'Viswakarma']
 const districtNames = [
     "Achham",
     "Arghakhanchi",
@@ -196,18 +198,33 @@ const SuperAdminDashboard = () => {
         item.scholarship2FundType.includes(selectedFundType) ||
         item.scholarship3FundType.includes(selectedFundType) ||
         item.scholarship4FundType.includes(selectedFundType) ||
-        item.scholarship5FundType.includes(selectedFundType))
+        item.scholarship5FundType.includes(selectedFundType) ||
+        item.scholarship6FundType.includes(selectedFundType) ||
+        item.scholarship7FundType.includes(selectedFundType) ||
+        item.scholarship8FundType.includes(selectedFundType) ||
+        item.scholarship9FundType.includes(selectedFundType) ||
+        item.scholarship10FundType.includes(selectedFundType)
+        )
          )
-    
-    
-    const disabledAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.studentType === "Disabled");
+
+         //Filter by Ethnicity
+    const [selectedEthnicity, setSelectedEthnicity] = useState("all");
+
+    const allStudentsFilteredByEthnicity = 
+    selectedEthnicity == "all" ? (allStudentsListFilteredByFundType) : (
+        allStudentsListFilteredByFundType.filter((item) => 
+        item?.ethnicity.includes(selectedEthnicity) 
+        )
+    )
+
+    const disabledAllStudentsList = allStudentsFilteredByEthnicity.filter((obj) => obj.studentType === "Disabled");
     const disabledCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.studentType === "Disabled");
-    const orphanAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.studentType === "Orphan");
+    const orphanAllStudentsList = allStudentsFilteredByEthnicity.filter((obj) => obj.studentType === "Orphan");
     const orphanCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.studentType === "Orphan");
 
-    const ncsepAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.project === "NCSEP");
-    const prlAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.project === "PRL");
-    const ethsAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.project === "ETHS");
+    const ncsepAllStudentsList = allStudentsFilteredByEthnicity.filter((obj) => obj.project === "NCSEP");
+    const prlAllStudentsList = allStudentsFilteredByEthnicity.filter((obj) => obj.project === "PRL");
+    const ethsAllStudentsList = allStudentsFilteredByEthnicity.filter((obj) => obj.project === "ETHS");
     const ncsepCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.project === "NCSEP");
     const prlCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.project === "PRL");
     const ethsCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.project === "ETHS");
@@ -249,6 +266,19 @@ const SuperAdminDashboard = () => {
                             ARMF
                         </option>
                     </Select>
+                    <FormControl w={"200px"}>
+                      {/* <FormLabel>Ethnicity</FormLabel> */}
+                      <Select
+                        placeholder='Ethnicity'
+                        onChange={(e) => setSelectedEthnicity(e.target.value)}
+                      >
+                        {dalitEthnicitiesList.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                      </Select>
+                    </FormControl>
                     <FormControl w={"220px"} >
                         <HStack>
                             <FormLabel>From:</FormLabel>
@@ -369,6 +399,7 @@ const SuperAdminDashboard = () => {
                     <Heading m={5} fontSize="2xl" textAlign="center" >Current Year ETHS Recepients ({new Date().getFullYear()})</Heading>
                     <StudentNumberDisplay studentsList={ethsCurrentYearStudentsList} /></>}
             </Box>
+            <Divider w="70%" alignItems="center" />
         </>
     );
 };

@@ -29,20 +29,23 @@ import {
   FormErrorMessage,
   VStack, // Add this import for error message display
 } from '@chakra-ui/react';
-import AlumuniStudentForm from './alumuniStudentForm';
-import { SmallCloseIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+// import AlumuniStudentForm from './alumuniStudentForm';
+// import { SmallCloseIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 const baseUrl = process.env.REACT_APP_BASE_URL;
 
 const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipProject }) => {
-  const [isNewStudentForm, setIsnewStudentForm] = useState(true)
+  // const [isNewStudentForm, setIsnewStudentForm] = useState(true)
+  const dalitEthnicitiesList = ['Badi', 'Gandarva', 'Madeshi Origin', 'Pariyar', 'Sarki', 'Viswakarma']
   const imageInputRef = useRef()
   const toast = useToast();
   const [firstName, setFirstName] = useState('')
   const [middleName, setMiddleName] = useState('')
   const [lastName, setLastName] = useState()
+  const [gender, setGender] = useState('')
   const [dateOfBirth, setDateOfBirth] = useState('')
   const [contactNumber, setContactNumber] = useState('')
   const [email, setEmail] = useState('')
+  const [ethnicity, setEthnicity] = useState('')
   const [citizenshipNumber, setCitizenshipNumber] = useState('')
   
   const [qualification1, setQualification1] = useState('')
@@ -187,9 +190,11 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
       formData.append('firstName', firstName)
       formData.append('middleName', middleName)
       formData.append('lastName', lastName)
+      formData.append('gender', gender)
       formData.append('dateOfBirth', dateOfBirth)
       formData.append('contactNumber', contactNumber)
       formData.append('email', email)
+      formData.append('ethnicity', ethnicity)
       formData.append('citizenshipNumber', citizenshipNumber)
       
       formData.append('membershipType', membershipType)
@@ -387,8 +392,26 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
                   </FormControl>
                 </HStack>
                 <HStack justify="flex-start" mb={5}>
+                <FormControl>
+                      <FormLabel>Gender</FormLabel>
+                      <Select
+                        placeholder='Select'
+                        name="scholarship2.grade"
+                        // value={formData.scholarship1.grade}
+                        onChange={(event) => setGender(event.target.value)}
+                      >
+                        <option key="Male" value="Male">
+                          Male
+                        </option>
+                        <option key="Female" value="Female">
+                          Female
+                        </option>
+                        <option key="Other" value="Other">
+                          Other
+                        </option>
+                      </Select>
+                    </FormControl>
                   <FormControl>
-                    
                     <FormLabel>Date of birth</FormLabel>
                     <Input
                       type='date'
@@ -411,7 +434,20 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
                   </FormControl>
                  
                 </HStack>
-                <HStack justify="flex-start" mb={5}>
+                <Grid gridTemplateColumns={"1fr 1fr 1fr"} gap={2} >
+                <FormControl>
+                      <FormLabel>Ethnicity</FormLabel>
+                      <Select
+                        placeholder='Select'
+                        onChange={(event) => setEthnicity(event.target.value)}
+                      >
+                        {dalitEthnicitiesList.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                      </Select>
+                    </FormControl>
                   <FormControl>
                     <FormLabel>Contact number</FormLabel>
                     <Input placeholder='Contact no.'
@@ -432,13 +468,8 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormControl>
-                  <input
-                    type='file'
-                    accept="pdf/*"
-                    // style={{ display: "none" }}
-                    onChange={handleFileSelect}
-                />
-                </HStack>
+                  
+                </Grid>
               </Box>
             </Grid>
             {/* EDUCATION */}

@@ -35,6 +35,10 @@ const studentProfileSchema = ({
         type: String,
     },
 
+    ethnicity: {
+        type: String,
+    },
+
     studentType: {
         type: String,
     },
@@ -54,7 +58,6 @@ const studentProfileSchema = ({
     scholarship1FundType: {
         type: String,
     },
-
     scholarship1Category: {
         type: String,
     },
@@ -258,10 +261,9 @@ const studentProfileSchema = ({
         type: String,
     },
     //SCHOLARSHIP NINE
-    scholarship4FundType: {
+    scholarship9FundType: {
         type: String,
     },
-
     scholarship9Category: {
         type: String,
     },

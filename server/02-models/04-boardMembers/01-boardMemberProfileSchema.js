@@ -9,6 +9,7 @@ const boardMemberProfileSchema = ({
 
     citizenshipFileName: {
         type: String,
+        default: "",
     },
 
     firstName: {
@@ -20,6 +21,14 @@ const boardMemberProfileSchema = ({
     },
 
     lastName: {
+        type: String,
+    },
+
+    gender: {
+        type: String,
+    },
+
+    dateOfBirth: {
         type: String,
     },
 
@@ -36,6 +45,10 @@ const boardMemberProfileSchema = ({
     },
 
     citizenshipNumber: {
+        type: String,
+    },
+
+    ethnicity: {
         type: String,
     },
 

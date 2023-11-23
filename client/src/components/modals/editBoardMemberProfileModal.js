@@ -11,16 +11,18 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
   const imageInputRef = useRef()
   const toast = useToast()
   const [scrollBehavior, setScrollBehavior] = React.useState('inside')
-
+  const dalitEthnicitiesList = ['Badi', 'Gandarva', 'Madeshi Origin', 'Pariyar', 'Sarki', 'Viswakarma']
   const initialFormData = {
     // profileImageName: '',
     firstName: '',
     middleName: '',
     lastName: '',
+    gender: '',
     dateOfBirth: '',
     contactNumber: '',
     email: '',
     citizenshipNumber: '',
+    ethnicity: '',
 
     membershipType: '',
 
@@ -125,8 +127,10 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
       firstName: data?.firstName,
       middleName: data?.middleName,
       lastName: data?.lastName,
+      gender: data?.gender,
       dateOfBirth: data?.dateOfBirth,
       citizenshipNumber: data?.citizenshipNumber,
+      ethnicity: data?.ethnicity,
       contactNumber: data?.contactNumber,
       email: data?.email,
       
@@ -317,7 +321,26 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                       </FormControl>
                     </HStack>
                     <HStack justify="flex-start" mb={5}>
-                    
+                    <FormControl>
+                        <FormLabel>Gender</FormLabel>
+                       
+                       <Select
+                      placeholder={data?.gender}
+                      name="gender"
+                      // value={formData.scholarship1.grade}
+                      onChange={handleInputChange}
+                    >
+                      <option key="Male" value="Male">
+                        Male
+                      </option>
+                      <option key="Female" value="Female">
+                        Female
+                      </option>
+                      <option key="Other" value="Other">
+                        Other
+                      </option>
+                    </Select>
+                      </FormControl>
                       <FormControl>
                         <FormLabel>Date of birth</FormLabel>
                         <Input
@@ -340,6 +363,20 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                       </FormControl>
                     </HStack>
                     <HStack justify="flex-start" mb={5}>
+                    <FormControl>
+                      <FormLabel>Ethnicity</FormLabel>
+                      <Select
+                        placeholder={data?.ethnicity}
+                        name="ethnicity"
+                        onChange={handleInputChange}
+                      >
+                        {dalitEthnicitiesList.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                      </Select>
+                    </FormControl>
                       <FormControl>
                         <FormLabel>Contact number</FormLabel>
                         <Input placeholder={data?.contactNumber}
