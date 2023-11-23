@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -20,7 +20,7 @@ import {
     FormControl
 } from '@chakra-ui/react'
 import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon } from '@chakra-ui/icons';
-import StudentProfileForm from '../form/studentProfileForm';
+import BoardMembersDataDisplay from '../dataDisplay/boardMembersDataDisplay'
 import EditBoardMemberProfileModal from '../modals/editBoardMemberProfileModal'
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
 import BoardMemberProfileForm from '../form/boardMemberProfileForm'
@@ -29,6 +29,7 @@ const baseUrl = process.env.REACT_APP_BASE_URL
 
 
 const BoardMembersGrid = ({scholarshipProject}) => {
+    const scrollRef = useRef(null);
     //FETCH
     const [boardmembersList, setBoardMembersList] = useState([])
     //EDIT
@@ -152,12 +153,17 @@ const BoardMembersGrid = ({scholarshipProject}) => {
         }
     }
 
+    const scrollToElement = () => {
+        scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+       };
+
     useEffect(() => {
         fetchData()
     }, [])
 
     return (
         <>
+        <BoardMembersDataDisplay data={boardmembersList}/>
             <Box
                 // bg="gray.300"
                 pl={"230px"}
@@ -177,7 +183,7 @@ const BoardMembersGrid = ({scholarshipProject}) => {
                             colorScheme={isCreateNewUserActive == true ? "blue" : "gray"}
                             _hover={{ border: '2px solid #1C6FEB' }}
                             transition="0.15s ease-in-out"
-                            onClick={() => { setIsCreateNewUserActive(true) }}
+                            onClick={() => { setIsCreateNewUserActive(true); scrollToElement()}}
                         >Create</Button>
                     </HStack>
 
@@ -233,6 +239,7 @@ const BoardMembersGrid = ({scholarshipProject}) => {
                         </HStack>
                         {/* LIST HEADER */}
                         <Grid
+                        ref={scrollRef}
                             color="white"
                             templateColumns={{
                                 sm: '1fr',
@@ -319,7 +326,7 @@ const BoardMembersGrid = ({scholarshipProject}) => {
                                 // w="60px"
                                 p={1}
                             >
-                                Edit
+                                View
                             </Text>
                             <Text
                                 // w="60px"
@@ -422,7 +429,7 @@ const BoardMembersGrid = ({scholarshipProject}) => {
                         </Box>
                     </Box>)
                     :
-                    (<BoardMemberProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive} scholarshipProject={scholarshipProject}  />)
+                    (<BoardMemberProfileForm setIsCreateNewUserActive={setIsCreateNewUserActive} scholarshipProject={scholarshipProject}   />)
                 }
                 <ConfirmDeletePopUp isOpen={isDeleteDialogOpen} onClose={closeModal} data={studentProfileTodelete} accountType="Board Member Profile" handleDelete={handleStudentProfileDelete} />
                 <EditBoardMemberProfileModal isOpen={isEditDialogOpen} onClose={closeEditModal} data={studentProfileToEdit} fetchData={fetchData} closeEditModal={closeEditModal} scholarshipProject={scholarshipProject} />

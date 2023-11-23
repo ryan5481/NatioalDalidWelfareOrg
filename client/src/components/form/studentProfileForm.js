@@ -49,6 +49,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [lastName, setLastName] = useState()
   const [gender, setGender] = useState('')
   const [dateOfBirth, setDateOfBirth] = useState('')
+  const [ethnicity, setEthnicity] = useState('')
   const [studentType, setStudentType] = useState('')
   const [contactNumber, setContactNumber] = useState('')
   const [email, setEmail] = useState('')
@@ -255,6 +256,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('lastName', lastName)
       formData.append('gender', gender)
       formData.append('dateOfBirth', dateOfBirth)
+      formData.append('ethnicity', ethnicity)
       formData.append('studentType', studentType)
       formData.append('contactNumber', contactNumber)
       formData.append('email', email)
@@ -429,7 +431,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
     scholarshipProject == "prlEth"
       ? (["", "Pratap Ram Lohar", "ETHS Project"]) : (["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"])
 
-  //  console.log(scholarshipProject)
+  const dalitEthnicitiesList = ['Badi', 'Gandarva', 'Madeshi Origin', 'Pariyar', 'Sarki', 'Viswakarma']
 
   const conditionalDistrictInputProps = {
     placeholder: 'District',
@@ -619,6 +621,21 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                     </FormControl>
                   </HStack>
                   <HStack justify="flex-start" mb={5}>
+
+                    <FormControl>
+                      <FormLabel>Ethnicity</FormLabel>
+                      <Select
+                        placeholder='Select'
+                        // value={formData.scholarship1.grade}
+                        onChange={(event) => setEthnicity(event.target.value)}
+                      >
+                        {dalitEthnicitiesList.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                      </Select>
+                    </FormControl>
                     <FormControl>
                       <FormLabel>Student type</FormLabel>
                       <Select
@@ -626,7 +643,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                         // value={formData.scholarship1.grade}
                         onChange={(event) => setStudentType(event.target.value)}
                       >
-                        <option key="None" value="None">
+                        <option key="Normal" value="Normal">
                           None
                         </option>
                         <option key="Orphan" value="Orphan">
@@ -683,10 +700,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       placeholder='Select'
                       onChange={(event) => setScholarship1FundType(event.target.value)}
                     >
-                      <option key="NEF" value="NEF">
+                      <option key="Nepal Endowment Fund" value="Nepal Endowment Fund">
                         Nepal Endowment Fund
                       </option>
-                      <option key="ARMF" value="ARMF">
+                      <option key="Ansley Rose MacCormack Fund" value="Ansley Rose MacCormack Fund">
                         Ansley Rose MacCormack Fund
                       </option>
                     </Select>
@@ -742,10 +759,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       placeholder='Select'
                       onChange={(event) => setScholarship2FundType(event.target.value)}
                     >
-                      <option key="NEF" value="NEF">
+                      <option key="Nepal Endowment Fund" value="Nepal Endowment Fund">
                         Nepal Endowment Fund
                       </option>
-                      <option key="ARMF" value="ARMF">
+                      <option key="Ansley Rose MacCormack Fund" value="Ansley Rose MacCormack Fund">
                         Ansley Rose MacCormack Fund
                       </option>
                     </Select>
@@ -802,10 +819,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       placeholder='Select'
                       onChange={(event) => setScholarship3FundType(event.target.value)}
                     >
-                      <option key="NEF" value="NEF">
+                      <option key="Nepal Endowment Fund" value="Nepal Endowment Fund">
                         Nepal Endowment Fund
                       </option>
-                      <option key="ARMF" value="ARMF">
+                      <option key="Ansley Rose MacCormack Fund" value="Ansley Rose MacCormack Fund">
                         Ansley Rose MacCormack Fund
                       </option>
                     </Select>
@@ -864,10 +881,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       placeholder='Select'
                       onChange={(event) => setScholarship4FundType(event.target.value)}
                     >
-                      <option key="NEF" value="NEF">
+                      <option key="Nepal Endowment Fund" value="Nepal Endowment Fund">
                         Nepal Endowment Fund
                       </option>
-                      <option key="ARMF" value="ARMF">
+                      <option key="Ansley Rose MacCormack Fund" value="Ansley Rose MacCormack Fund">
                         Ansley Rose MacCormack Fund
                       </option>
                     </Select>
@@ -924,10 +941,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       placeholder='Select'
                       onChange={(event) => setScholarship5FundType(event.target.value)}
                     >
-                      <option key="NEF" value="NEF">
+                      <option key="Nepal Endowment Fund" value="Nepal Endowment Fund">
                         Nepal Endowment Fund
                       </option>
-                      <option key="ARMF" value="ARMF">
+                      <option key="Ansley Rose MacCormack Fund" value="Ansley Rose MacCormack Fund">
                         Ansley Rose MacCormack Fund
                       </option>
                     </Select>
@@ -987,10 +1004,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       placeholder='Select'
                       onChange={(event) => setScholarship6FundType(event.target.value)}
                     >
-                      <option key="NEF" value="NEF">
+                      <option key="Nepal Endowment Fund" value="Nepal Endowment Fund">
                         Nepal Endowment Fund
                       </option>
-                      <option key="ARMF" value="ARMF">
+                      <option key="Ansley Rose MacCormack Fund" value="Ansley Rose MacCormack Fund">
                         Ansley Rose MacCormack Fund
                       </option>
                     </Select>
@@ -1048,10 +1065,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       placeholder='Select'
                       onChange={(event) => setScholarship7FundType(event.target.value)}
                     >
-                      <option key="NEF" value="NEF">
+                      <option key="Nepal Endowment Fund" value="Nepal Endowment Fund">
                         Nepal Endowment Fund
                       </option>
-                      <option key="ARMF" value="ARMF">
+                      <option key="Ansley Rose MacCormack Fund" value="Ansley Rose MacCormack Fund">
                         Ansley Rose MacCormack Fund
                       </option>
                     </Select>
@@ -1108,10 +1125,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       placeholder='Select'
                       onChange={(event) => setScholarship8FundType(event.target.value)}
                     >
-                      <option key="NEF" value="NEF">
+                      <option key="Nepal Endowment Fund" value="Nepal Endowment Fund">
                         Nepal Endowment Fund
                       </option>
-                      <option key="ARMF" value="ARMF">
+                      <option key="Ansley Rose MacCormack Fund" value="Ansley Rose MacCormack Fund">
                         Ansley Rose MacCormack Fund
                       </option>
                     </Select>
@@ -1168,10 +1185,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       placeholder='Select'
                       onChange={(event) => setScholarship9FundType(event.target.value)}
                     >
-                      <option key="NEF" value="NEF">
+                      <option key="Nepal Endowment Fund" value="Nepal Endowment Fund">
                         Nepal Endowment Fund
                       </option>
-                      <option key="ARMF" value="ARMF">
+                      <option key="Ansley Rose MacCormack Fund" value="Ansley Rose MacCormack Fund">
                         Ansley Rose MacCormack Fund
                       </option>
                     </Select>
@@ -1230,10 +1247,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       placeholder='Select'
                       onChange={(event) => setScholarship10FundType(event.target.value)}
                     >
-                      <option key="NEF" value="NEF">
+                      <option key="Nepal Endowment Fund" value="Nepal Endowment Fund">
                         Nepal Endowment Fund
                       </option>
-                      <option key="ARMF" value="ARMF">
+                      <option key="Ansley Rose MacCormack Fund" value="Ansley Rose MacCormack Fund">
                         Ansley Rose MacCormack Fund
                       </option>
                     </Select>

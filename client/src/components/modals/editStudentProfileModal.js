@@ -21,6 +21,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     // CHECK 2FA TO SUBMIT EDIT
     const { onOpen } = useDisclosure();
     const [isCheck2FaDialogOpen, setIsCheck2FaDialogOpen] = useState(false);
+  const dalitEthnicitiesList = ['Badi', 'Gandarva', 'Madeshi Origin', 'Pariyar', 'Sarki', 'Viswakarma']
   const initialFormData = {
     profileImageName: null,
     project: '',
@@ -29,6 +30,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     lastName: '',
     gender: '',
     dateOfBirth: '',
+    ethnicity: '',
     studentType: '',
     contactNumber: '',
     email: '',
@@ -203,6 +205,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
       lastName: data?.lastName,
       gender: data?.gender,
       dateOfBirth: data?.dateOfBirth,
+      ethnicity: data?.ethnicity,
       studentType: data?.studentType,
       birthCertificateNo: data?.birthCertificateNo,
       contactNumber: data?.contactNumber,
@@ -363,6 +366,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     formData.lastName && formDataToUpdate.append('lastName', formData.lastName);
     formData.gender && formDataToUpdate.append('gender', formData.gender);
     formData.dateOfBirth && formDataToUpdate.append('dateOfBirth', formData.dateOfBirth);
+    formData.ethnicity && formDataToUpdate.append('ethnicity', formData.ethnicity);
     formData.studentType && formDataToUpdate.append('studentType', formData.studentType);
     formData.contactNumber && formDataToUpdate.append('contactNumber', formData.contactNumber);
     formData.email && formDataToUpdate.append('email', formData.email);
@@ -774,7 +778,21 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                       </FormControl>
                     </HStack>
                     <HStack justify="flex-start" mb={5}>
-                      <FormControl>
+                    <FormControl>
+                      <FormLabel>Ethnicity</FormLabel>
+                      <Select
+                        placeholder={data.ethnicity}
+                        name="ethnicity"
+                        onChange={handleInputChange}
+                      >
+                        {dalitEthnicitiesList.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                      </Select>
+                    </FormControl>
+                    <FormControl>
                     <FormLabel>Student type</FormLabel>
                     <Select
                       placeholder={data.studentType}

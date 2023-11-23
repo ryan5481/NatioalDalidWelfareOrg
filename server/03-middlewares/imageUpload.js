@@ -12,25 +12,35 @@ const studentProfileImageStorage = multer.diskStorage({
 
 const StudentProfileImageUpload = multer({
     storage: studentProfileImageStorage,
-    // limits: { fileSize: 1024 * 1024 * 4 }, //max file size 4 MB
-    // fileFilter: fileFilter
 }).single("profileImageName")
 
 //BOARD MEMBER PROFILE IMAGE
-const boardMemberProfileImageStorage = multer.diskStorage({
+const boardMemberImageStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "../client/src/uploads/boardMemberImage/")
     },
     filename: function (req, file, cb) {
-        cb(null, "Board_member_profile_img_" + Date.now() + ".jpeg")
+        cb(null, "Board_member_img_" + Date.now() + ".jpeg")
     }
 })
 
 const BoardMemberProfileImageUpload = multer({
-    storage: boardMemberProfileImageStorage,
-    // limits: { fileSize: 1024 * 1024 * 4 }, //max file size 4 MB
-    // fileFilter: fileFilter
+    storage: boardMemberImageStorage,
 }).single("profileImageName")
+
+//BOARD MEMBER CITIZENSHIP FILE
+const citizenshipFileStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "../client/public/assets/boardmemberCitizenshipFile/")
+    },
+    filename: function (req, file, cb) {
+        cb(null, "Board_member_ctzn_" + Date.now() + ".jpeg")
+    }
+})
+
+const CitizenshipFileUpload = multer({
+    storage: citizenshipFileStorage,
+}).single("citizenshipFileName");
 
 //Logo IMAGE
 const logoImageStorage = multer.diskStorage({
@@ -44,12 +54,10 @@ const logoImageStorage = multer.diskStorage({
 
 const LogoImageUpload = multer({
     storage: logoImageStorage,
-    // limits: { fileSize: 1024 * 1024 * 4 }, //max file size 4 MB
-    // fileFilter: fileFilter
 }).single("logoImageName")
 
 
-//Logo IMAGE
+//BANNER IMAGE
 const loginBannerImageStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "../client/src/uploads/loginBanner/")
@@ -61,26 +69,12 @@ const loginBannerImageStorage = multer.diskStorage({
 
 const LoginBannerImageUpload = multer({
     storage: loginBannerImageStorage,
-    // limits: { fileSize: 1024 * 1024 * 4 }, //max file size 4 MB
-    // fileFilter: fileFilter
 }).single("loginBannerImageName")
 
-//CITIZENSHIP FILE
-const citizenshipFileStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "../client/public/assets/boardmemberCitizenshipFile/")
-    },
-    filename: function (req, file, cb) {
-        cb(null, "Board_member_ctzn_" + Date.now() + ".pdf")
-    }
-})
 
-const CitizenshipFileUpload = multer({
-    storage: citizenshipFileStorage,
-}).single("citizenshipFileName");
 
 exports.StudentProfileImageUpload = StudentProfileImageUpload;
-exports.BoardMemberProfileImageUpload = BoardMemberProfileImageUpload;
 exports.LogoImageUpload = LogoImageUpload;
 exports.LoginBannerImageUpload = LoginBannerImageUpload;
+exports.BoardMemberProfileImageUpload = BoardMemberProfileImageUpload;
 exports.CitizenshipFileUpload = CitizenshipFileUpload;
