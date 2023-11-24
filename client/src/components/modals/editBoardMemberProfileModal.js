@@ -292,8 +292,10 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                   <Box m={5} >
                     <HStack justify="flex-start" mb={5} >
                       <FormControl>
-                        <FormLabel >First name</FormLabel>
+                        <FormLabel fontWeight="bold">First name:</FormLabel>
                         <Input
+                        variant="unstyled"
+                        _placeholder={{ color: "black" }}
                           placeholder={data?.firstName}
                           name='firstName'
                           onChange={handleInputChange}
@@ -301,7 +303,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                         />
                       </FormControl>
                       <FormControl>
-                        <FormLabel>Middle name</FormLabel>
+                        <FormLabel fontWeight="bold">Middle name:</FormLabel>
                         <Input
                           placeholder={data?.middleName}
                           name="middleName"
@@ -310,7 +312,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                         />
                       </FormControl>
                       <FormControl>
-                        <FormLabel>Last name</FormLabel>
+                        <FormLabel fontWeight="bold">Last name:</FormLabel>
                         <Input
                           placeholder={data?.lastName}
                           isRequired
@@ -322,7 +324,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                     </HStack>
                     <HStack justify="flex-start" mb={5}>
                     <FormControl>
-                        <FormLabel>Gender</FormLabel>
+                        <FormLabel fontWeight="bold">Gender:</FormLabel>
                        
                        <Select
                       placeholder={data?.gender}
@@ -342,7 +344,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                     </Select>
                       </FormControl>
                       <FormControl>
-                        <FormLabel>Date of birth</FormLabel>
+                        <FormLabel fontWeight="bold">Date of birth:</FormLabel>
                         <Input
                           placeholder={data?.dateOfBirth}
                           isRequired
@@ -352,7 +354,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                         />
                       </FormControl>
                       <FormControl>
-                        <FormLabel>Birth certificate number</FormLabel>
+                        <FormLabel fontWeight="bold">Birth certificate number:</FormLabel>
                         <Input
                           placeholder={data?.citizenshipNumber}
                           type='number'
@@ -364,7 +366,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                     </HStack>
                     <HStack justify="flex-start" mb={5}>
                     <FormControl>
-                      <FormLabel>Ethnicity</FormLabel>
+                      <FormLabel fontWeight="bold">Ethnicity:</FormLabel>
                       <Select
                         placeholder={data?.ethnicity}
                         name="ethnicity"
@@ -378,7 +380,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                       </Select>
                     </FormControl>
                       <FormControl>
-                        <FormLabel>Contact number</FormLabel>
+                        <FormLabel fontWeight="bold">Contact number:</FormLabel>
                         <Input placeholder={data?.contactNumber}
                           type='number'
                           isRequired
@@ -388,7 +390,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                         />
                       </FormControl>
                       <FormControl>
-                        <FormLabel>Email ID</FormLabel>
+                        <FormLabel fontWeight="bold">Email ID:</FormLabel>
                         <Input
                           placeholder={data?.email}
                           type='email'
@@ -402,7 +404,8 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                 </Grid>
 
                 <FormControl mb={5} >
-            <FormLabel fontSize="22px" fontWeight="bold" >Membership type</FormLabel>
+                  <HStack>
+            <FormLabel fontSize="22px" fontWeight="bold" >Membership type:</FormLabel>
             <Select w="500px"
                         placeholder={data?.membershipType}
                         name='membershipType'
@@ -421,20 +424,21 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                         Lifetime
                         </option>
                       </Select>
+            </HStack>
             </FormControl>
                {/* QUALIFICATION*/}
                <FormControl mb={5} >
                 <FormLabel mt={5} fontSize="22px" fontWeight="bold"  >Education</FormLabel>
                 <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
-                  <FormLabel >SN</FormLabel>
-                  <FormLabel >Qualification</FormLabel>
-                  <FormLabel>Graduated year</FormLabel>
-                  <FormLabel>Institution name</FormLabel>
-                  <FormLabel>Address</FormLabel>
+                <FormLabel fontWeight="bold">SN</FormLabel>
+                  <FormLabel fontWeight="bold">Qualification</FormLabel>
+                  <FormLabel fontWeight="bold">Graduated year</FormLabel>
+                  <FormLabel fontWeight="bold">Institution name</FormLabel>
+                  <FormLabel fontWeight="bold">Address</FormLabel>
                 </Grid>
                 {/* QUALIFICATION ONE*/}
                 <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
-                <FormLabel>1.</FormLabel>
+                <FormLabel fontWeight="bold">1.</FormLabel>
                   <Input
                     placeholder={data?.qualification1}
                     name="qualification1"
@@ -460,7 +464,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                   </Grid>
                 {/* QUALIFICATION TWO*/}
                 <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
-                <FormLabel>2.</FormLabel>
+                <FormLabel fontWeight="bold">2.</FormLabel>
                   <Input
                     placeholder={data?.qualification2}
                     name="qualification2"
@@ -486,7 +490,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                 </Grid>
                 {/* QUALIFICATION THREE*/}
                 <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
-                <FormLabel>3.</FormLabel>
+                <FormLabel fontWeight="bold">3.</FormLabel>
                   <Input
                     placeholder={data?.qualification3}
                     name="qualification3"
@@ -516,14 +520,14 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
             <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} >
               <FormLabel >SN</FormLabel>
               <FormLabel >Position</FormLabel>
-              <FormLabel>Joined date</FormLabel>
-              <FormLabel>Tenure</FormLabel>
-              <FormLabel>Remarks</FormLabel>
+              <FormLabel fontWeight="bold">Joined date</FormLabel>
+              <FormLabel fontWeight="bold">Tenure</FormLabel>
+              <FormLabel fontWeight="bold">Remarks</FormLabel>
             </Grid>
             <FormControl>
               {/* Tenure ONE */}
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
-                <FormLabel>1. </FormLabel>
+                <FormLabel fontWeight="bold">1. </FormLabel>
                 <Input
                   placeholder={data?.position1}
                   name="position1"
@@ -547,7 +551,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               </Grid>
               {/* Tenure TWO */}
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
-                <FormLabel>2. </FormLabel>
+                <FormLabel fontWeight="bold">2. </FormLabel>
                 <Input
                   placeholder={data?.position2}
                   name="position2"
@@ -571,7 +575,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               </Grid>
               {/* Tenure THREE */}
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
-                <FormLabel>3. </FormLabel>
+                <FormLabel fontWeight="bold">3. </FormLabel>
                 <Input
                   placeholder={data?.position3}
                   name="position3"
@@ -595,7 +599,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               </Grid>
               {/* Tenure FOUR */}
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
-                <FormLabel>4. </FormLabel>
+                <FormLabel fontWeight="bold">4. </FormLabel>
                 <Input
                   placeholder={data?.position4}
                   name="position4"
@@ -619,7 +623,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               </Grid>
               {/* Tenure FIVE */}
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
-                <FormLabel>5. </FormLabel>
+                <FormLabel fontWeight="bold">5. </FormLabel>
                 <Input
                   placeholder={data?.position5}
                   name="position5"
@@ -649,10 +653,10 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
             <FormControl>
               <FormLabel mt={5} fontSize="22px" fontWeight="bold"  >Permanent address</FormLabel>
               <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
-                <FormLabel >Municipality</FormLabel>
-                <FormLabel>Ward No.</FormLabel>
-                <FormLabel>District</FormLabel>
-                <FormLabel>Province</FormLabel>
+                <FormLabel >Municipality:</FormLabel>
+                <FormLabel fontWeight="bold">Ward No.:</FormLabel>
+                <FormLabel fontWeight="bold">District:</FormLabel>
+                <FormLabel fontWeight="bold">Province:</FormLabel>
               </Grid>
               <HStack>
                 <Input
@@ -683,10 +687,10 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
             <FormControl mb={5} >
               <FormLabel mt={5} fontSize="22px" fontWeight="bold"  >Current address</FormLabel>
               <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
-                <FormLabel >Municipality</FormLabel>
-                <FormLabel>Ward No.</FormLabel>
-                <FormLabel>District</FormLabel>
-                <FormLabel>Province</FormLabel>
+                <FormLabel >Municipality:</FormLabel>
+                <FormLabel fontWeight="bold">Ward No.:</FormLabel>
+                <FormLabel fontWeight="bold">District:</FormLabel>
+                <FormLabel fontWeight="bold">Province:</FormLabel>
               </Grid>
               <HStack>
                 <Input
@@ -716,17 +720,17 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
             <FormControl>
                {/* Tenure FIVE */}
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} >
-              <FormLabel >SN</FormLabel>
-              <FormLabel >Profession</FormLabel>
-              <FormLabel>Organization</FormLabel>
-              <FormLabel>Address</FormLabel>
-              <FormLabel>Starting date</FormLabel>
+               <FormLabel fontWeight="bold">SN</FormLabel>
+              <FormLabel fontWeight="bold">Profession</FormLabel>
+              <FormLabel fontWeight="bold">Organization</FormLabel>
+              <FormLabel fontWeight="bold">Address</FormLabel>
+              <FormLabel fontWeight="bold">Starting date</FormLabel>
               <FormLabel isTruncated >Status</FormLabel>
-              <FormLabel>Remarks</FormLabel>
+              <FormLabel fontWeight="bold">Remarks</FormLabel>
             </Grid>
             {/* PERSONAL ONE */}
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
-                <FormLabel>1. </FormLabel>
+                <FormLabel fontWeight="bold">1. </FormLabel>
                 <Input
                   placeholder={data?.profession1}
                   name="profession1"
@@ -760,7 +764,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               </Grid>
             {/* PERSONAL TWO */}
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
-                <FormLabel>2. </FormLabel>
+                <FormLabel fontWeight="bold">2. </FormLabel>
                 <Input
                   placeholder={data?.profession2}
                   name="profession2"
@@ -794,7 +798,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               </Grid>
             {/* PERSONAL THREE */}
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
-                <FormLabel>1. </FormLabel>
+                <FormLabel fontWeight="bold">3. </FormLabel>
                 <Input
                   placeholder={data?.profession3}
                   name="profession3"
@@ -828,7 +832,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               </Grid>
             {/* PERSONAL FOUR */}
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
-                <FormLabel>4. </FormLabel>
+                <FormLabel fontWeight="bold">4. </FormLabel>
                 <Input
                   placeholder={data?.profession4}
                   name="profession4"
