@@ -131,7 +131,7 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
   const [selectedImage, setSelectedImage] = useState(null)
   const [previewImage, setPreviewImage] = useState(null)
   
-  const [selectedFile, setSelectedFile] = useState(null)
+  const [selectedCtznshipIdImage, setSelectedCtznshipIdImage] = useState(null)
 
   // const validationSchema = Yup.object().shape({
   //   firstName: Yup.string().required("First name is required"),
@@ -157,15 +157,15 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
   //   }
   // })
 
-  const handleImageSelect = (event) => {
+  const handleProfileImageSelect = (event) => {
     setSelectedImage(event.target.files[0])
     if (event.target.files && event.target.files[0]) {
       setPreviewImage(URL.createObjectURL(event.target.files[0]));
     }
   }
 
-  const handleFileSelect = (event) => {
-    setSelectedFile(event.target.files[0])
+  const handleCtznImageSelect = (event) => {
+    setSelectedCtznshipIdImage(event.target.files[0])
   }
 
   const submitForm = async () => {
@@ -184,8 +184,8 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
       if (selectedImage) {
         formData.append('profileImageName', selectedImage, selectedImage.filename);
       }
-      if (selectedFile) {
-        formData.append('citizenshipFileName', selectedFile, selectedFile.filename);
+      if (selectedCtznshipIdImage) {
+        formData.append('citizenshipFileName', selectedCtznshipIdImage, selectedCtznshipIdImage.filename);
       }
       formData.append('firstName', firstName)
       formData.append('middleName', middleName)
@@ -289,7 +289,7 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
           isClosable: true,
           position: 'top'
         });
-        window.location.reload()
+        // window.location.reload()
 
       } else {
         toast({
@@ -357,7 +357,7 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
                   accept='image/*'
                   ref={imageInputRef}
                   style={{ display: "none" }}
-                  onChange={(event) => { handleImageSelect(event) }}
+                  onChange={(event) => { handleProfileImageSelect(event) }}
                 />
               </Center>
               <Box m={5} >
@@ -468,7 +468,16 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormControl>
-                  
+                  <FormControl>
+                    <FormLabel>Upload Citizenship ID</FormLabel>
+                  <input
+                  id='jobImage'
+                  type='file'
+                  accept='image/*'
+                  // style={{ display: "none" }}
+                  onChange={(event) => { handleCtznImageSelect(event) }}
+                />
+                  </FormControl>
                 </Grid>
               </Box>
             </Grid>

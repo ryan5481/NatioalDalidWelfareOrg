@@ -9,7 +9,6 @@ const boardMemberProfileSchema = ({
 
     citizenshipFileName: {
         type: String,
-        default: "",
     },
 
     firstName: {

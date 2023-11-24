@@ -9,15 +9,16 @@ dotenv.config();
 
 const CreateBoardMemberProfile = async(req, res) => {
     try{
-        if (!req.file) {
-            return res.status(400).json({
-                msg: "File not received."
-            });
-        }
+        // if (!req.files) {
+        //     return res.status(400).json({
+        //         msg: "File not received."
+        //     });
+        // }
 
         const reqInclFile = {
             ...req.body,
-            profileImageName: req.file.filename,
+            profileImageName: req.files.profileImageName[0].filename,
+            citizenshipFileName: req.files.citizenshipFileName[0].filename,
           };
 
         const data = await BoardMemberProfile.create(reqInclFile)

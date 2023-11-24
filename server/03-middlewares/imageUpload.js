@@ -15,32 +15,30 @@ const StudentProfileImageUpload = multer({
 }).single("profileImageName")
 
 //BOARD MEMBER PROFILE IMAGE
-const boardMemberImageStorage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, "../client/src/uploads/boardMemberImage/")
-    },
-    filename: function (req, file, cb) {
-        cb(null, "Board_member_img_" + Date.now() + ".jpeg")
-    }
-})
+// const boardMemberImageStorage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, "../client/src/uploads/boardMemberImage/")
+//     },
+//     filename: function (req, file, cb) {
+//         cb(null, "Board_member_img_" + Date.now() + ".jpeg")
+//     }
+// })
 
-const BoardMemberProfileImageUpload = multer({
-    storage: boardMemberImageStorage,
-}).single("profileImageName")
+// const BoardMemberProfileImageUpload = multer({
+//     storage: boardMemberImageStorage,
+// }).single("profileImageName")
 
 //BOARD MEMBER CITIZENSHIP FILE
-const citizenshipFileStorage = multer.diskStorage({
+const boardMembersImagesStorage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "../client/public/assets/boardmemberCitizenshipFile/")
     },
     filename: function (req, file, cb) {
-        cb(null, "Board_member_ctzn_" + Date.now() + ".jpeg")
+        cb(null, "Board_member_image_" + Date.now() + ".jpeg")
     }
-})
+}) 
 
-const CitizenshipFileUpload = multer({
-    storage: citizenshipFileStorage,
-}).single("citizenshipFileName");
+const BoardMemberImagesUpload = multer({storage: boardMembersImagesStorage }).fields([{name: "profileImageName", maxCount: 1}, {name: "citizenshipFileName", maxCount: 1}])
 
 //Logo IMAGE
 const logoImageStorage = multer.diskStorage({
@@ -76,5 +74,5 @@ const LoginBannerImageUpload = multer({
 exports.StudentProfileImageUpload = StudentProfileImageUpload;
 exports.LogoImageUpload = LogoImageUpload;
 exports.LoginBannerImageUpload = LoginBannerImageUpload;
-exports.BoardMemberProfileImageUpload = BoardMemberProfileImageUpload;
-exports.CitizenshipFileUpload = CitizenshipFileUpload;
+// exports.BoardMemberProfileImageUpload = BoardMemberProfileImageUpload;
+exports.BoardMemberImagesUpload = BoardMemberImagesUpload;
