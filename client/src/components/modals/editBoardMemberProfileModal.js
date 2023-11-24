@@ -259,6 +259,13 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
     }
   };
 
+  const inputFieldStyle = {
+    // variant:"flushed",
+    border:"white",
+    focusBorderColor:"blue.500",
+    _placeholder:{ color: "black" }
+  }
+
   return (
     <>
       {data &&
@@ -276,9 +283,11 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <form
               >
                 <Grid gridTemplateColumns={"1fr 3fr"}>
+                <VStack>
+
                   {data?.profileImageName && <Image
                     rounded={10}
-                    src={require(`../../uploads/boardMemberImage/${data?.profileImageName}`)} w="200px"
+                    src={require(`../../uploads/boardMembersImages/${data?.profileImageName}`)} w="200px"
                     onClick={() => imageInputRef.current.click()}
                   />}
                   <input
@@ -289,13 +298,22 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                     style={{ display: "none" }}
                     onChange={handleImageSelect}
                   />
+                    <FormLabel fontWeight="bold" >Citizenship ID:</FormLabel>
+                    {data?.citizenshipFileName &&<Image
+                    rounded="5px"
+                    src={require(`../../uploads/boardMembersImages/${data?.citizenshipFileName}`)} w="200px">
+                    </Image>}
+                    {/* <Button 
+                    maxH="35px" 
+                    onClick={()=>window.open(`../../uploads/boardMembersImages/${data?.citizenshipFileName}`, '_blank')}
+                    >View</Button> */}
+                    </VStack>
                   <Box m={5} >
                     <HStack justify="flex-start" mb={5} >
                       <FormControl>
                         <FormLabel fontWeight="bold">First name:</FormLabel>
                         <Input
-                        variant="unstyled"
-                        _placeholder={{ color: "black" }}
+                        {...inputFieldStyle}
                           placeholder={data?.firstName}
                           name='firstName'
                           onChange={handleInputChange}
@@ -305,6 +323,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                       <FormControl>
                         <FormLabel fontWeight="bold">Middle name:</FormLabel>
                         <Input
+                        {...inputFieldStyle}
                           placeholder={data?.middleName}
                           name="middleName"
                           // value={formdata?.middleName}
@@ -314,6 +333,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                       <FormControl>
                         <FormLabel fontWeight="bold">Last name:</FormLabel>
                         <Input
+                        {...inputFieldStyle}
                           placeholder={data?.lastName}
                           isRequired
                           name="lastName"
@@ -327,6 +347,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                         <FormLabel fontWeight="bold">Gender:</FormLabel>
                        
                        <Select
+                       {...inputFieldStyle}
                       placeholder={data?.gender}
                       name="gender"
                       // value={formData.scholarship1.grade}
@@ -346,6 +367,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                       <FormControl>
                         <FormLabel fontWeight="bold">Date of birth:</FormLabel>
                         <Input
+                        {...inputFieldStyle}
                           placeholder={data?.dateOfBirth}
                           isRequired
                           name="dateOfBirth"
@@ -354,8 +376,9 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                         />
                       </FormControl>
                       <FormControl>
-                        <FormLabel fontWeight="bold">Birth certificate number:</FormLabel>
+                        <FormLabel fontWeight="bold">Citizenship number:</FormLabel>
                         <Input
+                        {...inputFieldStyle}
                           placeholder={data?.citizenshipNumber}
                           type='number'
                           name="citizenshipNumber"
@@ -368,6 +391,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                     <FormControl>
                       <FormLabel fontWeight="bold">Ethnicity:</FormLabel>
                       <Select
+                      {...inputFieldStyle}
                         placeholder={data?.ethnicity}
                         name="ethnicity"
                         onChange={handleInputChange}
@@ -381,7 +405,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                     </FormControl>
                       <FormControl>
                         <FormLabel fontWeight="bold">Contact number:</FormLabel>
-                        <Input placeholder={data?.contactNumber}
+                        <Input {...inputFieldStyle} placeholder={data?.contactNumber}
                           type='number'
                           isRequired
                           name="contactNumber"
@@ -392,6 +416,7 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                       <FormControl>
                         <FormLabel fontWeight="bold">Email ID:</FormLabel>
                         <Input
+                        {...inputFieldStyle}
                           placeholder={data?.email}
                           type='email'
                           name="email"
@@ -400,13 +425,16 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                         />
                       </FormControl>
                     </HStack>
+                   
                   </Box>
                 </Grid>
 
                 <FormControl mb={5} >
-                  <HStack>
+                  <HStack mt={10} >
             <FormLabel fontSize="22px" fontWeight="bold" >Membership type:</FormLabel>
-            <Select w="500px"
+            <Select
+            {...inputFieldStyle}
+             maxW="200px"
                         placeholder={data?.membershipType}
                         name='membershipType'
                         onChange={handleInputChange}
@@ -440,11 +468,13 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                 <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
                 <FormLabel fontWeight="bold">1.</FormLabel>
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.qualification1}
                     name="qualification1"
                     onChange={handleInputChange}
                   />
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.graduatedYear1}
                     type='number'
                     name='graduatedYear1'
@@ -452,11 +482,13 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                   />
 
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.institutionName1}
                     name="institutionName1"
                     onChange={handleInputChange}
                   />
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.institutionAddress1}
                     name='institutionAddress1'
                     onChange={handleInputChange}
@@ -466,11 +498,13 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                 <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
                 <FormLabel fontWeight="bold">2.</FormLabel>
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.qualification2}
                     name="qualification2"
                     onChange={handleInputChange}
                   />
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.graduatedYear2}
                     type='number'
                     name='graduatedYear2'
@@ -478,11 +512,13 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                   />
 
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.institutionName2}
                     name="institutionName2"
                     onChange={handleInputChange}
                   />
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.institutionAddress2}
                     name='institutionAddress2'
                     onChange={handleInputChange}
@@ -492,11 +528,13 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                 <Grid gridTemplateColumns={"0.1fr 0.7fr 0.5fr 1fr 1fr"} gap={1} >
                 <FormLabel fontWeight="bold">3.</FormLabel>
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.qualification3}
                     name="qualification3"
                     onChange={handleInputChange}
                   />
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.graduatedYear3}
                     type='number'
                     name='graduatedYear3'
@@ -504,11 +542,13 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                   />
 
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.institutionName3}
                     name="institutionName3"
                     onChange={handleInputChange}
                   />
                   <Input
+                  {...inputFieldStyle}
                     placeholder={data?.institutionAddress3}
                     name='institutionAddress3'
                     onChange={handleInputChange}
@@ -518,8 +558,8 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                 {/* TENURE */}
             <FormLabel fontSize="22px" fontWeight="bold" >Designation</FormLabel>
             <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} >
-              <FormLabel >SN</FormLabel>
-              <FormLabel >Position</FormLabel>
+              <FormLabel fontWeight="bold" >SN</FormLabel>
+              <FormLabel fontWeight="bold" >Position</FormLabel>
               <FormLabel fontWeight="bold">Joined date</FormLabel>
               <FormLabel fontWeight="bold">Tenure</FormLabel>
               <FormLabel fontWeight="bold">Remarks</FormLabel>
@@ -529,21 +569,25 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel fontWeight="bold">1. </FormLabel>
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.position1}
                   name="position1"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.joinedDate1}
                    name="joinedDate1"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.tenure1}
                   name="tenure1"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.remark1}
                   name="remark1"
                   onChange={handleInputChange}
@@ -553,21 +597,25 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel fontWeight="bold">2. </FormLabel>
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.position2}
                   name="position2"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.joinedDate2}
                   name="joinedDate2"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.tenure2}
                   name="tenure2"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.remark2}
                   name="remark2"
                   onChange={handleInputChange}
@@ -577,21 +625,25 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel fontWeight="bold">3. </FormLabel>
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.position3}
                   name="position3"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.joinedDate3}
                   name="joinedDate3"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.tenure3}
                   name="tenure3"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.remark3}
                   name="remark3"
                   onChange={handleInputChange}
@@ -601,21 +653,25 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel fontWeight="bold">4. </FormLabel>
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.position4}
                   name="position4"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.joinedDate4}
                   name="joinedDate4"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.tenure4}
                   name="tenure4"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.remark4}
                   name="remark4"
                   onChange={handleInputChange}
@@ -625,21 +681,25 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <Grid gridTemplateColumns={"0.1fr 1fr 1fr 1fr 1fr"} gap={1} mb={1} >
                 <FormLabel fontWeight="bold">5. </FormLabel>
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.position5}
                   name="position5"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.joinedDate5}
                   name="joinedDate5"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.tenure5}
                   name="tenure5"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.remark5}
                   name="remark5"
                   onChange={handleInputChange}
@@ -660,22 +720,26 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               </Grid>
               <HStack>
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.permanentMunicipality}
                   name="permanentMunicipality"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.permanentWardNo}
                   type='number'
                   name="permanentWardNo"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.permanentDistrict}
                   name="permanentDistrict"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.permanentProvince}
                   name="permanentProvince"
                   onChange={handleInputChange}
@@ -687,18 +751,20 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
             <FormControl mb={5} >
               <FormLabel mt={5} fontSize="22px" fontWeight="bold"  >Current address</FormLabel>
               <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
-                <FormLabel >Municipality:</FormLabel>
+                <FormLabel fontWeight="bold">Municipality:</FormLabel>
                 <FormLabel fontWeight="bold">Ward No.:</FormLabel>
                 <FormLabel fontWeight="bold">District:</FormLabel>
                 <FormLabel fontWeight="bold">Province:</FormLabel>
               </Grid>
               <HStack>
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.temporaryMunicipality}
                   name="temporaryMunicipality"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.temporaryWardNo}
                   type='number'
                   name="temporaryWardNo"
@@ -706,11 +772,13 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                 />
                 
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.temporaryDistrict}
                   name="temporaryDistrict"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.temporaryProvince}
                   name="temporaryProvince"
                   onChange={handleInputChange}
@@ -725,38 +793,44 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
               <FormLabel fontWeight="bold">Organization</FormLabel>
               <FormLabel fontWeight="bold">Address</FormLabel>
               <FormLabel fontWeight="bold">Starting date</FormLabel>
-              <FormLabel isTruncated >Status</FormLabel>
+              <FormLabel fontWeight="bold" isTruncated >Status</FormLabel>
               <FormLabel fontWeight="bold">Remarks</FormLabel>
             </Grid>
             {/* PERSONAL ONE */}
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
                 <FormLabel fontWeight="bold">1. </FormLabel>
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.profession1}
                   name="profession1"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.organization1}
                   name="organization1"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.address1}
                   name="address1"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.startingDate1}
                   name="startingDate1"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.currentStatus1}
                   name="currentStatus1"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.pRemark1}
                   name="pRemark1"
                   onChange={handleInputChange}
@@ -766,31 +840,37 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
                 <FormLabel fontWeight="bold">2. </FormLabel>
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.profession2}
                   name="profession2"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.organization2}
                   name="organization2"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.address2}
                   name="address2"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.startingDate2}
                   name="startingDate2"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.currentStatus2}
                   name="currentStatus2"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.pRemark2}
                   name="pRemark2"
                   onChange={handleInputChange}
@@ -800,31 +880,37 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
                 <FormLabel fontWeight="bold">3. </FormLabel>
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.profession3}
                   name="profession3"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.organization3}
                   name="organization3"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.address3}
                   name="address3"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.startingDate3}
                   name="startingDate3"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.currentStatus3}
                   name="currentStatus3"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.pRemark3}
                   name="pRemark3"
                   onChange={handleInputChange}
@@ -834,31 +920,37 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
                <Grid gridTemplateColumns={"0.1fr 0.7fr 1fr 1fr 0.7fr 0.7fr 1fr"} gap={1} mb={1} >
                 <FormLabel fontWeight="bold">4. </FormLabel>
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.profession4}
                   name="profession4"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.organization4}
                   name="organization4"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.address4}
                   name="address4"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.startingDate4}
                   name="startingDate4"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.currentStatus4}
                   name="currentStatus4"
                   onChange={handleInputChange}
                 />
                 <Input
+                {...inputFieldStyle}
                   placeholder={data?.pRemark4}
                   name="pRemark4"
                   onChange={handleInputChange}

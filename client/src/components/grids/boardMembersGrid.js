@@ -19,7 +19,7 @@ import {
     Input,
     FormControl
 } from '@chakra-ui/react'
-import { ViewIcon, DeleteIcon, EditIcon, SmallCloseIcon } from '@chakra-ui/icons';
+import { ViewIcon, DeleteIcon, SmallCloseIcon } from '@chakra-ui/icons';
 import BoardMembersDataDisplay from '../dataDisplay/boardMembersDataDisplay'
 import EditBoardMemberProfileModal from '../modals/editBoardMemberProfileModal'
 import ConfirmDeletePopUp from '../popUps/confirmDeletePopUp';
@@ -375,7 +375,7 @@ const BoardMembersGrid = ({scholarshipProject}) => {
                                         <Text w="120px">{student.createdAt.slice(0, 10)}</Text>
                                         <Text w="120px" >{student.updatedAt.slice(0, 10)}</Text>
                                         <Box  >
-                                            <EditIcon
+                                            <ViewIcon
                                                 style={{ cursor: 'pointer' }}
                                                 _hover={{ color: 'blue.400' }}
                                                 onClick={() => {

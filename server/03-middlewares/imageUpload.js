@@ -31,7 +31,7 @@ const StudentProfileImageUpload = multer({
 //BOARD MEMBER CITIZENSHIP FILE
 const boardMembersImagesStorage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "../client/public/assets/boardmemberCitizenshipFile/")
+        cb(null, "../client/src/uploads/boardMembersImages/")
     },
     filename: function (req, file, cb) {
         cb(null, "Board_member_image_" + Date.now() + ".jpeg")

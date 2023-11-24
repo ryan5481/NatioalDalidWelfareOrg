@@ -289,7 +289,7 @@ const BoardMemberProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarsh
           isClosable: true,
           position: 'top'
         });
-        // window.location.reload()
+        window.location.reload()
 
       } else {
         toast({

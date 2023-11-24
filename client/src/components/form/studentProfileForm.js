@@ -525,6 +525,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
 
                   />
                   <input
+                  isRequired
                     type='file'
                     accept='image/*'
                     ref={imageInputRef}
