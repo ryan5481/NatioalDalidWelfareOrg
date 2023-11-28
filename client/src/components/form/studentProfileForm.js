@@ -343,12 +343,12 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('scholarship10Remarks', scholarship10Remarks)
       formData.append('permanentMunicipality', permanentMunicipality)
       formData.append('permanentWardNumber', permanentWardNumber)
-      formData.append('permanentDistrict', permanentDistrict)
-      formData.append('permanentProvince', permanentProvince)
+      formData.append('permanentDistrict', district == "all" ? permanentDistrict : district)
+      formData.append('permanentProvince', district == "all" ? permanentProvince : loggedInDistAdminProvince)
       formData.append('currentMunicipality', currentMunicipality)
       formData.append('currentWardNumber', currentWardNumber)
-      formData.append('currentDistrict', district == "all" ? currentDistrict : district)
-      formData.append('currentProvince', district == "all" ? currentProvince : loggedInDistAdminProvince)
+      formData.append('currentDistrict', currentDistrict)
+      formData.append('currentProvince', currentProvince)
       formData.append('schoolName', schoolName)
       formData.append('principalName', principalName)
       formData.append('schoolNumber', schoolNumber)
@@ -549,7 +549,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                     </Select>
                   </FormControl>}
                   <HStack justify="flex-start" mb={5} >
-                    <FormControl>
+                    <FormControl isRequired>
                       <FormLabel >First name</FormLabel>
                       <Input
                         placeholder='First name'
@@ -567,7 +567,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                         onChange={(e) => setMiddleName(e.target.value)}
                       />
                     </FormControl>
-                    <FormControl>
+                    <FormControl isRequired>
                       <FormLabel>Last name</FormLabel>
                       <Input
                         placeholder='Last name'
@@ -579,7 +579,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                     </FormControl>
                   </HStack>
                   <HStack justify="flex-start" mb={5}>
-                    <FormControl>
+                    <FormControl isRequired>
                       <FormLabel>Gender</FormLabel>
                       <Select
                         placeholder='Select'
@@ -599,7 +599,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       </Select>
                     </FormControl>
 
-                    <FormControl>
+                    <FormControl isRequired>
                       <FormLabel>Date of birth</FormLabel>
                       <Input
                         type='date'
@@ -623,7 +623,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                   </HStack>
                   <HStack justify="flex-start" mb={5}>
 
-                    <FormControl>
+                    <FormControl isRequired>
                       <FormLabel>Ethnicity</FormLabel>
                       <Select
                         placeholder='Select'
@@ -637,7 +637,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                       ))}
                       </Select>
                     </FormControl>
-                    <FormControl>
+                    <FormControl isRequired>
                       <FormLabel>Student type</FormLabel>
                       <Select
                         placeholder='Select'
@@ -1314,35 +1314,57 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                   <FormLabel>Ward No.</FormLabel>
                 </Grid>
                 <HStack>
-                  <Select
-                    placeholder="Province"
-                    onChange={(e) => setPermanentProvince(e.target.value)}
-                  >
-                    {nepalProvincesList.map((province, index) => (
-                      <option key={index} value={province} >{province}</option>
-                    ))}
-                  </Select>
-                  <Select
-                    placeholder="District"
-                    onChange={(e) => setPermanentDistrict(e.target.value)}
-                  >
-                    {selectedPermanentProvinceDistricts.map((district, index) => (
-                      <option key={index} value={district.name} >{district.name}</option>
-                    ))}
-                  </Select>
+                  {/* currentProvince is set to the district admin's district, is only selectable by super admin */}
+                  {district == "all" ?
+                    <Select
+                      placeholder="Province"
+                      onChange={(e) => setPermanentProvince(e.target.value)}
+                    >
+                      {nepalProvincesList.map((province, index) => (
+                        <option key={index} value={province} >{province}</option>
+                      ))}
+                    </Select>
+                    :
+                    <Input
+                      placeholder={loggedInDistAdminProvince}
+                      isDisabled
+                    />
+                  }
+                  {/* currentDistrict is set to the district admin's district, is only selectable by super admin */}
+                  {
+                    district == "all" ?
+                      <Select
+                        placeholder="District"
+                        onChange={(e) => setPermanentDistrict(e.target.value)}
+                      >
+                        {selectedPermanentProvinceDistricts.map((district, index) => (
+                          <option key={index} value={district.name} >{district.name}</option>
+                        ))}
+                      </Select>
+                      :
+                      <Input
+                        placeholder={district}
+                        // value={formData.permanentAddress.wardNumber}
+                        isDisabled
+                      />
+                  }
                   <Select
                     placeholder="Municipality"
                     onChange={(e) => setPermanentMunicipality(e.target.value)}
                   >
-                    {selectedPermanentDistrictMunicipalities.map((municipality, index) => (
-                      <option key={index} value={municipality.name} >{municipality.name}</option>
-                    ))}
+                    {
+                      district == "all" ?
+                        selectedPermanentDistrictMunicipalities.map((municipality, index) => (
+                          <option key={index} value={municipality.name} >{municipality.name}</option>
+                        ))
+                        :
+                        loggedInDistrictMunicipalities.map((municipality, index) => (
+                          <option key={index} value={municipality.name} >{municipality.name}</option>))
+                    }
                   </Select>
                   <Input
                     placeholder='Ward no.'
                     type='number'
-                    name="permanentAddress.wardNumber"
-                    // value={formData.permanentAddress.wardNumber}
                     onChange={(e) => setPermanentWardNumber(e.target.value)}
                   />
 
@@ -1359,62 +1381,42 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                   <FormLabel>Ward No.</FormLabel>
                 </Grid>
                 <HStack>
-                  {/* currentProvince is set to the district admin's district, is only selectable by super admin */}
-                  {district == "all" ?
-                    <Select
-                      placeholder="Province"
-                      onChange={(e) => setCurrentProvince(e.target.value)}
-                    >
-                      {nepalProvincesList.map((province, index) => (
-                        <option key={index} value={province} >{province}</option>
-                      ))}
-                    </Select>
-                    :
-                    <Input
-                      placeholder={loggedInDistAdminProvince}
-                      s isDisabled
-                    />
-                  }
-                  {/* currentDistrict is set to the district admin's district, is only selectable by super admin */}
-                  {
-                    district == "all" ?
-                      <Select
-                        placeholder="District"
-                        onChange={(e) => setCurrentDistrict(e.target.value)}
-                      >
-                        {selectedCurrentProvinceDistricts.map((district, index) => (
-                          <option key={index} value={district.name} >{district.name}</option>
-                        ))}
-                      </Select>
-                      :
-                      <Input
-                        placeholder={district}
-                        // value={formData.permanentAddress.wardNumber}
-                        isDisabled
-                      />
-                  }
+                  <Select
+                    placeholder="Province"
+                    onChange={(e) => setCurrentProvince(e.target.value)}
+                  >
+                    {nepalProvincesList.map((province, index) => (
+                      <option key={index} value={province} >{province}</option>
+                    ))}
+                  </Select>
+                  <Select
+                    placeholder="District"
+                    onChange={(e) => setCurrentDistrict(e.target.value)}
+                  >
+                    {selectedCurrentProvinceDistricts.map((district, index) => (
+                      <option key={index} value={district.name} >{district.name}</option>
+                    ))}
+                  </Select>
                   <Select
                     placeholder="Municipality"
                     onChange={(e) => setCurrentMunicipality(e.target.value)}
                   >
-                    {
-                      district == "all" ?
-                        selectedCurrentDistrictMunicipalities.map((municipality, index) => (
-                          <option key={index} value={municipality.name} >{municipality.name}</option>
-                        ))
-                        :
-                        loggedInDistrictMunicipalities.map((municipality, index) => (
-                          <option key={index} value={municipality.name} >{municipality.name}</option>))
-                    }
+                    {selectedCurrentDistrictMunicipalities.map((municipality, index) => (
+                      <option key={index} value={municipality.name} >{municipality.name}</option>
+                    ))}
                   </Select>
                   <Input
                     placeholder='Ward no.'
                     type='number'
+                    name="permanentAddress.wardNumber"
+                    // value={formData.permanentAddress.wardNumber}
                     onChange={(e) => setCurrentWardNumber(e.target.value)}
                   />
 
                 </HStack>
               </FormControl>
+
+
 
               {/* SCHOOL */}
               <FormControl>
@@ -1663,7 +1665,6 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
             {/* BUTTONS */}
             <Box justifySelf="center" m={5}  >
               <Center>
-
                 <Button colorScheme='red' mx={1} w={'200px'} onClick={() => setIsCreateNewUserActive(false)} >Cancel</Button>
                 <Button onClick={() => submitForm()} colorScheme='green' mx={1} w={'200px'} >Save</Button>
               </Center>
