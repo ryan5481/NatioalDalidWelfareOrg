@@ -306,7 +306,7 @@ const SuperAdminLogin = () => {
 
               <Center><Image w={600}
                 src={require('../../../uploads/assets/nndswo-logo.jpeg')}></Image></Center>
-              <Heading fontSize={'2xl'} textAlign="center" >District Admin Email Verification</Heading>
+              <Heading fontSize={'2xl'} textAlign="center" >Super Admin Email Verification</Heading>
               <Text fontSize={'md'} textAlign="center" >Type your OTP code sent to {email ?
                 email.replace(/^(.)([^@]*)/, (match, firstLetter, rest) => firstLetter + rest.replace(/[a-zA-Z]/g, '*')) :
                 'Invalid Email Address'

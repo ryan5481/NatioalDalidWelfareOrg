@@ -96,7 +96,7 @@ const StudentsGrid = ({ scholarshipProject }) => {
 
     const filteredStudentsList = studentsList
         .filter((item) =>
-            item.currentDistrict.toLowerCase().includes(selectedDistrict.toLowerCase())
+            item.permanentDistrict.toLowerCase().includes(selectedDistrict.toLowerCase())
         )
         .filter(
             (item) =>
@@ -167,7 +167,7 @@ const StudentsGrid = ({ scholarshipProject }) => {
 
         // Check if district is "all"
         if (userRole !== "superAdmin") {
-            apiUrl += `?currentDistrict=${district}`;
+            apiUrl += `?permanentDistrict=${district}`;
         }
         const res = await axios.get(apiUrl)
         if (res) {
@@ -331,7 +331,7 @@ const StudentsGrid = ({ scholarshipProject }) => {
                                         </HStack>}
                                     <Select value={selectedOption} onChange={(e) => setSelectedOption(e.target.value)}>
                                         <option value="Active">Active students</option>
-                                        <option value="Inactive">Inactive students</option>
+                                        <option value="Inactive">Alumuni students</option>
                                     </Select>
                                     <InputGroup  >
                                         <Input

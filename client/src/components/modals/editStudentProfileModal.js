@@ -544,70 +544,6 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
     }
   };
 
-//   const submitToArchiveAsAlumuni = async () => {
-//     const formData = new FormData()
-//     formData.append('registeredBy', district)
-//     if(district !== "all"){
-//         formData.append('project', "ncsep")
-//     }else{
-//         // formData.append('project', project)
-//     }
-//     formData.append('name', data.firstName + ' ' + data?.middleName + ' ' + + data.lastName)
-//     formData.append('contactNumber', data.contactNumber)
-//     formData.append('email', data.email)
-//     // formData.append('citizenshipNumber', data.citizenshipNumber)
-//     // formData.append('currentStatus', alumuniCurrentStatus)
-//     // formData.append('occupation', alumuniOccupation)
-//     // formData.append('organization', alumuniOrganization)
-//     // formData.append('position', alumuniPosition)
-//     formData.append('municipality', data.currentMunicipality)
-//     formData.append('wardNo', data.currentWardNumber)
-//     formData.append('alumuniDistrict', data.currentDistrict)
-//     formData.append('province', data.currentDistrict)
-
-//     try {
-//         const res = await axios.post(`${baseUrl}/create-alumuni-student-profile`, formData, {
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//             }
-//         );
-//         if (res.status === 200) {
-//             toast({
-//                 title: 'Success.',
-//                 description: 'Alumuni student profile created.',
-//                 status: 'success',
-//                 duration: 5000,
-//                 isClosable: true,
-//                 position: 'top'
-//             });
-//             window.location.reload()
-
-//         } else {
-//             toast({
-//                 title: 'Error.',
-//                 description: 'Failed to create student profile.',
-//                 status: 'error',
-//                 duration: 5000,
-//                 isClosable: true,
-//                 position: 'top'
-//             });
-//         }
-//     } catch (error) {
-//         console.error('Error updating image: ', error);
-//         toast({
-//             title: 'Error.',
-//             description: 'Failed to connect to server.',
-//             status: 'error',
-//             duration: 5000,
-//             isClosable: true,
-//             position: 'top'
-//         });
-//     }
-// }
-
-
-
   //filter municipalities from selected district from selected province
   //PERMANENT DISTRICT
   
@@ -1579,7 +1515,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </Grid>
 
-                {/* PERMANENT ADDRESS */}
+              {/* CURRENT ADDRESS */}
               <FormControl>
                 <FormLabel mt={5} fontSize="18px" fontWeight="bold"  >Permanent address</FormLabel>
                 <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
@@ -1589,7 +1525,8 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   <FormLabel>Ward No.</FormLabel>
                 </Grid>
                 <HStack>
-                <Select
+                {district == "all" ?
+                  <Select
                       placeholder={data.permanentProvince}
                       name="permanentProvince"
                       onChange={handleInputChange}
@@ -1598,6 +1535,10 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                           <option key={index} value={province} >{province}</option>
                       ))}
                   </Select>
+                  :
+                  <Input placeholder={data.permanentProvince} isDisabled />
+                  }
+                {district == "all" ?
                 <Select
                       placeholder={data.permanentDistrict}
                       name="permanentDistrict"
@@ -1607,6 +1548,9 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                           <option key={index} value={district.name} >{district.name}</option>
                       ))}
                   </Select>
+                    :
+                    <Input placeholder={data.permanentProvince} isDisabled />
+                      }
                 <Select
                       placeholder={data.permanentMunicipality}
                       name="permanentMunicipality"
@@ -1626,7 +1570,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </HStack>
               </FormControl>
-              {/* CURRENT ADDRESS */}
+                {/* CURRENT ADDRESS */}
               <FormControl>
                 <FormLabel mt={5} fontSize="18px" fontWeight="bold"  >Current address</FormLabel>
                 <Grid gridTemplateColumns={"1fr 1fr 1fr 1fr"} gap={5} >
@@ -1636,8 +1580,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   <FormLabel>Ward No.</FormLabel>
                 </Grid>
                 <HStack>
-                {district == "all" ?
-                  <Select
+                <Select
                       placeholder={data.currentProvince}
                       name="currentProvince"
                       onChange={handleInputChange}
@@ -1646,10 +1589,6 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                           <option key={index} value={province} >{province}</option>
                       ))}
                   </Select>
-                  :
-                  <Input placeholder={data.currentProvince} isDisabled />
-                  }
-                {district == "all" ?
                 <Select
                       placeholder={data.currentDistrict}
                       name="currentDistrict"
@@ -1659,9 +1598,6 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                           <option key={index} value={district.name} >{district.name}</option>
                       ))}
                   </Select>
-                    :
-                    <Input placeholder={data.currentProvince} isDisabled />
-                      }
                 <Select
                       placeholder={data.currentMunicipality}
                       name="currentMunicipality"
@@ -1681,6 +1617,7 @@ const EditStudentProfileModal = ({ isOpen, onClose, data, scholarshipProject }) 
                   />
                 </HStack>
               </FormControl>
+
               {/* SCHOOL */}
               <FormControl>
                 <FormLabel mt={5} fontSize="18px" fontWeight="bold" >School</FormLabel>
