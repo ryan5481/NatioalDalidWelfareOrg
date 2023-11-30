@@ -439,7 +439,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
 
   const scholarshipCategories =
     scholarshipProject == "prlEth"
-      ? (["", "Pratap Ram Lohar", "ETHS Project"]) : (["", "Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"])
+      ? (["Pratap Ram Lohar", "ETHS Project"]) : (["Special Focus Children", "Highly Vunerable Children", "Role Model (RM)"])
 
   const dalitEthnicitiesList = ['Badi', 'Gandarva', 'Madeshi Origin', 'Pariyar', 'Sarki', 'Viswakarma']
 

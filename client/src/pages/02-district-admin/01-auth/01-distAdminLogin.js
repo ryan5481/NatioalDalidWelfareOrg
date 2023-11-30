@@ -165,7 +165,7 @@ useEffect(() => {
             district: response.data.district
           })
         );
-        navigate("/student-management");
+        navigate("/dist-admin-dashboard");
         toast({
           title: 'Success.',
           description: 'Logged into district admin dashboard.',

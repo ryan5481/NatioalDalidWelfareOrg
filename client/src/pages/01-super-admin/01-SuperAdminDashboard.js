@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import {
     Box,
@@ -15,11 +16,9 @@ import {
     Select
 } from '@chakra-ui/react';
 import StudentNumberDisplay from '../../components/dataDisplay/studentNumberDisplay';
-import BoardMembersDataDisplay from '../../components/dataDisplay/boardMembersDataDisplay';
 import { CheckIcon, RepeatClockIcon } from '@chakra-ui/icons';
 
 const baseUrl = process.env.REACT_APP_BASE_URL;
-const dalitEthnicitiesList = ['Badi', 'Gandarva', 'Madeshi Origin', 'Pariyar', 'Sarki', 'Viswakarma']
 const districtNames = [
     "Achham",
     "Arghakhanchi",
@@ -98,6 +97,7 @@ const districtNames = [
     "Udayapur",
 ];
 const SuperAdminDashboard = () => {
+    const { userRole, district } = useSelector(state => state.user)
     const [studentsList, setStudentsList] = useState([]);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -116,7 +116,13 @@ const SuperAdminDashboard = () => {
 
     const fetchStudentsList = async () => {
         try {
-            const res = await axios.get(`${baseUrl}/get-student-profiles`);
+            let apiUrl = `${baseUrl}/get-student-profiles`;
+
+        // Check if district is "all"
+        if (userRole !== "superAdmin") {
+            apiUrl += `?permanentDistrict=${district}`;
+        }
+        const res = await axios.get(apiUrl)
             if (res) {
                 const data = res.data.data;
                 setStudentsList(data.reverse());
@@ -131,6 +137,11 @@ const SuperAdminDashboard = () => {
                         new Date(student.scholarship3From),
                         new Date(student.scholarship4From),
                         new Date(student.scholarship5From),
+                        new Date(student.scholarship6From),
+                        new Date(student.scholarship7From),
+                        new Date(student.scholarship8From),
+                        new Date(student.scholarship9From),
+                        new Date(student.scholarship10From),
                     ];
 
                     return scholarshipDates.some(
@@ -163,6 +174,11 @@ const SuperAdminDashboard = () => {
                 new Date(student.scholarship3From),
                 new Date(student.scholarship4From),
                 new Date(student.scholarship5From),
+                new Date(student.scholarship6From),
+                new Date(student.scholarship7From),
+                new Date(student.scholarship8From),
+                new Date(student.scholarship9From),
+                new Date(student.scholarship10From)
             ];
 
             return scholarshipDates.some(
@@ -203,28 +219,18 @@ const SuperAdminDashboard = () => {
         item.scholarship7FundType.includes(selectedFundType) ||
         item.scholarship8FundType.includes(selectedFundType) ||
         item.scholarship9FundType.includes(selectedFundType) ||
-        item.scholarship10FundType.includes(selectedFundType)
-        )
+        item.scholarship10FundType.includes(selectedFundType) )
          )
-
-         //Filter by Ethnicity
-    const [selectedEthnicity, setSelectedEthnicity] = useState("all");
-
-    const allStudentsFilteredByEthnicity = 
-    selectedEthnicity == "all" ? (allStudentsListFilteredByFundType) : (
-        allStudentsListFilteredByFundType.filter((item) => 
-        item?.ethnicity.includes(selectedEthnicity) 
-        )
-    )
-
-    const disabledAllStudentsList = allStudentsFilteredByEthnicity.filter((obj) => obj.studentType === "Disabled");
+    
+    
+    const disabledAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.studentType === "Disabled");
     const disabledCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.studentType === "Disabled");
-    const orphanAllStudentsList = allStudentsFilteredByEthnicity.filter((obj) => obj.studentType === "Orphan");
+    const orphanAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.studentType === "Orphan");
     const orphanCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.studentType === "Orphan");
 
-    const ncsepAllStudentsList = allStudentsFilteredByEthnicity.filter((obj) => obj.project === "NCSEP");
-    const prlAllStudentsList = allStudentsFilteredByEthnicity.filter((obj) => obj.project === "PRL");
-    const ethsAllStudentsList = allStudentsFilteredByEthnicity.filter((obj) => obj.project === "ETHS");
+    const ncsepAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.project === "NCSEP");
+    const prlAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.project === "PRL");
+    const ethsAllStudentsList = allStudentsListFilteredByFundType.filter((obj) => obj.project === "ETHS");
     const ncsepCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.project === "NCSEP");
     const prlCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.project === "PRL");
     const ethsCurrentYearStudentsList = currentYearStudentsList.filter((obj) => obj.project === "ETHS");
@@ -235,7 +241,7 @@ const SuperAdminDashboard = () => {
             <Box p={5} pos={"relative"} left={"120px"} mb={10}  >
                 <Heading mb={5} fontSize="2xl" textAlign="center" > Overall Scholarships Provided</Heading>
                 <HStack zIndex={5} pos="fixed" bottom="0px" left={"20%"} bg={"gray.100"} border={'solid 1px lightgray'} p={2} px={4} rounded={10} justify="center" spacing={3} m={5} >
-                    <Select
+                    { userRole == "superAdmin" && <Select
                         mx={1}
                         h={8}
                         w={"200px"}
@@ -248,7 +254,7 @@ const SuperAdminDashboard = () => {
                         {districtNames.map((district, index) => (
                             <option key={index} value={district} >{district}</option>
                         ))}
-                    </Select>
+                    </Select>}
                     <Select
                         mx={1}
                         h={8}
@@ -266,19 +272,6 @@ const SuperAdminDashboard = () => {
                             ARMF
                         </option>
                     </Select>
-                    <FormControl w={"200px"}>
-                      {/* <FormLabel>Ethnicity</FormLabel> */}
-                      <Select
-                        placeholder='Ethnicity'
-                        onChange={(e) => setSelectedEthnicity(e.target.value)}
-                      >
-                        {dalitEthnicitiesList.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
-                      </Select>
-                    </FormControl>
                     <FormControl w={"220px"} >
                         <HStack>
                             <FormLabel>From:</FormLabel>
@@ -360,6 +353,7 @@ const SuperAdminDashboard = () => {
                         <StudentNumberDisplay studentsList={orphanCurrentYearStudentsList} /></>)}
                 <Divider alignItems="center" my={5} borderColor={"gray.400"} w="1100px" mx={"auto"} />
 
+                { userRole == "superAdmin" && 
                 <Center >
                     <HStack>
                         <Button
@@ -384,8 +378,8 @@ const SuperAdminDashboard = () => {
                             onClick={() => { setDataToDisplayByProject("ETHS") }}
                         >ETHS</Button>
                     </HStack>
-                </Center>
-                {dataToDisplayByProject == "NCSEP" && <> <Heading m={5} fontSize="2xl" textAlign="center" >Total NCSEP Recepients </Heading>
+                </Center>}
+                {dataToDisplayByProject == "NCSEP" && userRole == "superAdmin" && <> <Heading m={5} fontSize="2xl" textAlign="center" >Total NCSEP Recepients </Heading>
                     <StudentNumberDisplay studentsList={ncsepAllStudentsList} />
                     <Heading m={5} fontSize="2xl" textAlign="center" >Current Year NCSEP Recepients ({new Date().getFullYear()})</Heading>
                     <StudentNumberDisplay studentsList={ncsepCurrentYearStudentsList} /></>}
@@ -399,10 +393,8 @@ const SuperAdminDashboard = () => {
                     <Heading m={5} fontSize="2xl" textAlign="center" >Current Year ETHS Recepients ({new Date().getFullYear()})</Heading>
                     <StudentNumberDisplay studentsList={ethsCurrentYearStudentsList} /></>}
             </Box>
-            <Divider w="70%" alignItems="center" />
         </>
     );
 };
 
 export default SuperAdminDashboard;
-
