@@ -24,7 +24,7 @@ import {
   Center,
   useDisclosure,
   Select,
-  FormErrorMessage,
+  Switch,
   VStack, // Add this import for error message display
 } from '@chakra-ui/react';
 import AlumuniStudentForm from './alumuniStudentForm';
@@ -167,6 +167,11 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
   const [guardianCitizenshipNumber, setGuardianCitizenshipNumber] = useState('')
   const [guardianOccupation, setGuardianOccupation] = useState('')
   const [guardianContactNumber, setGuardianContactNumber] = useState('')
+  const [isAlumni, setIsAlumni] = useState(false)
+  const [status, setStatus] = useState('')
+  const [alumniOccupation, setAlumniOccupation] = useState('')
+  const [alumniOrganization, setAlumniOrganization] = useState('')
+  const [alumniPosition, setAlumniPosition] = useState('')
 
   const [selectedImage, setSelectedImage] = useState(null)
   const [previewImage, setPreviewImage] = useState(null)
@@ -374,6 +379,11 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
       formData.append('guardianCitizenshipNumber', guardianCitizenshipNumber)
       formData.append('guardianOccupation', guardianOccupation)
       formData.append('guardianContactNumber', guardianContactNumber)
+      formData.append('isAlumni', isAlumni)
+      formData.append('status', status)
+      formData.append('alumniOrganization', alumniOrganization)
+      formData.append('alumniOccupation', alumniOccupation)
+      formData.append('alumniPosition', alumniPosition)
 
       console.log(baseUrl)
       const res = await axios.post(`${baseUrl}/create-student-profile`, formData, {
@@ -525,7 +535,7 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
 
                   />
                   <input
-                  isRequired
+                    isRequired
                     type='file'
                     accept='image/*'
                     ref={imageInputRef}
@@ -631,10 +641,10 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                         onChange={(event) => setEthnicity(event.target.value)}
                       >
                         {dalitEthnicitiesList.map((option) => (
-                        <option key={option} value={option}>
-                          {option}
-                        </option>
-                      ))}
+                          <option key={option} value={option}>
+                            {option}
+                          </option>
+                        ))}
                       </Select>
                     </FormControl>
                     <FormControl isRequired>
@@ -1301,8 +1311,8 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                   </Grid>
                 }
               </FormControl>
-              { numFields < 10 && <Button mx={1} w="150px" h="30px" onClick={handleAddField} colorScheme="blue">Add field</Button>}
-              { numFields > 1 && <Button mx={1} w="150px" h="30px" onClick={handleRemoveField} colorScheme="red">Remove field</Button>}
+              {numFields < 10 && <Button mx={1} w="150px" h="30px" onClick={handleAddField} colorScheme="blue">Add field</Button>}
+              {numFields > 1 && <Button mx={1} w="150px" h="30px" onClick={handleRemoveField} colorScheme="red">Remove field</Button>}
 
               {/* PERMANENT ADDRESS */}
               <FormControl>
@@ -1657,6 +1667,82 @@ const StudentProfileForm = ({ setIsCreateNewUserActive, fetchData, scholarshipPr
                     value={guardianContactNumber}
                     isDisabled={selectedRadio !== null}
                     onChange={(e) => setGuardianContactNumber(e.target.value)}
+                  />
+                </HStack>
+              </FormControl>
+              <FormControl mt={5} align="flex-start">
+                <HStack>
+                  <FormLabel fontSize="22px" fontWeight="bold">
+                    Alumni
+                  </FormLabel>
+                  <Switch
+                     colorScheme="blue"
+                     size="lg"
+                     isChecked={isAlumni}
+                     onChange={() => setIsAlumni(!isAlumni)}
+                  />
+                </HStack>
+              </FormControl>
+              {/* <FormControl mt={5} >
+                  <HStack>
+                  <FormLabel fontSize="22px" fontWeight="bold" >Alumni</FormLabel>
+                  <Select
+                  maxW="100px"
+                    placeholder="Select"
+                    onChange={(e) => setIsAlumni(e.target.value)}
+                  >
+                    <option key="Yes" value="Yes">
+                      Yes
+                    </option>
+                    <option key="No" value="No">
+                      No
+                    </option>
+                  </Select>
+                  </HStack>
+                </FormControl> */}
+              <FormControl mt={5} isDisabled={!isAlumni} >
+                <HStack>
+                  <FormLabel>Status</FormLabel>
+                  <Select
+                    maxW="200px"
+                    placeholder="Select"
+                    onChange={(event) => setStatus(event.target.value)}
+                  >
+                    <option key="Government Job" value="Government Job">
+                      Government Job
+                    </option>
+                    <option key="Private Job" value="Private Job">
+                      Private Job
+                    </option>
+                    <option key="Employed Abroad" value="Employed Abroad">
+                      Employed Abroad
+                    </option>
+                    <option key="Student" value="Student">
+                      Student
+                    </option>
+                  </Select>
+                </HStack>
+              </FormControl>
+              {/* ALUMNI STATUS */}
+              <FormControl isDisabled={!isAlumni} >
+                <FormLabel mt={5} fontSize="22px" fontWeight="bold">Alumni details</FormLabel>
+                <Grid gridTemplateColumns={"1fr 1fr 1fr"} gap={5} >
+                  <FormLabel >Organization</FormLabel>
+                  <FormLabel>Occupation</FormLabel>
+                  <FormLabel>Position</FormLabel>
+                </Grid>
+                <HStack>
+                  <Input
+                    placeholder='Organization'
+                    onChange={(e) => setAlumniOrganization(e.target.value)}
+                  />
+                  <Input
+                    placeholder='Occupation'
+                    onChange={(e) => setAlumniOccupation(e.target.value)}
+                  />
+                  <Input
+                    placeholder='Position'
+                    onChange={(e) => setAlumniPosition(e.target.value)}
                   />
                 </HStack>
               </FormControl>
