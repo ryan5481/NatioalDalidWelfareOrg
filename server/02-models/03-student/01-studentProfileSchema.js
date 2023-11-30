@@ -419,6 +419,28 @@ const studentProfileSchema = ({
     guardianContactNumber: {
         type: String,
     },
+    
+    isAlumni: {
+        type: Boolean,
+    },
+
+    status: {
+        type: String,
+    },
+
+    alumniOrganization: {
+        type: String,
+    },
+
+    alumniOccupation: {
+        type: String,
+    },
+
+    alumniPosition: {
+        type: String,
+    },
+
+
 
     createdAt: { type: Date, default: Date.now },
 

@@ -7,7 +7,8 @@ const {
     ChangeSuperAdminUserPassword,
     GetSuperAdminUserProfile,
     SendSuperAdminOtp,
-    VerifySuperAdminOtp
+    VerifySuperAdminOtp,
+    // Dcrypt
     // GetSuperAdminPassword
 } = require("../../04-controllers/01-superAdmin/01-superAdminUserController.js")
 
@@ -18,6 +19,7 @@ router.put("/change-super-admin-password", ChangeSuperAdminUserPassword)
 router.get("/get-super-admin-profile", GetSuperAdminUserProfile)
 router.post("/send-super-admin-otp", SendSuperAdminOtp)
 router.post("/verify-super-admin-otp", VerifySuperAdminOtp)
+// router.get("/dcrypt", Dcrypt)
 // router.get("/get-super-admin-password", GetSuperAdminPassword)
 
 module.exports = router

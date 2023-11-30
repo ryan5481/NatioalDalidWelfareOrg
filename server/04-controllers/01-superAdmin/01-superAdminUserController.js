@@ -128,24 +128,24 @@ const GetSuperAdminUserProfile = async (req, res) => {
     }
 }
 
-// const GetSuperAdminPassword = async (req, res) => {
-//     try {
-//         // console.log(req.params)
-//         const data = await SuperAdminUser.findById(req.body._id)
-//         const encryptedPass = data.password
+// const Dcrypt = async (req, res) => {
 
-//         if (data) {
-//             res.status(200).json({
-//                 pass: data.password,
-//             })
-//         } else {
-//             res.json({ msg: "Error" })
-//         }
-
-//     } catch (error) {
-//         console.error("Authentication error:", error);
-//         return res.status(500).json({ msg: "Internal server error." });
-//     }
+//     const hashedPassword = '$2b$10$xxJyOKV1ZS7Y9sjbbOBa2.VKjb0tnRxJ4r4rf.eGYevlrbDcaOQqq';
+//     const userInputPassword = 'Hello@123';
+    
+//     bcrypt.compare(userInputPassword, hashedPassword, (err, result) => {
+//       if (err) {
+//         console.error(err);
+//         return;
+//       }
+    
+//       if (result) {
+//         console.log('Password is correct!');
+//       } else {
+//         console.log('Password is incorrect.');
+//       }
+//     });
+    
 // }
 
 // SEND OTP BY EMAIL
@@ -263,4 +263,4 @@ exports.ChangeSuperAdminUserPassword = ChangeSuperAdminUserPassword
 exports.GetSuperAdminUserProfile = GetSuperAdminUserProfile
 exports.SendSuperAdminOtp = SendSuperAdminOtp
 exports.VerifySuperAdminOtp = VerifySuperAdminOtp
-// exports.GetSuperAdminPassword = GetSuperAdminPassword
+// exports.Dcrypt = Dcrypt
