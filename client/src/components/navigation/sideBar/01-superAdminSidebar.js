@@ -74,7 +74,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'District Admins', icon: FaUserGroup, href: "/user-management" },
   { name: 'NCSEP', icon: PiUsersFourFill, href: "/ncsep-students" },
   { name: 'PRLMSP & ETHS', icon: PiUsersFourFill, href: "/prlmsp-eth-students" },
-  { name: 'Alumuni', icon: FaUserGraduate, href: "/alumuni" },
+  // { name: 'Alumuni', icon: FaUserGraduate, href: "/alumuni" },
   { name: 'Settings', icon: FaGear, href: "/settings" },
 ]
 
