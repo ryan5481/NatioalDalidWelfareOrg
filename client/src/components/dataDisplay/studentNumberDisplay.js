@@ -96,7 +96,7 @@ const StudentNumberDisplay = ({studentsList}) => {
     return (
         <>
             <Box mb={10} >
-                <VStack>
+                <VStack fontSize="xs" >
                     <Box>
                         <VStack p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
                             {studentsList && <Heading fontSize="5xl" >{totalScholarships}</Heading>}
@@ -106,7 +106,7 @@ const StudentNumberDisplay = ({studentsList}) => {
                     <HStack>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{basicEducationNumber}</Heading>
                                     <Text  >Basic Education</Text>
                                 </Box>
@@ -123,7 +123,7 @@ const StudentNumberDisplay = ({studentsList}) => {
                         </Box>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{secondaryEducationNumber}</Heading>
                                     <Text  >Secondary Education</Text>
                                 </Box>
@@ -140,7 +140,7 @@ const StudentNumberDisplay = ({studentsList}) => {
                         </Box>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{higherSecondaryEducationNumber} </Heading>
                                     <Text  >Higher Secondary Education</Text>
                                 </Box>
@@ -157,7 +157,7 @@ const StudentNumberDisplay = ({studentsList}) => {
                         </Box>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{bachelorsEducationNumber} </Heading>
                                     <Text  >Bachelors Degree</Text>
                                 </Box>
@@ -174,7 +174,7 @@ const StudentNumberDisplay = ({studentsList}) => {
                         </Box>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{mastersEducationNumber} </Heading>
                                     <Text >Masters Degree</Text>
                                 </Box>
@@ -191,7 +191,7 @@ const StudentNumberDisplay = ({studentsList}) => {
                         </Box>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{diplomaEducationNumber} </Heading>
                                     <Text  >Technical and Vocational Education</Text>
                                 </Box>

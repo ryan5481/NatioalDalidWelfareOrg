@@ -21,6 +21,7 @@ import DistAdminSidebar from '../components/navigation/sideBar/02-distAdminSideb
 import ManageStudents from '../pages/02-district-admin/02-manageStudents';
 import AlumuniListDist from '../pages/02-district-admin/03-alumuniList';
 import DistAdminDashboard from '../pages/02-district-admin/01-distAdimnDashboard';
+import PageNotFound from '../pages/99-404error';
 
 //NON USER ROUTES
 // import Header from '../components/header/header';
@@ -64,9 +65,10 @@ const DistAdminRoutes = () => {
     <>
       <DistAdminSidebar />
       <Routes >
-        <Route path="/dist-admin-dashboard" element={<DistAdminDashboard />} />
+        <Route path="/" element={<DistAdminDashboard />} />
         <Route path="/student-management" element={<ManageStudents />} />
         <Route path="/alumuni" element={<AlumuniListDist />} />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </>
   )
@@ -92,6 +94,7 @@ const NonUserRoutes = () => {
       <Routes>
         <Route path="/super-admin-login" element={<SuperAdminLogin />} />
         <Route path="/dist-admin-login" element={<DistAdminLogin />} />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </>
   )

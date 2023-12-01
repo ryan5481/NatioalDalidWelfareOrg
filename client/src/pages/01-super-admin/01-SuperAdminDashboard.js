@@ -238,7 +238,7 @@ const SuperAdminDashboard = () => {
 
     return (
         <>
-            <Box p={5} pos={"relative"} left={"120px"} mb={10}  >
+            <Box p={5} pos={"relative"} left={{base: "300px", sm:"300px", md: "200px",lg:"100px", xl: "100px" }} mb={10}  >
                 <Heading mb={5} fontSize="2xl" textAlign="center" > Overall Scholarships Provided</Heading>
                 <HStack zIndex={5} pos="fixed" bottom="0px" left={"20%"} bg={"gray.100"} border={'solid 1px lightgray'} p={2} px={4} rounded={10} justify="center" spacing={3} m={5} >
                     { userRole == "superAdmin" && <Select

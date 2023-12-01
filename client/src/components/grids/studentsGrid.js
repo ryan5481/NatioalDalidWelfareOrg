@@ -333,42 +333,41 @@ const StudentsGrid = ({ scholarshipProject }) => {
                                         <option value="Active">Active students</option>
                                         <option value="Inactive">Alumuni students</option>
                                     </Select>
-                                    <InputGroup  >
-                                        <Input
-                                            m={3}
-                                            rounded="full"
-                                            w="300px"
-                                            border={'solid 1px gray'}
-                                            h={8}
-                                            placeholder="Search student name, school"
-                                            onChange={(e) => setSearchInput(e.target.value)}
-                                            value={searchInput}
-                                        />
-                                        {searchInput && (
-                                            <InputRightElement>
-                                                <Box
-                                                    as={IconButton}
-                                                    size='xxs'
-                                                    bg='gray.500'
-                                                    rounded="full"
-                                                    right="2035%"
-                                                    top="20%"
-                                                    zIndex='10'
-                                                    boxShadow="2xl"
-                                                    _hover={{
-                                                        bg: "darkgray"
-                                                    }}
-                                                    onClick={() => setSearchInput('')}
-                                                >
-                                                    <SmallCloseIcon
-                                                        w="19x"
-                                                        h="19px"
-                                                        color="gray.50"
-                                                    />
-                                                </Box>
-                                            </InputRightElement>
-                                        )}
-                                    </InputGroup>
+                                    <InputGroup display="flex" justifyContent="flex-end" alignItems="center">
+                                            <Input
+                                                m={3}
+                                                rounded="full"
+                                                w="300px"
+                                                border={'solid 1px gray'}
+                                                h={8}
+                                                placeholder="Search name"
+                                                onChange={(e) => setSearchInput(e.target.value)}
+                                                value={searchInput}
+                                            />
+                                            {searchInput && (
+                                                <InputRightElement>
+                                                    <Box
+                                                        as={IconButton}
+                                                        top="20%"
+                                                        right="20%"
+                                                        size='xxs'
+                                                        bg='gray.500'
+                                                        rounded="full"
+                                                        boxShadow="2xl"
+                                                        _hover={{
+                                                            bg: "darkgray"
+                                                        }}
+                                                        onClick={() => setSearchInput('')}
+                                                    >
+                                                        <SmallCloseIcon
+                                                            w="19x"
+                                                            h="19px"
+                                                            color="gray.50"
+                                                        />
+                                                    </Box>
+                                                </InputRightElement>
+                                            )}
+                                        </InputGroup>
                                 </HStack>
                             </FormControl>
 
@@ -376,11 +375,9 @@ const StudentsGrid = ({ scholarshipProject }) => {
                         {/* LIST HEADER */}
                         <Grid
                             color="white"
-                            templateColumns={{
-                                sm: '1fr',
-                                md: '1fr 1fr 1fr',
-                                lg: '0.5fr 2fr 2fr 1.5fr 1fr 1fr 0.3fr 0.3fr 0.3fr',
-                            }}
+                            templateColumns={
+                                '0.5fr 2fr 2fr 1.5fr 1fr 1fr 0.3fr 0.3fr 0.3fr'
+                            }
                             m={1}
                             h={8}
                             gap={1}
@@ -491,11 +488,7 @@ const StudentsGrid = ({ scholarshipProject }) => {
                                 // mx={10}
                                 >
                                     <Grid
-                                        templateColumns={{
-                                            sm: '1fr',
-                                            md: '1fr 1fr 1fr',
-                                            lg: '0.5fr 2fr 2fr 1.5fr 1fr 1fr 0.3fr 0.3fr 0.3fr',
-                                        }}
+                                        templateColumns={ '0.5fr 2fr 2fr 1.5fr 1fr 1fr 0.3fr 0.3fr 0.3fr'}
                                         p={1}
                                         m={1}
                                         h={8}

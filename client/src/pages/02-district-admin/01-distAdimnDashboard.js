@@ -37,7 +37,7 @@ const DistAdminDashboard = () => {
 
     return(
         <>
-            <SuperAdminDashboard  />
+            <SuperAdminDashboard left={{base: "300px", sm:"300px", md: "200px",lg:"100px", xl: "100px" }}  />
         </>
     )
 }

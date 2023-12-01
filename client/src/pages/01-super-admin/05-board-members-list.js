@@ -6,12 +6,8 @@ import BoardMembersGrid from '../../components/grids/boardMembersGrid'
 const PrlEthStudentsList = () => {
     
     return (<>
-        <Box
-            textAlign="center"
-        >
-            <Text textAlign={"center"} m={5} fontWeight={"bold"} fontSize={"22px"}> PRL & ETH Students</Text>
+        <Box>
             <BoardMembersGrid district={""} scholarshipProject="prlEth" />
-            
         </Box>
     </>
     )
