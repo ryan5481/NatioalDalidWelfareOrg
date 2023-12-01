@@ -63,6 +63,7 @@ const EditSuperAdminProfile = () => {
             isClosable: true,
             position: 'top'
         });
+        navigate("/")
     } else {
         toast({
             title: 'Error.',

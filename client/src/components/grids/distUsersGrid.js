@@ -193,7 +193,7 @@ const DistUsersGrid = () => {
                     (<Box
                         pos={"absolute"}
                         px={10}
-                        h={8}
+                        maxH={8}
                     >
                         <HStack>
                             <Box></Box>
@@ -213,42 +213,41 @@ const DistUsersGrid = () => {
                             </Select>
                             <Text fontSize={"14px"} px={2} >Search:</Text>
                             <FormControl>
-                                <InputGroup  >
-                                    <Input
-                                        m={3}
-                                        rounded="full"
-                                        w="300px"
-                                        border={'solid 1px gray'}
-                                        h={8}
-                                        placeholder="Search name, email id"
-                                        onChange={(e) => setSearchInput(e.target.value)}
-                                        value={searchInput}
-                                    />
-                                    {searchInput && (
-                                        <InputRightElement>
-                                            <Box
-                                                as={IconButton}
-                                                size='xxs'
-                                                bg='gray.500'
+                            <InputGroup display="flex" justifyContent="flex-end" alignItems="center">
+                                            <Input
+                                                m={3}
                                                 rounded="full"
-                                                right="1320%"
-                                                top="20%"
-                                                zIndex='10'
-                                                boxShadow="2xl"
-                                                _hover={{
-                                                    bg: "darkgray"
-                                                }}
-                                                onClick={() => setSearchInput('')}
-                                            >
-                                                <SmallCloseIcon
-                                                    w="19x"
-                                                    h="19px"
-                                                    color="gray.50"
-                                                />
-                                            </Box>
-                                        </InputRightElement>
-                                    )}
-                                </InputGroup>
+                                                w="300px"
+                                                border={'solid 1px gray'}
+                                                h={8}
+                                                placeholder="Search name"
+                                                onChange={(e) => setSearchInput(e.target.value)}
+                                                value={searchInput}
+                                            />
+                                            {searchInput && (
+                                                <InputRightElement>
+                                                    <Box
+                                                        as={IconButton}
+                                                        top="20%"
+                                                        right="20%"
+                                                        size='xxs'
+                                                        bg='gray.500'
+                                                        rounded="full"
+                                                        boxShadow="2xl"
+                                                        _hover={{
+                                                            bg: "darkgray"
+                                                        }}
+                                                        onClick={() => setSearchInput('')}
+                                                    >
+                                                        <SmallCloseIcon
+                                                            w="19x"
+                                                            h="19px"
+                                                            color="gray.50"
+                                                        />
+                                                    </Box>
+                                                </InputRightElement>
+                                            )}
+                                        </InputGroup>
                             </FormControl>
 
                         </HStack>
@@ -258,7 +257,7 @@ const DistUsersGrid = () => {
                             templateColumns={'0.2fr 1fr 1fr 1fr 1fr 1fr 1fr 0.3fr 0.3fr'}
                             p={1}
                             m={1}
-                            h={9}
+                            // h={9}
                             gap={1}
                             bg={originalBackgroundColor}
                             _hover={{
@@ -266,8 +265,6 @@ const DistUsersGrid = () => {
                             }}
                             textAlign="left"
                             fontWeight="bold"
-                            align="center"
-                            justify="center"
                         >
                             <Text
                                 // w="100%"
@@ -281,7 +278,7 @@ const DistUsersGrid = () => {
                                 SN
                             </Text>
                             <Text
-                                // w="150px"
+                            isTruncated
                                 m={1}
                                 bg={textMouseStates.district ? clickedBackgroundColor : originalBackgroundColor}
                                 onMouseDown={() => handleMouseDown('district')}
@@ -293,7 +290,7 @@ const DistUsersGrid = () => {
                                 District{sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
                             </Text>
                             <Text
-                                // w="200px"
+                                isTruncated
                                 m={1}
                                 bg={textMouseStates.name ? clickedBackgroundColor : originalBackgroundColor}
                                 onMouseDown={() => handleMouseDown('name')}
@@ -305,7 +302,7 @@ const DistUsersGrid = () => {
                                 Name{sortOrder == "asc" ? <ChevronDownIcon /> : <ChevronUpIcon />}
                             </Text>
                             <Text
-                                // w="200px"
+                                isTruncated
                                 m={1}
                                 // bg={textMouseStates.number ? clickedBackgroundColor : originalBackgroundColor}
                                 onMouseDown={() => handleMouseDown('number')}

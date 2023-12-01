@@ -15,12 +15,10 @@ const BoardMembersDataDisplay = ({data}) => {
     }
 
     return (
-        <>
-            <Box  p={5} pos={"relative"} left={"120px"} mb="5">
-                <VStack>
+                <VStack m={5} pos="relative" >
                             <Heading fontSize="3xl" p={2} >Board Members</Heading>
                     <Box>
-                        <VStack p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                        <VStack p={2} w="150px" h="130px" rounded={10} border={'solid 1px gray'} >
                             <Heading fontSize="5xl" >{data.length}</Heading>
                             <Text fontSize="xl" >Total</Text>
                         </VStack>
@@ -28,7 +26,7 @@ const BoardMembersDataDisplay = ({data}) => {
                     <HStack>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{data && getListByIthnicity("Badi").length}</Heading>
                                     <Text>Badi</Text>
                                 </Box>
@@ -45,7 +43,7 @@ const BoardMembersDataDisplay = ({data}) => {
                         </Box>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{data && getListByIthnicity("Gandarva").length}</Heading>
                                     <Text>Gandarva</Text>
                                 </Box>
@@ -62,7 +60,7 @@ const BoardMembersDataDisplay = ({data}) => {
                         </Box>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{data && getListByIthnicity("Madeshi Origin").length} </Heading>
                                     <Text  >Madeshi Origin</Text>
                                 </Box>
@@ -79,7 +77,7 @@ const BoardMembersDataDisplay = ({data}) => {
                         </Box>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{data && getListByIthnicity("Pariyar").length}</Heading>
                                     <Text  >Pariyar</Text>
                                 </Box>
@@ -96,7 +94,7 @@ const BoardMembersDataDisplay = ({data}) => {
                         </Box>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{data && getListByIthnicity("Sarki").length}</Heading>
                                     <Text >Sarki</Text>
                                 </Box>
@@ -113,7 +111,7 @@ const BoardMembersDataDisplay = ({data}) => {
                         </Box>
                         <Box>
                             <VStack>
-                                <Box textAlign="center" p={2} w="180px" h="130px" rounded={10} border={'solid 1px gray'} >
+                                <Box textAlign="center" p={2} w="130px" h="130px" rounded={10} border={'solid 1px gray'} >
                                     <Heading fontSize="5xl" >{data && getListByIthnicity("Viswakarma").length}</Heading>
                                     <Text  >Viswakarma</Text>
                                 </Box>
@@ -130,9 +128,6 @@ const BoardMembersDataDisplay = ({data}) => {
                         </Box>
                     </HStack>
                 </VStack>
-            </Box>
-
-        </>
     )
 }
 

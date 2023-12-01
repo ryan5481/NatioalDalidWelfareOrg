@@ -273,9 +273,10 @@ const EditBoardMemberProfileModal = ({ isOpen, onClose, data, scholarshipProject
           onClose={onClose}
           isOpen={isOpen}
           scrollBehavior={scrollBehavior}
-          size="6xl"
+          size={{base: "full", xl: "6xl"}}
+          w="full"
         >
-          <ModalOverlay />
+          {/* <ModalOverlay /> */}
           <ModalContent>
             <ModalHeader textAlign="center" fontSize="24px" >Edit Board Member Profile</ModalHeader>
             <ModalCloseButton />
